@@ -694,6 +694,12 @@ export function DeterminismProof() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
   const reduced = useReducedMotion() ?? false;
 
+  // Motion timing for Act 3 (identical runs stamping + connector line).
+  // Connector delay = base + (last-card stagger) + badge offset + settle buffer.
+  const BASE_DELAY_S = 0.3;
+  const STAGGER_S = 0.25;
+  const CONNECTOR_DELAY_S = 1.6; // keeps cadence crisp; tune if STAGGER or BASE changes
+
   const runs = [
     { idx: '01', time: '09:14 AM' },
     { idx: '02', time: '11:47 AM' },
@@ -774,11 +780,11 @@ replay_enabled = true`}
               initial={reduced ? { scaleY: 1 } : { scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: reduced ? 0 : 1.6, duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
+              transition={{ delay: reduced ? 0 : CONNECTOR_DELAY_S, duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
               style={{ background: GREEN_OK_BG_40, transformOrigin: 'top' }}
             />
             {runs.map((r, i) => (
-              <RunCard key={r.idx} idx={r.idx} time={r.time} delay={reduced ? 0 : 0.3 + i * 0.25} reduced={reduced} />
+              <RunCard key={r.idx} idx={r.idx} time={r.time} delay={reduced ? 0 : BASE_DELAY_S + i * STAGGER_S} reduced={reduced} />
             ))}
           </div>
 
@@ -838,6 +844,7 @@ function RunCard({ idx, time, delay, reduced }: { idx: string; time: string; del
                 }
           }
           viewport={{ once: true, amount: 0.3 }}
+          // +0.3s after card lands (matches DeterminismProof's BADGE_OFFSET of 0.3s)
           transition={{ delay: delay + 0.3, duration: 0.5 }}
           className="text-[13px] font-bold rounded-full px-2 py-0.5"
           style={{ color: GREEN_OK, background: GREEN_OK_BG_10 }}
