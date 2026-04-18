@@ -1,4 +1,5 @@
 import { useInView } from '../hooks/useInView';
+import { ChevronRight, Flag } from 'lucide-react';
 
 /**
  * PlatformStory — visual long-form platform narrative.
@@ -424,11 +425,72 @@ export function ContextMatters() {
 export function HallucinationControl() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
 
+  const walls = [
+    {
+      n: '01',
+      title: 'Grounding',
+      desc: 'Must cite a chunk from your private index.',
+      gate: 'no source → reject',
+      evidence: (
+        <div className="space-y-2">
+          <StatRow label="Rejected today" value="14" />
+          <StatRow label="Passed" value="8,204" />
+        </div>
+      ),
+    },
+    {
+      n: '02',
+      title: 'Confidence',
+      desc: 'Every field scored. Below θ → human review.',
+      gate: 'low score → escalate',
+      evidence: (
+        <div className="space-y-2">
+          <ScoreBar label="vendor" pct={99} />
+          <ScoreBar label="gl" pct={95} />
+          <ScoreBar label="amount" pct={72} flag />
+        </div>
+      ),
+    },
+    {
+      n: '03',
+      title: 'Cross-verify',
+      desc: '2nd model validates the first. Disagree → escalate.',
+      gate: 'agreement < θ → escalate',
+      evidence: (
+        <div className="space-y-2">
+          <ModelChip name="Llama-70" role="primary" />
+          <ModelChip name="Mistral-8x" role="verifier" />
+          <StatRow label="Agreement" value="97.8%" />
+          <StatRow label="Escalated" value="2.2%" />
+        </div>
+      ),
+    },
+    {
+      n: '04',
+      title: 'Schema lock',
+      desc: 'Typed JSON. Invalid → rejected at runtime.',
+      gate: 'schema fail → reject',
+      evidence: (
+        <pre className="text-[13px] leading-[1.5] font-mono text-black bg-[rgba(0,0,0,0.04)] rounded-[8px] p-3 overflow-x-auto">
+{`{
+  "vendor_id": "V-472",
+  "amount": 13503.00,
+  "gl": "6100-2340",
+  "cite": ["inv:p2"],
+  "conf": 0.98
+}`}
+        </pre>
+      ),
+    },
+  ];
+
   return (
     <section ref={ref} className="py-24" style={{ background: 'var(--bg-s3)' }}>
-      <div className="max-w-[1280px] mx-auto px-6">
+      <div className="max-w-[1400px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[760px] mx-auto">
-          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.50)' }}>Hallucination control</div>
+          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.50)' }}>
+            Hallucination control
+          </div>
           <h2 className={`display-2 sr d-1 ${inView ? 'is-in' : ''}`}>
             Four walls, <span className="italic">not four prompts.</span>
           </h2>
@@ -437,124 +499,26 @@ export function HallucinationControl() {
           </p>
         </div>
 
-        {/* Gauntlet diagram */}
-        <div className={`max-w-[1400px] mx-auto rounded-[24px] p-10 sr ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
-          <svg viewBox="0 0 1040 260" className="w-full">
-            {/* Input candidate answer */}
-            <rect x="14" y="96" width="110" height="68" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" strokeWidth="1.5" />
-            <rect x="14" y="96" width="110" height="16" rx="10" fill="rgba(0,0,0,0.08)" />
-            <text x="22" y="108" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">CANDIDATE</text>
-            <text x="22" y="126" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">raw answer</text>
-            <text x="22" y="138" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">from router</text>
-            <text x="22" y="154" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">untrusted · unchecked</text>
-
-            {/* Wall 1 — Grounding */}
-            <g>
-              <rect x="154" y="48" width="170" height="164" rx="14" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-              <circle cx="178" cy="76" r="14" fill="rgba(0,0,0,0.04)" />
-              <text x="178" y="80" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">01</text>
-              <text x="200" y="80" fontFamily="Plus Jakarta Sans" fontSize="11" fontWeight="700" fill="#000000">Grounding</text>
-              <text x="166" y="104" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Must cite a chunk from</text>
-              <text x="166" y="116" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">your private index.</text>
-              <text x="166" y="134" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">gate:</text>
-              <text x="166" y="146" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">no source → reject</text>
-              <rect x="166" y="158" width="146" height="18" rx="4" fill="rgba(0,0,0,0.04)" />
-              <text x="172" y="170" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">rejected today:</text>
-              <text x="260" y="170" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">14</text>
-              <rect x="166" y="180" width="146" height="18" rx="4" fill="rgba(0,0,0,0.04)" />
-              <text x="172" y="192" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">passed:</text>
-              <text x="260" y="192" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">8,204</text>
-            </g>
-
-            {/* Wall 2 — Confidence gates */}
-            <g>
-              <rect x="354" y="48" width="170" height="164" rx="14" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-              <circle cx="378" cy="76" r="14" fill="rgba(0,0,0,0.04)" />
-              <text x="378" y="80" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">02</text>
-              <text x="400" y="80" fontFamily="Plus Jakarta Sans" fontSize="11" fontWeight="700" fill="#000000">Confidence</text>
-              <text x="366" y="104" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Every field scored.</text>
-              <text x="366" y="116" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Below θ → human review.</text>
-              <text x="366" y="134" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">field scores:</text>
-              {/* score bars */}
-              <rect x="366" y="140" width="146" height="6" rx="3" fill="rgba(0,0,0,0.04)" />
-              <rect x="366" y="140" width="140" height="6" rx="3" fill="rgba(0,0,0,0.15)" />
-              <text x="514" y="146" textAnchor="end" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">vendor 99%</text>
-              <rect x="366" y="154" width="146" height="6" rx="3" fill="rgba(0,0,0,0.04)" />
-              <rect x="366" y="154" width="132" height="6" rx="3" fill="rgba(0,0,0,0.15)" />
-              <text x="514" y="160" textAnchor="end" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">gl 95%</text>
-              <rect x="366" y="168" width="146" height="6" rx="3" fill="rgba(0,0,0,0.04)" />
-              <rect x="366" y="168" width="88" height="6" rx="3" fill="rgba(0,0,0,0.30)" />
-              <text x="514" y="174" textAnchor="end" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">amount 72% ⚑</text>
-              <rect x="366" y="182" width="146" height="18" rx="4" fill="rgba(0,0,0,0.04)" />
-              <text x="439" y="194" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">→ human review</text>
-            </g>
-
-            {/* Wall 3 — Cross-verify */}
-            <g>
-              <rect x="554" y="48" width="170" height="164" rx="14" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-              <circle cx="578" cy="76" r="14" fill="rgba(0,0,0,0.04)" />
-              <text x="578" y="80" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">03</text>
-              <text x="600" y="80" fontFamily="Plus Jakarta Sans" fontSize="11" fontWeight="700" fill="#000000">Cross-verify</text>
-              <text x="566" y="104" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">2nd model validates</text>
-              <text x="566" y="116" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">the first. Disagree → esc.</text>
-              {/* Two model chips */}
-              <rect x="566" y="130" width="68" height="22" rx="5" fill="rgba(0,0,0,0.04)" />
-              <text x="600" y="144" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">Llama-70</text>
-              <text x="600" y="151" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">primary</text>
-              <rect x="644" y="130" width="68" height="22" rx="5" fill="rgba(0,0,0,0.04)" />
-              <text x="678" y="144" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">Mistral-8x</text>
-              <text x="678" y="151" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">verifier</text>
-              <rect x="566" y="158" width="146" height="18" rx="4" fill="rgba(0,0,0,0.04)" />
-              <text x="572" y="170" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">agreement:</text>
-              <text x="706" y="170" textAnchor="end" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">97.8%</text>
-              <rect x="566" y="180" width="146" height="18" rx="4" fill="rgba(0,0,0,0.04)" />
-              <text x="572" y="192" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">escalated:</text>
-              <text x="706" y="192" textAnchor="end" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">2.2%</text>
-            </g>
-
-            {/* Wall 4 — Schema */}
-            <g>
-              <rect x="754" y="48" width="170" height="164" rx="14" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-              <circle cx="778" cy="76" r="14" fill="rgba(0,0,0,0.04)" />
-              <text x="778" y="80" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">04</text>
-              <text x="800" y="80" fontFamily="Plus Jakarta Sans" fontSize="11" fontWeight="700" fill="#000000">Schema lock</text>
-              <text x="766" y="104" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Typed JSON. Invalid →</text>
-              <text x="766" y="116" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">rejected at runtime.</text>
-              {/* JSON chip */}
-              <rect x="766" y="128" width="146" height="74" rx="5" fill="rgba(0,0,0,0.04)" />
-              <text x="774" y="140" fontFamily="monospace" fontSize="10" fill="#000000">{'{'}</text>
-              <text x="780" y="150" fontFamily="monospace" fontSize="10" fill="#000000">"vendor_id": "V-472",</text>
-              <text x="780" y="160" fontFamily="monospace" fontSize="10" fill="#000000">"amount": 13503.00,</text>
-              <text x="780" y="170" fontFamily="monospace" fontSize="10" fill="#000000">"gl": "6100-2340",</text>
-              <text x="780" y="180" fontFamily="monospace" fontSize="10" fill="#000000">"cite": ["inv:p2"],</text>
-              <text x="780" y="190" fontFamily="monospace" fontSize="10" fill="#000000">"conf": 0.98</text>
-              <text x="774" y="200" fontFamily="monospace" fontSize="10" fill="#000000">{'}'}</text>
-            </g>
-
-            {/* Final approved */}
-            <rect x="944" y="96" width="84" height="68" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-            <text x="986" y="118" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">✓</text>
-            <text x="986" y="136" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">APPROVED</text>
-            <text x="986" y="150" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">safe to emit</text>
-
-            {/* Flow arrows between walls */}
-            <g stroke="rgba(0,0,0,0.15)" strokeWidth="2" fill="none" markerEnd="url(#ps-gauntlet-arr)" className="ps-dash">
-              <defs>
-                <marker id="ps-gauntlet-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                  <path d="M0,0 L10,5 L0,10 z" fill="rgba(0,0,0,0.30)" />
-                </marker>
-              </defs>
-              <line x1="124" y1="130" x2="152" y2="130" />
-              <line x1="324" y1="130" x2="352" y2="130" />
-              <line x1="524" y1="130" x2="552" y2="130" />
-              <line x1="724" y1="130" x2="752" y2="130" />
-              <line x1="924" y1="130" x2="942" y2="130" />
-            </g>
-          </svg>
+        {/* Gauntlet row */}
+        <div
+          className={`flex flex-col lg:flex-row items-stretch gap-3 sr d-3 ${inView ? 'is-in' : ''}`}
+        >
+          <EndCard variant="candidate" />
+          {walls.map((w) => (
+            <div key={w.n} className="flex items-stretch gap-3 lg:contents">
+              <Chevron />
+              <WallCard {...w} />
+            </div>
+          ))}
+          <Chevron />
+          <EndCard variant="approved" />
         </div>
 
-        {/* Metric strip */}
-        <div className={`max-w-[900px] mx-auto mt-10 rounded-[24px] p-8 grid grid-cols-3 gap-6 text-center sr d-3 ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
+        {/* Metric strip — unchanged */}
+        <div
+          className={`max-w-[900px] mx-auto mt-10 rounded-[24px] p-8 grid grid-cols-3 gap-6 text-center sr d-4 ${inView ? 'is-in' : ''}`}
+          style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
+        >
           <div>
             <div className="font-display text-[48px] text-black">0.04<span className="text-[28px] text-[rgba(0,0,0,0.65)]">%</span></div>
             <div className="micro-upper text-[rgba(0,0,0,0.65)] mt-1">silent error rate</div>
@@ -573,6 +537,116 @@ export function HallucinationControl() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* --- Subcomponents for HallucinationControl --- */
+
+function WallCard({
+  n,
+  title,
+  desc,
+  gate,
+  evidence,
+}: {
+  n: string;
+  title: string;
+  desc: string;
+  gate: string;
+  evidence: React.ReactNode;
+}) {
+  return (
+    <div
+      className="flex-1 min-w-0 rounded-[20px] p-5"
+      style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
+    >
+      <div className="flex items-center gap-3 mb-3">
+        <div
+          className="w-8 h-8 rounded-full flex items-center justify-center text-[14px] font-bold text-black"
+          style={{ background: 'rgba(0,0,0,0.04)' }}
+        >
+          {n}
+        </div>
+        <div className="font-display text-[18px] text-black leading-tight">{title}</div>
+      </div>
+      <div className="text-[14px] text-[rgba(0,0,0,0.70)] leading-snug mb-3">{desc}</div>
+      <div className="flex items-baseline gap-2 mb-3">
+        <div className="micro-upper text-[11px]" style={{ color: 'rgba(0,0,0,0.50)' }}>
+          Gate
+        </div>
+        <div className="text-[14px] text-black font-medium">{gate}</div>
+      </div>
+      <div>{evidence}</div>
+    </div>
+  );
+}
+
+function EndCard({ variant }: { variant: 'candidate' | 'approved' }) {
+  const isCandidate = variant === 'candidate';
+  return (
+    <div
+      className="lg:w-[140px] rounded-[20px] p-5 flex flex-col justify-center"
+      style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
+    >
+      <div className="micro-upper text-[11px] mb-2" style={{ color: 'rgba(0,0,0,0.50)' }}>
+        {isCandidate ? 'Candidate' : 'Approved'}
+      </div>
+      <div className="font-display text-[18px] text-black leading-tight mb-1">
+        {isCandidate ? 'raw answer' : '✓ safe'}
+      </div>
+      <div className="text-[14px] text-[rgba(0,0,0,0.50)]">
+        {isCandidate ? 'untrusted · unchecked' : 'safe to emit'}
+      </div>
+    </div>
+  );
+}
+
+function Chevron() {
+  return (
+    <div className="hidden lg:flex items-center text-[rgba(0,0,0,0.30)]" aria-hidden>
+      <ChevronRight size={24} />
+    </div>
+  );
+}
+
+function StatRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div
+      className="flex items-baseline justify-between rounded-[8px] px-3 py-2"
+      style={{ background: 'rgba(0,0,0,0.04)' }}
+    >
+      <div className="text-[13px] text-[rgba(0,0,0,0.60)]">{label}</div>
+      <div className="text-[14px] font-bold text-black">{value}</div>
+    </div>
+  );
+}
+
+function ScoreBar({ label, pct, flag }: { label: string; pct: number; flag?: boolean }) {
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-1">
+        <div className="text-[13px] text-[rgba(0,0,0,0.60)] flex items-center gap-1">
+          {label}
+          {flag && <Flag size={12} className="text-[rgba(0,0,0,0.60)]" />}
+        </div>
+        <div className="text-[13px] font-bold text-black">{pct}%</div>
+      </div>
+      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(0,0,0,0.06)' }}>
+        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: 'rgba(0,0,0,0.30)' }} />
+      </div>
+    </div>
+  );
+}
+
+function ModelChip({ name, role }: { name: string; role: string }) {
+  return (
+    <div
+      className="flex items-baseline justify-between rounded-[8px] px-3 py-2"
+      style={{ background: 'rgba(0,0,0,0.04)' }}
+    >
+      <div className="text-[14px] font-bold text-black">{name}</div>
+      <div className="text-[13px] text-[rgba(0,0,0,0.50)]">{role}</div>
+    </div>
   );
 }
 
