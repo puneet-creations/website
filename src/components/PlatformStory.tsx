@@ -1,5 +1,7 @@
-import { useInView } from '../hooks/useInView';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronRight, Flag } from 'lucide-react';
+import { useInView } from '../hooks/useInView';
 
 /**
  * PlatformStory — visual long-form platform narrative.
@@ -424,6 +426,24 @@ export function ContextMatters() {
 /* ============================================================ */
 export function HallucinationControl() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
+  const reduced = useReducedMotion();
+  const [activeIdx, setActiveIdx] = useState<number>(-1);
+  // indices: -1 = not started, 0 = candidate, 1..4 = walls, 5 = approved
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduced) {
+      // Light up all cards statically, skip traversal
+      setActiveIdx(5);
+      return;
+    }
+    const sequence = [0, 1, 2, 3, 4, 5];
+    const stepMs = 400;
+    const timers = sequence.map((idx, i) =>
+      window.setTimeout(() => setActiveIdx(idx), i * stepMs)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [inView, reduced]);
 
   const walls = [
     {
@@ -503,15 +523,15 @@ export function HallucinationControl() {
         <div
           className={`flex flex-col lg:flex-row items-stretch gap-3 sr d-3 ${inView ? 'is-in' : ''}`}
         >
-          <EndCard variant="candidate" />
-          {walls.map((w) => (
+          <EndCard variant="candidate" active={activeIdx >= 0} />
+          {walls.map((w, i) => (
             <div key={w.n} className="flex items-stretch gap-3 lg:contents">
               <Chevron />
-              <WallCard {...w} />
+              <WallCard {...w} active={activeIdx >= i + 1} />
             </div>
           ))}
           <Chevron />
-          <EndCard variant="approved" />
+          <EndCard variant="approved" active={activeIdx >= 5} />
         </div>
 
         {/* Metric strip — unchanged */}
@@ -548,15 +568,21 @@ function WallCard({
   desc,
   gate,
   evidence,
+  active,
 }: {
   n: string;
   title: string;
   desc: string;
   gate: string;
   evidence: React.ReactNode;
+  active?: boolean;
 }) {
   return (
-    <div
+    <motion.div
+      animate={{
+        boxShadow: active ? '0 0 0 2px #5b76fe' : '0 0 0 0px rgba(91,118,254,0)',
+      }}
+      transition={{ duration: active ? 0.2 : 0.4 }}
       className="flex-1 min-w-0 rounded-[20px] p-5"
       style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
     >
@@ -577,14 +603,18 @@ function WallCard({
         <div className="text-[14px] text-black font-medium">{gate}</div>
       </div>
       <div>{evidence}</div>
-    </div>
+    </motion.div>
   );
 }
 
-function EndCard({ variant }: { variant: 'candidate' | 'approved' }) {
+function EndCard({ variant, active }: { variant: 'candidate' | 'approved'; active?: boolean }) {
   const isCandidate = variant === 'candidate';
   return (
-    <div
+    <motion.div
+      animate={{
+        boxShadow: active ? '0 0 0 2px #5b76fe' : '0 0 0 0px rgba(91,118,254,0)',
+      }}
+      transition={{ duration: active ? 0.2 : 0.4 }}
       className="lg:w-[140px] rounded-[20px] p-5 flex flex-col justify-center"
       style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
     >
@@ -597,7 +627,7 @@ function EndCard({ variant }: { variant: 'candidate' | 'approved' }) {
       <div className="text-[14px] text-[rgba(0,0,0,0.50)]">
         {isCandidate ? 'untrusted · unchecked' : 'safe to emit'}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
