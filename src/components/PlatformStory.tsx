@@ -571,7 +571,7 @@ function WallCard({
       </div>
       <div className="text-[14px] text-[rgba(0,0,0,0.70)] leading-snug mb-3">{desc}</div>
       <div className="flex items-baseline gap-2 mb-3">
-        <div className="micro-upper text-[11px]" style={{ color: 'rgba(0,0,0,0.50)' }}>
+        <div className="micro-upper" style={{ color: 'rgba(0,0,0,0.50)' }}>
           Gate
         </div>
         <div className="text-[14px] text-black font-medium">{gate}</div>
@@ -588,7 +588,7 @@ function EndCard({ variant }: { variant: 'candidate' | 'approved' }) {
       className="lg:w-[140px] rounded-[20px] p-5 flex flex-col justify-center"
       style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
     >
-      <div className="micro-upper text-[11px] mb-2" style={{ color: 'rgba(0,0,0,0.50)' }}>
+      <div className="micro-upper mb-2" style={{ color: 'rgba(0,0,0,0.50)' }}>
         {isCandidate ? 'Candidate' : 'Approved'}
       </div>
       <div className="font-display text-[18px] text-black leading-tight mb-1">
