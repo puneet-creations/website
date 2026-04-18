@@ -866,7 +866,9 @@ export function ScaleAtVolume() {
     <section ref={ref} className="py-24" style={{ background: 'var(--bg-s5)' }}>
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[760px] mx-auto">
-          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.50)' }}>Scale</div>
+          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.50)' }}>
+            Scale
+          </div>
           <h2 className={`display-2 sr d-1 ${inView ? 'is-in' : ''}`}>
             From one document <span className="italic">to thousands per hour.</span>
           </h2>
@@ -875,7 +877,7 @@ export function ScaleAtVolume() {
           </p>
         </div>
 
-        {/* Metrics */}
+        {/* Top metric cards — unchanged content */}
         <div className="grid md:grid-cols-4 gap-4 max-w-[1400px] mx-auto mb-10">
           {metrics.map((m, i) => (
             <div
@@ -891,8 +893,12 @@ export function ScaleAtVolume() {
         </div>
 
         {/* Pipeline visual */}
-        <div className={`max-w-[1400px] mx-auto rounded-[24px] p-10 sr d-3 ${inView ? 'is-in' : ''}`} style={{ background: 'white', border: '1px solid rgba(0,0,0,0.06)' }}>
-          <div className="flex items-baseline justify-between mb-6">
+        <div
+          className={`max-w-[1400px] mx-auto rounded-[24px] p-10 sr d-3 ${inView ? 'is-in' : ''}`}
+          style={{ background: 'white', border: '1px solid rgba(0,0,0,0.06)' }}
+        >
+          {/* Header row */}
+          <div className="flex items-baseline justify-between mb-8">
             <div>
               <div className="micro-upper mb-1" style={{ color: 'rgba(0,0,0,0.50)' }}>Monday backlog · Thomson Group</div>
               <div className="font-display text-[28px] text-black">14,200 vouchers</div>
@@ -903,70 +909,20 @@ export function ScaleAtVolume() {
             </div>
           </div>
 
-          {/* Router fanout SVG */}
-          <svg viewBox="0 0 1020 160" className="w-full mb-4">
-            {/* Queue */}
-            <rect x="10" y="50" width="160" height="60" rx="10" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.2" />
-            <text x="90" y="72" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">QUEUE · 14,200</text>
-            <g>
-              {[0,1,2,3,4,5,6,7,8,9].map((i) => (
-                <rect key={i} x={20 + i * 14} y={84} width="10" height="14" rx="1" fill="#000000" opacity={0.08 + (i % 4) * 0.04} />
-              ))}
-            </g>
+          {/* Sankey bar + lane labels */}
+          <SankeyBar inView={inView} />
 
-            {/* Router */}
-            <circle cx="260" cy="80" r="34" fill="rgba(0,0,0,0.08)" />
-            <text x="260" y="78" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">ROUTER</text>
-            <text x="260" y="90" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.40)">cost + complexity</text>
-            <line x1="170" y1="80" x2="224" y2="80" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" strokeDasharray="4 3" />
+          {/* QUEUE → ROUTER → SAP chip row */}
+          <div className="flex items-center justify-between gap-4 mt-8 flex-wrap md:flex-nowrap">
+            <PipelineChip label="QUEUE" value="14,200 in" />
+            <span className="text-[rgba(0,0,0,0.30)] hidden md:block" aria-hidden><ChevronRight size={20} /></span>
+            <PipelineChip label="ROUTER" value="cost + complexity" />
+            <span className="text-[rgba(0,0,0,0.30)] hidden md:block" aria-hidden><ChevronRight size={20} /></span>
+            <PipelineChip label="POSTED TO SAP" value="14,200 · 0 errors" highlight />
+          </div>
 
-            {/* 3 fanout lanes */}
-            <g stroke="rgba(0,0,0,0.15)" strokeWidth="1.2" fill="none" strokeDasharray="4 3">
-              <path d="M294,68 C350,40 380,20 420,20" />
-              <path d="M294,80 L420,80" />
-              <path d="M294,92 C350,120 380,140 420,140" />
-            </g>
-
-            {/* Lane 1 — small */}
-            <rect x="420" y="4" width="260" height="34" rx="8" fill="rgba(0,0,0,0.03)" />
-            <text x="430" y="20" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">SMALL MODEL · 7B on-prem</text>
-            <text x="430" y="30" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">invoices · simple vouchers · receipts</text>
-            <rect x="600" y="4" width="80" height="34" rx="8" fill="rgba(0,0,0,0.08)" />
-            <text x="640" y="20" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">11,820</text>
-            <text x="640" y="30" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">83% · $0.0002/doc</text>
-
-            {/* Lane 2 — medium */}
-            <rect x="420" y="62" width="260" height="34" rx="8" fill="rgba(0,0,0,0.03)" />
-            <text x="430" y="78" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">FRONTIER · Llama-70 / Mistral</text>
-            <text x="430" y="88" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">cross-doc matches · handwritten · edge</text>
-            <rect x="600" y="62" width="80" height="34" rx="8" fill="rgba(0,0,0,0.08)" />
-            <text x="640" y="78" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">1,960</text>
-            <text x="640" y="88" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">14% · $0.004/doc</text>
-
-            {/* Lane 3 — human */}
-            <rect x="420" y="120" width="260" height="34" rx="8" fill="rgba(0,0,0,0.03)" />
-            <text x="430" y="136" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">HUMAN REVIEW</text>
-            <text x="430" y="146" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">confidence &lt; θ · exception · flagged</text>
-            <rect x="600" y="120" width="80" height="34" rx="8" fill="rgba(0,0,0,0.08)" />
-            <text x="640" y="136" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">420</text>
-            <text x="640" y="146" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">3% · 90s avg</text>
-
-            {/* Converge */}
-            <g stroke="rgba(0,0,0,0.15)" strokeWidth="1.2" fill="none" strokeDasharray="4 3">
-              <path d="M680,20 C740,20 760,60 800,80" />
-              <path d="M680,80 L800,80" />
-              <path d="M680,140 C740,140 760,100 800,80" />
-            </g>
-
-            {/* ERP */}
-            <rect x="800" y="50" width="210" height="60" rx="10" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.2" />
-            <text x="905" y="72" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">POSTED TO SAP</text>
-            <text x="905" y="86" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">14,200 · 0 errors</text>
-            <text x="905" y="98" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.50)">audit trail emitted · reversible</text>
-          </svg>
-
-          {/* Throughput progress bar */}
-          <div className="relative h-5 rounded-full overflow-hidden mb-2" style={{ background: 'rgba(0,0,0,0.05)' }}>
+          {/* Throughput progress bar — unchanged */}
+          <div className="relative h-5 rounded-full overflow-hidden mb-2 mt-8" style={{ background: 'rgba(0,0,0,0.05)' }}>
             <div
               className="absolute inset-y-0 left-0 rounded-full"
               style={{
@@ -976,7 +932,7 @@ export function ScaleAtVolume() {
               }}
             />
           </div>
-          <div className="grid grid-cols-5 text-[16px] text-[rgba(0,0,0,0.50)]">
+          <div className="grid grid-cols-5 text-[14px] text-[rgba(0,0,0,0.50)]">
             <div>06:00</div>
             <div>07:30</div>
             <div>09:00</div>
@@ -986,5 +942,106 @@ export function ScaleAtVolume() {
         </div>
       </div>
     </section>
+  );
+}
+
+function SankeyBar({ inView }: { inView: boolean }) {
+  const reduced = useReducedMotion() ?? false;
+
+  const lanes = [
+    { key: 'small', label: 'Small model · 7B on-prem', detail: 'invoices · simple vouchers · receipts', pct: 83, volume: '11,820', rate: '$0.0002/doc', fill: 'rgba(91,118,254,0.22)' },
+    { key: 'frontier', label: 'Frontier · Llama-70 / Mistral', detail: 'cross-doc matches · handwritten · edge', pct: 14, volume: '1,960', rate: '$0.004/doc', fill: 'rgba(91,118,254,0.45)' },
+    { key: 'human', label: 'Human review', detail: 'confidence < θ · exceptions · flagged', pct: 3, volume: '420', rate: '90s avg', fill: 'rgba(91,118,254,0.70)' },
+  ];
+
+  // Delay each lane's grow so they animate sequentially, not simultaneously.
+  // Connector timing: 83% segment grows first (0.9s), then 14% (0.4s), then 3% (0.3s).
+  const laneDelays = [0, 0.9, 1.3];
+  const laneDurations = [0.9, 0.4, 0.3];
+
+  return (
+    <div>
+      {/* Desktop: horizontal sankey bar */}
+      <div className="hidden md:block">
+        <div className="flex h-[80px] rounded-[12px] overflow-hidden" style={{ background: 'rgba(0,0,0,0.03)' }}>
+          {lanes.map((lane, i) => (
+            <motion.div
+              key={lane.key}
+              initial={reduced ? false : { width: 0 }}
+              animate={reduced ? { width: `${lane.pct}%` } : inView ? { width: `${lane.pct}%` } : { width: 0 }}
+              transition={{ delay: reduced ? 0 : laneDelays[i], duration: laneDurations[i], ease: [0.22, 0.61, 0.36, 1] }}
+              style={{ background: lane.fill, minWidth: lane.pct < 5 ? '48px' : 0 }}
+              className="flex items-center px-3 overflow-hidden whitespace-nowrap"
+            >
+              <span className="text-[14px] font-bold text-black">{lane.pct}%</span>
+            </motion.div>
+          ))}
+        </div>
+        {/* Lane labels under the bar */}
+        <div className="grid grid-cols-[83fr_14fr_3fr] gap-0 mt-3">
+          {lanes.map((lane, i) => (
+            <motion.div
+              key={lane.key}
+              initial={reduced ? false : { opacity: 0 }}
+              animate={reduced ? { opacity: 1 } : inView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: reduced ? 0 : laneDelays[i] + laneDurations[i] + 0.15, duration: 0.4 }}
+              className="pr-4 last:pr-0"
+            >
+              <div className="text-[14px] font-bold text-black leading-tight">{lane.label}</div>
+              <div className="text-[13px] text-[rgba(0,0,0,0.60)] mt-0.5 leading-snug">{lane.detail}</div>
+              <div className="flex items-baseline gap-2 mt-1.5 flex-wrap">
+                <span className="text-[18px] font-display text-black">{lane.volume}</span>
+                <span className="text-[13px] text-[rgba(0,0,0,0.50)]">{lane.rate}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile: 3 stacked bars, heights proportional */}
+      <div className="md:hidden space-y-3">
+        {lanes.map((lane, i) => (
+          <motion.div
+            key={lane.key}
+            initial={reduced ? false : { opacity: 0, x: -20 }}
+            animate={reduced ? { opacity: 1, x: 0 } : inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ delay: reduced ? 0 : 0.2 + i * 0.15, duration: 0.4 }}
+          >
+            <div
+              className="rounded-[8px] flex items-center justify-center px-3"
+              style={{
+                background: lane.fill,
+                height: i === 0 ? 80 : i === 1 ? 40 : 20,
+              }}
+            >
+              <span className="text-[14px] font-bold text-black">{lane.pct}%</span>
+            </div>
+            <div className="mt-2">
+              <div className="text-[14px] font-bold text-black">{lane.label}</div>
+              <div className="text-[13px] text-[rgba(0,0,0,0.60)]">{lane.detail}</div>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-[18px] font-display text-black">{lane.volume}</span>
+                <span className="text-[13px] text-[rgba(0,0,0,0.50)]">{lane.rate}</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PipelineChip({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+  return (
+    <div
+      className="rounded-[12px] px-4 py-3 flex-1 min-w-0"
+      style={{
+        background: highlight ? 'rgba(91,118,254,0.08)' : 'rgba(0,0,0,0.03)',
+        border: `1px solid ${highlight ? 'rgba(91,118,254,0.20)' : 'rgba(0,0,0,0.06)'}`,
+      }}
+    >
+      <div className="micro-upper mb-1" style={{ color: 'rgba(0,0,0,0.50)' }}>{label}</div>
+      <div className="text-[14px] font-bold text-black truncate">{value}</div>
+    </div>
   );
 }
