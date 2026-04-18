@@ -116,7 +116,7 @@ export default function CinematicFooter() {
     { to: '/#ownership', label: 'IP & ownership' },
   ];
   const proof: LinkItem[] = [
-    { to: '/case-studies', label: 'Case studies' },
+    { to: '/solutions', label: 'Solutions' },
     { to: '/competitors', label: 'Competitors' },
     { to: '/agents#production', label: 'Live production' },
     { to: '/why-generic-fail', label: 'Why generic fails' },
