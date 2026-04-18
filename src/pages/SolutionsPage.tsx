@@ -1,3 +1,4 @@
+import { MotionConfig } from 'framer-motion';
 import ClientsStrip from '../components/ClientsStrip';
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
@@ -20,56 +21,58 @@ import { ANCHOR_INDUSTRIES } from '../data/solutions';
  */
 export default function SolutionsPage() {
   return (
-    <main>
-      <PageHero
-        label="Solutions by industry"
-        title="Your industry."
-        titleAccent="Your agents."
-        description="Five agents. Three industries in production. Seven more where the same pattern ships. Pick yours."
-        accent="#d97706"
-        orbColor="#e0c080"
-        pills={[
-          '10 industries',
-          '5 sovereign agents',
-          '3 in production',
-          '0 hallucination incidents',
-          'On-prem by default',
-        ]}
-      />
+    <MotionConfig reducedMotion="user">
+      <main>
+        <PageHero
+          label="Solutions by industry"
+          title="Your industry."
+          titleAccent="Your agents."
+          description="Five agents. Three industries in production. Seven more where the same pattern ships. Pick yours."
+          accent="#d97706"
+          orbColor="#e0c080"
+          pills={[
+            '10 industries',
+            '5 sovereign agents',
+            '3 in production',
+            '0 hallucination incidents',
+            'On-prem by default',
+          ]}
+        />
 
-      <ClientsStrip />
+        <ClientsStrip />
 
-      <IndustrySwitcher />
+        <IndustrySwitcher />
 
-      {ANCHOR_INDUSTRIES.map((a) => (
-        <IndustryAnchorSection key={a.id} data={a} />
-      ))}
+        {ANCHOR_INDUSTRIES.map((a) => (
+          <IndustryAnchorSection key={a.id} data={a} />
+        ))}
 
-      <ParallaxHero
-        imageSrc="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1920&h=1080&fit=crop"
-        headline="The same agent."
-        headlineAccent="A different industry."
-        subline="Five agents are live in three industries today. The same pattern ships in seven more."
-        label="Extend the pattern"
-        height="60vh"
-        clipRadius={24}
-      />
+        <ParallaxHero
+          imageSrc="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1920&h=1080&fit=crop"
+          headline="The same agent."
+          headlineAccent="A different industry."
+          subline="Five agents are live in three industries today. The same pattern ships in seven more."
+          label="Extend the pattern"
+          height="60vh"
+          clipRadius={24}
+        />
 
-      <AgentIndustryMatrix />
+        <AgentIndustryMatrix />
 
-      <AdjacentIndustries />
+        <AdjacentIndustries />
 
-      <ParallaxHero
-        imageSrc="https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=1920&h=1080&fit=crop"
-        headline="Is your industry"
-        headlineAccent="here?"
-        subline="If your workflow has mixed-format docs, regulated reporting, real-time voice, or multi-tool orchestration — we've seen the pattern before."
-        label="Not listed?"
-        height="60vh"
-        clipRadius={24}
-      />
+        <ParallaxHero
+          imageSrc="https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=1920&h=1080&fit=crop"
+          headline="Is your industry"
+          headlineAccent="here?"
+          subline="If your workflow has mixed-format docs, regulated reporting, real-time voice, or multi-tool orchestration — we've seen the pattern before."
+          label="Not listed?"
+          height="60vh"
+          clipRadius={24}
+        />
 
-      <SolutionsCloser />
-    </main>
+        <SolutionsCloser />
+      </main>
+    </MotionConfig>
   );
 }

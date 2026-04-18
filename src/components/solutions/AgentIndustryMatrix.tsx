@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
@@ -89,48 +89,51 @@ export default function AgentIndustryMatrix() {
             }}
           >
             {/* Header row: empty corner + 10 industry columns */}
-            <div
-              className="sticky left-0 z-[2]"
-              style={{
-                background: '#fafafa',
-                borderBottom: '1px solid rgba(0,0,0,0.08)',
-                borderRight: '1px solid rgba(0,0,0,0.08)',
-              }}
-            />
-            {INDUSTRIES.map((ind) => {
-              const Icon = (Lucide as any)[ind.iconName] ?? Lucide.HelpCircle;
-              return (
-                <div
-                  key={ind.id}
-                  role="columnheader"
-                  className="flex flex-col items-center justify-end gap-1 px-1 py-3"
-                  style={{
-                    background: '#fafafa',
-                    borderBottom: '1px solid rgba(0,0,0,0.08)',
-                    borderRight: '1px solid rgba(0,0,0,0.04)',
-                    minHeight: 72,
-                  }}
-                >
-                  <Icon aria-hidden="true" size={14} style={{ color: 'rgba(0,0,0,0.55)' }} />
-                  <span
-                    className="text-center leading-tight"
+            <div role="row" style={{ display: 'contents' }}>
+              <div
+                role="columnheader"
+                className="sticky left-0 z-[2]"
+                style={{
+                  background: '#fafafa',
+                  borderBottom: '1px solid rgba(0,0,0,0.08)',
+                  borderRight: '1px solid rgba(0,0,0,0.08)',
+                }}
+              />
+              {INDUSTRIES.map((ind) => {
+                const Icon = (Lucide as any)[ind.iconName] ?? Lucide.HelpCircle;
+                return (
+                  <div
+                    key={ind.id}
+                    role="columnheader"
+                    className="flex flex-col items-center justify-end gap-1 px-1 py-3"
                     style={{
-                      fontFamily: 'var(--mono)',
-                      fontSize: 10,
-                      letterSpacing: '0.04em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(0,0,0,0.65)',
+                      background: '#fafafa',
+                      borderBottom: '1px solid rgba(0,0,0,0.08)',
+                      borderRight: '1px solid rgba(0,0,0,0.04)',
+                      minHeight: 72,
                     }}
                   >
-                    {ind.short}
-                  </span>
-                </div>
-              );
-            })}
+                    <Icon aria-hidden="true" size={14} style={{ color: 'rgba(0,0,0,0.55)' }} />
+                    <span
+                      className="text-center leading-tight"
+                      style={{
+                        fontFamily: 'var(--mono)',
+                        fontSize: 10,
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(0,0,0,0.65)',
+                      }}
+                    >
+                      {ind.short}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
 
             {/* 5 rows × (agent label + 10 cells) */}
             {AGENTS.map((agent, rowIdx) => (
-              <React.Fragment key={agent.id}>
+              <div key={agent.id} role="row" style={{ display: 'contents' }}>
                 {/* Row header (agent name) */}
                 <div
                   role="rowheader"
@@ -194,7 +197,7 @@ export default function AgentIndustryMatrix() {
                     </motion.div>
                   );
                 })}
-              </React.Fragment>
+              </div>
             ))}
           </div>
         </div>

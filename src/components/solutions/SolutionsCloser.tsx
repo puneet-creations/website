@@ -32,16 +32,18 @@ export default function SolutionsCloser() {
               className="relative"
               style={{ width: 'clamp(280px, 32vw, 420px)', height: 'clamp(280px, 32vw, 420px)' }}
             >
-              <Suspense fallback={null}>
-                <HeroOrb
-                  baseColor="#6b3410"
-                  attenuationColor="#f5a623"
-                  envColor="#e0b080"
-                  attenuationDistance={0.9}
-                  breatheAmp={0.14}
-                  floatAmp={0.25}
-                />
-              </Suspense>
+              {inView && (
+                <Suspense fallback={null}>
+                  <HeroOrb
+                    baseColor="#6b3410"
+                    attenuationColor="#f5a623"
+                    envColor="#e0b080"
+                    attenuationDistance={0.9}
+                    breatheAmp={0.14}
+                    floatAmp={0.25}
+                  />
+                </Suspense>
+              )}
             </div>
           </motion.div>
 

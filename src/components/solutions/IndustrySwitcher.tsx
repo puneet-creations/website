@@ -20,18 +20,21 @@ export default function IndustrySwitcher() {
 
     const obs = new IntersectionObserver(
       (entries) => {
-        // Pick the entry with the largest intersection ratio among those intersecting.
-        const visible = entries
+        // Pick the topmost visible section still within the narrow activation
+        // band. Using rect geometry (not intersectionRatio) avoids jitter when
+        // multiple adjacent cards share similar ratios in the 4-col grid row.
+        const candidates = entries
           .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
+          .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
+        if (candidates.length > 0) {
+          setActiveId(candidates[0].target.id);
         }
       },
       {
-        // Top-of-viewport band: active = the section just under the sticky switcher.
-        rootMargin: '-120px 0px -60% 0px',
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        // Narrow 15%-tall activation band at top of viewport
+        // (below sticky nav + switcher).
+        rootMargin: '-120px 0px -85% 0px',
+        threshold: 0,
       }
     );
 
