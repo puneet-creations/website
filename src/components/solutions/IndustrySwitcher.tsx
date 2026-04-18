@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { INDUSTRIES } from '../../data/solutions';
 
+// Account for sticky SiteNav (64px) + switcher (32px).
+const SCROLL_OFFSET = 96;
+
 /**
  * IndustrySwitcher — sticky 10-pill segmented control under the SiteNav.
  * Tracks the industry section currently in view and smooth-scrolls on click.
@@ -58,7 +61,7 @@ export default function IndustrySwitcher() {
     e.preventDefault();
     const target = document.getElementById(id);
     if (!target) return;
-    const y = target.getBoundingClientRect().top + window.scrollY - 96;
+    const y = target.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
     window.scrollTo({ top: y, behavior: 'smooth' });
   };
 

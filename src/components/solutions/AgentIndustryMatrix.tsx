@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
 import {
   AGENTS,
@@ -100,7 +101,9 @@ export default function AgentIndustryMatrix() {
                 }}
               />
               {INDUSTRIES.map((ind) => {
-                const Icon = (Lucide as any)[ind.iconName] ?? Lucide.HelpCircle;
+                const Icon: LucideIcon =
+                  (Lucide as unknown as Record<string, LucideIcon>)[ind.iconName] ??
+                  Lucide.HelpCircle;
                 return (
                   <div
                     key={ind.id}

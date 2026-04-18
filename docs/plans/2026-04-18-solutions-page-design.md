@@ -150,7 +150,8 @@ Grid: `lg:grid-cols-4 md:grid-cols-2 grid-cols-1` = perfect 4×2 desktop.
 
 **8th CTA card** (inverted — black bg, white text):
 - Icon: `Plus`
-- Headline: *Your industry here?*
+- Label (micro-upper): "Your industry?"
+- Headline: "Not here? / *Bring the docs.*"
 - Body: "The platform is industry-agnostic. The agents extend by pattern. If your workflow has mixed-format docs, regulated reporting, real-time voice, or multi-tool orchestration — we've seen it before."
 - Link: "Tell us about your documents →" → `mailto:hello@attentions.ai?subject=New%20Industry%20Fit`
 

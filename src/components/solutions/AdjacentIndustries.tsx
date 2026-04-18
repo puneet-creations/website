@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
 import {
   ADJACENT_INDUSTRIES,
@@ -65,7 +66,9 @@ export default function AdjacentIndustries() {
 }
 
 function Card({ data, delay }: { data: AdjacentIndustry; delay: number }) {
-  const Icon = (Lucide as any)[data.iconName] ?? Lucide.HelpCircle;
+  const Icon: LucideIcon =
+    (Lucide as unknown as Record<string, LucideIcon>)[data.iconName] ??
+    Lucide.HelpCircle;
   const industry = INDUSTRY_BY_ID[data.id];
 
   return (

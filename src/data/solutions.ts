@@ -134,6 +134,8 @@ export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
 export type AnchorIndustry = {
   id: IndustryId;
   accent: string;       // hex color for the section accent
+  headline: string;        // first part (normal weight); empty string allowed for single-word accents
+  headlineAccent: string;  // last part (italic, accent-colored)
   docs: string[];       // 4–5 document types
   agents: AgentId[];    // which of the 5 apply
   client: string;
@@ -149,6 +151,8 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
   {
     id: 'finance-logistics',
     accent: '#187574',
+    headline: 'Finance &',
+    headlineAccent: 'Logistics',
     docs: [
       'Handwritten invoices',
       'Multi-currency vouchers',
@@ -168,6 +172,8 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
   {
     id: 'healthcare',
     accent: '#8a2c6a',
+    headline: '',
+    headlineAccent: 'Healthcare',
     docs: [
       'Clinical consults (voice)',
       'SOAP notes + ICD-10',
@@ -187,6 +193,8 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
   {
     id: 'manufacturing',
     accent: '#2f5d14',
+    headline: '',
+    headlineAccent: 'Manufacturing',
     docs: [
       'Product Concern Reports',
       '8D reports (D1–D8)',

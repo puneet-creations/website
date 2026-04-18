@@ -1,24 +1,15 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { AGENT_BY_ID, INDUSTRY_BY_ID, type AnchorIndustry } from '../../data/solutions';
+import { AGENT_BY_ID, type AnchorIndustry } from '../../data/solutions';
 
 /**
  * IndustryAnchorSection — one of the 3 in-production industry blocks.
  *
  * Two-column layout: docs + agents on the left, client card on the right.
- * Fraunces headline with italic last word, amber metric, quote, proof chips.
+ * Fraunces headline with italic accent word, amber metric, quote, proof chips.
  */
 export default function IndustryAnchorSection({ data }: { data: AnchorIndustry }) {
   const [ref, inView] = useInView<HTMLElement>(0.2);
-  const industry = INDUSTRY_BY_ID[data.id];
-
-  // Split industry name into main + italic-accent parts
-  //   "Finance & Logistics" → main "Finance &" accent "Logistics"
-  //   "Healthcare"          → main "Healthcare" accent "" (no split — italic the whole word)
-  const parts = industry.name.split(' ');
-  const lastWord = parts[parts.length - 1];
-  const leadWords = parts.slice(0, -1).join(' ');
-  const hasSplit = parts.length > 1;
 
   return (
     <section
@@ -49,14 +40,8 @@ export default function IndustryAnchorSection({ data }: { data: AnchorIndustry }
               color: '#000000',
             }}
           >
-            {hasSplit ? (
-              <>
-                {leadWords}{' '}
-                <span style={{ fontStyle: 'italic', color: data.accent }}>{lastWord}</span>
-              </>
-            ) : (
-              <span style={{ fontStyle: 'italic', color: data.accent }}>{lastWord}</span>
-            )}
+            {data.headline && <>{data.headline}{' '}</>}
+            <span style={{ fontStyle: 'italic', color: data.accent }}>{data.headlineAccent}</span>
           </h2>
         </motion.div>
 
