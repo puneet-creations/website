@@ -45,16 +45,22 @@ export default function IndustrySwitcher() {
     return () => obs.disconnect();
   }, []);
 
-  // When active pill changes on mobile, center it in the scrollable strip
+  // When active pill changes, horizontally center it within the strip's
+  // overflow-x scroll. Uses strip.scrollTo — NOT activePill.scrollIntoView,
+  // which on initial mount would auto-scroll the window (walks every
+  // scrollable ancestor, including window) and push the hero out of view.
   useEffect(() => {
     const strip = stripRef.current;
     if (!strip) return;
     const activePill = strip.querySelector<HTMLAnchorElement>(
       `[data-industry-pill="${activeId}"]`
     );
-    if (activePill) {
-      activePill.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
-    }
+    if (!activePill) return;
+    const stripRect = strip.getBoundingClientRect();
+    const pillRect = activePill.getBoundingClientRect();
+    const pillLeftInStrip = pillRect.left - stripRect.left + strip.scrollLeft;
+    const targetLeft = pillLeftInStrip - (strip.clientWidth - pillRect.width) / 2;
+    strip.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
   }, [activeId]);
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
