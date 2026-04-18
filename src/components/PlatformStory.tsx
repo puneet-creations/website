@@ -918,7 +918,7 @@ export function ScaleAtVolume() {
             <span className="text-[rgba(0,0,0,0.30)] hidden md:block" aria-hidden><ChevronRight size={20} /></span>
             <PipelineChip label="ROUTER" value="cost + complexity" />
             <span className="text-[rgba(0,0,0,0.30)] hidden md:block" aria-hidden><ChevronRight size={20} /></span>
-            <PipelineChip label="POSTED TO SAP" value="14,200 · 0 errors" highlight />
+            <PipelineChip label="POSTED TO SAP" value="14,200 · 0 errors" variant="terminal" />
           </div>
 
           {/* Throughput progress bar — unchanged */}
@@ -963,6 +963,7 @@ function SankeyBar({ inView }: { inView: boolean }) {
     <div>
       {/* Desktop: horizontal sankey bar */}
       <div className="hidden md:block">
+        {/* overflow-hidden trims the 48px-minWidth overshoot on the 3% lane (sum may exceed 100%) */}
         <div className="flex h-[80px] rounded-[12px] overflow-hidden" style={{ background: 'rgba(0,0,0,0.03)' }}>
           {lanes.map((lane, i) => (
             <motion.div
@@ -977,8 +978,8 @@ function SankeyBar({ inView }: { inView: boolean }) {
             </motion.div>
           ))}
         </div>
-        {/* Lane labels under the bar */}
-        <div className="grid grid-cols-[83fr_14fr_3fr] gap-0 mt-3">
+        {/* Lane labels under the bar — grid template derived from lane percentages to prevent drift */}
+        <div className="grid gap-0 mt-3" style={{ gridTemplateColumns: lanes.map((l) => `${l.pct}fr`).join(' ') }}>
           {lanes.map((lane, i) => (
             <motion.div
               key={lane.key}
@@ -1031,13 +1032,14 @@ function SankeyBar({ inView }: { inView: boolean }) {
   );
 }
 
-function PipelineChip({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+function PipelineChip({ label, value, variant = 'default' }: { label: string; value: string; variant?: 'default' | 'terminal' }) {
+  const isTerminal = variant === 'terminal';
   return (
     <div
       className="rounded-[12px] px-4 py-3 flex-1 min-w-0"
       style={{
-        background: highlight ? 'rgba(91,118,254,0.08)' : 'rgba(0,0,0,0.03)',
-        border: `1px solid ${highlight ? 'rgba(91,118,254,0.20)' : 'rgba(0,0,0,0.06)'}`,
+        background: isTerminal ? 'rgba(91,118,254,0.08)' : 'rgba(0,0,0,0.03)',
+        border: `1px solid ${isTerminal ? 'rgba(91,118,254,0.20)' : 'rgba(0,0,0,0.06)'}`,
       }}
     >
       <div className="micro-upper mb-1" style={{ color: 'rgba(0,0,0,0.50)' }}>{label}</div>
