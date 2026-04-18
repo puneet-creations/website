@@ -1,6 +1,7 @@
 import PageHero from '../components/PageHero';
 import IndustrySwitcher from '../components/solutions/IndustrySwitcher';
-import { INDUSTRIES } from '../data/solutions';
+import IndustryAnchorSection from '../components/solutions/IndustryAnchorSection';
+import { INDUSTRIES, ANCHOR_INDUSTRIES } from '../data/solutions';
 
 /**
  * SolutionsPage — industry-first landing.
@@ -33,14 +34,19 @@ export default function SolutionsPage() {
 
       <IndustrySwitcher />
 
-      {/* TEMPORARY placeholder sections — replaced in Tasks 4, 6, 7 */}
-      {INDUSTRIES.map((i) => (
+      {/* 3 proven industries */}
+      {ANCHOR_INDUSTRIES.map((a) => (
+        <IndustryAnchorSection key={a.id} data={a} />
+      ))}
+
+      {/* TEMPORARY placeholder sections for the 7 adjacent (replaced in Task 6) */}
+      {INDUSTRIES.filter((i) => !i.proven).map((i) => (
         <section
           key={i.id}
           id={i.id}
-          style={{ minHeight: '80vh', padding: '80px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}
+          style={{ minHeight: '50vh', padding: '80px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}
         >
-          <h2 className="font-display text-4xl text-center">{i.name} (placeholder)</h2>
+          <h2 className="font-display text-3xl text-center">{i.name} (placeholder)</h2>
         </section>
       ))}
     </main>
