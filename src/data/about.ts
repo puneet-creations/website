@@ -2,8 +2,6 @@
  * about.ts — data source for the /about page.
  *
  * Single source of truth. All 10 sections on /about consume from here.
- * Before shipping: user must fill in EXPERTS with real names + roles
- * (the TBD placeholders below are not appropriate for production).
  */
 
 export type Certification = {
@@ -27,10 +25,12 @@ export type Founder = {
   linkedinUrl?: string;
 };
 
-export type Expert = {
+export type Advisor = {
   name: string;
-  role: string;
+  role: string;          // e.g., "EVP of Data, Analytics & AI"
+  affiliation: string;   // e.g., "Swisscom"
   initials: string;
+  bio: string;
 };
 
 export type SuccessStory = {
@@ -95,18 +95,36 @@ export const FOUNDERS: Founder[] = [
   },
 ];
 
-// ── Experts (6 slots — USER MUST FILL IN BEFORE SHIPPING) ─────────────
+// ── Advisory Board (3 real advisors from old attentions.ai/about-us) ──
 
-export const EXPERTS: Expert[] = [
-  { name: '[Name TBD]', role: 'AI Research Lead \u00b7 Document intelligence',  initials: 'TB' },
-  { name: '[Name TBD]', role: 'Platform Engineering Lead \u00b7 Sovereign runtime', initials: 'TB' },
-  { name: '[Name TBD]', role: 'ERP Connectors Lead \u00b7 SAP / Epic integrations', initials: 'TB' },
-  { name: '[Name TBD]', role: 'Voice AI Lead \u00b7 Real-time transcription',    initials: 'TB' },
-  { name: '[Name TBD]', role: 'Governance & Compliance \u00b7 Audit trail',     initials: 'TB' },
-  { name: '[Name TBD]', role: 'Product Design Lead \u00b7 Operator workflows',   initials: 'TB' },
+export const ADVISORS: Advisor[] = [
+  {
+    name: 'Omair Ahmed Khan',
+    role: 'EVP of Data, Analytics & AI',
+    affiliation: 'Swisscom',
+    initials: 'OK',
+    bio:
+      'Drives enterprise transformation with deep expertise in AI strategy, data governance, and large-scale change management across regulated industries.',
+  },
+  {
+    name: 'Monica Dalla Riva',
+    role: 'Chief Design Officer',
+    affiliation: 'Deutsche Telekom',
+    initials: 'MD',
+    bio:
+      'Shapes customer-focused innovation through global design and product expertise. Two decades architecting digital products at enterprise scale.',
+  },
+  {
+    name: 'Murad Semercioglu',
+    role: 'CEO',
+    affiliation: 'CPC Y\u00f6netim Dan\u0131\u015fmanl\u0131k',
+    initials: 'MS',
+    bio:
+      'Guides leaders and organizations through strategic transformation with expertise in executive advisory and performance coaching.',
+  },
 ];
 
-export const EXPERT_TOTAL_COUNT = 18;
+export const TEAM_TOTAL_COUNT = 18;
 
 // ── Success stories (Thomson / Qira / Daimler, About framing) ──────────
 
@@ -181,7 +199,7 @@ export const WORK_PRINCIPLES: WorkPrinciple[] = [
     title: 'We own outcomes.',
     titleAccent: 'Not billable hours.',
     body:
-      'We\u2019re not a consulting firm counting hours. ROI metrics defined at scoping. Production agent live on your infrastructure by the end. If the business case isn\u2019t delivering, we know before you do \u2014 and we revisit scope, not the invoice.',
+      'We\u2019re not a consulting firm counting hours. ROI metrics defined at scoping. Production agent live on your infrastructure by the end \u2014 and outcomes land within ~2 months of deployment, not years. If the business case isn\u2019t delivering, we know before you do, and we revisit scope.',
   },
 ];
 

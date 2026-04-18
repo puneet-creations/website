@@ -1,17 +1,16 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { FOUNDERS, EXPERTS, EXPERT_TOTAL_COUNT } from '../../data/about';
+import { FOUNDERS, ADVISORS, TEAM_TOTAL_COUNT } from '../../data/about';
 
 const ACCENT = '#475569';
 
 /**
- * TeamGrid — 2 founder bios (richer) + 5–8 named experts grid +
- * aggregate footer "+ N more across AI research, ML engineering,
- * data science, domain expertise".
+ * TeamGrid — 2 founder bios + 3 advisory board members + aggregate
+ * footer "+ 18 team members across AI research, ML engineering, data
+ * science, domain expertise".
  */
 export default function TeamGrid() {
   const [ref, inView] = useInView<HTMLElement>(0.1);
-  const remaining = EXPERT_TOTAL_COUNT - EXPERTS.length - FOUNDERS.length;
 
   return (
     <section
@@ -40,12 +39,12 @@ export default function TeamGrid() {
             }}
           >
             Founders who shipped.{' '}
-            <span style={{ fontStyle: 'italic' }}>Experts who deliver.</span>
+            <span style={{ fontStyle: 'italic' }}>Advisors who&rsquo;ve scaled.</span>
           </h2>
         </motion.div>
 
         {/* Founders block */}
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
           {FOUNDERS.map((founder, idx) => (
             <motion.article
               key={founder.name}
@@ -61,6 +60,7 @@ export default function TeamGrid() {
             >
               <div className="flex items-start gap-5 mb-5">
                 <div
+                  aria-hidden="true"
                   className="w-[80px] h-[80px] rounded-full flex items-center justify-center flex-shrink-0"
                   style={{
                     background: `${ACCENT}10`,
@@ -105,75 +105,115 @@ export default function TeamGrid() {
           ))}
         </div>
 
-        {/* Experts grid */}
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {EXPERTS.map((expert, idx) => (
-            <motion.div
-              key={`${expert.name}-${idx}`}
+        {/* Advisory Board block */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-8 text-center"
+        >
+          <div
+            className="micro-upper mb-3"
+            style={{ color: ACCENT }}
+          >
+            Advisory board
+          </div>
+          <h3
+            style={{
+              fontFamily: 'var(--serif)',
+              fontSize: 'clamp(22px, 2.4vw, 32px)',
+              fontWeight: 500,
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              color: '#000000',
+            }}
+          >
+            Strategic guidance.{' '}
+            <span style={{ fontStyle: 'italic' }}>Institutional credibility.</span>
+          </h3>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-5 mb-10">
+          {ADVISORS.map((advisor, idx) => (
+            <motion.article
+              key={advisor.name}
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 + idx * 0.05 }}
-              className="rounded-2xl p-5"
+              transition={{ duration: 0.5, delay: 0.4 + idx * 0.08 }}
+              className="rounded-3xl p-7"
               style={{
                 background: '#ffffff',
                 border: '1px solid rgba(0,0,0,0.06)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
               }}
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mb-4">
                 <div
-                  className="w-[56px] h-[56px] rounded-full flex items-center justify-center flex-shrink-0"
+                  aria-hidden="true"
+                  className="w-[64px] h-[64px] rounded-full flex items-center justify-center flex-shrink-0"
                   style={{
-                    background: `${ACCENT}0d`,
-                    border: `1px solid ${ACCENT}1a`,
+                    background: `${ACCENT}10`,
+                    border: `1px solid ${ACCENT}20`,
                     fontFamily: 'var(--serif)',
                     fontStyle: 'italic',
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: 600,
                     color: ACCENT,
                   }}
                 >
-                  {expert.initials}
+                  {advisor.initials}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div
                     style={{
                       fontFamily: 'var(--serif)',
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: 500,
                       color: '#000000',
-                      lineHeight: 1.1,
+                      lineHeight: 1.15,
+                      letterSpacing: '-0.01em',
                     }}
                   >
-                    {expert.name}
+                    {advisor.name}
                   </div>
                   <div
-                    className="mt-1 text-[12px] leading-snug"
-                    style={{ color: 'rgba(0,0,0,0.55)' }}
+                    className="micro-upper mt-1"
+                    style={{ color: ACCENT, fontSize: 11 }}
                   >
-                    {expert.role}
+                    {advisor.role}
                   </div>
                 </div>
               </div>
-            </motion.div>
+              <div
+                className="mb-3 text-[13px] font-medium"
+                style={{ color: 'rgba(0,0,0,0.80)' }}
+              >
+                {advisor.affiliation}
+              </div>
+              <p
+                className="text-[14px] leading-relaxed"
+                style={{ color: 'rgba(0,0,0,0.65)' }}
+              >
+                {advisor.bio}
+              </p>
+            </motion.article>
           ))}
         </div>
 
         {/* Aggregate footer */}
-        {remaining > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-8 text-center text-[14px]"
-            style={{
-              color: 'rgba(0,0,0,0.55)',
-              fontStyle: 'italic',
-              fontFamily: 'var(--serif)',
-            }}
-          >
-            + {remaining} more across AI research, ML engineering, data science, domain expertise.
-          </motion.div>
-        )}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-8 text-center text-[14px]"
+          style={{
+            color: 'rgba(0,0,0,0.55)',
+            fontStyle: 'italic',
+            fontFamily: 'var(--serif)',
+          }}
+        >
+          + {TEAM_TOTAL_COUNT} team members across AI research, ML engineering, data science, domain expertise.
+        </motion.div>
       </div>
     </section>
   );
