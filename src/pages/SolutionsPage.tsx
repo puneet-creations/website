@@ -1,6 +1,8 @@
 import PageHero from '../components/PageHero';
+import ParallaxHero from '../components/ParallaxHero';
 import IndustrySwitcher from '../components/solutions/IndustrySwitcher';
 import IndustryAnchorSection from '../components/solutions/IndustryAnchorSection';
+import AgentIndustryMatrix from '../components/solutions/AgentIndustryMatrix';
 import { INDUSTRIES, ANCHOR_INDUSTRIES } from '../data/solutions';
 
 /**
@@ -38,6 +40,18 @@ export default function SolutionsPage() {
       {ANCHOR_INDUSTRIES.map((a) => (
         <IndustryAnchorSection key={a.id} data={a} />
       ))}
+
+      <ParallaxHero
+        imageSrc="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1920&h=1080&fit=crop"
+        headline="The same agent."
+        headlineAccent="A different industry."
+        subline="Five agents are live in three industries today. The same pattern ships in seven more."
+        label="Extend the pattern"
+        height="60vh"
+        clipRadius={24}
+      />
+
+      <AgentIndustryMatrix />
 
       {/* TEMPORARY placeholder sections for the 7 adjacent (replaced in Task 6) */}
       {INDUSTRIES.filter((i) => !i.proven).map((i) => (
