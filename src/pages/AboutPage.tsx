@@ -2,6 +2,7 @@ import { MotionConfig } from 'framer-motion';
 import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
 import CertificationsStrip from '../components/about/CertificationsStrip';
+import StatRow from '../components/about/StatRow';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -36,8 +37,10 @@ export default function AboutPage() {
 
         <CertificationsStrip />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 4–10 */}
-        {['stats', 'success', 'parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
+        <StatRow />
+
+        {/* TEMPORARY placeholders — replaced in Tasks 5–10 */}
+        {['success', 'parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
           <section
             key={id}
             id={id}
