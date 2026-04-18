@@ -3,6 +3,12 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronRight, Flag } from 'lucide-react';
 import { useInView } from '../hooks/useInView';
 
+// Success-green tokens used by DeterminismProof (RunCard badge + connector line)
+const GREEN_OK = '#2a8f5c';
+const GREEN_OK_BG_10 = 'rgba(42,143,92,0.10)';
+const GREEN_OK_BG_30 = 'rgba(42,143,92,0.30)';
+const GREEN_OK_BG_40 = 'rgba(42,143,92,0.40)';
+
 /**
  * PlatformStory — visual long-form platform narrative.
  *   A. Three agent families (document · voice · multimodal) — each with a mini flow diagram
@@ -685,6 +691,7 @@ function ModelChip({ name, role }: { name: string; role: string }) {
 /* ============================================================ */
 export function DeterminismProof() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
+  const reduced = useReducedMotion() ?? false;
 
   const runs = [
     { idx: '01', time: '09:14 AM' },
@@ -759,8 +766,18 @@ replay_enabled = true`}
 
           {/* Act 3: 4 identical runs */}
           <div className="relative space-y-3">
-            {runs.map((r) => (
-              <RunCard key={r.idx} idx={r.idx} time={r.time} />
+            {/* Vertical connector line — anchored to the sha chips column on desktop only */}
+            <motion.div
+              aria-hidden
+              className="absolute right-[140px] top-8 bottom-8 w-px hidden lg:block"
+              initial={reduced ? { scaleY: 1 } : { scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: reduced ? 0 : 1.6, duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
+              style={{ background: GREEN_OK_BG_40, transformOrigin: 'top' }}
+            />
+            {runs.map((r, i) => (
+              <RunCard key={r.idx} idx={r.idx} time={r.time} delay={reduced ? 0 : 0.3 + i * 0.25} reduced={reduced} />
             ))}
           </div>
 
@@ -779,12 +796,16 @@ replay_enabled = true`}
   );
 }
 
-function RunCard({ idx, time }: { idx: string; time: string }) {
+function RunCard({ idx, time, delay, reduced }: { idx: string; time: string; delay: number; reduced: boolean }) {
   // Values (vendor_id, amount, gl, hash) are intentionally hardcoded identical
   // across all 4 runs — that IS the demonstration of determinism. Do not
   // "DRY this up" by lifting values into props; the repetition is the proof.
   return (
-    <div
+    <motion.div
+      initial={reduced ? false : { opacity: 0, x: 60 }}
+      whileInView={reduced ? undefined : { opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ delay, duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
       className="rounded-[12px] px-5 py-4 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-4"
       style={{ background: 'white', border: '1px solid rgba(0,0,0,0.06)' }}
     >
@@ -804,11 +825,25 @@ function RunCard({ idx, time }: { idx: string; time: string }) {
       </div>
       <div className="flex items-center gap-2 whitespace-nowrap">
         <span className="text-[13px] font-mono text-black">sha256: 4a2f…0e19</span>
-        <span className="text-[13px] font-bold text-[#2a8f5c] rounded-full px-2 py-0.5" style={{ background: 'rgba(42,143,92,0.10)' }}>
+        <motion.span
+          initial={reduced ? false : { scale: 0.8, background: GREEN_OK_BG_30 }}
+          whileInView={
+            reduced
+              ? undefined
+              : {
+                  scale: [0.8, 1.15, 1],
+                  background: [GREEN_OK_BG_30, GREEN_OK_BG_30, GREEN_OK_BG_10],
+                }
+          }
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: delay + 0.3, duration: 0.5 }}
+          className="text-[13px] font-bold rounded-full px-2 py-0.5"
+          style={{ color: GREEN_OK, background: GREEN_OK_BG_10 }}
+        >
           ✓ identical
-        </span>
+        </motion.span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
