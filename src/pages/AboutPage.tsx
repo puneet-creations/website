@@ -3,6 +3,7 @@ import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
 import CertificationsStrip from '../components/about/CertificationsStrip';
 import StatRow from '../components/about/StatRow';
+import SuccessStories from '../components/about/SuccessStories';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -39,8 +40,10 @@ export default function AboutPage() {
 
         <StatRow />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 5–10 */}
-        {['success', 'parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
+        <SuccessStories />
+
+        {/* TEMPORARY placeholders — replaced in Tasks 6–10 */}
+        {['parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
           <section
             key={id}
             id={id}
