@@ -780,6 +780,9 @@ replay_enabled = true`}
 }
 
 function RunCard({ idx, time }: { idx: string; time: string }) {
+  // Values (vendor_id, amount, gl, hash) are intentionally hardcoded identical
+  // across all 4 runs — that IS the demonstration of determinism. Do not
+  // "DRY this up" by lifting values into props; the repetition is the proof.
   return (
     <div
       className="rounded-[12px] px-5 py-4 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-4"
