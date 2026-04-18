@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 import { SUCCESS_STORIES, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
@@ -55,15 +56,13 @@ export default function SuccessStories() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 + idx * 0.1 }}
-                className="flex flex-col overflow-hidden rounded-3xl"
+                className="flex flex-col"
                 style={{
-                  background: '#ffffff',
-                  border: '1px solid rgba(0,0,0,0.06)',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.05)',
+                  ...whiteCardStyle({ shadow: 'md' }),
                   minHeight: 420,
                 }}
               >
-                <div style={{ height: 1, background: '#000000' }} />
+                <AccentStrip color="#000000" />
                 <div className="p-7 md:p-8 flex flex-col flex-1 gap-5">
                   <div
                     className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center"

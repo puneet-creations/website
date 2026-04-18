@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 import type { Door, PanelId } from '../../data/pricing';
 
 const ACCENT = '#3a7d44';
@@ -43,16 +44,10 @@ export default function PricingDoor({ data }: { data: Door }) {
       <div className="max-w-[1200px] mx-auto">
         <article
           className="flex flex-col"
-          style={{
-            background: '#ffffff',
-            border: '1px solid rgba(0,0,0,0.06)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.05)',
-            borderRadius: 24,
-            overflow: 'hidden',
-          }}
+          style={whiteCardStyle({ shadow: 'md' })}
         >
           {/* Forest-green top accent strip */}
-          <div style={{ height: 1, background: ACCENT }} />
+          <AccentStrip color={ACCENT} />
 
           <div className="p-8 md:p-10 flex flex-col gap-6">
             {/* Header: icon + tier name */}

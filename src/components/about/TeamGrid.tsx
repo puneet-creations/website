@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle } from '../common/whiteCard';
 import { FOUNDERS, ADVISORS, TEAM_TOTAL_COUNT, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
@@ -49,12 +50,8 @@ export default function TeamGrid() {
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 + idx * 0.1 }}
-              className="rounded-3xl p-8 md:p-10"
-              style={{
-                background: '#ffffff',
-                border: '1px solid rgba(0,0,0,0.06)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.05)',
-              }}
+              className="p-8 md:p-10"
+              style={whiteCardStyle({ shadow: 'md' })}
             >
               <div className="flex items-start gap-5 mb-5">
                 <div
@@ -153,12 +150,8 @@ export default function TeamGrid() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 + idx * 0.08 }}
-              className="rounded-3xl p-7"
-              style={{
-                background: '#ffffff',
-                border: '1px solid rgba(0,0,0,0.06)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
-              }}
+              className="p-7"
+              style={whiteCardStyle({ shadow: 'sm' })}
             >
               <div className="flex items-center gap-4 mb-4">
                 <div

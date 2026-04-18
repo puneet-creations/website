@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle } from '../common/whiteCard';
 import { CERTIFICATIONS, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
@@ -40,12 +41,8 @@ export default function CertificationsStrip() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 + idx * 0.08 }}
-                className="flex flex-col items-center text-center rounded-3xl p-6 md:p-7"
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid rgba(0,0,0,0.06)',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
-                }}
+                className="flex flex-col items-center text-center p-6 md:p-7"
+                style={whiteCardStyle({ shadow: 'sm' })}
               >
                 <div
                   className="w-[64px] h-[64px] rounded-2xl flex items-center justify-center mb-4"

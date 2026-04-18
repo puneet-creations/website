@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 import {
   ADJACENT_INDUSTRIES,
   AGENT_BY_ID,
@@ -80,16 +81,12 @@ function Card({ data, delay }: { data: AdjacentIndustry; delay: number }) {
       transition={{ duration: 0.6, delay }}
       className="group flex flex-col"
       style={{
-        background: '#ffffff',
-        border: '1px solid rgba(0,0,0,0.06)',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
-        borderRadius: 20,
-        overflow: 'hidden',
+        ...whiteCardStyle({ shadow: 'sm', radius: 20 }),
         minHeight: 520,
       }}
     >
       {/* Black 1px top accent strip */}
-      <div style={{ height: 1, background: '#000000' }} />
+      <AccentStrip color="#000000" />
 
       <div className="p-7 flex flex-col flex-1">
         {/* Icon square */}

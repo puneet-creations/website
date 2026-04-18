@@ -1,6 +1,7 @@
 import { Truck, Car, Stethoscope } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 
 /**
  * ProductionProof — 3 white cards with real production clients.
@@ -111,16 +112,14 @@ export default function ProductionProof() {
                 className="group"
               >
                 <div
-                  className="relative rounded-3xl overflow-hidden transition-shadow duration-300 hover:shadow-xl flex flex-col"
+                  className="relative transition-shadow duration-300 hover:shadow-xl flex flex-col"
                   style={{
-                    background: '#ffffff',
-                    border: '1px solid rgba(0,0,0,0.06)',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.05)',
+                    ...whiteCardStyle({ shadow: 'md' }),
                     minHeight: 620,
                   }}
                 >
                   {/* Top strip */}
-                  <div className="h-1 w-full" style={{ background: '#000000' }} />
+                  <AccentStrip color="#000000" thickness={4} />
 
                   <div className="p-10 flex flex-col flex-1">
                     {/* Icon */}

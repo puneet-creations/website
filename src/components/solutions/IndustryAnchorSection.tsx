@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle } from '../common/whiteCard';
 import { AGENT_BY_ID, type AnchorIndustry } from '../../data/solutions';
 
 /**
@@ -102,12 +103,8 @@ export default function IndustryAnchorSection({ data }: { data: AnchorIndustry }
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="rounded-3xl p-8 md:p-10"
-            style={{
-              background: '#ffffff',
-              border: '1px solid rgba(0,0,0,0.06)',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.05)',
-            }}
+            className="p-8 md:p-10"
+            style={whiteCardStyle({ shadow: 'md' })}
           >
             {/* Client header */}
             <div className="mb-6">

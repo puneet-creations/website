@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 import { STATS, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
@@ -23,14 +24,9 @@ export default function StatRow() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="rounded-3xl overflow-hidden"
-              style={{
-                background: '#ffffff',
-                border: '1px solid rgba(0,0,0,0.06)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
-              }}
+              style={whiteCardStyle({ shadow: 'sm' })}
             >
-              <div style={{ height: 1, background: ACCENT }} />
+              <AccentStrip color={ACCENT} />
               <div className="p-6 md:p-7 text-center">
                 <div
                   className="leading-none mb-3"
