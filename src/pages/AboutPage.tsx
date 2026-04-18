@@ -1,6 +1,7 @@
 import { MotionConfig } from 'framer-motion';
 import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
+import ParallaxHero from '../components/ParallaxHero';
 import CertificationsStrip from '../components/about/CertificationsStrip';
 import StatRow from '../components/about/StatRow';
 import SuccessStories from '../components/about/SuccessStories';
@@ -42,8 +43,18 @@ export default function AboutPage() {
 
         <SuccessStories />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 6–10 */}
-        {['parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
+        <ParallaxHero
+          imageSrc="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop"
+          headline="Shipped. Audited."
+          headlineAccent="Live."
+          subline="Three enterprise clients in regulated industries. Zero hallucination incidents since day one. Four certifications on file."
+          label="The track record"
+          height="60vh"
+          clipRadius={24}
+        />
+
+        {/* TEMPORARY placeholders — replaced in Tasks 7–10 */}
+        {['team', 'how', 'timeline', 'closer'].map((id) => (
           <section
             key={id}
             id={id}
