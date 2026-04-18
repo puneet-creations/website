@@ -1,11 +1,13 @@
 import { FileText, Mic, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
+import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 
 /**
- * AgentFamilies — 3 agent family cards matching the landing page white theme.
- * Clean white cards with black top strip, icon, label, heading, checklist, proof.
- * Middle card animates in first from below, then sides slide in from left/right.
+ * AgentFamilies — 3 agent family cards (Document / Voice / Multimodal).
+ * White cards with black top strip, Lucide icon square, Fraunces heading
+ * with italic accent, checklist bullets, and a proof capsule chip.
+ * Middle card animates in first from below, then sides slide in.
  */
 
 const families = [
@@ -51,16 +53,24 @@ export default function AgentFamilies() {
   const [ref, inView] = useInView<HTMLElement>(0.1);
 
   return (
-    <section ref={ref} id="families" className="py-28 px-6 relative overflow-hidden" style={{ background: 'var(--bg-s2)' }}>
+    <section
+      ref={ref}
+      id="families"
+      className="relative overflow-hidden"
+      style={{ background: 'var(--bg-s2)', padding: 'clamp(80px, 10vw, 140px) 24px' }}
+    >
       <div className="cf-grid absolute inset-0 pointer-events-none" />
       <div className="relative z-10 max-w-[1320px] mx-auto">
-        {/* Section header */}
-        <div className="text-center mb-16 max-w-[760px] mx-auto">
-          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.65)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-16 text-center max-w-[760px] mx-auto"
+        >
+          <div className="micro-upper mb-4" style={{ color: 'rgba(0,0,0,0.65)' }}>
             Three families. One platform.
           </div>
           <h2
-            className={`sr d-1 ${inView ? 'is-in' : ''}`}
             style={{
               fontFamily: 'var(--serif)',
               fontWeight: 500,
@@ -73,9 +83,8 @@ export default function AgentFamilies() {
             Document, voice, multimodal.{' '}
             <span style={{ fontStyle: 'italic' }}>One platform underneath.</span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* 3 family cards — middle card enters first from below */}
         <div className="grid md:grid-cols-3 gap-8">
           {families.map((f, i) => {
             const isMiddle = i === 1;
@@ -92,27 +101,17 @@ export default function AgentFamilies() {
                 className="group"
               >
                 <div
-                  className="relative rounded-3xl overflow-hidden transition-shadow duration-300 hover:shadow-xl flex flex-col"
-                  style={{
-                    background: '#ffffff',
-                    border: '1px solid rgba(0,0,0,0.06)',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.05)',
-                    minHeight: 560,
-                  }}
+                  className="relative flex flex-col transition-shadow duration-300 hover:shadow-xl"
+                  style={{ ...whiteCardStyle({ shadow: 'md' }), minHeight: 560 }}
                 >
-                  {/* Top strip */}
-                  <div className="h-1 w-full" style={{ background: '#000000' }} />
-
+                  <AccentStrip color="#000000" thickness={4} />
                   <div className="p-10 flex flex-col flex-1">
-                    {/* Icon */}
                     <div
                       className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center mb-6"
                       style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.08)' }}
                     >
-                      <f.icon className="w-9 h-9" style={{ color: '#000000' }} strokeWidth={1.5} />
+                      <f.icon className="w-9 h-9" style={{ color: '#000000' }} strokeWidth={1.5} aria-hidden="true" />
                     </div>
-
-                    {/* Label */}
                     <div
                       className="mb-3"
                       style={{
@@ -126,8 +125,6 @@ export default function AgentFamilies() {
                     >
                       {f.label}
                     </div>
-
-                    {/* Heading */}
                     <h3
                       className="mb-6"
                       style={{
@@ -142,12 +139,11 @@ export default function AgentFamilies() {
                       {f.title}{' '}
                       <span style={{ fontStyle: 'italic' }}>{f.titleAccent}</span>
                     </h3>
-
-                    {/* Checklist */}
                     <ul className="space-y-3 mb-8 text-left">
                       {f.bullets.map((b) => (
                         <li key={b} className="flex items-start gap-3 text-[17px] leading-relaxed" style={{ color: 'rgba(0,0,0,0.70)' }}>
                           <span
+                            aria-hidden="true"
                             className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[13px] font-semibold text-white mt-0.5"
                             style={{ background: '#000000' }}
                           >
@@ -157,11 +153,7 @@ export default function AgentFamilies() {
                         </li>
                       ))}
                     </ul>
-
-                    {/* Spacer */}
                     <div className="flex-1" />
-
-                    {/* Proof capsule */}
                     <div
                       className="capsule-light self-start"
                       style={{ padding: '8px 16px', fontSize: 12 }}
