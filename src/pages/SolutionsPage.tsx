@@ -4,6 +4,7 @@ import IndustrySwitcher from '../components/solutions/IndustrySwitcher';
 import IndustryAnchorSection from '../components/solutions/IndustryAnchorSection';
 import AgentIndustryMatrix from '../components/solutions/AgentIndustryMatrix';
 import AdjacentIndustries from '../components/solutions/AdjacentIndustries';
+import SolutionsCloser from '../components/solutions/SolutionsCloser';
 import { ANCHOR_INDUSTRIES } from '../data/solutions';
 
 /**
@@ -37,7 +38,6 @@ export default function SolutionsPage() {
 
       <IndustrySwitcher />
 
-      {/* 3 proven industries */}
       {ANCHOR_INDUSTRIES.map((a) => (
         <IndustryAnchorSection key={a.id} data={a} />
       ))}
@@ -55,6 +55,18 @@ export default function SolutionsPage() {
       <AgentIndustryMatrix />
 
       <AdjacentIndustries />
+
+      <ParallaxHero
+        imageSrc="https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=1920&h=1080&fit=crop"
+        headline="Is your industry"
+        headlineAccent="here?"
+        subline="If your workflow has mixed-format docs, regulated reporting, real-time voice, or multi-tool orchestration — we've seen the pattern before."
+        label="Not listed?"
+        height="60vh"
+        clipRadius={24}
+      />
+
+      <SolutionsCloser />
     </main>
   );
 }
