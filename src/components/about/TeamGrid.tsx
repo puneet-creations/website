@@ -61,18 +61,33 @@ export default function TeamGrid() {
               <div className="flex items-start gap-5 mb-5">
                 <div
                   aria-hidden="true"
-                  className="w-[80px] h-[80px] rounded-full flex items-center justify-center flex-shrink-0"
+                  className="w-[80px] h-[80px] rounded-full overflow-hidden flex items-center justify-center flex-shrink-0"
                   style={{
                     background: `${ACCENT}10`,
                     border: `1px solid ${ACCENT}20`,
-                    fontFamily: 'var(--serif)',
-                    fontStyle: 'italic',
-                    fontSize: 24,
-                    fontWeight: 600,
-                    color: ACCENT,
                   }}
                 >
-                  {founder.initials}
+                  {founder.photoUrl ? (
+                    <img
+                      src={founder.photoUrl}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span
+                      style={{
+                        fontFamily: 'var(--serif)',
+                        fontStyle: 'italic',
+                        fontSize: 24,
+                        fontWeight: 600,
+                        color: ACCENT,
+                      }}
+                    >
+                      {founder.initials}
+                    </span>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div
@@ -150,18 +165,33 @@ export default function TeamGrid() {
               <div className="flex items-center gap-4 mb-4">
                 <div
                   aria-hidden="true"
-                  className="w-[64px] h-[64px] rounded-full flex items-center justify-center flex-shrink-0"
+                  className="w-[64px] h-[64px] rounded-full overflow-hidden flex items-center justify-center flex-shrink-0"
                   style={{
                     background: `${ACCENT}10`,
                     border: `1px solid ${ACCENT}20`,
-                    fontFamily: 'var(--serif)',
-                    fontStyle: 'italic',
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: ACCENT,
                   }}
                 >
-                  {advisor.initials}
+                  {advisor.photoUrl ? (
+                    <img
+                      src={advisor.photoUrl}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span
+                      style={{
+                        fontFamily: 'var(--serif)',
+                        fontStyle: 'italic',
+                        fontSize: 20,
+                        fontWeight: 600,
+                        color: ACCENT,
+                      }}
+                    >
+                      {advisor.initials}
+                    </span>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div

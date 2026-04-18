@@ -21,6 +21,7 @@ export type Founder = {
   role: string;
   region: string;
   initials: string;
+  photoUrl?: string;     // CDN URL for headshot; falls back to initials avatar if missing
   bio: string;
   linkedinUrl?: string;
 };
@@ -30,6 +31,7 @@ export type Advisor = {
   role: string;          // e.g., "EVP of Data, Analytics & AI"
   affiliation: string;   // e.g., "Swisscom"
   initials: string;
+  photoUrl?: string;     // CDN URL for headshot; falls back to initials avatar if missing
   bio: string;
 };
 
@@ -82,6 +84,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Founder & CEO',
     region: 'Dubai',
     initials: 'PO',
+    photoUrl: 'https://framerusercontent.com/images/J2S1OtoV8nz53PCuekvPqPwMU.png',
     bio:
       'Spent years inside Deutsche Telekom as an Enterprise Architect \u2014 implementing AI across regulated workflows and watching it stop short of execution. The pattern repeated everywhere: impressive demos, brittle production, and teams still typing AI output into SAP by hand. Founded Attentions AI in 2023 to build the platform that finishes the job \u2014 on your hardware, with your data, for your regulator.',
   },
@@ -90,6 +93,7 @@ export const FOUNDERS: Founder[] = [
     role: 'Founder & CTO',
     region: 'Pune',
     initials: 'AA',
+    photoUrl: 'https://framerusercontent.com/images/B2LWtYZ7LoTYUKJvxYfiainQiM.png',
     bio:
       'Architected enterprise integrations at Deutsche Telekom \u2014 the deep system-integration work that makes artiGen\u2019s execution layer possible. Knows what breaks when an AI output tries to post itself into a live ERP, and how to architect around it. Leads 18 top experts in AI, ML, product engineering, and domain expertise.',
   },
@@ -103,6 +107,7 @@ export const ADVISORS: Advisor[] = [
     role: 'EVP of Data, Analytics & AI',
     affiliation: 'Swisscom',
     initials: 'OK',
+    photoUrl: 'https://framerusercontent.com/images/QxzzV8QYbmzVJDnpUU2sqjldI.png',
     bio:
       'Drives enterprise transformation with deep expertise in AI strategy, data governance, and large-scale change management across regulated industries.',
   },
@@ -111,6 +116,7 @@ export const ADVISORS: Advisor[] = [
     role: 'Chief Design Officer',
     affiliation: 'Deutsche Telekom',
     initials: 'MD',
+    photoUrl: 'https://framerusercontent.com/images/h4JMnbmaMDug0ZoxaaiBPz2YU.png',
     bio:
       'Shapes customer-focused innovation through global design and product expertise. Two decades architecting digital products at enterprise scale.',
   },
@@ -119,6 +125,7 @@ export const ADVISORS: Advisor[] = [
     role: 'CEO',
     affiliation: 'CPC Y\u00f6netim Dan\u0131\u015fmanl\u0131k',
     initials: 'MS',
+    photoUrl: 'https://framerusercontent.com/images/HeNrKYvsYuZSwPe2B4AtRen8gcM.png',
     bio:
       'Guides leaders and organizations through strategic transformation with expertise in executive advisory and performance coaching.',
   },
