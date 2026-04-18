@@ -7,6 +7,7 @@ import StatRow from '../components/about/StatRow';
 import SuccessStories from '../components/about/SuccessStories';
 import TeamGrid from '../components/about/TeamGrid';
 import HowWeWork from '../components/about/HowWeWork';
+import TimelineStrip from '../components/about/TimelineStrip';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -59,8 +60,10 @@ export default function AboutPage() {
 
         <HowWeWork />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 9–10 */}
-        {['timeline', 'closer'].map((id) => (
+        <TimelineStrip />
+
+        {/* TEMPORARY placeholders — replaced in Task 10 */}
+        {['closer'].map((id) => (
           <section
             key={id}
             id={id}
