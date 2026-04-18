@@ -5,6 +5,7 @@ import ParallaxHero from '../components/ParallaxHero';
 import CertificationsStrip from '../components/about/CertificationsStrip';
 import StatRow from '../components/about/StatRow';
 import SuccessStories from '../components/about/SuccessStories';
+import TeamGrid from '../components/about/TeamGrid';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -53,8 +54,10 @@ export default function AboutPage() {
           clipRadius={24}
         />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 7–10 */}
-        {['team', 'how', 'timeline', 'closer'].map((id) => (
+        <TeamGrid />
+
+        {/* TEMPORARY placeholders — replaced in Tasks 8–10 */}
+        {['how', 'timeline', 'closer'].map((id) => (
           <section
             key={id}
             id={id}
