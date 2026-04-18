@@ -3,6 +3,7 @@ import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
 import PricingDoor from '../components/pricing/PricingDoor';
 import { DOORS } from '../data/pricing';
+import ParallaxHero from '../components/ParallaxHero';
 
 /**
  * PricingPage v2 — three-doors redesign.
@@ -37,6 +38,16 @@ export default function PricingPage() {
         {DOORS.map((d) => (
           <PricingDoor key={d.id} data={d} />
         ))}
+
+        <ParallaxHero
+          imageSrc="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1920&h=1080&fit=crop"
+          headline="Start anywhere."
+          headlineAccent="Compound over time."
+          subline="A door you start with today becomes the foundation for the next. Every engagement is scoped to pay back in months, not years."
+          label="The compound effect"
+          height="60vh"
+          clipRadius={24}
+        />
       </main>
     </MotionConfig>
   );
