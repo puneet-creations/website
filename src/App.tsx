@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Outlet, useLocation, Navigate } from 'react-router-dom';
-import GradientMesh from './components/GradientMesh';
+import GradientMesh, { MESHES } from './components/GradientMesh';
 import SvgDefs from './components/motions/SvgDefs';
 import SiteNav from './components/SiteNav';
 import CinematicFooter from './components/CinematicFooter';
@@ -48,7 +48,7 @@ function Shell() {
       <ScrollToTop />
       {/* Global SVG defs — rendered once, referenced by all motion stories via url(#id) */}
       <svg aria-hidden className="absolute w-0 h-0 overflow-hidden"><SvgDefs /></svg>
-      <GradientMesh page={meshPage as any} />
+      <GradientMesh page={meshPage as keyof typeof MESHES} />
       <div className="relative z-[1]">
         <div className="comet-grain" aria-hidden />
         <CursorGlow />

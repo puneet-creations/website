@@ -73,7 +73,7 @@ export default function IndustrySwitcher() {
     >
       <div
         ref={stripRef}
-        className="max-w-[1400px] mx-auto flex items-center gap-3 px-6 py-3 overflow-x-auto"
+        className="max-w-[1400px] mx-auto flex items-center gap-3 px-6 py-3 overflow-x-auto no-scrollbar"
         style={{ scrollbarWidth: 'none' }}
       >
         <span className="micro-upper flex-shrink-0" style={{ color: 'rgba(0,0,0,0.45)' }}>
@@ -125,8 +125,9 @@ function Pill({
     <a
       href={`#${id}`}
       data-industry-pill={id}
+      aria-current={active ? 'location' : undefined}
       onClick={(e) => onClick(e, id)}
-      className="flex-shrink-0 inline-flex items-center rounded-full transition-all duration-150"
+      className="flex-shrink-0 inline-flex items-center rounded-full transition-all duration-150 focus-visible:outline-2 focus-visible:outline-black focus-visible:outline-offset-2"
       style={{
         padding: '6px 14px',
         fontFamily: 'var(--mono)',

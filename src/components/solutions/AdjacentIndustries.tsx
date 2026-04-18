@@ -94,7 +94,7 @@ function Card({ data, delay }: { data: AdjacentIndustry; delay: number }) {
           className="w-[60px] h-[60px] rounded-2xl flex items-center justify-center mb-5"
           style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.08)' }}
         >
-          <Icon size={28} style={{ color: '#000000' }} />
+          <Icon aria-hidden="true" size={28} style={{ color: '#000000' }} />
         </div>
 
         {/* Industry label */}
@@ -193,7 +193,7 @@ function CTACard({ delay }: { delay: number }) {
           className="w-[60px] h-[60px] rounded-2xl flex items-center justify-center mb-5"
           style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.16)' }}
         >
-          <Lucide.Plus size={28} style={{ color: '#ffffff' }} />
+          <Lucide.Plus aria-hidden="true" size={28} style={{ color: '#ffffff' }} />
         </div>
 
         <div className="micro-upper mb-3" style={{ color: 'rgba(255,255,255,0.55)' }}>

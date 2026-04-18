@@ -69,8 +69,13 @@ export default function AgentIndustryMatrix() {
         </motion.div>
 
         {/* Matrix — horizontal scroll on narrow viewports */}
-        <div className="overflow-x-auto">
+        <div
+          className="overflow-x-auto"
+          role="region"
+          aria-label="Agent to industry fit matrix"
+        >
           <div
+            role="grid"
             className="grid relative"
             style={{
               minWidth: 900,
@@ -97,6 +102,7 @@ export default function AgentIndustryMatrix() {
               return (
                 <div
                   key={ind.id}
+                  role="columnheader"
                   className="flex flex-col items-center justify-end gap-1 px-1 py-3"
                   style={{
                     background: '#fafafa',
@@ -105,7 +111,7 @@ export default function AgentIndustryMatrix() {
                     minHeight: 72,
                   }}
                 >
-                  <Icon size={14} style={{ color: 'rgba(0,0,0,0.55)' }} />
+                  <Icon aria-hidden="true" size={14} style={{ color: 'rgba(0,0,0,0.55)' }} />
                   <span
                     className="text-center leading-tight"
                     style={{
@@ -127,6 +133,7 @@ export default function AgentIndustryMatrix() {
               <React.Fragment key={agent.id}>
                 {/* Row header (agent name) */}
                 <div
+                  role="rowheader"
                   className="sticky left-0 z-[1] flex items-center justify-end px-4 py-3 text-right"
                   style={{
                     background: '#ffffff',
@@ -154,6 +161,9 @@ export default function AgentIndustryMatrix() {
                   return (
                     <motion.div
                       key={`${agent.id}-${ind.id}`}
+                      role="gridcell"
+                      tabIndex={cell.fit !== 'none' ? 0 : -1}
+                      aria-label={`${agent.name} in ${ind.name}: ${cell.fit}${cell.reason ? '. ' + cell.reason : ''}`}
                       initial={{ opacity: 0 }}
                       animate={inView ? { opacity: 1 } : {}}
                       transition={{ duration: 0.4, delay: 0.3 + colIdx * 0.05 }}
@@ -161,7 +171,11 @@ export default function AgentIndustryMatrix() {
                         cell.fit !== 'none' && setHovered({ a: agent.id, i: ind.id })
                       }
                       onMouseLeave={() => setHovered(null)}
-                      className="flex items-center justify-center cursor-pointer"
+                      onFocus={() =>
+                        cell.fit !== 'none' && setHovered({ a: agent.id, i: ind.id })
+                      }
+                      onBlur={() => setHovered(null)}
+                      className={`flex items-center justify-center ${cell.fit !== 'none' ? 'cursor-pointer' : 'cursor-default'}`}
                       style={{
                         borderBottom:
                           rowIdx === AGENTS.length - 1
@@ -205,7 +219,7 @@ export default function AgentIndustryMatrix() {
         <div className="mt-8 flex flex-wrap gap-4 justify-center">
           <LegendChip fit="proven" label="PROVEN · in production today" />
           <LegendChip fit="fits" label="FITS · same pattern, new vertical" />
-          <LegendChip fit="none" label="NOT YET · weak fit" />
+          <LegendChip fit="none" label="NOT YET" />
         </div>
       </div>
     </section>
@@ -252,7 +266,9 @@ function CellGlyph({ fit, isHovered }: { fit: 'proven' | 'fits' | 'none'; isHove
 function LegendChip({ fit, label }: { fit: 'proven' | 'fits' | 'none'; label: string }) {
   return (
     <span className="inline-flex items-center gap-2 capsule-light rounded-full">
-      <CellGlyph fit={fit} isHovered={false} />
+      <span className="inline-flex items-center justify-center" style={{ width: 12, height: 12 }}>
+        <CellGlyph fit={fit} isHovered={false} />
+      </span>
       <span>{label}</span>
     </span>
   );
