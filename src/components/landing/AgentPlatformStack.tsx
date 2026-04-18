@@ -1,8 +1,7 @@
 // src/components/landing/AgentPlatformStack.tsx
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, useMotionValueEvent } from 'framer-motion';
 import type { MotionValue } from 'framer-motion';
-import { useRef } from 'react';
 import { FileText, GitBranch, Mic, Phone, Receipt, Plus, Sparkles, ArrowRight } from 'lucide-react';
 import {
   BEATS,
@@ -143,6 +142,8 @@ function CopyPanel({ activeBeat, reduced }: { activeBeat: Beat; reduced: boolean
             letterSpacing: '-0.02em',
             lineHeight: 1.05,
           }}
+          // SAFETY: copy.headline is always a hardcoded literal from getBeatCopy.
+          // Never pass user/CMS input here without sanitizing <em>-only markup.
           dangerouslySetInnerHTML={{ __html: copy.headline }}
         />
 
