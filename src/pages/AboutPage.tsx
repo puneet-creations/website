@@ -8,6 +8,7 @@ import SuccessStories from '../components/about/SuccessStories';
 import TeamGrid from '../components/about/TeamGrid';
 import HowWeWork from '../components/about/HowWeWork';
 import TimelineStrip from '../components/about/TimelineStrip';
+import AboutCloser from '../components/about/AboutCloser';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -62,20 +63,7 @@ export default function AboutPage() {
 
         <TimelineStrip />
 
-        {/* TEMPORARY placeholders — replaced in Task 10 */}
-        {['closer'].map((id) => (
-          <section
-            key={id}
-            id={id}
-            style={{
-              minHeight: '30vh',
-              padding: '60px 24px',
-              borderTop: '1px solid rgba(0,0,0,0.06)',
-            }}
-          >
-            <h2 className="font-display text-3xl text-center">{id} (placeholder)</h2>
-          </section>
-        ))}
+        <AboutCloser />
       </main>
     </MotionConfig>
   );
