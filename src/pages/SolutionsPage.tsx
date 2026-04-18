@@ -1,3 +1,4 @@
+import ClientsStrip from '../components/ClientsStrip';
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
 import IndustrySwitcher from '../components/solutions/IndustrySwitcher';
@@ -35,6 +36,8 @@ export default function SolutionsPage() {
           'On-prem by default',
         ]}
       />
+
+      <ClientsStrip />
 
       <IndustrySwitcher />
 
