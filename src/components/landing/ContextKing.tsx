@@ -152,15 +152,15 @@ export default function ContextKing() {
                 <div className="space-y-3" style={{ fontFamily: 'var(--mono)', fontSize: 14 }}>
                   <div style={{ color: 'rgba(0,0,0,0.75)' }}>
                     vendor: <span style={{ color: '#000000', fontWeight: 500 }}>Global Logistics LLC</span>
-                    <span className="ml-2" style={{ color: '#000000' }}>V-472 \u2713</span>
+                    <span className="ml-2" style={{ color: '#000000' }}>V-472 ✓</span>
                   </div>
                   <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    gl: <span style={{ color: '#000000', fontWeight: 500 }}>Freight \u00b7 6100-2340</span>
-                    <span className="ml-2" style={{ color: '#000000' }}>cited \u2713</span>
+                    gl: <span style={{ color: '#000000', fontWeight: 500 }}>Freight · 6100-2340</span>
+                    <span className="ml-2" style={{ color: '#000000' }}>cited ✓</span>
                   </div>
                   <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    approver: <span style={{ color: '#000000', fontWeight: 500 }}>CFO \u00b7 Named</span>
-                    <span className="ml-2" style={{ color: '#000000' }}>audit \u2713</span>
+                    approver: <span style={{ color: '#000000', fontWeight: 500 }}>CFO · Named</span>
+                    <span className="ml-2" style={{ color: '#000000' }}>audit ✓</span>
                   </div>
                 </div>
               </div>
