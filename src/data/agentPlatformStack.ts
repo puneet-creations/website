@@ -62,12 +62,12 @@ export type Agent = {
 };
 
 export const INDUSTRIES: readonly Industry[] = [
-  { id: 'logistics',  name: 'Logistics & trade finance', tagline: 'Clear the Monday backlog by 10:42.',      photoUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&q=70', pairedAgentId: 'invoice' },
-  { id: 'pharma',     name: 'Pharma & life sciences',    tagline: 'PCR graphs across millions of reports.', photoUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&q=70', pairedAgentId: 'pcr' },
-  { id: 'dental',     name: 'Dental networks',           tagline: 'Every patient call logged and coded.',   photoUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&q=70', pairedAgentId: 'voice' },
-  { id: 'auto',       name: 'Automotive aftermarket',    tagline: 'Handwritten warranty claims → SAP.',     photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=1600&q=70', pairedAgentId: 'voucher' },
-  { id: 'healthcare', name: 'Hospital systems',          tagline: 'Patient history, cited and reversible.', photoUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&q=70', pairedAgentId: 'patient' },
-  { id: 'banking',    name: 'Banking & compliance',      tagline: 'KYC docs with a full audit trail.',      photoUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&q=70', pairedAgentId: 'invoice' },
+  { id: 'logistics',  name: 'Logistics & trade finance', tagline: 'Clear the Monday backlog by 10:42.',      photoUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=70', pairedAgentId: 'invoice' },
+  { id: 'pharma',     name: 'Pharma & life sciences',    tagline: 'PCR graphs across millions of reports.', photoUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=70', pairedAgentId: 'pcr' },
+  { id: 'dental',     name: 'Dental networks',           tagline: 'Every patient call logged and coded.',   photoUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=70', pairedAgentId: 'voice' },
+  { id: 'auto',       name: 'Automotive aftermarket',    tagline: 'Handwritten warranty claims → SAP.',     photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=600&q=70', pairedAgentId: 'voucher' },
+  { id: 'healthcare', name: 'Hospital systems',          tagline: 'Patient history, cited and reversible.', photoUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=70', pairedAgentId: 'patient' },
+  { id: 'banking',    name: 'Banking & compliance',      tagline: 'KYC docs with a full audit trail.',      photoUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=70', pairedAgentId: 'invoice' },
 ] as const;
 
 export const AGENTS: readonly Agent[] = [
