@@ -6,6 +6,7 @@ import CertificationsStrip from '../components/about/CertificationsStrip';
 import StatRow from '../components/about/StatRow';
 import SuccessStories from '../components/about/SuccessStories';
 import TeamGrid from '../components/about/TeamGrid';
+import HowWeWork from '../components/about/HowWeWork';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -56,8 +57,10 @@ export default function AboutPage() {
 
         <TeamGrid />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 8–10 */}
-        {['how', 'timeline', 'closer'].map((id) => (
+        <HowWeWork />
+
+        {/* TEMPORARY placeholders — replaced in Tasks 9–10 */}
+        {['timeline', 'closer'].map((id) => (
           <section
             key={id}
             id={id}
