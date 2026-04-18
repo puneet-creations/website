@@ -4,6 +4,7 @@ import ClientsStrip from '../components/ClientsStrip';
 import PricingDoor from '../components/pricing/PricingDoor';
 import { DOORS } from '../data/pricing';
 import ParallaxHero from '../components/ParallaxHero';
+import PricingCloser from '../components/pricing/PricingCloser';
 
 /**
  * PricingPage v2 — three-doors redesign.
@@ -48,6 +49,8 @@ export default function PricingPage() {
           height="60vh"
           clipRadius={24}
         />
+
+        <PricingCloser />
       </main>
     </MotionConfig>
   );
