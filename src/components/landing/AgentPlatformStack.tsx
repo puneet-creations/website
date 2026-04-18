@@ -79,7 +79,7 @@ function BackgroundLayers() {
   return (
     <div className="absolute inset-0 pointer-events-none" aria-hidden>
       <div
-        className="absolute inset-0"
+        className="wow-teal-pulse absolute inset-0"
         style={{
           background: 'radial-gradient(circle at 50% 50%, rgba(138,245,192,0.04), transparent 70%)',
           animation: 'wowTealPulse 8s ease-in-out infinite',
