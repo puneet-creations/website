@@ -7,7 +7,7 @@ const HeroOrb = lazy(() => import('../HeroOrb'));
 /**
  * PlatformCloser — Platform page closing manifesto.
  * Blue glass orb on the left, "Six layers. One base. Every agent plugs in." manifesto on the right.
- * Mirrors the landing page's OwnershipBand orb + closer pattern.
+ * Mirrors the LandingCloser orb + closer pattern.
  */
 
 export default function PlatformCloser() {
