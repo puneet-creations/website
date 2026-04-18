@@ -1,6 +1,7 @@
 import { MotionConfig } from 'framer-motion';
 import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
+import PricingDoor from '../components/pricing/PricingDoor';
 import { DOORS } from '../data/pricing';
 
 /**
@@ -33,21 +34,8 @@ export default function PricingPage() {
 
         <ClientsStrip />
 
-        {/* TEMPORARY placeholder sections for 3 doors — replaced in Task 4 */}
         {DOORS.map((d) => (
-          <section
-            key={d.id}
-            id={d.id}
-            style={{
-              minHeight: '40vh',
-              padding: '60px 24px',
-              borderTop: '1px solid rgba(0,0,0,0.06)',
-            }}
-          >
-            <h2 className="font-display text-3xl text-center">
-              {d.tierName} (placeholder)
-            </h2>
-          </section>
+          <PricingDoor key={d.id} data={d} />
         ))}
       </main>
     </MotionConfig>
