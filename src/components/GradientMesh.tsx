@@ -31,9 +31,9 @@ const MESHES: Record<string, MeshConfig> = {
     { color: '#e0f5ec', position: '30% 15%', size: '50%', opacity: 0.25 },
     { color: '#e8eeff', position: '15% 70%', size: '40%', opacity: 0.15 },
   ]},
-  pricing: { base: '#fffcf8', blobs: [
-    { color: '#fff3e0', position: '25% 15%', size: '45%', opacity: 0.20 },
-    { color: '#e0f5ec', position: '75% 30%', size: '40%', opacity: 0.15 },
+  pricing: { base: '#f7faf6', blobs: [
+    { color: '#d6f2dd', position: '20% 30%', size: '50%', opacity: 0.22 },
+    { color: '#c9e6d0', position: '80% 70%', size: '40%', opacity: 0.14 },
   ]},
   solutions: { base: '#f8fcfa', blobs: [
     { color: '#e0f5ec', position: '15% 20%', size: '50%', opacity: 0.25 },
