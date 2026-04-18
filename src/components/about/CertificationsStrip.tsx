@@ -2,9 +2,7 @@ import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
-import { CERTIFICATIONS } from '../../data/about';
-
-const ACCENT = '#475569';
+import { CERTIFICATIONS, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * CertificationsStrip — 4-cert badge grid below ClientsStrip.

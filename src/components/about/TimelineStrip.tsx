@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { TIMELINE } from '../../data/about';
-
-const ACCENT = '#475569';
+import { TIMELINE, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * TimelineStrip — 5-node horizontal timeline on desktop, vertical
@@ -43,9 +41,15 @@ export default function TimelineStrip() {
         </motion.div>
 
         <div className="relative grid md:grid-cols-5 gap-6 md:gap-4">
+          {/* Desktop: horizontal dashed line */}
           <div
             className="hidden md:block absolute left-[10%] right-[10%] top-[42px] h-[1px] pointer-events-none"
             style={{ borderTop: `1px dashed ${ACCENT}40` }}
+          />
+          {/* Mobile: vertical dashed line */}
+          <div
+            className="md:hidden absolute top-[42px] bottom-[42px] left-1/2 w-[1px] pointer-events-none"
+            style={{ borderLeft: `1px dashed ${ACCENT}40`, transform: 'translateX(-0.5px)' }}
           />
           {TIMELINE.map((node, idx) => (
             <motion.div

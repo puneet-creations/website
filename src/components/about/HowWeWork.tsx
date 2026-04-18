@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { WORK_PRINCIPLES } from '../../data/about';
-
-const ACCENT = '#475569';
+import { WORK_PRINCIPLES, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * HowWeWork — 5 merged beliefs/principles items. Vertical stack.

@@ -2,9 +2,7 @@ import { motion } from 'framer-motion';
 import * as Lucide from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
-import { SUCCESS_STORIES } from '../../data/about';
-
-const ACCENT = '#475569';
+import { SUCCESS_STORIES, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * SuccessStories — 3 customer outcome cards. Same Thomson/Qira/Daimler

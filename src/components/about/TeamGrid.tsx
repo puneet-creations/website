@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { FOUNDERS, ADVISORS, TEAM_TOTAL_COUNT } from '../../data/about';
-
-const ACCENT = '#475569';
+import { FOUNDERS, ADVISORS, TEAM_TOTAL_COUNT, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * TeamGrid — 2 founder bios + 3 advisory board members + aggregate

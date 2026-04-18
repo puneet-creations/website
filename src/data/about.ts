@@ -244,3 +244,7 @@ export const TIMELINE: TimelineNode[] = [
       '5 agents live. 3 enterprise clients. 0 hallucination incidents. The shared platform is the moat.',
   },
 ];
+
+// ── Page-level constants ──────────────────────────────────────────────
+
+export const PAGE_ACCENT = '#475569';

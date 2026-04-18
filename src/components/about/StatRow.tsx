@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { STATS } from '../../data/about';
-
-const ACCENT = '#475569';
+import { STATS, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * StatRow — 4-up metric grid. White cards, 1px slate top accent,
