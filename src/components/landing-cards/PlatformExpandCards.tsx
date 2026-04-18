@@ -19,6 +19,8 @@ export default function PlatformExpandCards({ tabs }: Props) {
     <section className="max-w-[1100px] mx-auto px-6 py-8 flex flex-col gap-4">
       {tabs.map((t) => {
         const isOpen = open === t.id;
+        const triggerId = `platform-expand-${t.id}-trigger`;
+        const panelId = `platform-expand-${t.id}-panel`;
         return (
           <article
             key={t.id}
@@ -37,9 +39,18 @@ export default function PlatformExpandCards({ tabs }: Props) {
             {/* Header bar — always visible, hover or click to expand */}
             <button
               type="button"
+              id={triggerId}
               onClick={() => setOpen(isOpen ? '' : t.id)}
               aria-expanded={isOpen}
+              aria-controls={panelId}
               className="w-full grid md:grid-cols-[1fr_160px_40px] gap-4 items-center px-7 py-5 text-left"
+              style={{
+                border: 'none',
+                font: 'inherit',
+                color: 'inherit',
+                appearance: 'none',
+                background: 'transparent',
+              }}
             >
               <div>
                 <div
@@ -86,7 +97,12 @@ export default function PlatformExpandCards({ tabs }: Props) {
 
             {/* Expanded content */}
             {isOpen && (
-              <div className="px-7 pb-8 pt-2 grid lg:grid-cols-[1fr_1fr] gap-6">
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={triggerId}
+                className="px-7 pb-8 pt-2 grid lg:grid-cols-[1fr_1fr] gap-6"
+              >
                 {/* LEFT — description + motion story */}
                 <div>
                   <p className="text-[15px] text-[rgba(255,255,255,0.85)] leading-relaxed mb-5">

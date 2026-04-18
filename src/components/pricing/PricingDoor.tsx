@@ -148,6 +148,8 @@ export default function PricingDoor({ data }: { data: Door }) {
             <div className="flex flex-col gap-2">
               {data.panels.map((panel) => {
                 const isOpen = openPanels.has(panel.id);
+                const triggerId = `${data.id}-${panel.id}-trigger`;
+                const panelId = `${data.id}-${panel.id}-panel`;
                 return (
                   <div
                     key={panel.id}
@@ -162,12 +164,18 @@ export default function PricingDoor({ data }: { data: Door }) {
                   >
                     <button
                       type="button"
+                      id={triggerId}
                       onClick={() => togglePanel(panel.id)}
                       aria-expanded={isOpen}
+                      aria-controls={panelId}
                       className="w-full flex items-center justify-between gap-4 text-left px-5 py-4 transition-colors"
                       style={{
                         background: 'transparent',
                         cursor: 'pointer',
+                        border: 'none',
+                        font: 'inherit',
+                        color: 'inherit',
+                        appearance: 'none',
                       }}
                     >
                       <span
@@ -194,6 +202,9 @@ export default function PricingDoor({ data }: { data: Door }) {
                     <AnimatePresence initial={false}>
                       {isOpen && (
                         <motion.div
+                          id={panelId}
+                          role="region"
+                          aria-labelledby={triggerId}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
