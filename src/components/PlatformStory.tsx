@@ -686,11 +686,20 @@ function ModelChip({ name, role }: { name: string; role: string }) {
 export function DeterminismProof() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
 
+  const runs = [
+    { idx: '01', time: '09:14 AM' },
+    { idx: '02', time: '11:47 AM' },
+    { idx: '03', time: '02:22 PM' },
+    { idx: '04', time: '06:08 PM' },
+  ];
+
   return (
     <section ref={ref} className="py-24" style={{ background: 'var(--bg-s4)' }}>
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[760px] mx-auto">
-          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.50)' }}>Deterministic by design</div>
+          <div className={`micro-upper mb-4 sr ${inView ? 'is-in' : ''}`} style={{ color: 'rgba(0,0,0,0.50)' }}>
+            Deterministic by design
+          </div>
           <h2 className={`display-2 sr d-1 ${inView ? 'is-in' : ''}`}>
             Same input. <span className="italic">Same output. Every time.</span>
           </h2>
@@ -699,77 +708,104 @@ export function DeterminismProof() {
           </p>
         </div>
 
-        {/* Visual: same input → 4 runs → same hash */}
-        <div className={`max-w-[1400px] mx-auto rounded-[24px] p-10 sr ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
-          <svg viewBox="0 0 1040 340" className="w-full">
-            {/* Single input */}
-            <rect x="14" y="130" width="130" height="80" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" strokeWidth="1.5" />
-            <rect x="14" y="130" width="130" height="16" rx="10" fill="rgba(0,0,0,0.08)" />
-            <text x="22" y="142" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">INPUT · IN-8892</text>
-            <text x="22" y="160" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Global Logistics LLC</text>
-            <text x="22" y="172" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">USD 13,503.00</text>
-            <text x="22" y="184" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">hash: 7a2f…0e19</text>
-            <text x="22" y="198" fontFamily="Plus Jakarta Sans" fontSize="10" fontStyle="italic" fill="rgba(0,0,0,0.45)">fed 4× throughout day</text>
+        {/* 3-act story container */}
+        <div
+          className={`max-w-[1200px] mx-auto rounded-[24px] p-10 sr d-3 ${inView ? 'is-in' : ''}`}
+          style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
+        >
+          {/* Act 1 + Act 2 — side by side on desktop, stacked on mobile */}
+          <div className="grid md:grid-cols-2 gap-5 mb-6">
+            {/* Act 1: Input */}
+            <div
+              className="rounded-[20px] p-6"
+              style={{ background: 'white', border: '1px solid rgba(0,0,0,0.06)' }}
+            >
+              <div className="micro-upper mb-3" style={{ color: 'rgba(0,0,0,0.50)' }}>
+                Input · IN-8892
+              </div>
+              <div className="font-display text-[22px] text-black leading-tight mb-1">Global Logistics LLC</div>
+              <div className="text-[16px] text-[rgba(0,0,0,0.65)] mb-3">USD 13,503.00</div>
+              <div
+                className="inline-block text-[13px] font-mono text-black rounded-[8px] px-3 py-1.5"
+                style={{ background: 'rgba(0,0,0,0.04)' }}
+              >
+                sha256: 7a2f…0e19
+              </div>
+              <div className="text-[13px] italic text-[rgba(0,0,0,0.50)] mt-3">fed 4× throughout the day</div>
+            </div>
 
-            {/* Pinning core */}
-            <g transform="translate(220, 110)">
-              <rect x="0" y="0" width="180" height="120" rx="12" fill="rgba(0,0,0,0.04)" />
-              <rect x="0" y="0" width="180" height="18" rx="12" fill="rgba(0,0,0,0.08)" />
-              <text x="10" y="13" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">PINNING LAYER</text>
-              <text x="10" y="34" fontFamily="monospace" fontSize="10" fill="#000000">temperature = 0</text>
-              <text x="10" y="46" fontFamily="monospace" fontSize="10" fill="#000000">seed = 42</text>
-              <text x="10" y="58" fontFamily="monospace" fontSize="10" fill="#000000">top_p = 1.0</text>
-              <text x="10" y="70" fontFamily="monospace" fontSize="10" fill="#000000">retriever = idx_v12</text>
-              <text x="10" y="82" fontFamily="monospace" fontSize="10" fill="#000000">model = llama-70-v4.2</text>
-              <text x="10" y="94" fontFamily="monospace" fontSize="10" fill="#000000">schema = invoice.v3</text>
-              <text x="10" y="106" fontFamily="monospace" fontSize="10" fill="#000000">replay_enabled = true</text>
-            </g>
+            {/* Act 2: Pinning layer */}
+            <div
+              className="rounded-[20px] p-6"
+              style={{ background: 'white', border: '1px solid rgba(0,0,0,0.06)' }}
+            >
+              <div className="micro-upper mb-3" style={{ color: 'rgba(0,0,0,0.50)' }}>
+                Pinning layer
+              </div>
+              <pre
+                className="text-[13px] leading-[1.6] font-mono text-black rounded-[8px] p-3 overflow-x-auto"
+                style={{ background: 'rgba(0,0,0,0.04)' }}
+              >
+{`temperature = 0
+seed = 42
+top_p = 1.0
+retriever = idx_v12
+model = llama-70-v4.2
+schema = invoice.v3
+replay_enabled = true`}
+              </pre>
+            </div>
+          </div>
 
-            {/* 4 run branches */}
-            {[
-              { y: 18, t: '09:14 AM', delay: '0s' },
-              { y: 112, t: '11:47 AM', delay: '0.4s' },
-              { y: 206, t: '02:22 PM', delay: '0.8s' },
-              { y: 300, t: '06:08 PM', delay: '1.2s' },
-            ].map((r, i) => (
-              <g key={i}>
-                {/* branch line */}
-                <path
-                  d={`M 402,170 C 452,170 452,${r.y + 26} 502,${r.y + 26}`}
-                  stroke="rgba(0,0,0,0.15)"
-                  strokeWidth="1.5"
-                  fill="none"
-                  strokeDasharray="4 3"
-                />
-                {/* output card */}
-                <rect x="500" y={r.y} width="360" height="52" rx="8" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
-                <text x="510" y={r.y + 16} fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">Run {String(i + 1).padStart(2, '0')} · {r.t}</text>
-                <text x="510" y={r.y + 30} fontFamily="monospace" fontSize="10" fill="#000000">vendor_id: "V-472"</text>
-                <text x="644" y={r.y + 30} fontFamily="monospace" fontSize="10" fill="#000000">amount: 13503.00</text>
-                <text x="776" y={r.y + 30} fontFamily="monospace" fontSize="10" fill="#000000">gl: "6100-2340"</text>
-                <text x="510" y={r.y + 44} fontFamily="monospace" fontSize="10" fill="rgba(0,0,0,0.45)">tol: 0.15% under · 2 sources cited</text>
-                <text x="852" y={r.y + 44} textAnchor="end" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">✓ identical</text>
-                {/* hash chip */}
-                <rect x="880" y={r.y + 18} width="136" height="18" rx="9" fill="rgba(0,0,0,0.03)" />
-                <text x="948" y={r.y + 30} textAnchor="middle" fontFamily="monospace" fontSize="10" fontWeight="700" fill="#000000">sha256: 4a2f…0e19</text>
-              </g>
+          {/* Act 3: 4 identical runs */}
+          <div className="relative space-y-3">
+            {runs.map((r) => (
+              <RunCard key={r.idx} idx={r.idx} time={r.time} />
             ))}
+          </div>
 
-            {/* input→pinning arrow */}
-            <line x1="144" y1="170" x2="218" y2="170" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" strokeDasharray="4 3" />
-          </svg>
-
-          <div className="mt-6 grid grid-cols-[1fr_auto] items-center gap-4 border-t border-[rgba(0,0,0,0.06)] pt-5">
-            <div className="text-[18px] text-[rgba(0,0,0,0.65)]">
+          {/* Footer */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-4 border-t border-[rgba(0,0,0,0.06)] pt-5">
+            <div className="text-[16px] text-[rgba(0,0,0,0.65)]">
               <b className="text-black">All four runs hash-identical.</b> Replay harness runs last month's vouchers against today's build before every promote — regression caught pre-prod, never in prod.
             </div>
-            <code className="capsule-light rounded-full whitespace-nowrap">
+            <code className="capsule-light rounded-full whitespace-nowrap text-[13px]">
               4 / 4 identical · 0 drift
             </code>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function RunCard({ idx, time }: { idx: string; time: string }) {
+  return (
+    <div
+      className="rounded-[12px] px-5 py-4 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-4"
+      style={{ background: 'white', border: '1px solid rgba(0,0,0,0.06)' }}
+    >
+      <div className="font-display text-[16px] text-black whitespace-nowrap">
+        Run {idx} · <span className="text-[rgba(0,0,0,0.60)]">{time}</span>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <span className="text-[13px] font-mono text-black rounded-[6px] px-2 py-1" style={{ background: 'rgba(0,0,0,0.04)' }}>
+          vendor_id: V-472
+        </span>
+        <span className="text-[13px] font-mono text-black rounded-[6px] px-2 py-1" style={{ background: 'rgba(0,0,0,0.04)' }}>
+          amount: 13503.00
+        </span>
+        <span className="text-[13px] font-mono text-black rounded-[6px] px-2 py-1" style={{ background: 'rgba(0,0,0,0.04)' }}>
+          gl: 6100-2340
+        </span>
+      </div>
+      <div className="flex items-center gap-2 whitespace-nowrap">
+        <span className="text-[13px] font-mono text-black">sha256: 4a2f…0e19</span>
+        <span className="text-[13px] font-bold text-[#2a8f5c] rounded-full px-2 py-0.5" style={{ background: 'rgba(42,143,92,0.10)' }}>
+          ✓ identical
+        </span>
+      </div>
+    </div>
   );
 }
 
