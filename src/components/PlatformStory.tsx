@@ -3,7 +3,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronRight, Flag } from 'lucide-react';
 import { useInView } from '../hooks/useInView';
 
-// Success-green tokens used by DeterminismProof (RunCard badge + connector line)
+// Success-green tokens used by DeterminismProof (RunCard badge + connector line).
+// Numeric suffix = background alpha percentage (10 / 30 / 40).
 const GREEN_OK = '#2a8f5c';
 const GREEN_OK_BG_10 = 'rgba(42,143,92,0.10)';
 const GREEN_OK_BG_30 = 'rgba(42,143,92,0.30)';
@@ -832,6 +833,7 @@ function RunCard({ idx, time, delay, reduced }: { idx: string; time: string; del
               ? undefined
               : {
                   scale: [0.8, 1.15, 1],
+                  // [A, A, B] = hold darker green through the scale pop, fade to lighter on settle
                   background: [GREEN_OK_BG_30, GREEN_OK_BG_30, GREEN_OK_BG_10],
                 }
           }
