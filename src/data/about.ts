@@ -6,8 +6,6 @@
  * (the TBD placeholders below are not appropriate for production).
  */
 
-export type CertStatus = 'certified' | 'type-1' | 'compliant';
-
 export type Certification = {
   id: 'soc2' | 'hipaa' | 'gdpr' | 'iso27001';
   name: string;

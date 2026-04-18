@@ -1,6 +1,7 @@
 import { MotionConfig } from 'framer-motion';
 import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
+import CertificationsStrip from '../components/about/CertificationsStrip';
 
 /**
  * AboutPage v2 — credibility-lead redesign.
@@ -33,8 +34,10 @@ export default function AboutPage() {
 
         <ClientsStrip />
 
-        {/* TEMPORARY placeholders — replaced in Tasks 3–10 */}
-        {['certs', 'stats', 'success', 'parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
+        <CertificationsStrip />
+
+        {/* TEMPORARY placeholders — replaced in Tasks 4–10 */}
+        {['stats', 'success', 'parallax', 'team', 'how', 'timeline', 'closer'].map((id) => (
           <section
             key={id}
             id={id}
