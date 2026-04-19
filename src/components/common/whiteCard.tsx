@@ -1,3 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
+// Intentionally co-locates the `whiteCardStyle` helper with the `AccentStrip`
+// component. They form a cohesive white-card API consumed by 11+ callers
+// together; splitting into two files would just churn imports. Fast-refresh
+// HMR loses this file only — not a production concern.
 import type { CSSProperties } from 'react';
 
 /**

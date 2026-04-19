@@ -434,20 +434,19 @@ export function ContextMatters() {
 export function HallucinationControl() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
   const reduced = useReducedMotion();
-  const [activeIdx, setActiveIdx] = useState<number>(-1);
-  // indices: -1 = not started, 0 = candidate, 1..4 = walls, 5 = approved
+  const [animatedIdx, setAnimatedIdx] = useState<number>(-1);
+  // indices: -1 = not started, 0 = candidate, 1..4 = walls, 5 = approved.
+  // In reduced-motion mode we skip the traversal entirely: every card
+  // shows its final lit state. Derived at render time so the reduced
+  // branch doesn't need a setState-inside-useEffect.
+  const activeIdx = reduced && inView ? 5 : animatedIdx;
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduced) {
-      // Light up all cards statically, skip traversal
-      setActiveIdx(5);
-      return;
-    }
+    if (!inView || reduced) return;
     const sequence = [0, 1, 2, 3, 4, 5];
     const stepMs = 400;
     const timers = sequence.map((idx, i) =>
-      window.setTimeout(() => setActiveIdx(idx), i * stepMs)
+      window.setTimeout(() => setAnimatedIdx(idx), i * stepMs)
     );
     return () => timers.forEach(clearTimeout);
   }, [inView, reduced]);
