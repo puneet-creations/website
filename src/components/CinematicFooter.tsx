@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { COMPLIANCE } from '../data/compliance';
+import { resolveFooterMessage } from '../data/footerMessages';
 
 const HeroOrb = lazy(() => import('./HeroOrb'));
 
@@ -88,6 +89,9 @@ export default function CinematicFooter() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const { pathname } = useLocation();
+  const msg = resolveFooterMessage(pathname);
+
   // prefers-reduced-motion is read once at mount; if the user toggles their
   // system preference mid-session, they must reload for it to take effect —
   // consistent with how the existing GSAP reduced-motion guard (below) behaves.
@@ -120,6 +124,9 @@ export default function CinematicFooter() {
   }, [prefersReducedMotion]);
 
   // Subtle GSAP on the headline
+  // Re-fire the headline entrance on route change — the footer stays
+  // mounted across routes (rendered in Shell), so without `pathname`
+  // in deps the new per-route headline would swap in without its fade.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
@@ -132,7 +139,7 @@ export default function CinematicFooter() {
       });
     });
     return () => ctx.revert();
-  }, []);
+  }, [pathname]);
 
   // 5-column link structure
   const product: LinkItem[] = [
@@ -241,7 +248,7 @@ export default function CinematicFooter() {
                   color: '#8af5c0',
                 }}
               >
-                Founder first
+                {msg.eyebrow}
               </div>
               <h2
                 ref={headingRef}
@@ -255,17 +262,13 @@ export default function CinematicFooter() {
                   color: '#ffffff',
                 }}
               >
-                Sovereign AI and production agents on the{' '}
-                <span style={{ fontStyle: 'italic' }}>artiGen Platform.</span>
+                {msg.headline}{' '}
+                <span style={{ fontStyle: 'italic' }}>{msg.headlineAccent}</span>
               </h2>
 
               {/* 3-pill row — replaces the 3 orb-badge callouts */}
               <div className="flex flex-wrap gap-2 mb-8 justify-center md:justify-start">
-                {[
-                  'Secure by architecture',
-                  'Fixed low cost',
-                  'ROI in weeks',
-                ].map((pill) => (
+                {msg.pills.map((pill) => (
                   <span
                     key={pill}
                     className="px-4 py-2 rounded-full text-[13px] font-medium"
@@ -282,10 +285,10 @@ export default function CinematicFooter() {
               </div>
 
               <p className="mb-8 max-w-[500px] mx-auto md:mx-0 italic" style={{ fontSize: 15, color: 'rgba(255,255,255,0.50)', fontFamily: "'Fraunces', serif" }}>
-                Don&rsquo;t hand your IP to public AI.
+                {msg.tagline}
               </p>
               <motion.a
-                href="mailto:hello@attentions.ai?subject=Founder%20Call"
+                href={msg.ctaHref}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full"
@@ -299,7 +302,7 @@ export default function CinematicFooter() {
                   textTransform: 'uppercase',
                 }}
               >
-                Book a founder call <span>→</span>
+                {msg.ctaLabel} <span>→</span>
               </motion.a>
               <div className="mt-5 text-[13px]" style={{ color: 'rgba(255,255,255,0.50)', fontFamily: "'JetBrains Mono', monospace" }}>
                 hello@attentions.ai · Response within 4 business hours
