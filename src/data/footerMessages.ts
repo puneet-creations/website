@@ -146,8 +146,9 @@ if (import.meta.env.DEV) {
   const last = FOOTER_MESSAGES[FOOTER_MESSAGES.length - 1];
   if (!last || last.matches !== '*') {
     throw new Error(
-      "footerMessages: the final FOOTER_MESSAGES entry must have matches:'*' " +
-      "so resolveFooterMessage() never returns undefined."
+      "footerMessages: the last entry in FOOTER_MESSAGES must have matches:'*' " +
+      "(the catch-all sentinel). Move it to the bottom or add one — otherwise " +
+      "resolveFooterMessage() can return undefined at runtime."
     );
   }
 }
