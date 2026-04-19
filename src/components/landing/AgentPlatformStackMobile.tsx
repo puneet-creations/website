@@ -63,7 +63,7 @@ function IndustriesStrip() {
       >
         INDUSTRIES
       </div>
-      <div className="flex gap-3 overflow-x-auto scroll-smooth px-6 pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+      <div className="no-scrollbar flex gap-3 overflow-x-auto scroll-smooth px-6 pb-4 snap-x snap-mandatory">
         {INDUSTRIES.map((ind) => (
           <div
             key={ind.id}
