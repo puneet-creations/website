@@ -33,6 +33,7 @@ export default function LandingCloser() {
   return (
     <section
       ref={ref}
+      id="ownership"
       className="relative overflow-hidden"
       style={{ background: 'var(--bg-s2)', padding: 'clamp(96px, 14vw, 160px) 24px' }}
     >
