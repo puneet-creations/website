@@ -215,9 +215,9 @@ export default function CinematicFooter() {
               <div className="relative" style={{ width: 'clamp(260px, 30vw, 420px)', height: 'clamp(260px, 30vw, 420px)' }}>
                 <Suspense fallback={null}>
                   <HeroOrb
-                    baseColor="#1a1a1a"
-                    attenuationColor="#000000"
-                    envColor="#666666"
+                    baseColor="#ffffff"
+                    attenuationColor="#e8e8e8"
+                    envColor="#f5f5f5"
                     attenuationDistance={0.6}
                     breatheAmp={0.12}
                     floatAmp={0.22}
