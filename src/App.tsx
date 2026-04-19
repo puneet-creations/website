@@ -30,12 +30,31 @@ const ROUTE_TO_MESH: Record<string, string> = {
   '/faq': 'faq',
 };
 
-/** Scroll to top on every route change */
+/**
+ * Scroll to top on route change — unless the URL has a `#hash`, in which
+ * case scroll the matching element into view so cross-page hash links
+ * (e.g. footer "See security architecture →" → /security#compliance)
+ * land at their anchor instead of the page top.
+ * Fallback to top if the target id isn't in the DOM yet.
+ */
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      // Defer one paint — give the newly-rendered page a chance to mount
+      // the target element before we measure its position.
+      const t = window.setTimeout(() => {
+        const el = document.getElementById(hash.slice(1));
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      }, 50);
+      return () => window.clearTimeout(t);
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
