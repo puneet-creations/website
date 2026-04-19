@@ -14,6 +14,7 @@ import {
   type BeatId,
 } from '../../data/agentPlatformStack';
 import { useSplitText } from '../../hooks/useSplitText';
+import AgentPlatformStackMobile from './AgentPlatformStackMobile';
 
 const ICON_MAP = { FileText, GitBranch, Mic, Phone, Receipt, Plus } as const;
 
@@ -38,18 +39,12 @@ export default function AgentPlatformStack() {
   return (
     <section
       ref={containerRef}
-      className="relative"
-      style={{
-        height: reduced ? 'auto' : '310vh',
-        background: 'var(--wow-bg, #0a0e18)',
-      }}
+      className="relative wow-section-outer"
+      style={{ background: 'var(--wow-bg, #0a0e18)' }}
     >
       <div
-        className="h-screen w-full overflow-hidden"
-        style={{
-          position: reduced ? 'static' : 'sticky',
-          top: 0,
-        }}
+        className="w-full overflow-hidden h-auto lg:h-screen wow-section-inner"
+        style={{ top: 0 }}
       >
         <BackgroundLayers />
 
@@ -64,10 +59,8 @@ export default function AgentPlatformStack() {
           />
         </div>
 
-        <div className="lg:hidden h-full flex items-center justify-center p-8 text-center">
-          <div className="text-[rgba(255,255,255,0.60)] text-[14px]">
-            Mobile version ships in Phase 2c.
-          </div>
+        <div className="lg:hidden">
+          <AgentPlatformStackMobile />
         </div>
       </div>
     </section>
@@ -96,8 +89,16 @@ function BackgroundLayers() {
           0%, 100% { opacity: 0.7; }
           50%      { opacity: 1; }
         }
+        .wow-section-outer { height: auto; }
+        .wow-section-inner { position: static; }
+        @media (min-width: 1024px) {
+          .wow-section-outer { height: 310vh; }
+          .wow-section-inner { position: sticky; }
+        }
         @media (prefers-reduced-motion: reduce) {
           .wow-teal-pulse { animation: none !important; }
+          .wow-section-outer { height: auto; }
+          .wow-section-inner { position: static; }
         }
       `}</style>
     </div>
