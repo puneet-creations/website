@@ -99,10 +99,13 @@ function AgentsStack() {
         {AGENTS.map((agent) => {
           const Icon = ICON_MAP[agent.iconKey] ?? Plus;
           const isBuild = agent.id === 'build';
+          const href = isBuild ? '/pricing#pilot' : '/agents#agent-deep-dive';
           return (
-            <div
+            <a
               key={agent.id}
-              className="rounded-[14px] p-4 flex items-center gap-4"
+              href={href}
+              aria-label={`${agent.name} — ${agent.domainLabel}`}
+              className="rounded-[14px] p-4 flex items-center gap-4 no-underline active:scale-[0.98] transition-transform"
               style={{
                 background: 'rgba(255,255,255,0.03)',
                 border: isBuild ? '2px dashed rgba(138,245,192,0.5)' : '1px solid rgba(255,255,255,0.08)',
@@ -112,11 +115,31 @@ function AgentsStack() {
                 <Icon size={18} color="#8af5c0" />
               </div>
               <div className="flex-1 min-w-0">
+                <div
+                  className="text-[rgba(138,245,192,0.70)] text-[10px] font-bold uppercase leading-tight mb-0.5"
+                  style={{ fontFamily: 'var(--mono)', letterSpacing: '0.08em' }}
+                >
+                  {agent.domainLabel}
+                </div>
                 <div className="text-white text-[14px] font-bold leading-tight">{agent.name}</div>
-                <div className="text-[rgba(255,255,255,0.55)] text-[12px] mt-1 leading-snug">{agent.flow}</div>
+                <div className="text-[rgba(255,255,255,0.60)] text-[12px] mt-1 leading-snug">{agent.flow}</div>
               </div>
-              {isBuild && <Sparkles size={16} color="#8af5c0" />}
-            </div>
+              {isBuild ? (
+                <Sparkles size={16} color="#8af5c0" className="flex-shrink-0" />
+              ) : (
+                <span
+                  className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded flex-shrink-0"
+                  style={{
+                    color: '#8af5c0',
+                    background: 'rgba(138,245,192,0.12)',
+                    fontFamily: 'var(--mono)',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  LIVE
+                </span>
+              )}
+            </a>
           );
         })}
       </div>

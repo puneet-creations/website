@@ -294,14 +294,18 @@ function IndustryTile({ industry, isActive }: { industry: typeof INDUSTRIES[numb
 function AgentCard({ agent, isActive }: { agent: typeof AGENTS[number]; isActive: boolean }) {
   const Icon = ICON_MAP[agent.iconKey] ?? Plus;
   const isBuildPlaceholder = agent.id === 'build';
+  const href = isBuildPlaceholder ? '/pricing#pilot' : '/agents#agent-deep-dive';
 
   return (
-    <motion.div
-      className="relative flex-1 rounded-[14px] p-3 flex flex-col gap-1.5"
+    <motion.a
+      href={href}
+      aria-label={`${agent.name} — ${agent.domainLabel}`}
+      className="relative flex-1 rounded-[14px] p-3 flex flex-col gap-1.5 no-underline cursor-pointer"
       animate={{
         scale: isActive ? 1.08 : 0.94,
         opacity: isActive || isBuildPlaceholder ? 1 : 0.55,
       }}
+      whileHover={{ scale: isActive ? 1.12 : 0.98 }}
       transition={{ duration: 0.5, ease: [0.22, 0.61, 0.36, 1] }}
       style={{
         background: 'rgba(255,255,255,0.03)',
@@ -346,7 +350,7 @@ function AgentCard({ agent, isActive }: { agent: typeof AGENTS[number]; isActive
       <div className="text-[12px] text-[rgba(255,255,255,0.55)] leading-snug">
         {agent.flow}
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
 
