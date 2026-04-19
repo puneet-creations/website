@@ -1,27 +1,28 @@
 import { Check, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from '../../hooks/useInView';
-import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 
 /**
- * ContextKing — two WhiteCards comparing Generic LLM vs artiGen+context.
- * Terminal-style code-diff blocks and 3-bullet contrast per card.
- * No orbs (dropped from prior design to reduce landing-page orb count).
+ * ContextKing — dark-cinematic comparison (post-Phase-2 cohesion pass).
+ * Generic LLM vs artiGen+context, code-diff blocks + 3 bullets each.
+ * Matches AgentPlatformStack's palette: #0a0e18 bg, teal accents, serif
+ * italic headlines.
  */
 
 const BAD_BULLETS = [
   'Guesses vendor names, fabricates GL codes',
   'No tolerance rules, no approval ladder',
-  'No audit trail \u2014 undefendable',
+  'No audit trail — undefendable',
 ];
 
 const GOOD_BULLETS = [
   'Your masters, your taxonomy, your rules',
   'Every field traceable to a source chunk',
-  'Full audit trail \u2014 reversible, defensible',
+  'Full audit trail — reversible, defensible',
 ];
 
-const RED = '#d94a4a';
+const RED = '#ff7a7a'; // brighter red for dark bg (vs light-bg #d94a4a)
+const TEAL = '#8af5c0';
 
 export default function ContextKing() {
   const [ref, inView] = useInView<HTMLElement>(0.08);
@@ -30,9 +31,27 @@ export default function ContextKing() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: 'var(--bg-s4)', padding: 'clamp(96px, 12vw, 160px) 24px' }}
+      style={{ background: '#0a0e18', padding: 'clamp(96px, 12vw, 160px) 24px' }}
     >
-      <div className="cf-grid absolute inset-0 pointer-events-none opacity-40" />
+      {/* Subtle teal radial pulse + dot grid, matching AgentPlatformStack */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(circle at 50% 50%, rgba(138,245,192,0.04), transparent 70%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
+          }}
+        />
+      </div>
+
       <div className="relative z-10 max-w-[1280px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -40,7 +59,17 @@ export default function ContextKing() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center max-w-[760px] mx-auto"
         >
-          <div className="micro-upper mb-4" style={{ color: 'rgba(0,0,0,0.55)' }}>
+          <div
+            className="mb-4"
+            style={{
+              fontFamily: 'var(--mono)',
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: TEAL,
+            }}
+          >
             The question buyers ask
           </div>
           <h2
@@ -50,7 +79,7 @@ export default function ContextKing() {
               fontWeight: 500,
               lineHeight: 1.05,
               letterSpacing: '-0.025em',
-              color: '#000000',
+              color: 'rgba(255,255,255,0.95)',
             }}
           >
             An agent without your context{' '}
@@ -59,15 +88,29 @@ export default function ContextKing() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
+          {/* Left — Generic LLM (red accent) */}
           <motion.article
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
-            style={{ ...whiteCardStyle({ shadow: 'md' }) }}
+            className="rounded-[20px] overflow-hidden"
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,122,122,0.20)',
+              borderTop: `3px solid ${RED}`,
+            }}
           >
-            <AccentStrip color={RED} />
             <div className="p-8 md:p-10 flex flex-col gap-6">
-              <div className="micro-upper" style={{ color: RED }}>
+              <div
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: RED,
+                }}
+              >
                 Generic LLM
               </div>
               <h3
@@ -77,7 +120,7 @@ export default function ContextKing() {
                   fontWeight: 500,
                   lineHeight: 1.15,
                   letterSpacing: '-0.02em',
-                  color: '#000000',
+                  color: 'rgba(255,255,255,0.95)',
                 }}
               >
                 The demo that{' '}
@@ -85,19 +128,19 @@ export default function ContextKing() {
               </h3>
               <div
                 className="rounded-2xl p-5"
-                style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)' }}
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
               >
                 <div className="space-y-3" style={{ fontFamily: 'var(--mono)', fontSize: 14 }}>
-                  <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    vendor: <span style={{ color: '#000000' }}>&ldquo;Global Logistics Inc.&rdquo;</span>
+                  <div style={{ color: 'rgba(255,255,255,0.70)' }}>
+                    vendor: <span style={{ color: 'rgba(255,255,255,0.95)' }}>&ldquo;Global Logistics Inc.&rdquo;</span>
                     <span className="ml-2" style={{ color: RED }}>&larr; wrong</span>
                   </div>
-                  <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    gl: <span style={{ color: '#000000' }}>&ldquo;AP 2000&rdquo;</span>
+                  <div style={{ color: 'rgba(255,255,255,0.70)' }}>
+                    gl: <span style={{ color: 'rgba(255,255,255,0.95)' }}>&ldquo;AP 2000&rdquo;</span>
                     <span className="ml-2" style={{ color: RED }}>&larr; guessed</span>
                   </div>
-                  <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    approver: <span style={{ color: '#000000' }}>&ldquo;system admin&rdquo;</span>
+                  <div style={{ color: 'rgba(255,255,255,0.70)' }}>
+                    approver: <span style={{ color: 'rgba(255,255,255,0.95)' }}>&ldquo;system admin&rdquo;</span>
                     <span className="ml-2" style={{ color: RED }}>&larr; invented</span>
                   </div>
                 </div>
@@ -110,9 +153,9 @@ export default function ContextKing() {
                       className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
                       style={{ background: RED }}
                     >
-                      <X size={14} style={{ color: '#ffffff' }} strokeWidth={3} />
+                      <X size={14} style={{ color: '#0a0e18' }} strokeWidth={3} />
                     </span>
-                    <span className="text-[16px] leading-relaxed" style={{ color: 'rgba(0,0,0,0.70)' }}>
+                    <span className="text-[16px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.70)' }}>
                       {b}
                     </span>
                   </li>
@@ -121,15 +164,29 @@ export default function ContextKing() {
             </div>
           </motion.article>
 
+          {/* Right — artiGen + context (teal accent) */}
           <motion.article
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.25 }}
-            style={{ ...whiteCardStyle({ shadow: 'md' }) }}
+            className="rounded-[20px] overflow-hidden"
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(138,245,192,0.25)',
+              borderTop: `3px solid ${TEAL}`,
+            }}
           >
-            <AccentStrip color="#000000" />
             <div className="p-8 md:p-10 flex flex-col gap-6">
-              <div className="micro-upper" style={{ color: '#000000' }}>
+              <div
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: TEAL,
+                }}
+              >
                 artiGen + context
               </div>
               <h3
@@ -139,7 +196,7 @@ export default function ContextKing() {
                   fontWeight: 500,
                   lineHeight: 1.15,
                   letterSpacing: '-0.02em',
-                  color: '#000000',
+                  color: 'rgba(255,255,255,0.95)',
                 }}
               >
                 The agent that{' '}
@@ -147,20 +204,20 @@ export default function ContextKing() {
               </h3>
               <div
                 className="rounded-2xl p-5"
-                style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)' }}
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
               >
                 <div className="space-y-3" style={{ fontFamily: 'var(--mono)', fontSize: 14 }}>
-                  <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    vendor: <span style={{ color: '#000000', fontWeight: 500 }}>Global Logistics LLC</span>
-                    <span className="ml-2" style={{ color: '#000000' }}>V-472 ✓</span>
+                  <div style={{ color: 'rgba(255,255,255,0.70)' }}>
+                    vendor: <span style={{ color: 'rgba(255,255,255,0.95)', fontWeight: 500 }}>Global Logistics LLC</span>
+                    <span className="ml-2" style={{ color: TEAL }}>V-472 ✓</span>
                   </div>
-                  <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    gl: <span style={{ color: '#000000', fontWeight: 500 }}>Freight · 6100-2340</span>
-                    <span className="ml-2" style={{ color: '#000000' }}>cited ✓</span>
+                  <div style={{ color: 'rgba(255,255,255,0.70)' }}>
+                    gl: <span style={{ color: 'rgba(255,255,255,0.95)', fontWeight: 500 }}>Freight · 6100-2340</span>
+                    <span className="ml-2" style={{ color: TEAL }}>cited ✓</span>
                   </div>
-                  <div style={{ color: 'rgba(0,0,0,0.75)' }}>
-                    approver: <span style={{ color: '#000000', fontWeight: 500 }}>CFO · Named</span>
-                    <span className="ml-2" style={{ color: '#000000' }}>audit ✓</span>
+                  <div style={{ color: 'rgba(255,255,255,0.70)' }}>
+                    approver: <span style={{ color: 'rgba(255,255,255,0.95)', fontWeight: 500 }}>CFO · Named</span>
+                    <span className="ml-2" style={{ color: TEAL }}>audit ✓</span>
                   </div>
                 </div>
               </div>
@@ -170,11 +227,11 @@ export default function ContextKing() {
                     <span
                       aria-hidden="true"
                       className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
-                      style={{ background: '#000000' }}
+                      style={{ background: TEAL }}
                     >
-                      <Check size={14} style={{ color: '#ffffff' }} strokeWidth={3} />
+                      <Check size={14} style={{ color: '#0a0e18' }} strokeWidth={3} />
                     </span>
-                    <span className="text-[16px] leading-relaxed" style={{ color: 'rgba(0,0,0,0.70)' }}>
+                    <span className="text-[16px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.70)' }}>
                       {b}
                     </span>
                   </li>
