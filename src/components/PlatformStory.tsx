@@ -82,53 +82,59 @@ export function AgentFamilies() {
             </div>
             <div className="font-display text-[30px] leading-tight text-black mb-3">Read anything. Cite everything.</div>
 
-            {/* Visual flow */}
-            <div className="motion-card mb-4">
-              <svg viewBox="0 0 320 140" className="w-full h-[180px]">
-                {/* Input stack of docs */}
-                <g className="ps-float">
-                  <rect x="8" y="22" width="56" height="78" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.2" />
-                  <rect x="14" y="14" width="56" height="78" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.2" />
-                  <rect x="20" y="6" width="56" height="78" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-                  <line x1="26" y1="22" x2="68" y2="22" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
-                  <line x1="26" y1="30" x2="62" y2="30" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
-                  <line x1="26" y1="38" x2="68" y2="38" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
-                  <line x1="26" y1="46" x2="58" y2="46" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
-                  <text x="26" y="72" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">INV · PO · GRN</text>
-                </g>
-                {/* Arrow */}
-                <line x1="92" y1="48" x2="128" y2="48" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" className="ps-dash" markerEnd="url(#ps-arr-1)" />
-                <defs>
-                  <marker id="ps-arr-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                    <path d="M0,0 L10,5 L0,10 z" fill="rgba(0,0,0,0.30)" />
-                  </marker>
-                </defs>
-                {/* OCR engine */}
-                <rect x="130" y="28" width="64" height="42" rx="6" fill="rgba(0,0,0,0.08)" />
-                <text x="162" y="46" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">OCR +</text>
-                <text x="162" y="56" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">layout</text>
-                <text x="162" y="64" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">artiGen</text>
-                {/* Arrow */}
-                <line x1="198" y1="48" x2="232" y2="48" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" className="ps-dash" markerEnd="url(#ps-arr-1)" />
-                {/* Structured output */}
-                <rect x="234" y="18" width="82" height="64" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-                <rect x="234" y="18" width="82" height="12" rx="6" fill="rgba(0,0,0,0.08)" />
-                <text x="240" y="27" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">STRUCTURED</text>
-                <text x="240" y="40" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">vendor</text>
-                <text x="278" y="40" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">V-472</text>
-                <text x="240" y="49" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">amount</text>
-                <text x="278" y="49" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">$13,503</text>
-                <text x="240" y="58" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">gl</text>
-                <text x="278" y="58" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">6100-2340</text>
-                <text x="240" y="67" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">conf</text>
-                <text x="278" y="67" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">99.2%</text>
-                <rect x="240" y="72" width="70" height="6" rx="3" fill="rgba(0,0,0,0.03)" />
-                <text x="275" y="77" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">→ SAP</text>
-                {/* labels */}
-                <text x="48" y="122" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">mixed PDFs</text>
-                <text x="162" y="122" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">layout + NER</text>
-                <text x="275" y="122" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">typed JSON</text>
-              </svg>
+            {/* Mini-flow — HTML replacement of the prior SVG (readability ≥13px) */}
+            <div
+              className="motion-card mb-4 rounded-[14px] p-4"
+              style={{
+                background: 'rgba(24,117,116,0.04)',
+                border: '1px solid rgba(24,117,116,0.10)',
+              }}
+            >
+              <div
+                className="grid items-center gap-3"
+                style={{ gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.2fr)' }}
+              >
+                {/* INPUT */}
+                <div className="min-w-0">
+                  <div className="text-[14px] font-bold text-black leading-tight">INV · PO · GRN</div>
+                  <div className="text-[12.5px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">mixed PDFs</div>
+                </div>
+
+                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+
+                {/* PROCESS */}
+                <div
+                  className="min-w-0 rounded-[10px] px-3 py-2.5"
+                  style={{ background: 'rgba(24,117,116,0.08)', border: '1px solid rgba(24,117,116,0.14)' }}
+                >
+                  <div className="text-[14px] font-bold text-black leading-tight">OCR + layout · artiGen</div>
+                  <div className="text-[12px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">on-prem · auto-routed</div>
+                </div>
+
+                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+
+                {/* OUTPUT */}
+                <div
+                  className="min-w-0 rounded-[10px] px-3 py-2.5"
+                  style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)' }}
+                >
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[rgba(0,0,0,0.55)] mb-1.5" style={{ fontFamily: 'var(--mono)' }}>
+                    Structured
+                  </div>
+                  <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5" style={{ fontFamily: 'var(--mono)', fontSize: 13 }}>
+                    <span className="text-[rgba(0,0,0,0.50)]">vendor:</span><span className="text-black font-medium">V-472</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">amount:</span><span className="text-black font-medium">$13,503</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">gl:</span><span className="text-black font-medium">6100-2340</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">conf:</span><span className="text-black font-medium">99.2%</span>
+                  </div>
+                  <div
+                    className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider"
+                    style={{ background: 'rgba(24,117,116,0.12)', color: '#187574', fontFamily: 'var(--mono)' }}
+                  >
+                    → SAP
+                  </div>
+                </div>
+              </div>
             </div>
 
             <ul className="space-y-1.5 mb-4 text-[18px] text-[rgba(0,0,0,0.75)]">
