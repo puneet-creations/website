@@ -12,6 +12,10 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// motion(Link) — Framer Motion factory wrapping React Router Link, so
+// internal CTAs preserve SPA navigation instead of full-page reloads.
+const MotionLink = motion(Link);
+
 /**
  * CinematicFooter — dark footer with a large animated black orb centerpiece,
  * 5-column link grid (with jump-link anchors), and a legal row.
@@ -287,23 +291,43 @@ export default function CinematicFooter() {
               <p className="mb-8 max-w-[500px] mx-auto md:mx-0 italic" style={{ fontSize: 15, color: 'rgba(255,255,255,0.50)', fontFamily: "'Fraunces', serif" }}>
                 {msg.tagline}
               </p>
-              <motion.a
-                href={msg.ctaHref}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full"
-                style={{
-                  background: '#ffffff',
-                  color: '#000000',
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 14,
-                  fontWeight: 700,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {msg.ctaLabel} <span>→</span>
-              </motion.a>
+              {msg.ctaHref.startsWith('/') ? (
+                <MotionLink
+                  to={msg.ctaHref}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full"
+                  style={{
+                    background: '#ffffff',
+                    color: '#000000',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {msg.ctaLabel} <span>→</span>
+                </MotionLink>
+              ) : (
+                <motion.a
+                  href={msg.ctaHref}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full"
+                  style={{
+                    background: '#ffffff',
+                    color: '#000000',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {msg.ctaLabel} <span>→</span>
+                </motion.a>
+              )}
               <div className="mt-5 text-[13px]" style={{ color: 'rgba(255,255,255,0.50)', fontFamily: "'JetBrains Mono', monospace" }}>
                 hello@attentions.ai · Response within 4 business hours
               </div>

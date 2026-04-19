@@ -346,7 +346,7 @@ Open each URL, scroll to the footer, and check the green teal eyebrow text above
 | `http://localhost:5173/` | `FOUNDER FIRST` | landing |
 | `http://localhost:5173/platform` | `PLATFORM` | platform |
 | `http://localhost:5173/agents` | `AGENTS IN PRODUCTION` | agents |
-| `http://localhost:5173/security` | `SOVEREIGN BY DESIGN` | trust |
+| `http://localhost:5173/security` | `SOVEREIGN BY DESIGN` | security |
 | `http://localhost:5173/pricing` | `READY TO SHIP` | conversion |
 | `http://localhost:5173/contact` | `READY TO SHIP` | conversion |
 | `http://localhost:5173/about` | `FOUNDER FIRST` | default |
