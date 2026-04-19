@@ -212,7 +212,7 @@ function IllustrationPanel({
               >
                 {String(layer.n).padStart(2, '0')}
               </span>
-              <span className="text-white text-[10px] font-bold truncate leading-tight">{layer.title}</span>
+              <span className="text-white text-[10px] font-bold leading-tight">{layer.title}</span>
             </div>
           ))}
         </div>
