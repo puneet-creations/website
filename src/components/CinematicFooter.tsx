@@ -1,4 +1,4 @@
-import { useEffect, useRef, Suspense, lazy } from 'react';
+import { useEffect, useRef, useState, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -85,6 +85,38 @@ function FooterColumn({ title, items }: { title: string; items: LinkItem[] }) {
 export default function CinematicFooter() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // prefers-reduced-motion is read once at mount; if the user toggles their
+  // system preference mid-session, they must reload for it to take effect —
+  // consistent with how the existing GSAP reduced-motion guard (below) behaves.
+  const [prefersReducedMotion] = useState<boolean>(
+    () => typeof window !== 'undefined' &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+
+  // Pause video playback when the footer scrolls off-screen so we don't burn
+  // CPU on long scrolling sessions. Threshold:0.01 fires when ≥1% of the
+  // video is visible.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || prefersReducedMotion) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Autoplay may be blocked on iOS Low-Power-Mode / Data Saver; if so,
+          // the promise rejects silently and the poster frame shows instead.
+          video.play().catch(() => { /* intentionally silent */ });
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.01 }
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, [prefersReducedMotion]);
 
   // Subtle GSAP on the headline
   useEffect(() => {
@@ -138,10 +170,33 @@ export default function CinematicFooter() {
     <div ref={wrapperRef} className="relative h-auto w-full">
       <footer className="relative flex min-h-screen w-full flex-col overflow-hidden text-white" style={{ background: '#060a12' }}>
 
-        {/* Aurora glow */}
-        <div className="absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 cf-aurora rounded-[50%] blur-[80px] pointer-events-none z-0" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(138,245,192,0.06) 0%, rgba(91,118,254,0.05) 40%, transparent 70%)' }} />
-        {/* Grid */}
-        <div className="cf-grid absolute inset-0 z-[1] pointer-events-none" />
+        {/* Motion background — dark particles drift, self-hosted Pexels CC0 loop */}
+        <video
+          ref={videoRef}
+          src="/footer-bg.mp4"
+          poster="/footer-bg-poster.webp"
+          autoPlay={!prefersReducedMotion}
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+          style={{
+            opacity: 0.55,
+            mixBlendMode: 'screen',
+            filter: 'brightness(0.85) saturate(0.9)',
+          }}
+        />
+        {/* Dark gradient overlay — guarantees WCAG AA on the white content on top */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(6,10,18,0.45) 0%, rgba(6,10,18,0.70) 50%, rgba(6,10,18,0.85) 100%)',
+          }}
+        />
 
         {/* Diagonal marquee band */}
         <div className="relative z-10 border-y py-4 -rotate-1 scale-105 overflow-hidden" style={{ borderColor: 'rgba(255,255,255,0.06)', background: 'rgba(6,10,18,0.70)', backdropFilter: 'blur(12px)' }}>
@@ -175,21 +230,71 @@ export default function CinematicFooter() {
             <div className="text-center md:text-left">
               <h2
                 ref={headingRef}
-                className="mb-6"
+                className="mb-10"
                 style={{
                   fontFamily: "'Fraunces', serif",
-                  fontSize: 'clamp(36px, 5vw, 64px)',
+                  fontSize: 'clamp(36px, 5.5vw, 72px)',
                   fontWeight: 500,
                   lineHeight: 1.02,
-                  letterSpacing: '-0.02em',
+                  letterSpacing: '-0.03em',
                   color: '#ffffff',
                 }}
               >
-                Ready to <span style={{ fontStyle: 'italic' }}>own</span> it?
+                Sovereign AI and production agents on the{' '}
+                <span style={{ fontStyle: 'italic' }}>artiGen Platform.</span>
               </h2>
-              <p className="mb-8 max-w-[460px] mx-auto md:mx-0" style={{ fontSize: 18, color: 'rgba(255,255,255,0.70)', fontFamily: "'Noto Sans', sans-serif", lineHeight: 1.5 }}>
-                30-minute founder call. No SDR, no slides. We discuss your stack,
-                your regulator, your timeline.
+
+              {/* 3 value callouts with white orb badges */}
+              <div className="flex flex-col gap-5 mb-10 items-center md:items-start">
+                {[
+                  { title: 'Secure by architecture', sub: 'On-prem. Air-gapped if you need it.' },
+                  { title: 'Fixed low cost', sub: 'No per-token surprise. Predictable.' },
+                  { title: 'ROI in weeks', sub: 'Live agents in 4 weeks, not quarters.' },
+                ].map((c) => (
+                  <div key={c.title} className="flex items-center gap-4 text-left">
+                    {/* White glass orb */}
+                    <div
+                      className="flex-shrink-0 rounded-full"
+                      style={{
+                        width: 48,
+                        height: 48,
+                        background:
+                          'radial-gradient(circle at 35% 30%, #ffffff 0%, #e8e8e8 40%, #b8b8b8 100%)',
+                        boxShadow:
+                          'inset -4px -6px 10px rgba(0,0,0,0.15), inset 2px 3px 6px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.10)',
+                      }}
+                    />
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: "'Fraunces', serif",
+                          fontSize: 20,
+                          fontWeight: 500,
+                          letterSpacing: '-0.01em',
+                          color: '#ffffff',
+                          lineHeight: 1.1,
+                        }}
+                      >
+                        {c.title}
+                      </div>
+                      <div
+                        className="mt-1"
+                        style={{
+                          fontFamily: "'Noto Sans', sans-serif",
+                          fontSize: 14,
+                          color: 'rgba(255,255,255,0.55)',
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {c.sub}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mb-8 max-w-[500px] mx-auto md:mx-0 italic" style={{ fontSize: 15, color: 'rgba(255,255,255,0.50)', fontFamily: "'Fraunces', serif" }}>
+                Don&rsquo;t hand your IP to public AI.
               </p>
               <motion.a
                 href="mailto:hello@attentions.ai?subject=Founder%20Call"
