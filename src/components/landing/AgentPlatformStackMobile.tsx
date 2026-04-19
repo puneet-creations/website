@@ -99,7 +99,7 @@ function AgentsStack() {
         {AGENTS.map((agent) => {
           const Icon = ICON_MAP[agent.iconKey] ?? Plus;
           const isBuild = agent.id === 'build';
-          const href = isBuild ? '/pricing#pilot' : '/agents#agent-deep-dive';
+          const href = isBuild ? '/pricing#assessment' : '/agents#agent-deep-dive';
           return (
             <a
               key={agent.id}

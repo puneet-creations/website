@@ -294,7 +294,7 @@ function IndustryTile({ industry, isActive }: { industry: typeof INDUSTRIES[numb
 function AgentCard({ agent, isActive }: { agent: typeof AGENTS[number]; isActive: boolean }) {
   const Icon = ICON_MAP[agent.iconKey] ?? Plus;
   const isBuildPlaceholder = agent.id === 'build';
-  const href = isBuildPlaceholder ? '/pricing#pilot' : '/agents#agent-deep-dive';
+  const href = isBuildPlaceholder ? '/pricing#assessment' : '/agents#agent-deep-dive';
 
   return (
     <motion.a

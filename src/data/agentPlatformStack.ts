@@ -98,7 +98,7 @@ export type EngagementOption = {
 };
 
 export const ENGAGEMENT_OPTIONS: readonly EngagementOption[] = [
-  { id: 'pilot',     num: '01', label: 'Scope your agent',      pitch: '4-week pilot. Fixed scope. One workflow live.',              href: '/pricing#pilot',             ctaText: 'Scope it' },
+  { id: 'pilot',     num: '01', label: 'Scope your agent',      pitch: '4-week pilot. Fixed scope. One workflow live.',              href: '/pricing#assessment',        ctaText: 'Scope it' },
   { id: 'evaluate',  num: '02', label: 'Evaluate the platform', pitch: '30-day sandbox on your hardware. Bring your data.',         href: '/platform',                  ctaText: 'Start eval' },
   { id: 'architect', num: '03', label: 'Talk to an architect',  pitch: '30 min unfiltered. Regulatory, integrations, constraints.', href: 'mailto:hello@attentions.ai', ctaText: 'Book call' },
 ] as const;
