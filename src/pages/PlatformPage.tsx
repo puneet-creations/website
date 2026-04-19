@@ -1,5 +1,6 @@
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
+import ClientsStrip from '../components/ClientsStrip';
 import PlatformStack from '../components/PlatformStack';
 import FlowDiagram from '../components/FlowDiagram';
 import { AgentFamilies, HallucinationControl, DeterminismProof, ScaleAtVolume } from '../components/PlatformStory';
@@ -28,6 +29,8 @@ export default function PlatformPage() {
         orbColor="#c0d0f5"
         pills={['On-prem · sovereign', 'Hallucination-controlled', 'Deterministic', 'Cited · auditable', '12,400 docs/hr']}
       />
+
+      <ClientsStrip />
 
       <PlatformWhySection />
 
