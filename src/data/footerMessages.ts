@@ -8,7 +8,7 @@
 // Readability guardrails — DO NOT exceed these on edits:
 //   eyebrow         ≤ 22 chars  (12px mono uppercase, 0.12em track)
 //   headline + accent combined ≤ 60 chars (Fraunces clamp(36-72px))
-//   each pill       ≤ 20 chars  (13px, 3-up flex row)
+//   each pill       ≤ 22 chars  (13px, 3-up flex row)
 //   tagline         ≤ 55 chars  (15px Fraunces italic, one line)
 //   ctaLabel        ≤ 28 chars  (14px mono uppercase)
 //
@@ -34,7 +34,7 @@ type FooterMessageEntry = {
 
 // Ordered — first match wins. The '*' entry is the fallback default
 // and must be last.
-export const FOOTER_MESSAGES: FooterMessageEntry[] = [
+export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
   {
     matches: '/',
     message: {
@@ -77,7 +77,7 @@ export const FOOTER_MESSAGES: FooterMessageEntry[] = [
   {
     matches: '/security',
     message: {
-      id: 'trust',
+      id: 'security',
       eyebrow: 'SOVEREIGN BY DESIGN',
       headline: 'The data never leaves.',
       headlineAccent: 'Period.',
@@ -122,6 +122,8 @@ export const FOOTER_MESSAGES: FooterMessageEntry[] = [
  */
 export function resolveFooterMessage(pathname: string): FooterMessage {
   for (const entry of FOOTER_MESSAGES) {
+    // '*' is our sentinel for "always matches", not a real pathname —
+    // React Router pathnames are always '/'-prefixed, never literally '*'.
     if (entry.matches === '*') return entry.message;
     if (Array.isArray(entry.matches)) {
       if (entry.matches.includes(pathname)) return entry.message;
@@ -132,4 +134,20 @@ export function resolveFooterMessage(pathname: string): FooterMessage {
   // Unreachable — '*' entry always matches. TS narrows on the loop
   // so we need this for exhaustiveness.
   return FOOTER_MESSAGES[FOOTER_MESSAGES.length - 1].message;
+}
+
+// ---------------------------------------------------------------------
+// Dev-time invariants. Runs once at module load in development builds
+// to catch the easy mistakes (wildcard entry missing, wrong position).
+// Stripped from production by Vite's dead-code elimination on the
+// `import.meta.env.DEV` constant.
+// ---------------------------------------------------------------------
+if (import.meta.env.DEV) {
+  const last = FOOTER_MESSAGES[FOOTER_MESSAGES.length - 1];
+  if (!last || last.matches !== '*') {
+    throw new Error(
+      "footerMessages: the final FOOTER_MESSAGES entry must have matches:'*' " +
+      "so resolveFooterMessage() never returns undefined."
+    );
+  }
 }
