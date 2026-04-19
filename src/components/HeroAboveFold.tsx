@@ -11,7 +11,6 @@ import { HeroGallery } from './ui/hero-gallery';
  */
 
 /* ── SVG icons for cards — darker outlines for readability on white cards ── */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 function InvoiceIcon({ accent: _a }: { accent: string }) {
   return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="26" y="16" width="68" height="88" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.55)" strokeWidth="2"/><line x1="40" y1="40" x2="80" y2="40" stroke="rgba(0,0,0,0.45)" strokeWidth="2"/><line x1="40" y1="52" x2="72" y2="52" stroke="rgba(0,0,0,0.40)" strokeWidth="2"/><line x1="40" y1="64" x2="66" y2="64" stroke="rgba(0,0,0,0.35)" strokeWidth="2"/><path d="M55 78L62 85L76 71" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" fill="none"/></svg>);
 }
