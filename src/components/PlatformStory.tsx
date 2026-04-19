@@ -155,63 +155,59 @@ export function AgentFamilies() {
             </div>
             <div className="font-display text-[30px] leading-tight text-black mb-3">Listen. Structure. Route.</div>
 
-            <div className="motion-card mb-4">
-              <svg viewBox="0 0 320 140" className="w-full h-[180px]">
-                {/* Mic + wave */}
-                <g transform="translate(30, 46)">
-                  <circle r="20" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-                  <rect x="-5" y="-10" width="10" height="14" rx="5" fill="rgba(0,0,0,0.30)" />
-                  <line x1="-8" y1="6" x2="8" y2="6" stroke="rgba(0,0,0,0.30)" strokeWidth="1.5" strokeLinecap="round" />
-                  <line x1="0" y1="6" x2="0" y2="12" stroke="rgba(0,0,0,0.30)" strokeWidth="1.5" strokeLinecap="round" />
-                </g>
-                {/* Waveform */}
-                {[0,1,2,3,4,5,6,7,8,9].map((i) => {
-                  const h = 4 + ((i * 7) % 14);
-                  return (
-                    <rect
-                      key={i}
-                      x={60 + i * 5}
-                      y={46 - h / 2}
-                      width="3"
-                      height={h}
-                      rx="1.5"
-                      fill="rgba(0,0,0,0.30)"
-                      className="ps-pulse"
-                      style={{ animationDelay: `${i * 0.08}s` }}
-                    />
-                  );
-                })}
-                {/* Arrow */}
-                <line x1="115" y1="46" x2="148" y2="46" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" className="ps-dash" markerEnd="url(#ps-arr-2)" />
-                <defs>
-                  <marker id="ps-arr-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                    <path d="M0,0 L10,5 L0,10 z" fill="rgba(0,0,0,0.30)" />
-                  </marker>
-                </defs>
-                {/* NER engine */}
-                <rect x="150" y="28" width="60" height="36" rx="6" fill="rgba(0,0,0,0.08)" />
-                <text x="180" y="44" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">Dental</text>
-                <text x="180" y="54" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">NER</text>
-                <line x1="214" y1="46" x2="244" y2="46" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" className="ps-dash" markerEnd="url(#ps-arr-2)" />
-                {/* SOAP */}
-                <rect x="246" y="14" width="68" height="70" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-                <rect x="246" y="14" width="68" height="12" rx="6" fill="rgba(0,0,0,0.08)" />
-                <text x="252" y="23" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">SOAP + ICD</text>
-                <text x="252" y="36" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">S</text>
-                <text x="262" y="36" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">cold sens 2w</text>
-                <text x="252" y="46" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">O</text>
-                <text x="262" y="46" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">#3 Class II</text>
-                <text x="252" y="56" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">A</text>
-                <text x="262" y="56" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">K02.51</text>
-                <text x="252" y="66" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">P</text>
-                <text x="262" y="66" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">D2392 · 2-vst</text>
-                <rect x="252" y="72" width="56" height="6" rx="3" fill="rgba(0,0,0,0.03)" />
-                <text x="280" y="77" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">→ Dentrix</text>
+            {/* Mini-flow — HTML replacement (readability ≥13px) */}
+            <div
+              className="motion-card mb-4 rounded-[14px] p-4"
+              style={{
+                background: 'rgba(245,168,212,0.04)',
+                border: '1px solid rgba(245,168,212,0.12)',
+              }}
+            >
+              <div
+                className="grid items-center gap-3"
+                style={{ gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.2fr)' }}
+              >
+                {/* INPUT */}
+                <div className="min-w-0">
+                  <div className="text-[14px] font-bold text-black leading-tight">Dental · live audio</div>
+                  <div className="text-[12.5px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">on-prem ASR</div>
+                </div>
 
-                <text x="48" y="122" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">live audio</text>
-                <text x="180" y="122" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">on-prem ASR</text>
-                <text x="280" y="122" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">EHR sync</text>
-              </svg>
+                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+
+                {/* PROCESS */}
+                <div
+                  className="min-w-0 rounded-[10px] px-3 py-2.5"
+                  style={{ background: 'rgba(245,168,212,0.10)', border: '1px solid rgba(245,168,212,0.18)' }}
+                >
+                  <div className="text-[14px] font-bold text-black leading-tight">Domain NER</div>
+                  <div className="text-[12px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">SOAP + ICD mapping</div>
+                </div>
+
+                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+
+                {/* OUTPUT */}
+                <div
+                  className="min-w-0 rounded-[10px] px-3 py-2.5"
+                  style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)' }}
+                >
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[rgba(0,0,0,0.55)] mb-1.5" style={{ fontFamily: 'var(--mono)' }}>
+                    SOAP · ICD
+                  </div>
+                  <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5" style={{ fontFamily: 'var(--mono)', fontSize: 13 }}>
+                    <span className="text-[rgba(0,0,0,0.50)]">S:</span><span className="text-black font-medium">cold sens 2w</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">O:</span><span className="text-black font-medium">#3 Class II</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">A:</span><span className="text-black font-medium">K02.51</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">P:</span><span className="text-black font-medium">D2392 · 2-vst</span>
+                  </div>
+                  <div
+                    className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider"
+                    style={{ background: 'rgba(245,168,212,0.18)', color: '#c04a8f', fontFamily: 'var(--mono)' }}
+                  >
+                    → Dentrix
+                  </div>
+                </div>
+              </div>
             </div>
 
             <ul className="space-y-1.5 mb-4 text-[18px] text-[rgba(0,0,0,0.75)]">
@@ -232,54 +228,69 @@ export function AgentFamilies() {
             </div>
             <div className="font-display text-[30px] leading-tight text-black mb-3">Docs + voice + images, fused.</div>
 
-            <div className="motion-card mb-4">
-              <svg viewBox="0 0 320 140" className="w-full h-[180px]">
-                {/* 3 inputs stacked */}
-                <g>
-                  <rect x="8" y="8" width="62" height="28" rx="5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1" />
-                  <text x="14" y="20" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">🖼 IMAGE</text>
-                  <text x="14" y="30" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">ins. card photo</text>
+            {/* Mini-flow — HTML replacement (readability ≥13px) */}
+            <div
+              className="motion-card mb-4 rounded-[14px] p-4"
+              style={{
+                background: 'rgba(255,208,128,0.05)',
+                border: '1px solid rgba(255,208,128,0.18)',
+              }}
+            >
+              <div
+                className="grid items-center gap-3"
+                style={{ gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.2fr)' }}
+              >
+                {/* INPUT — 3 stacked mini-chips */}
+                <div className="min-w-0 flex flex-col gap-1">
+                  <div className="text-[12.5px] text-black leading-tight">
+                    <span aria-hidden>🖼</span> <span className="font-semibold">Image:</span>{' '}
+                    <span className="text-[rgba(0,0,0,0.65)]">ins. card photo</span>
+                  </div>
+                  <div className="text-[12.5px] text-black leading-tight">
+                    <span aria-hidden>🎙</span> <span className="font-semibold">Voice:</span>{' '}
+                    <span className="text-[rgba(0,0,0,0.65)]">&ldquo;tooth hurts&rdquo;</span>
+                  </div>
+                  <div className="text-[12.5px] text-black leading-tight">
+                    <span aria-hidden>📄</span> <span className="font-semibold">Doc:</span>{' '}
+                    <span className="text-[rgba(0,0,0,0.65)]">chart history</span>
+                  </div>
+                </div>
 
-                  <rect x="8" y="42" width="62" height="28" rx="5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1" />
-                  <text x="14" y="54" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">🎙 VOICE</text>
-                  <text x="14" y="64" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">"tooth hurts"</text>
+                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
 
-                  <rect x="8" y="76" width="62" height="28" rx="5" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1" />
-                  <text x="14" y="88" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">📄 DOC</text>
-                  <text x="14" y="98" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">chart history</text>
-                </g>
-                {/* Converge arrows */}
-                <g stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" fill="none" className="ps-dash">
-                  <path d="M70,22 Q110,22 132,56" />
-                  <path d="M70,56 L132,56" />
-                  <path d="M70,90 Q110,90 132,56" />
-                </g>
-                {/* Fusion core */}
-                <circle cx="162" cy="56" r="26" fill="rgba(0,0,0,0.08)" />
-                <text x="162" y="54" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">FUSION</text>
-                <text x="162" y="64" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">cross-modal</text>
-                {/* Out */}
-                <line x1="190" y1="56" x2="224" y2="56" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" className="ps-dash" markerEnd="url(#ps-arr-3)" />
-                <defs>
-                  <marker id="ps-arr-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                    <path d="M0,0 L10,5 L0,10 z" fill="rgba(0,0,0,0.30)" />
-                  </marker>
-                </defs>
-                {/* Decision card */}
-                <rect x="226" y="22" width="86" height="70" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="1.5" />
-                <rect x="226" y="22" width="86" height="12" rx="6" fill="rgba(0,0,0,0.08)" />
-                <text x="232" y="31" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">DECISION</text>
-                <text x="232" y="44" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">plan</text>
-                <text x="252" y="44" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Delta PPO</text>
-                <text x="232" y="54" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">proc</text>
-                <text x="252" y="54" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">D2392</text>
-                <text x="232" y="64" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">slot</text>
-                <text x="252" y="64" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">Thu 9:00</text>
-                <text x="232" y="74" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">cite</text>
-                <text x="252" y="74" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">img+voice</text>
-                <rect x="232" y="80" width="74" height="6" rx="3" fill="rgba(0,0,0,0.03)" />
-                <text x="269" y="85" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">→ booked</text>
-              </svg>
+                {/* PROCESS */}
+                <div
+                  className="min-w-0 rounded-[10px] px-3 py-2.5"
+                  style={{ background: 'rgba(255,208,128,0.14)', border: '1px solid rgba(255,208,128,0.28)' }}
+                >
+                  <div className="text-[14px] font-bold text-black leading-tight">Cross-modal fusion</div>
+                  <div className="text-[12px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">cited · reversible</div>
+                </div>
+
+                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+
+                {/* OUTPUT */}
+                <div
+                  className="min-w-0 rounded-[10px] px-3 py-2.5"
+                  style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)' }}
+                >
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[rgba(0,0,0,0.55)] mb-1.5" style={{ fontFamily: 'var(--mono)' }}>
+                    Decision
+                  </div>
+                  <div className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5" style={{ fontFamily: 'var(--mono)', fontSize: 13 }}>
+                    <span className="text-[rgba(0,0,0,0.50)]">Plan:</span><span className="text-black font-medium">Delta PPO</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">Proc:</span><span className="text-black font-medium">D2392</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">Slot:</span><span className="text-black font-medium">Thu 9:00</span>
+                    <span className="text-[rgba(0,0,0,0.50)]">Cite:</span><span className="text-black font-medium">img+voice</span>
+                  </div>
+                  <div
+                    className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider"
+                    style={{ background: 'rgba(255,208,128,0.20)', color: '#9e6c1f', fontFamily: 'var(--mono)' }}
+                  >
+                    → booked
+                  </div>
+                </div>
+              </div>
             </div>
 
             <ul className="space-y-1.5 mb-4 text-[18px] text-[rgba(0,0,0,0.75)]">
