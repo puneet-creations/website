@@ -1,0 +1,269 @@
+/* ============================================================
+   motion-base.css — shared 4-step animation timing for all
+   agent motion stories. 16-second loop, 4 scenes × ~3.6s each
+   with 0.4s crossfade between scenes.
+   ============================================================ */
+
+/* Stage container — silver glassmorphism for SVG animations */
+.motion-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  background: linear-gradient(160deg,
+    rgba(255,255,255,0.10) 0%,
+    rgba(255,255,255,0.04) 40%,
+    rgba(255,255,255,0.06) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  overflow: hidden;
+  container-type: inline-size;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.12) inset,
+    0 -1px 0 rgba(0,0,0,0.08) inset,
+    0 8px 32px rgba(0,0,0,0.20);
+}
+/* Mirror glass reflection — subtle white sheen */
+.motion-stage::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.08) 0%,
+    rgba(255,255,255,0.03) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 20px 20px 0 0;
+}
+/* Top-edge specular highlight — silver glass reflection line */
+.motion-stage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.15) 15%,
+    rgba(255,255,255,0.35) 45%,
+    rgba(255,255,255,0.40) 50%,
+    rgba(255,255,255,0.35) 55%,
+    rgba(255,255,255,0.15) 85%,
+    transparent 100%
+  );
+  z-index: 4;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Scene wrappers — percentage insets scale with any container size */
+.motion-scene {
+  position: absolute;
+  top: 10%;
+  left: 2%;
+  right: 2%;
+  bottom: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+/* SVG scales to fill the scene — viewBox handles proportions */
+.motion-scene svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Each scene is visible during its 4-second window of the 16-second loop */
+.scene-1 { animation: showScene1 16s ease-in-out infinite; }
+.scene-2 { animation: showScene2 16s ease-in-out infinite; }
+.scene-3 { animation: showScene3 16s ease-in-out infinite; }
+.scene-4 { animation: showScene4 16s ease-in-out infinite; }
+
+@keyframes showScene1 {
+  0%, 22%   { opacity: 1; }
+  25%, 100% { opacity: 0; }
+}
+@keyframes showScene2 {
+  0%, 22%   { opacity: 0; }
+  25%, 47%  { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes showScene3 {
+  0%, 47%   { opacity: 0; }
+  50%, 72%  { opacity: 1; }
+  75%, 100% { opacity: 0; }
+}
+@keyframes showScene4 {
+  0%, 72%   { opacity: 0; }
+  75%, 97%  { opacity: 1; }
+  100%      { opacity: 0; }
+}
+
+/* === Step indicator (top bar) === */
+.step-indicator {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 10px 16px 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 5;
+  background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, transparent 100%);
+  overflow: hidden;
+}
+.step-dots { display: flex; gap: 5px; flex-shrink: 0; }
+.step-dot {
+  width: 28px;
+  height: 4px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.step-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #5b76fe;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.step-dot-1::after { animation: fillDot 16s linear infinite; }
+.step-dot-2::after { animation: fillDot 16s linear infinite; animation-delay: 4s; }
+.step-dot-3::after { animation: fillDot 16s linear infinite; animation-delay: 8s; }
+.step-dot-4::after { animation: fillDot 16s linear infinite; animation-delay: 12s; }
+@keyframes fillDot {
+  0%   { transform: scaleX(0); }
+  25%  { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+
+.step-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(9px, 1.5vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.step-label-current {
+  color: #ffffff;
+  font-weight: 700;
+}
+.step-label-1 { animation: showLabel1 16s ease-in-out infinite; }
+.step-label-2 { animation: showLabel2 16s ease-in-out infinite; }
+.step-label-3 { animation: showLabel3 16s ease-in-out infinite; }
+.step-label-4 { animation: showLabel4 16s ease-in-out infinite; }
+.motion-stage .step-label { display: none; position: absolute; }
+.motion-stage .step-indicator .step-label { display: inline-block; position: static; }
+@keyframes showLabel1 {
+  0%, 22%   { opacity: 1; transform: translateY(0); }
+  25%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+@keyframes showLabel2 {
+  0%, 22%   { opacity: 0; transform: translateY(4px); }
+  25%, 47%  { opacity: 1; transform: translateY(0); }
+  50%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+@keyframes showLabel3 {
+  0%, 47%   { opacity: 0; transform: translateY(4px); }
+  50%, 72%  { opacity: 1; transform: translateY(0); }
+  75%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+@keyframes showLabel4 {
+  0%, 72%   { opacity: 0; transform: translateY(4px); }
+  75%, 97%  { opacity: 1; transform: translateY(0); }
+  100%      { opacity: 0; transform: translateY(-4px); }
+}
+.step-label-stack { position: relative; flex: 1; min-height: 12px; min-width: 0; overflow: hidden; }
+.step-label-stack > .step-label { position: absolute; inset: 0; }
+
+/* Hide step labels when container is narrow (e.g. QuadGrid 2×2) */
+@container (max-width: 320px) {
+  .step-label-stack { display: none; }
+}
+/* container-type is set on .motion-stage above */
+
+/* === Generic AI ✗ callout (bottom bar) === */
+.generic-fail {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: 2%;
+  padding: 6px 12px;
+  background: rgba(192,57,43,0.12);
+  border-left: 3px solid #ff9090;
+  border-radius: 10px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: clamp(10px, 1.3vw, 12px);
+  line-height: 1.4;
+  color: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.generic-fail-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: #ff9090;
+  background: rgba(255,255,255,0.06);
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+.generic-fail-text { flex: 1; color: #ff9090; }
+.generic-fail-stack { position: absolute; left: 3%; right: 3%; bottom: 2%; }
+.generic-fail-stack > .generic-fail { position: absolute; inset: 0; }
+
+.gf-1 { animation: showFail1 16s ease-in-out infinite; }
+.gf-2 { animation: showFail2 16s ease-in-out infinite; }
+.gf-3 { animation: showFail3 16s ease-in-out infinite; }
+.gf-4 { animation: showFail4 16s ease-in-out infinite; }
+@keyframes showFail1 {
+  0%, 22%   { opacity: 1; }
+  25%, 100% { opacity: 0; }
+}
+@keyframes showFail2 {
+  0%, 22%   { opacity: 0; }
+  25%, 47%  { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes showFail3 {
+  0%, 47%   { opacity: 0; }
+  50%, 72%  { opacity: 1; }
+  75%, 100% { opacity: 0; }
+}
+@keyframes showFail4 {
+  0%, 72%   { opacity: 0; }
+  75%, 97%  { opacity: 1; }
+  100%      { opacity: 0; }
+}
+
+/* Pulse helper for highlight elements */
+@keyframes msPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.06); opacity: 0.88; }
+}
+.ms-pulse { animation: msPulse 1.4s ease-in-out infinite; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-scene, .step-dot::after, .step-label,
+  .generic-fail, .ms-pulse { animation: none !important; opacity: 1 !important; }
+}
