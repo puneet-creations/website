@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ChevronRight, Flag } from 'lucide-react';
+import { ChevronRight, ChevronDown, Flag } from 'lucide-react';
 import { useInView } from '../hooks/useInView';
 
 // Success-green tokens used by DeterminismProof (RunCard badge + connector line).
@@ -90,17 +90,14 @@ export function AgentFamilies() {
                 border: '1px solid rgba(24,117,116,0.10)',
               }}
             >
-              <div
-                className="grid items-center gap-3"
-                style={{ gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.2fr)' }}
-              >
+              <div className="flex flex-col gap-2">
                 {/* INPUT */}
                 <div className="min-w-0">
                   <div className="text-[14px] font-bold text-black leading-tight">INV · PO · GRN</div>
                   <div className="text-[12.5px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">mixed PDFs</div>
                 </div>
 
-                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+                <ChevronDown size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0 self-center" />
 
                 {/* PROCESS */}
                 <div
@@ -111,7 +108,7 @@ export function AgentFamilies() {
                   <div className="text-[12px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">on-prem · auto-routed</div>
                 </div>
 
-                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+                <ChevronDown size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0 self-center" />
 
                 {/* OUTPUT */}
                 <div
@@ -163,17 +160,14 @@ export function AgentFamilies() {
                 border: '1px solid rgba(245,168,212,0.12)',
               }}
             >
-              <div
-                className="grid items-center gap-3"
-                style={{ gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.2fr)' }}
-              >
+              <div className="flex flex-col gap-2">
                 {/* INPUT */}
                 <div className="min-w-0">
                   <div className="text-[14px] font-bold text-black leading-tight">Dental · live audio</div>
                   <div className="text-[12.5px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">on-prem ASR</div>
                 </div>
 
-                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+                <ChevronDown size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0 self-center" />
 
                 {/* PROCESS */}
                 <div
@@ -184,7 +178,7 @@ export function AgentFamilies() {
                   <div className="text-[12px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">SOAP + ICD mapping</div>
                 </div>
 
-                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+                <ChevronDown size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0 self-center" />
 
                 {/* OUTPUT */}
                 <div
@@ -236,10 +230,7 @@ export function AgentFamilies() {
                 border: '1px solid rgba(255,208,128,0.18)',
               }}
             >
-              <div
-                className="grid items-center gap-3"
-                style={{ gridTemplateColumns: 'minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.2fr)' }}
-              >
+              <div className="flex flex-col gap-2">
                 {/* INPUT — 3 stacked mini-chips */}
                 <div className="min-w-0 flex flex-col gap-1">
                   <div className="text-[12.5px] text-black leading-tight">
@@ -256,7 +247,7 @@ export function AgentFamilies() {
                   </div>
                 </div>
 
-                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+                <ChevronDown size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0 self-center" />
 
                 {/* PROCESS */}
                 <div
@@ -267,7 +258,7 @@ export function AgentFamilies() {
                   <div className="text-[12px] text-[rgba(0,0,0,0.55)] mt-0.5 leading-snug">cited · reversible</div>
                 </div>
 
-                <ChevronRight size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0" />
+                <ChevronDown size={20} aria-hidden className="text-[rgba(0,0,0,0.30)] flex-shrink-0 self-center" />
 
                 {/* OUTPUT */}
                 <div
