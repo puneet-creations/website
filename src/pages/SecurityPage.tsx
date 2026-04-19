@@ -1,6 +1,7 @@
 import { useInView } from '../hooks/useInView';
 import ParallaxHero from '../components/ParallaxHero';
 import PageCinematicWrap from '../components/PageCinematicWrap';
+import { COMPLIANCE } from '../data/compliance';
 
 /**
  * SecurityPage — concentric security rings diagram.
@@ -14,8 +15,6 @@ const RINGS = [
   { n: '04', name: 'Model',      body: 'Your fine-tuned weights. Never uploaded. Versioned + reproducible.',                     radius: 125, color: 'rgba(138,245,192,0.08)',  ink: '#8af5c0' },
   { n: '05', name: 'Data',       body: 'Your raw documents never leave. Only your business outputs are surfaced — cited.',       radius: 80,  color: 'rgba(160,220,140,0.08)', ink: '#a0dc8c' },
 ];
-
-const COMPLIANCE = ['GDPR', 'HIPAA', 'SOC 2 Type II', 'ISO 27001', 'PCI DSS', 'Air-gapped'];
 
 export default function SecurityPage() {
   const [ref, inView] = useInView<HTMLElement>();

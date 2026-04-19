@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { COMPLIANCE } from '../data/compliance';
 
 const HeroOrb = lazy(() => import('./HeroOrb'));
 
@@ -304,6 +305,51 @@ export default function CinematicFooter() {
                 hello@attentions.ai · Response within 4 business hours
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Compliance strip — certifications + link to /security#compliance */}
+        <div
+          className="relative z-10 border-t px-6 py-10"
+          style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+        >
+          <div className="max-w-[1200px] mx-auto text-center">
+            <div
+              className="mb-5"
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#8af5c0',
+              }}
+            >
+              Certified &amp; audited
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              {COMPLIANCE.map((c) => (
+                <span
+                  key={c}
+                  className="px-5 py-2.5 rounded-full text-[13px] font-semibold"
+                  style={{
+                    background: 'rgba(138,245,192,0.08)',
+                    border: '1px solid rgba(138,245,192,0.20)',
+                    color: '#8af5c0',
+                    fontFamily: "'Noto Sans', sans-serif",
+                  }}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+            <Link
+              to="/security#compliance"
+              className="inline-flex items-center gap-1.5 mt-6 text-[13px] transition-colors hover:text-white"
+              style={{ color: 'rgba(255,255,255,0.55)' }}
+            >
+              See security architecture →
+            </Link>
           </div>
         </div>
 
