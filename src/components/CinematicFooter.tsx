@@ -228,9 +228,23 @@ export default function CinematicFooter() {
 
             {/* Headline + CTA */}
             <div className="text-center md:text-left">
+              {/* Eyebrow */}
+              <div
+                className="mb-4"
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: '#8af5c0',
+                }}
+              >
+                Founder first
+              </div>
               <h2
                 ref={headingRef}
-                className="mb-10"
+                className="mb-6"
                 style={{
                   fontFamily: "'Fraunces', serif",
                   fontSize: 'clamp(36px, 5.5vw, 72px)',
@@ -244,52 +258,25 @@ export default function CinematicFooter() {
                 <span style={{ fontStyle: 'italic' }}>artiGen Platform.</span>
               </h2>
 
-              {/* 3 value callouts with white orb badges */}
-              <div className="flex flex-col gap-5 mb-10 items-center md:items-start">
+              {/* 3-pill row — replaces the 3 orb-badge callouts */}
+              <div className="flex flex-wrap gap-2 mb-8 justify-center md:justify-start">
                 {[
-                  { title: 'Secure by architecture', sub: 'On-prem. Air-gapped if you need it.' },
-                  { title: 'Fixed low cost', sub: 'No per-token surprise. Predictable.' },
-                  { title: 'ROI in weeks', sub: 'Live agents in 4 weeks, not quarters.' },
-                ].map((c) => (
-                  <div key={c.title} className="flex items-center gap-4 text-left">
-                    {/* White glass orb */}
-                    <div
-                      className="flex-shrink-0 rounded-full"
-                      style={{
-                        width: 48,
-                        height: 48,
-                        background:
-                          'radial-gradient(circle at 35% 30%, #ffffff 0%, #e8e8e8 40%, #b8b8b8 100%)',
-                        boxShadow:
-                          'inset -4px -6px 10px rgba(0,0,0,0.15), inset 2px 3px 6px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.10)',
-                      }}
-                    />
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: "'Fraunces', serif",
-                          fontSize: 20,
-                          fontWeight: 500,
-                          letterSpacing: '-0.01em',
-                          color: '#ffffff',
-                          lineHeight: 1.1,
-                        }}
-                      >
-                        {c.title}
-                      </div>
-                      <div
-                        className="mt-1"
-                        style={{
-                          fontFamily: "'Noto Sans', sans-serif",
-                          fontSize: 14,
-                          color: 'rgba(255,255,255,0.55)',
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {c.sub}
-                      </div>
-                    </div>
-                  </div>
+                  'Secure by architecture',
+                  'Fixed low cost',
+                  'ROI in weeks',
+                ].map((pill) => (
+                  <span
+                    key={pill}
+                    className="px-4 py-2 rounded-full text-[13px] font-medium"
+                    style={{
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      color: 'rgba(255,255,255,0.85)',
+                      fontFamily: "'Noto Sans', sans-serif",
+                    }}
+                  >
+                    {pill}
+                  </span>
                 ))}
               </div>
 
