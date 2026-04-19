@@ -76,7 +76,7 @@ export const AGENTS: readonly Agent[] = [
   { id: 'voice',   name: 'Voice Wave',           domainLabel: 'Dental',        flow: 'call audio → structured transcript',    iconKey: 'Mic',       usesPlatformLayers: [1, 2, 3, 4] },
   { id: 'patient', name: 'Patient Call',         domainLabel: 'Healthcare',    flow: 'call → SOAP notes',                     iconKey: 'Phone',     usesPlatformLayers: [1, 2, 3, 5, 6] },
   { id: 'voucher', name: 'Voucher Stack',        domainLabel: 'Auto warranty', flow: 'handwritten → SAP vouchers',            iconKey: 'Receipt',   usesPlatformLayers: [1, 2, 3, 4, 5] },
-  { id: 'build',   name: '+ Build your own',     domainLabel: 'Any workflow',  flow: '4 weeks to live',                       iconKey: 'Plus',      usesPlatformLayers: [1, 2, 3, 4, 5, 6] },
+  { id: 'build',   name: '+ Build your own',     domainLabel: 'Any workflow',  flow: '4-8 weeks to live',                     iconKey: 'Plus',      usesPlatformLayers: [1, 2, 3, 4, 5, 6] },
 ] as const;
 
 export const PLATFORM_LAYERS: readonly { n: number; title: string; sub: string; tint: string }[] = [

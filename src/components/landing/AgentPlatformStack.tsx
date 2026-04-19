@@ -192,11 +192,35 @@ function IllustrationPanel({
 }: IllustrationPanelProps) {
   if (activeBeat.id === 'synthesis') {
     return (
-      <div className="h-full flex items-center px-8 py-12 relative z-10">
-        <div className="grid grid-cols-3 gap-4 w-full">
+      <div className="h-full flex flex-col justify-center px-8 py-12 relative z-10 gap-5">
+        <div className="grid grid-cols-3 gap-4">
           {ENGAGEMENT_OPTIONS.map((opt, i) => (
             <EngagementCard key={opt.id} option={opt} delayIndex={i} />
           ))}
+        </div>
+        {/* Platform-layer reminder strip — keeps "platform underneath everything" visible in synthesis */}
+        <div className="flex gap-2">
+          {PLATFORM_LAYERS.map((layer) => (
+            <div
+              key={layer.n}
+              className="flex-1 rounded-[8px] px-2 py-1.5 flex items-center gap-2 min-w-0"
+              style={{ background: layer.tint, border: '1px solid rgba(255,255,255,0.08)' }}
+            >
+              <span
+                className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[9px] font-bold flex-shrink-0"
+                style={{ background: 'rgba(255,255,255,0.08)', fontFamily: 'var(--mono)' }}
+              >
+                {String(layer.n).padStart(2, '0')}
+              </span>
+              <span className="text-white text-[10px] font-bold truncate leading-tight">{layer.title}</span>
+            </div>
+          ))}
+        </div>
+        <div
+          className="text-[rgba(255,255,255,0.40)] text-[11px] text-center tracking-wider uppercase"
+          style={{ fontFamily: 'var(--mono)', letterSpacing: '0.08em' }}
+        >
+          All agents share the same 6-layer sovereign platform · on your hardware
         </div>
       </div>
     );
@@ -289,20 +313,37 @@ function AgentCard({ agent, isActive }: { agent: typeof AGENTS[number]; isActive
     >
       <div className="flex items-center justify-between">
         <Icon size={18} style={{ color: isActive || isBuildPlaceholder ? '#8af5c0' : 'rgba(255,255,255,0.55)' }} />
-        {isActive && !isBuildPlaceholder && (
+        {isActive && !isBuildPlaceholder ? (
           <MotionPreview agentId={agent.id} />
-        )}
-        {isBuildPlaceholder && (
+        ) : isBuildPlaceholder ? (
           <Sparkles size={12} style={{ color: 'rgba(138,245,192,0.7)' }} />
+        ) : (
+          <span
+            className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+            style={{
+              color: '#8af5c0',
+              background: 'rgba(138,245,192,0.12)',
+              fontFamily: 'var(--mono)',
+              letterSpacing: '0.1em',
+            }}
+          >
+            LIVE
+          </span>
         )}
       </div>
       <div
-        className="text-white text-[12px] font-bold leading-tight"
+        className="text-[rgba(138,245,192,0.70)] text-[10px] font-bold uppercase leading-tight"
+        style={{ fontFamily: 'var(--mono)', letterSpacing: '0.08em' }}
+      >
+        {agent.domainLabel}
+      </div>
+      <div
+        className="text-white text-[13px] font-bold leading-tight"
         style={{ letterSpacing: '-0.01em' }}
       >
         {agent.name}
       </div>
-      <div className="text-[11px] text-[rgba(255,255,255,0.50)] leading-tight">
+      <div className="text-[12px] text-[rgba(255,255,255,0.55)] leading-snug">
         {agent.flow}
       </div>
     </motion.div>
@@ -476,8 +517,8 @@ function getBeatCopy(id: BeatId): { eyebrow: string; headline: string; subline: 
     case 'build':
       return {
         eyebrow: 'AGENT · + BUILD YOUR OWN',
-        headline: 'Your workflow. <em>Four weeks.</em> Production-live.',
-        subline: 'Same platform. Same grounding. Same audit trail. We scope with you, build the agent, and ship it into your environment in 4 weeks — fixed.',
+        headline: 'Your workflow. <em>4–8 weeks.</em> Production-live.',
+        subline: 'Same platform. Same grounding. Same audit trail. We scope with you, build the agent, and ship it into your environment in 4–8 weeks — fixed.',
       };
     default: {
       const industry = INDUSTRIES.find((i) => i.id === id);
