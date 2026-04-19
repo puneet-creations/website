@@ -73,7 +73,7 @@ export function AgentFamilies() {
         <div className="grid md:grid-cols-3 gap-6">
           {/* DOCUMENT AGENT */}
           <div
-            className={`rounded-[24px] p-10 sr ${inView ? 'is-in' : ''}`}
+            className={`rounded-[24px] p-8 sr ${inView ? 'is-in' : ''}`}
             style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -142,7 +142,7 @@ export function AgentFamilies() {
           </div>
 
           {/* VOICE AGENT */}
-          <div className={`rounded-[24px] p-10 sr d-1 ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
+          <div className={`rounded-[24px] p-8 sr d-1 ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-11 h-11 rounded-full flex items-center justify-center text-[20px]" style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.06)' }}>🎙</div>
               <div className="micro-upper text-[#000000]">Voice agents</div>
@@ -219,7 +219,7 @@ export function AgentFamilies() {
           </div>
 
           {/* MULTIMODAL AGENT */}
-          <div className={`rounded-[24px] p-10 sr d-2 ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
+          <div className={`rounded-[24px] p-8 sr d-2 ${inView ? 'is-in' : ''}`} style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-11 h-11 rounded-full flex items-center justify-center text-[20px]" style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.06)' }}>🧩</div>
               <div className="micro-upper text-[#000000]">Multimodal agents</div>
@@ -243,7 +243,7 @@ export function AgentFamilies() {
                   <text x="14" y="98" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">chart history</text>
                 </g>
                 {/* Converge arrows */}
-                <g stroke="rgba(0,0,0,0.15)" strokeWidth="1.2" fill="none" className="ps-dash">
+                <g stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" fill="none" className="ps-dash">
                   <path d="M70,22 Q110,22 132,56" />
                   <path d="M70,56 L132,56" />
                   <path d="M70,90 Q110,90 132,56" />
