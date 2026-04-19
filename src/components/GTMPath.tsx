@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
-import { whiteCardStyle, AccentStrip } from './common/whiteCard';
 
-const SLATE = '#475569';
+const TEAL = '#8af5c0';
 
 const STEPS = [
   {
@@ -29,9 +28,8 @@ const STEPS = [
 ];
 
 /**
- * GTMPath — the 3-step customer journey.
- * Assessment → Pilot → Platform.
- * WhiteCard grid (no station circles). Effort-based chips (not dollar).
+ * GTMPath — 3-step customer journey (Assessment → Pilot → Platform).
+ * Dark-cinematic palette matches ContextKing + AgentPlatformStack.
  */
 export default function GTMPath() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
@@ -40,16 +38,38 @@ export default function GTMPath() {
     <section
       ref={ref}
       className="relative overflow-hidden"
-      style={{ background: 'var(--bg-s4)', padding: 'clamp(96px, 12vw, 160px) 24px' }}
+      style={{ background: '#0a0e18', padding: 'clamp(96px, 12vw, 160px) 24px' }}
     >
-      <div className="max-w-[1280px] mx-auto">
+      {/* Subtle backdrop matching ContextKing */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-[1280px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-14 text-center max-w-[760px] mx-auto"
         >
-          <div className="micro-upper mb-4" style={{ color: 'rgba(0,0,0,0.55)' }}>
+          <div
+            className="mb-4"
+            style={{
+              fontFamily: 'var(--mono)',
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: TEAL,
+            }}
+          >
             The engagement path
           </div>
           <h2
@@ -59,7 +79,7 @@ export default function GTMPath() {
               fontWeight: 500,
               lineHeight: 1.05,
               letterSpacing: '-0.025em',
-              color: '#000000',
+              color: 'rgba(255,255,255,0.95)',
             }}
           >
             Three steps from curious{' '}
@@ -67,16 +87,17 @@ export default function GTMPath() {
           </h2>
           <p
             className="mt-4 text-[18px]"
-            style={{ color: 'rgba(0,0,0,0.65)', fontFamily: 'var(--serif)', fontStyle: 'italic' }}
+            style={{ color: 'rgba(255,255,255,0.55)', fontFamily: 'var(--serif)', fontStyle: 'italic' }}
           >
             No surprises. No rewrites.
           </p>
         </motion.div>
 
         <div className="relative grid md:grid-cols-3 gap-6">
+          {/* Teal dashed connector on desktop */}
           <div
             className="hidden md:block absolute left-[16%] right-[16%] top-[96px] h-[1px] pointer-events-none"
-            style={{ borderTop: `1px dashed ${SLATE}40` }}
+            style={{ borderTop: `1px dashed ${TEAL}30` }}
           />
 
           {STEPS.map((s, idx) => (
@@ -85,25 +106,38 @@ export default function GTMPath() {
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 + idx * 0.12 }}
-              className="relative"
-              style={{ ...whiteCardStyle({ shadow: 'md' }) }}
+              className="relative rounded-[20px] overflow-hidden"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderTop: `3px solid ${TEAL}`,
+              }}
             >
-              <AccentStrip color={SLATE} />
               <div className="p-8 md:p-10 flex flex-col gap-4">
                 <div className="flex items-baseline gap-3">
                   <span
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{
-                      fontFamily: 'var(--serif)',
-                      fontStyle: 'italic',
-                      fontSize: 28,
-                      fontWeight: 600,
-                      color: SLATE,
-                      lineHeight: 1,
+                      background: 'rgba(138,245,192,0.12)',
+                      color: TEAL,
+                      fontFamily: 'var(--mono)',
+                      fontSize: 14,
+                      fontWeight: 700,
                     }}
                   >
                     {s.num}
                   </span>
-                  <span className="micro-upper" style={{ color: 'rgba(0,0,0,0.50)' }}>
+                  <span
+                    className="ml-2"
+                    style={{
+                      fontFamily: 'var(--mono)',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(255,255,255,0.50)',
+                    }}
+                  >
                     {s.week}
                   </span>
                 </div>
@@ -115,18 +149,27 @@ export default function GTMPath() {
                     fontWeight: 500,
                     lineHeight: 1.1,
                     letterSpacing: '-0.02em',
-                    color: '#000000',
+                    color: 'rgba(255,255,255,0.95)',
                   }}
                 >
                   {s.name}
                 </h3>
                 <p
                   className="text-[15px] leading-relaxed"
-                  style={{ color: 'rgba(0,0,0,0.70)' }}
+                  style={{ color: 'rgba(255,255,255,0.65)' }}
                 >
                   {s.body}
                 </p>
-                <span className="capsule-light rounded-full self-start mt-2">
+                <span
+                  className="rounded-full self-start mt-2 px-3 py-1 text-[12px] font-semibold"
+                  style={{
+                    background: 'rgba(138,245,192,0.08)',
+                    color: TEAL,
+                    border: `1px solid ${TEAL}25`,
+                    fontFamily: 'var(--mono)',
+                    letterSpacing: '0.04em',
+                  }}
+                >
                   {s.effort}
                 </span>
               </div>
