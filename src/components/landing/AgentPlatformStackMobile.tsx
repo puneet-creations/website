@@ -70,7 +70,7 @@ function IndustriesStrip() {
             className="relative snap-start flex-shrink-0 rounded-[14px] overflow-hidden"
             style={{ width: 260, height: 180 }}
           >
-            <img src={ind.photoUrl} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(30%) contrast(1.05) brightness(0.85)' }} />
+            <img src={ind.photoUrl} alt="" role="presentation" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(30%) contrast(1.05) brightness(0.85)' }} />
             <div
               className="absolute inset-x-0 bottom-0 p-3"
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85), transparent)' }}

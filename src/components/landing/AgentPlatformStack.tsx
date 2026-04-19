@@ -266,6 +266,7 @@ function IndustryTile({ industry, isActive }: { industry: typeof INDUSTRIES[numb
       <img
         src={industry.photoUrl}
         alt=""
+        role="presentation"
         loading="lazy"
         decoding="async"
         className="w-full h-full object-cover"
@@ -356,27 +357,31 @@ function AgentCard({ agent, isActive }: { agent: typeof AGENTS[number]; isActive
 
 function MotionPreview({ agentId }: { agentId: string }) {
   const color = '#8af5c0';
+  // Respect prefers-reduced-motion — SMIL <animate>/<animateTransform> children
+  // ignore the media query on their own, so we gate them here at render-time.
+  // Shapes stay visible; only the motion is stripped.
+  const reduced = useReducedMotion() ?? false;
   switch (agentId) {
     case 'invoice':
       return (
         <svg width={40} height={20} aria-hidden>
           <rect x="2" y="4" width="36" height="12" rx="2" fill="rgba(138,245,192,0.08)" stroke={color} strokeWidth="0.8" />
           <rect x="4" y="4" width="36" height="2" fill={color} opacity="0.4">
-            <animate attributeName="y" from="4" to="14" dur="1.6s" repeatCount="indefinite" />
+            {!reduced && <animate attributeName="y" from="4" to="14" dur="1.6s" repeatCount="indefinite" />}
           </rect>
         </svg>
       );
     case 'pcr':
       return (
         <svg width={40} height={20} aria-hidden>
-          <circle cx="8" cy="10" r="2.5" fill={color}>
-            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" />
+          <circle cx="8" cy="10" r="2.5" fill={color} opacity="0.7">
+            {!reduced && <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" />}
           </circle>
           <line x1="8" y1="10" x2="20" y2="10" stroke={color} strokeWidth="0.8" opacity="0.5" />
           <circle cx="20" cy="10" r="2" fill={color} opacity="0.7" />
           <line x1="20" y1="10" x2="32" y2="10" stroke={color} strokeWidth="0.8" opacity="0.5" />
-          <circle cx="32" cy="10" r="2.5" fill={color}>
-            <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.4s" repeatCount="indefinite" />
+          <circle cx="32" cy="10" r="2.5" fill={color} opacity="0.7">
+            {!reduced && <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.4s" repeatCount="indefinite" />}
           </circle>
         </svg>
       );
@@ -385,8 +390,12 @@ function MotionPreview({ agentId }: { agentId: string }) {
         <svg width={40} height={20} aria-hidden>
           {[4, 10, 16, 22, 28, 34].map((x, i) => (
             <rect key={i} x={x} y="6" width="2" height="8" fill={color} opacity="0.7">
-              <animate attributeName="height" values={`4;${8 + (i % 3) * 3};4`} dur={`${1 + (i % 3) * 0.2}s`} repeatCount="indefinite" />
-              <animate attributeName="y" values={`8;${6 - (i % 3)};8`} dur={`${1 + (i % 3) * 0.2}s`} repeatCount="indefinite" />
+              {!reduced && (
+                <>
+                  <animate attributeName="height" values={`4;${8 + (i % 3) * 3};4`} dur={`${1 + (i % 3) * 0.2}s`} repeatCount="indefinite" />
+                  <animate attributeName="y" values={`8;${6 - (i % 3)};8`} dur={`${1 + (i % 3) * 0.2}s`} repeatCount="indefinite" />
+                </>
+              )}
             </rect>
           ))}
         </svg>
@@ -397,7 +406,7 @@ function MotionPreview({ agentId }: { agentId: string }) {
           <line x1="2" y1="10" x2="38" y2="10" stroke={color} strokeWidth="0.8" opacity="0.5" />
           {[8, 16, 24, 32].map((x, i) => (
             <circle key={i} cx={x} cy="10" r="1.5" fill={color}>
-              <animate attributeName="r" values="1.5;3;1.5" dur="1.2s" begin={`${i * 0.3}s`} repeatCount="indefinite" />
+              {!reduced && <animate attributeName="r" values="1.5;3;1.5" dur="1.2s" begin={`${i * 0.3}s`} repeatCount="indefinite" />}
             </circle>
           ))}
         </svg>
@@ -407,7 +416,7 @@ function MotionPreview({ agentId }: { agentId: string }) {
         <svg width={40} height={20} aria-hidden>
           {[0, 1, 2].map((i) => (
             <rect key={i} x={8 + i * 8} y={3 + i * 1.5} width="18" height="10" rx="1" fill="rgba(138,245,192,0.08)" stroke={color} strokeWidth="0.6">
-              <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="1.8s" begin={`${i * 0.2}s`} repeatCount="indefinite" />
+              {!reduced && <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="1.8s" begin={`${i * 0.2}s`} repeatCount="indefinite" />}
             </rect>
           ))}
         </svg>

@@ -1,3 +1,4 @@
+import { useReducedMotion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
 import ParallaxHero from '../components/ParallaxHero';
 import PageCinematicWrap from '../components/PageCinematicWrap';
@@ -18,6 +19,7 @@ const RINGS = [
 
 export default function SecurityPage() {
   const [ref, inView] = useInView<HTMLElement>();
+  const reduced = useReducedMotion() ?? false;
 
   return (
     <main className="pb-20" ref={ref}>
@@ -62,9 +64,15 @@ export default function SecurityPage() {
                 className={`transition-all`}
                 style={{
                   transformOrigin: 'center',
-                  transform: inView ? 'scale(1)' : 'scale(0.3)',
+                  // prefers-reduced-motion: reduce → rings render at final
+                  // scale immediately, no enlarging animation. Opacity still
+                  // fades in via inView to keep the staggered reveal, but
+                  // without the scale-in — matches WCAG 2.3.3 guidance.
+                  transform: reduced || inView ? 'scale(1)' : 'scale(0.3)',
                   opacity: inView ? 1 : 0,
-                  transition: `transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.12}s, opacity 0.8s ease ${i * 0.12}s`,
+                  transition: reduced
+                    ? `opacity 0.4s ease ${i * 0.06}s`
+                    : `transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.12}s, opacity 0.8s ease ${i * 0.12}s`,
                 }}
               />
             ))}

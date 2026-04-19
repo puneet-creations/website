@@ -328,8 +328,8 @@ export function ContextMatters() {
               <svg viewBox="0 0 360 180" className="w-full">
                 {/* Question */}
                 <rect x="10" y="14" width="140" height="32" rx="8" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.15)" strokeWidth="1" />
-                <text x="18" y="28" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">"Post invoice IN-8892"</text>
-                <text x="18" y="38" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">from finance team</text>
+                <text x="18" y="28" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">"Post invoice IN-8892"</text>
+                <text x="18" y="38" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.45)">from finance team</text>
 
                 {/* Arrow */}
                 <line x1="150" y1="30" x2="180" y2="30" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" markerEnd="url(#ps-arr-red)" />
@@ -341,30 +341,30 @@ export function ContextMatters() {
 
                 {/* LLM bubble */}
                 <circle cx="210" cy="30" r="22" fill="rgba(0,0,0,0.08)" />
-                <text x="210" y="28" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">LLM</text>
-                <text x="210" y="38" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.40)">generic</text>
+                <text x="210" y="28" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">LLM</text>
+                <text x="210" y="38" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.40)">generic</text>
 
                 {/* Missing sources crossed out */}
                 <g opacity="0.5">
                   <rect x="244" y="8" width="104" height="14" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" strokeDasharray="2 2" />
-                  <text x="252" y="18" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">✗ vendor master</text>
+                  <text x="252" y="18" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.45)">✗ vendor master</text>
                   <rect x="244" y="26" width="104" height="14" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" strokeDasharray="2 2" />
-                  <text x="252" y="36" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">✗ GL chart</text>
+                  <text x="252" y="36" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.45)">✗ GL chart</text>
                   <rect x="244" y="44" width="104" height="14" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" strokeDasharray="2 2" />
-                  <text x="252" y="54" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">✗ tolerance rules</text>
+                  <text x="252" y="54" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.45)">✗ tolerance rules</text>
                 </g>
 
                 {/* Output (wrong) */}
                 <line x1="210" y1="52" x2="210" y2="84" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" markerEnd="url(#ps-arr-red)" />
                 <rect x="60" y="90" width="260" height="78" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" />
-                <text x="68" y="104" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">HALLUCINATED OUTPUT</text>
-                <text x="68" y="118" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">vendor: "Global Logistics Inc."</text>
-                <text x="240" y="118" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">wrong</text>
-                <text x="68" y="132" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">gl: "Accounts Payable 2000"</text>
-                <text x="240" y="132" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">guessed</text>
-                <text x="68" y="146" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">approver: "system admin"</text>
-                <text x="240" y="146" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">invented</text>
-                <text x="68" y="160" fontFamily="Plus Jakarta Sans" fontSize="10" fontStyle="italic" fill="rgba(0,0,0,0.45)">no citation · no audit · silent fail</text>
+                <text x="68" y="104" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">HALLUCINATED OUTPUT</text>
+                <text x="68" y="118" fontFamily="Plus Jakarta Sans" fontSize="12" fill="#000000">vendor: "Global Logistics Inc."</text>
+                <text x="240" y="118" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">wrong</text>
+                <text x="68" y="132" fontFamily="Plus Jakarta Sans" fontSize="12" fill="#000000">gl: "Accounts Payable 2000"</text>
+                <text x="240" y="132" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">guessed</text>
+                <text x="68" y="146" fontFamily="Plus Jakarta Sans" fontSize="12" fill="#000000">approver: "system admin"</text>
+                <text x="240" y="146" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">invented</text>
+                <text x="68" y="160" fontFamily="Plus Jakarta Sans" fontSize="12" fontStyle="italic" fill="rgba(0,0,0,0.45)">no citation · no audit · silent fail</text>
               </svg>
             </div>
 
@@ -384,8 +384,8 @@ export function ContextMatters() {
               <svg viewBox="0 0 360 180" className="w-full">
                 {/* Question */}
                 <rect x="10" y="14" width="140" height="32" rx="8" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.15)" strokeWidth="1" />
-                <text x="18" y="28" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">"Post invoice IN-8892"</text>
-                <text x="18" y="38" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.45)">from finance team</text>
+                <text x="18" y="28" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">"Post invoice IN-8892"</text>
+                <text x="18" y="38" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.45)">from finance team</text>
 
                 <line x1="150" y1="30" x2="180" y2="30" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" markerEnd="url(#ps-arr-blue)" />
                 <defs>
@@ -396,16 +396,16 @@ export function ContextMatters() {
 
                 {/* Agent core */}
                 <circle cx="210" cy="30" r="22" fill="rgba(0,0,0,0.08)" />
-                <text x="210" y="28" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">agent</text>
-                <text x="210" y="38" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="10" fill="rgba(0,0,0,0.40)">+ context</text>
+                <text x="210" y="28" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">agent</text>
+                <text x="210" y="38" textAnchor="middle" fontFamily="Plus Jakarta Sans" fontSize="12" fill="rgba(0,0,0,0.40)">+ context</text>
 
                 {/* Sources plugged in */}
                 <rect x="244" y="4" width="108" height="14" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="0.8" />
-                <text x="250" y="14" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">✓ vendor master · V-472</text>
+                <text x="250" y="14" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">✓ vendor master · V-472</text>
                 <rect x="244" y="22" width="108" height="14" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="0.8" />
-                <text x="250" y="32" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">✓ GL chart · 6100-2340</text>
+                <text x="250" y="32" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">✓ GL chart · 6100-2340</text>
                 <rect x="244" y="40" width="108" height="14" rx="4" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.10)" strokeWidth="0.8" />
-                <text x="250" y="50" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">✓ tol · ±2% · named appr</text>
+                <text x="250" y="50" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">✓ tol · ±2% · named appr</text>
                 <line x1="232" y1="18" x2="244" y2="11" stroke="rgba(0,0,0,0.15)" strokeWidth="0.7" className="ps-dash" />
                 <line x1="232" y1="28" x2="244" y2="29" stroke="rgba(0,0,0,0.15)" strokeWidth="0.7" className="ps-dash" />
                 <line x1="232" y1="38" x2="244" y2="47" stroke="rgba(0,0,0,0.15)" strokeWidth="0.7" className="ps-dash" />
@@ -413,14 +413,14 @@ export function ContextMatters() {
                 {/* Output correct */}
                 <line x1="210" y1="52" x2="210" y2="84" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" markerEnd="url(#ps-arr-blue)" />
                 <rect x="60" y="90" width="260" height="78" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.15)" strokeWidth="1.5" />
-                <text x="68" y="104" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">GROUNDED OUTPUT</text>
-                <text x="68" y="118" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">vendor: Global Logistics LLC</text>
-                <text x="240" y="118" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">V-472 ✓</text>
-                <text x="68" y="132" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">gl: Freight · 6100-2340</text>
-                <text x="240" y="132" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">cited</text>
-                <text x="68" y="146" fontFamily="Plus Jakarta Sans" fontSize="10" fill="#000000">approver: CFO · Named approver</text>
-                <text x="240" y="146" fontFamily="Plus Jakarta Sans" fontSize="10" fontWeight="700" fill="#000000">named</text>
-                <text x="68" y="160" fontFamily="Plus Jakarta Sans" fontSize="10" fontStyle="italic" fill="rgba(0,0,0,0.45)">4 sources cited · audit emitted · reversible</text>
+                <text x="68" y="104" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">GROUNDED OUTPUT</text>
+                <text x="68" y="118" fontFamily="Plus Jakarta Sans" fontSize="12" fill="#000000">vendor: Global Logistics LLC</text>
+                <text x="240" y="118" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">V-472 ✓</text>
+                <text x="68" y="132" fontFamily="Plus Jakarta Sans" fontSize="12" fill="#000000">gl: Freight · 6100-2340</text>
+                <text x="240" y="132" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">cited</text>
+                <text x="68" y="146" fontFamily="Plus Jakarta Sans" fontSize="12" fill="#000000">approver: CFO · Named approver</text>
+                <text x="240" y="146" fontFamily="Plus Jakarta Sans" fontSize="12" fontWeight="700" fill="#000000">named</text>
+                <text x="68" y="160" fontFamily="Plus Jakarta Sans" fontSize="12" fontStyle="italic" fill="rgba(0,0,0,0.45)">4 sources cited · audit emitted · reversible</text>
               </svg>
             </div>
 
