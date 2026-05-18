@@ -1,22 +1,28 @@
 import { MotionConfig } from 'framer-motion';
 import HeroAboveFold from '../components/HeroAboveFold';
 import ClientsStrip from '../components/ClientsStrip';
+import WhyNowTriad from '../components/landing/WhyNowTriad';
 import SevenAgentsGrid from '../components/landing/SevenAgentsGrid';
-import IsThisYou from '../components/IsThisYou';
+import ThreeOfferings from '../components/landing/ThreeOfferings';
 import AgentPlatformStack from '../components/landing/AgentPlatformStack';
 import ContextKing from '../components/landing/ContextKing';
 import GTMPath from '../components/GTMPath';
 import LandingCloser from '../components/landing/LandingCloser';
 
 /**
- * LandingPage v5 — wow-section rhythm.
+ * LandingPage — deck-aligned rhythm.
  *
- * Story arc:
- *   Hero → ClientsStrip → SevenAgentsGrid (deck S04) → IsThisYou →
- *   AgentPlatformStack (centerpiece) → ContextKing → GTMPath → LandingCloser
+ * Story arc (matches Attentions AI Capability Deck v2):
+ *   Hero (S01) → ClientsStrip (proof) →
+ *   WhyNowTriad (deck S02 · Privacy/Cost/Outcomes) →
+ *   ThreeOfferings (deck S03 · Assessment/Agent/Platform with prices) →
+ *   SevenAgentsGrid (deck S04 · seven agents in production) →
+ *   AgentPlatformStack (centerpiece scroll-driven) →
+ *   ContextKing → GTMPath → LandingCloser.
  *
- * Design: docs/plans/2026-04-18-agent-platform-stack-design.md
- * SevenAgentsGrid: ported from Attentions-AI-Capability-Deck-v2.html slide S04.
+ * The old IsThisYou ("Where are you stuck?") section was replaced by
+ * ThreeOfferings — slide 2 of the deck is a stronger lead than persona
+ * pain since visitors get the price ladder upfront.
  */
 export default function LandingPage() {
   return (
@@ -24,8 +30,9 @@ export default function LandingPage() {
       <main>
         <HeroAboveFold />
         <ClientsStrip />
+        <WhyNowTriad />
+        <ThreeOfferings />
         <SevenAgentsGrid />
-        <IsThisYou />
         <AgentPlatformStack />
         <ContextKing />
         <GTMPath />
