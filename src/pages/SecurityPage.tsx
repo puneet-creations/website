@@ -27,9 +27,9 @@ export default function SecurityPage() {
         imageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop"
         headline="Your data. Your building."
         headlineAccent="Period."
-        subline="On-prem by default. Air-gapped on request. SOC 2, HIPAA, GDPR, ISO 27001 — pre-documented, not retrofitted."
-        label="Security"
-        pills={['On-prem', 'Air-gapped', 'SOC 2', 'HIPAA', 'GDPR', 'ISO 27001']}
+        subline="On-prem by default. Air-gapped on request. SOC 2 Type II, HIPAA, GDPR, ISO 27001 — pre-documented, not retrofitted. Zero security incidents on record."
+        label="Security · zero incidents on record"
+        pills={['On-prem', 'Air-gapped', 'SOC 2 Type II', 'HIPAA', 'GDPR', 'ISO 27001', 'Zero incidents']}
         height="80vh"
         clipRadius={0}
       />
@@ -41,7 +41,7 @@ export default function SecurityPage() {
           Architectural, <span className="italic">not contractual.</span>
         </h1>
         <p className={`mt-5 text-[18px] text-[rgba(0,0,0,0.65)] max-w-[620px] mx-auto sr d-2 ${inView ? 'is-in' : ''}`}>
-          Most AI vendors promise safety in a contract. We make it structurally impossible for data to leave. Five rings, three live clients, zero incidents.
+          Most AI vendors promise safety in a contract. We make it structurally impossible for data to leave. Five rings, 15 agents live across 3 regulated industries, zero security incidents on record.
         </p>
       </section>
 

@@ -85,7 +85,7 @@ const CATEGORIES: Category[] = [
     qas: [
       {
         q: 'How fast can you ship a new agent?',
-        a: 'Four weeks from the first call. Week 0 — discovery + ROI. Week 1 — design + security. Week 2 — build + fine-tune. Week 3 — integrate + UAT. Week 4 — go live. New agents on an existing platform are faster because they reuse all six shared layers.',
+        a: 'Four weeks from the end of the 2-week assessment. Week 1 — design + security. Week 2 — build + fine-tune on your data. Week 3 — integrate + UAT. Week 4 — cutover to autonomous execution against the named success measure. New agents on an existing platform are faster because they reuse all six shared layers.',
       },
       {
         q: 'How long does full production take?',
@@ -105,11 +105,15 @@ const CATEGORIES: Category[] = [
     qas: [
       {
         q: 'What does pricing look like?',
-        a: 'Two engagement shapes. A 2-week paid assessment at $5,000 that maps your workflows and scopes the pilot. Then a 4-week production deployment priced per scope. After the first agent ships, new agents on the same platform are fractionally cheaper because they reuse the shared base.',
+        a: 'Three ways to start, listed in order of commitment. (1) Enterprise AI Assessment — $5,000 USD fixed, one time. A board-ready business case in 2 weeks. (2) Sovereign AI Agent — from $10,000 USD per agent, up to $50K for a complex workflow. One agent live on your servers in 4 weeks. (3) Sovereign AI Platform — $20,000 USD per year + $10,000 USD per custom agent. Full platform deployed, three custom agents live in 6 weeks. The numbers on this page are the numbers on the contract.',
       },
       {
         q: 'Why is the assessment paid now instead of free?',
-        a: 'Because we invest a senior resource full time for 14 days, and because paying clients ship. Free assessments become slideware. Paid assessments produce a workflow inventory, ROI model, security blueprint, pilot spec, and executive readout — every time.',
+        a: 'Because we invest a senior architect full time for 14 days, and because paying clients ship. Free assessments become slideware. Paid assessments produce a workflow inventory, ROI model, security blueprint, pilot spec, named success measure, and executive readout — every time.',
+      },
+      {
+        q: 'Where do you have offices?',
+        a: 'Dubai and Pune. We work directly with regulated enterprises across the Gulf, India, South-East Asia, and the United States — sovereign deployments inside your network, not over the cloud.',
       },
     ],
   },

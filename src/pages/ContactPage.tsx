@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: 'What does pricing look like?',
-    a: 'Two engagement shapes: a 2-week paid assessment at $5,000 that maps your workflows and scopes a pilot, and a 4-week production deployment of your first agent priced per scope. After the first agent ships, new agents on the same platform are fractionally cheaper because they reuse the base.',
+    a: 'Three ways to start (deck v2): Enterprise AI Assessment at $5,000 USD fixed for 2 weeks · Sovereign AI Agent from $10,000 USD per agent for 4 weeks · Sovereign AI Platform at $20,000 USD per year plus $10,000 USD per custom agent for 6 weeks. After the first agent ships, new agents on the same platform are fractionally cheaper because they reuse the shared base.',
   },
   {
     q: 'How do I know it is not hallucinating?',
@@ -38,12 +38,18 @@ export default function ContactPage() {
   return (
     <main>
       <PageHero
-        label="Contact"
-        title="Three doors."
+        label="Contact · experts in sovereign AI for enterprise"
+        title="Three ways to start."
         titleAccent="One phone call."
-        description="A founder answers the phone. Not an SDR, not a pre-sales engineer. 30 minutes. Technical. Fast."
+        description="A founder answers the phone. Not an SDR, not a pre-sales engineer. 30 minutes. Technical. Fast. Sovereign AI experts based in Dubai and Pune, serving regulated enterprise globally."
         accent="#8af5c0"
-        pills={['$5K assessment', 'Migrate from public AI', 'hello@attentions.ai']}
+        pills={[
+          '$5K · 2-week assessment',
+          'From $10K · agent in 4 weeks',
+          '$20K/yr · platform + 3 agents',
+          'hello@attentions.ai',
+          'Dubai · Pune',
+        ]}
         orbColor="#c0f5d8"
       />
       <PageCinematicWrap auroraColor="#8af5c0" auroraSecondary="#5b76fe" giantText="CONTACT">

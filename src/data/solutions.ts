@@ -250,6 +250,27 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
     attrib: 'Automotive OEM · SE Asia · Quality Engineering',
     chips: ['LIVE · 1.2M+ REPORTS', 'HOURS TO ROOT CAUSE', 'AUTO-CITED 8D'],
   },
+  {
+    id: 'real-estate',
+    accent: '#1c456e',
+    headline: 'Real',
+    headlineAccent: 'Estate',
+    docs: [
+      'RFQs · Excel · document · scan',
+      'Specs, supplier compliance',
+      'Past-paid + government rate cards',
+      'Award decision pack',
+    ],
+    agents: ['tender'],
+    client: 'Real-estate developer',
+    region: 'Mumbai · awarding crores monthly',
+    metric: '4–8%',
+    metricLabel: 'saved on every purchase order awarded',
+    quote:
+      'We compare every quote at one true landed cost — tax, freight, retention, terms — against past paid and government rate cards. The committee decides in days, not weeks.',
+    attrib: 'Real-estate developer · Mumbai · Procurement',
+    chips: ['LIVE · TENDER INTELLIGENCE', '4–8% PO SAVINGS', 'CITED DECISION PACK'],
+  },
 ];
 
 // ── Adjacent industries (7 cards) ─────────────────────────────────────

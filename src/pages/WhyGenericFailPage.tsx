@@ -7,12 +7,17 @@ export default function WhyGenericFailPage() {
   return (
     <main>
       <PageHero
-        label="Why generic AI fails"
-        title="Built for the internet."
-        titleAccent="Breaks in your enterprise."
-        description="Public LLMs hallucinate, leak PII, cost exponentially, and produce zero audit trail. Here is exactly where each one fails."
+        label="Why now · privacy · cost · outcomes"
+        title="Three things changed."
+        titleAccent="Public AI no longer scales."
+        description="Sending your data to an outside cloud is no longer safe or legal. AI cloud bills are unpredictable and unusually high. And the board has stopped buying demos. Together they make sovereign AI — running on your own servers — the only option that scales."
         accent="#c0392b"
         orbColor="#f5c0c0"
+        pills={[
+          'Privacy · data no longer allowed to leave',
+          'Cost · cloud bills unpredictable',
+          'Outcomes · the board stopped buying demos',
+        ]}
         dustCount={10}
       />
       <PageCinematicWrap auroraColor="#c0392b" auroraSecondary="#ff9090" giantText="FAILS">

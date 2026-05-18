@@ -12,7 +12,7 @@ import {
 } from '../../data/solutions';
 
 /**
- * AgentIndustryMatrix — 5 agents × 10 industries fit grid.
+ * AgentIndustryMatrix — 7 agents × 11 industries fit grid.
  *
  * Cells show proven (filled teal-halo dot), fits (open ring), or none
  * (tiny grey dot). Hover reveals a 1-sentence reasoning tooltip.
@@ -40,7 +40,7 @@ export default function AgentIndustryMatrix() {
           className="mb-12 text-center max-w-[720px] mx-auto"
         >
           <div className="micro-upper mb-4" style={{ color: 'rgba(0,0,0,0.55)' }}>
-            The pattern, ten ways
+            The pattern, eleven ways
           </div>
           <h2
             style={{
@@ -52,7 +52,7 @@ export default function AgentIndustryMatrix() {
               color: '#000000',
             }}
           >
-            Five agents. <span style={{ fontStyle: 'italic' }}>Ten industries.</span>
+            Seven agents. <span style={{ fontStyle: 'italic' }}>Eleven industries.</span>
           </h2>
           <p
             className="mt-4 mx-auto max-w-[560px]"
@@ -64,8 +64,8 @@ export default function AgentIndustryMatrix() {
               lineHeight: 1.55,
             }}
           >
-            Three cells are live in production today. Thirty-five more where
-            the same pattern ships. Hover a cell for the one-line fit.
+            Seven cells are live in production today. Many more where the
+            same pattern ships. Hover a cell for the one-line fit.
           </p>
         </motion.div>
 
@@ -79,8 +79,8 @@ export default function AgentIndustryMatrix() {
             role="grid"
             className="grid relative"
             style={{
-              minWidth: 900,
-              gridTemplateColumns: '180px repeat(10, minmax(72px, 1fr))',
+              minWidth: 980,
+              gridTemplateColumns: `180px repeat(${INDUSTRIES.length}, minmax(68px, 1fr))`,
               rowGap: 0,
               columnGap: 0,
               border: '1px solid rgba(0,0,0,0.08)',
