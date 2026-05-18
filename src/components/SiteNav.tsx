@@ -5,7 +5,7 @@ import { DropdownNavigation } from './ui/dropdown-navigation';
 import {
   Server, Cpu, Shield, Zap, FileText, Eye, Users, Building2,
   Stethoscope, Factory, AlertTriangle, DollarSign, Lock,
-  HelpCircle, Phone, Info,
+  HelpCircle, Phone, Info, ClipboardCheck, ShieldAlert,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -40,17 +40,19 @@ const NAV_ITEMS = [
       {
         title: 'Live Agents',
         items: [
-          { label: 'Invoice Intelligence', description: 'Handwritten to ERP in 30s', icon: FileText, link: '/agents' },
-          { label: 'PCR Intelligence', description: '1.2M reports \u00b7 root cause in hours', icon: Cpu, link: '/agents' },
-          { label: 'Voice AI \u00b7 SOAP', description: 'Doctor talks \u00b7 note done in ~30s', icon: Stethoscope, link: '/agents' },
+          { label: 'Invoice Intelligence', description: 'Any format \u00b7 88% no-touch post', icon: FileText, link: '/agents' },
+          { label: 'Defect-report Intelligence', description: '1.2M reports \u00b7 root cause in hours', icon: Cpu, link: '/agents' },
+          { label: 'Doctor\u2019s Notes', description: '~2 hours back per doctor per day', icon: Stethoscope, link: '/agents' },
+          { label: 'Tender Intelligence', description: '4\u20138% saved on every PO awarded', icon: ClipboardCheck, link: '/agents' },
         ],
       },
       {
         title: 'Agent Pattern',
         items: [
           { label: 'READ \u00b7 THINK \u00b7 DO \u00b7 PROVE', description: 'The 4-verb agent anatomy', icon: Zap, link: '/agents' },
-          { label: 'Patient Experience OS', description: '$400K+ recovered per location', icon: Phone, link: '/agents' },
-          { label: 'Voucher Matching', description: '200-page vouchers in 5 minutes', icon: FileText, link: '/agents' },
+          { label: 'Patient Call Agent', description: '$100K+ recovered per clinic / yr', icon: Phone, link: '/agents' },
+          { label: 'Voucher Matching', description: 'Six docs in \u00b7 5 min per packet', icon: FileText, link: '/agents' },
+          { label: 'Fraud Intelligence', description: '< 1s to flag fraud at intake', icon: ShieldAlert, link: '/agents' },
         ],
       },
     ],

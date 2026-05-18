@@ -141,10 +141,10 @@ function S4() {
   return (
     <svg viewBox="0 0 1200 500" className="w-full h-auto block" preserveAspectRatio="xMidYMid meet">
       <rect width="1200" height="500" fill="#0a0e18" rx="16" />
-      <text x="600" y="45" fontSize="22" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="Georgia,serif">$400K+ recovered per location per year</text>
+      <text x="600" y="45" fontSize="22" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="Georgia,serif">$100K+ recovered per clinic per year</text>
 
       {[
-        { metric: '$400K+', label: 'RECOVERED', sub: 'Per location/year', color: '#ffd080', x: 80 },
+        { metric: '$100K+', label: 'RECOVERED', sub: 'Per clinic / year', color: '#ffd080', x: 80 },
         { metric: '100%', label: 'CALLS ANSWERED', sub: '24/7 · zero hold time', color: '#8af5c0', x: 440 },
         { metric: '0', label: 'SYSTEM REPLACEMENTS', sub: 'Works with existing tools', color: '#5b76fe', x: 800 },
       ].map((m) => (

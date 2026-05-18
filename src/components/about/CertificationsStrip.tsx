@@ -7,7 +7,7 @@ import { CERTIFICATIONS, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
  * CertificationsStrip — 4-cert badge grid below ClientsStrip.
- * SOC 2 Type 1 / HIPAA / GDPR / ISO 27001 with Lucide icons.
+ * SOC 2 Type II / HIPAA / GDPR / ISO 27001 with Lucide icons.
  */
 export default function CertificationsStrip() {
   const [ref, inView] = useInView<HTMLElement>(0.2);

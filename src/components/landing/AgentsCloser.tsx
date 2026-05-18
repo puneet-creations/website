@@ -6,7 +6,7 @@ const HeroOrb = lazy(() => import('../HeroOrb'));
 
 /**
  * AgentsCloser — Agents page closing manifesto.
- * Teal glass orb on the left, "Five agents today. Five more next quarter." manifesto on the right.
+ * Teal glass orb on the left, "Fifteen agents today. More every quarter." manifesto on the right.
  * Mirrors the Platform page's PlatformCloser pattern with a teal variant.
  */
 
