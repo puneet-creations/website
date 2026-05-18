@@ -3,35 +3,13 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { HeroGallery } from './ui/hero-gallery';
 
 /**
- * HeroAboveFold — v5: animated card gallery + value headline.
+ * HeroAboveFold — v6: value headline + 3-card GTM gallery.
  *
- * Two gallery rows: 3 GTM cards (Sovereign, Production, Secure) fanning out,
- * then 5 Agent cards below. Cards are draggable with spring physics.
- * Aurora glow background, staggered entrance animations.
+ * The 7-agent showcase used to live here as a draggable gallery; it has
+ * been promoted to its own deck-faithful section <SevenAgentsGrid />
+ * rendered immediately below by LandingPage. This component now just
+ * carries the hero value prop + 3 large GTM capability cards fanning out.
  */
-
-/* ── SVG icons for cards — darker outlines for readability on white cards ── */
-function InvoiceIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="26" y="16" width="68" height="88" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.55)" strokeWidth="2"/><line x1="40" y1="40" x2="80" y2="40" stroke="rgba(0,0,0,0.45)" strokeWidth="2"/><line x1="40" y1="52" x2="72" y2="52" stroke="rgba(0,0,0,0.40)" strokeWidth="2"/><line x1="40" y1="64" x2="66" y2="64" stroke="rgba(0,0,0,0.35)" strokeWidth="2"/><path d="M55 78L62 85L76 71" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" fill="none"/></svg>);
-}
-function GraphIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><circle cx="40" cy="38" r="10" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.55)" strokeWidth="1.8"/><circle cx="86" cy="34" r="10" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.55)" strokeWidth="1.8"/><circle cx="60" cy="80" r="10" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.55)" strokeWidth="1.8"/><circle cx="92" cy="84" r="8" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><line x1="48" y1="46" x2="54" y2="72" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><line x1="80" y1="42" x2="66" y2="72" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><line x1="70" y1="80" x2="84" y2="82" stroke="rgba(0,0,0,0.40)" strokeWidth="1.8"/></svg>);
-}
-function MicIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="46" y="22" width="28" height="44" rx="14" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><path d="M34 60C34 74 46 84 60 84C74 84 86 74 86 60" stroke="rgba(0,0,0,0.50)" strokeWidth="2.2" fill="none"/><line x1="60" y1="84" x2="60" y2="98" stroke="rgba(0,0,0,0.45)" strokeWidth="2.2"/><line x1="46" y1="98" x2="74" y2="98" stroke="rgba(0,0,0,0.45)" strokeWidth="2.2" strokeLinecap="round"/></svg>);
-}
-function PhoneIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="34" y="16" width="52" height="88" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.55)" strokeWidth="2.2"/><circle cx="60" cy="88" r="6" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><rect x="42" y="30" width="36" height="40" rx="4" fill="rgba(0,0,0,0.05)"/><text x="60" y="55" textAnchor="middle" fontFamily="var(--mono)" fontSize="16" fontWeight="700" fill="#000000">24/7</text></svg>);
-}
-function MatchIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="12" y="28" width="40" height="26" rx="5" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><rect x="12" y="66" width="40" height="26" rx="5" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><rect x="68" y="47" width="40" height="26" rx="5" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><line x1="52" y1="41" x2="68" y2="56" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><line x1="52" y1="79" x2="68" y2="64" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><path d="M78 56L85 63L99 49" stroke="#000000" strokeWidth="2.8" strokeLinecap="round" fill="none"/></svg>);
-}
-function TenderIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="14" y="18" width="92" height="20" rx="4" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><rect x="14" y="44" width="92" height="20" rx="4" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.55)" strokeWidth="2"/><rect x="14" y="70" width="92" height="20" rx="4" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><line x1="22" y1="28" x2="50" y2="28" stroke="rgba(0,0,0,0.40)" strokeWidth="2"/><line x1="22" y1="54" x2="60" y2="54" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><line x1="22" y1="80" x2="44" y2="80" stroke="rgba(0,0,0,0.40)" strokeWidth="2"/><circle cx="92" cy="54" r="6" fill="#000000"/><path d="M89 54L91 56L95 52" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" fill="none"/></svg>);
-}
-function FraudIcon({ accent: _a }: { accent: string }) {
-  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><path d="M60 12L98 24V58C98 76 82 92 60 100C38 92 22 76 22 58V24L60 12Z" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><circle cx="60" cy="56" r="14" fill="none" stroke="rgba(0,0,0,0.50)" strokeWidth="2"/><circle cx="60" cy="56" r="22" fill="none" stroke="rgba(0,0,0,0.30)" strokeWidth="1.6"/><circle cx="60" cy="56" r="30" fill="none" stroke="rgba(0,0,0,0.15)" strokeWidth="1.2"/><circle cx="60" cy="56" r="4" fill="#000000"/></svg>);
-}
 
 const gtmCards = [
   {
@@ -57,54 +35,7 @@ const gtmCards = [
   },
 ];
 
-// 7 deep-dive agent cards — fan-out positions tightened so all seven fit in the
-// hero gallery (250px center-to-center spacing, total 1500px spread).
-// Cards overlap by ~50–150px depending on viewport; HeroGallery's spring physics
-// + draggable interaction lets visitors fan them apart on hover/touch.
-const agentCards = [
-  {
-    id: 11, order: 0, x: '-750px', y: '8px', zIndex: 70, direction: 'left' as const,
-    label: 'Invoice Intelligence', sublabel: 'Logistics · Dubai', metric: '88%',
-    details: 'Any format in. Clean finance-system entry out.',
-    accent: '#8af5c0', icon: InvoiceIcon,
-  },
-  {
-    id: 12, order: 1, x: '-500px', y: '20px', zIndex: 60, direction: 'left' as const,
-    label: 'Defect-report Intelligence', sublabel: 'Automotive · SE Asia', metric: '1.2M',
-    details: 'Cross-link millions of reports. Cite the root cause.',
-    accent: '#8ea6ff', icon: GraphIcon,
-  },
-  {
-    id: 13, order: 2, x: '-250px', y: '12px', zIndex: 50, direction: 'left' as const,
-    label: 'Doctor’s Notes', sublabel: 'Healthcare · 38 clinics', metric: '~2h',
-    details: 'Listen on-prem. Write the note. Sync to records.',
-    accent: '#f5a8d4', icon: MicIcon,
-  },
-  {
-    id: 14, order: 3, x: '0px', y: '5px', zIndex: 80, direction: 'right' as const,
-    label: 'Patient Call Agent', sublabel: 'Healthcare · 24/7', metric: '$100K+',
-    details: 'Answer every call. Book. Bill. Remind.',
-    accent: '#ffd080', icon: PhoneIcon,
-  },
-  {
-    id: 15, order: 4, x: '250px', y: '22px', zIndex: 40, direction: 'right' as const,
-    label: 'Voucher Matching', sublabel: 'Logistics · Dubai', metric: '5 min',
-    details: 'Six documents in. Clean payment out.',
-    accent: '#a0dc8c', icon: MatchIcon,
-  },
-  {
-    id: 16, order: 5, x: '500px', y: '14px', zIndex: 30, direction: 'right' as const,
-    label: 'Tender Intelligence', sublabel: 'Real estate · Mumbai', metric: '4–8%',
-    details: 'Every quote, every spec, every tax.',
-    accent: '#c0d8e8', icon: TenderIcon,
-  },
-  {
-    id: 17, order: 6, x: '750px', y: '24px', zIndex: 20, direction: 'right' as const,
-    label: 'Fraud Intelligence', sublabel: 'Automotive · 700 dealers', metric: '< 1s',
-    details: 'Every claim, every pattern, every reason.',
-    accent: '#ffd0c8', icon: FraudIcon,
-  },
-];
+// (7-agent showcase moved to <SevenAgentsGrid /> — see LandingPage.)
 
 export default function HeroAboveFold() {
   const ref = useRef<HTMLElement>(null);
@@ -200,42 +131,14 @@ export default function HeroAboveFold() {
 
           {/* GTM Gallery — 3 capability cards */}
           <HeroGallery cards={gtmCards} animationDelay={0.6} large />
-
-          {/* Section headline between galleries */}
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7 }}
-            className="leading-[0.95] mt-16 mb-8"
-            style={{ fontFamily: 'var(--serif)', fontWeight: 500, fontSize: 'clamp(36px, 5.5vw, 72px)', letterSpacing: '-0.03em', color: '#000000' }}
-          >
-            Agents live in{' '}
-            <span className="italic">Production.</span>
-          </motion.h2>
-
-          {/* Agent Gallery — 7 cards (deck v2: 7 deep-dives) */}
-          <HeroGallery cards={agentCards} animationDelay={1.2} dropIn />
-
-          {/* Trust row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.5 }}
-            className="flex flex-wrap items-center justify-center gap-8 mt-4"
-          >
-            {[
-              { name: 'Logistics group', industry: 'Dubai · 20+ business units', color: '#000000' },
-              { name: 'Automotive OEM', industry: 'SE Asia · regional quality ops', color: '#8ea6ff' },
-              { name: 'Dental group', industry: '38 clinics · multi-state', color: '#f5a8d4' },
-            ].map((c) => (
-              <div key={c.name} className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full" style={{ background: c.color }} />
-                <span className="text-[14px] font-medium text-black">{c.name}</span>
-                <span className="text-[14px]" style={{ color: 'rgba(0,0,0,0.60)' }}>{c.industry}</span>
-              </div>
-            ))}
-          </motion.div>
+          {/*
+            Note: the 7-agent showcase formerly lived here as a draggable
+            HeroGallery. It has been promoted to its own deck-faithful
+            section <SevenAgentsGrid /> rendered by LandingPage right after
+            HeroAboveFold — arched cards, deck-canon content, foundation
+            strip. The trust row was redundant with the SevenAgentsGrid's
+            domain labels + ClientsStrip's metrics, so it has been removed.
+          */}
         </div>
       </motion.div>
     </section>
