@@ -50,8 +50,8 @@ export default function PricingDoor({ data }: { data: Door }) {
           <AccentStrip color={ACCENT} />
 
           <div className="p-8 md:p-10 flex flex-col gap-6">
-            {/* Header: icon + tier name */}
-            <div className="flex items-center gap-4">
+            {/* Header: icon + tier name + timing chip */}
+            <div className="flex items-center gap-4 flex-wrap">
               <div
                 className="w-[72px] h-[72px] rounded-2xl flex items-center justify-center flex-shrink-0"
                 style={{
@@ -67,6 +67,19 @@ export default function PricingDoor({ data }: { data: Door }) {
               >
                 {data.tierName}
               </div>
+              <span
+                className="micro-upper rounded-full inline-flex items-center ml-auto"
+                style={{
+                  color: ACCENT,
+                  background: `${ACCENT}10`,
+                  border: `1px solid ${ACCENT}25`,
+                  padding: '6px 14px',
+                  fontSize: 11,
+                  letterSpacing: '0.08em',
+                }}
+              >
+                {data.timing}
+              </span>
             </div>
 
             {/* Headline */}
@@ -220,19 +233,74 @@ export default function PricingDoor({ data }: { data: Door }) {
               })}
             </div>
 
-            {/* CTA */}
-            <a
-              href={data.ctaHref}
-              className="capsule-dark self-start inline-flex items-center gap-2 rounded-full transition-transform hover:scale-[1.03]"
+            {/* Outcome callout — deck OUTCOME wording */}
+            <div
+              className="rounded-2xl p-5 md:p-6 flex flex-col gap-2"
               style={{
-                padding: '10px 20px',
-                fontSize: 13,
-                textDecoration: 'none',
+                background: `${ACCENT}08`,
+                borderLeft: `3px solid ${ACCENT}`,
               }}
             >
-              {data.ctaLabel}
-              <span aria-hidden="true">&rarr;</span>
-            </a>
+              <span
+                className="micro-upper"
+                style={{ color: ACCENT, fontSize: 11 }}
+              >
+                Outcome
+              </span>
+              <p
+                className="text-[16px] leading-snug"
+                style={{
+                  color: '#000000',
+                  fontFamily: 'var(--serif)',
+                  fontStyle: 'italic',
+                  fontWeight: 500,
+                }}
+              >
+                {data.outcome}
+              </p>
+            </div>
+
+            {/* Price block — deck big-number style */}
+            <div
+              className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-3 pt-4"
+              style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}
+            >
+              <div className="flex flex-col">
+                <div
+                  style={{
+                    fontFamily: 'var(--serif)',
+                    fontSize: 'clamp(34px, 4vw, 44px)',
+                    fontWeight: 600,
+                    lineHeight: 1.0,
+                    color: '#000000',
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  {data.priceDisplay}
+                </div>
+                <div
+                  className="micro-upper mt-2"
+                  style={{ color: 'rgba(0,0,0,0.55)', fontSize: 11 }}
+                >
+                  {data.priceFootnote}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <a
+                href={data.ctaHref}
+                className="capsule-dark self-start inline-flex items-center gap-2 rounded-full transition-transform hover:scale-[1.03]"
+                style={{
+                  padding: '12px 22px',
+                  fontSize: 13,
+                  textDecoration: 'none',
+                  flexShrink: 0,
+                }}
+              >
+                {data.ctaLabel}
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
           </div>
         </article>
       </div>

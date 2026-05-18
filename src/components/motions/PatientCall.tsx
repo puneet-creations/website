@@ -1,7 +1,7 @@
 import JourneyFlow from './JourneyFlow';
 
 /**
- * PatientCall — Patient Experience OS (Qira Labs, 38 clinics).
+ * PatientCall — Patient Call Agent (multi-state dental group, 38 clinics).
  * 4 wide-format scenes. viewBox 1200×500.
  */
 export default function PatientCall() {
@@ -167,7 +167,7 @@ function S4() {
       <text x="780" y="345" fontSize="20" fontWeight="700" fill="#5b76fe">$80K</text>
 
       <rect x="300" y="420" width="600" height="45" rx="22" fill="rgba(255,208,128,0.08)" stroke="rgba(255,208,128,0.15)" />
-      <text x="600" y="448" fontSize="16" fontWeight="700" fill="#ffd080" textAnchor="middle">Live at Qira Labs · 38 clinics · zero system replacements</text>
+      <text x="600" y="448" fontSize="16" fontWeight="700" fill="#ffd080" textAnchor="middle">Live in 38 clinics · zero system replacements</text>
     </svg>
   );
 }

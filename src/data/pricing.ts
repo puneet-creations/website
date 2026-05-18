@@ -1,13 +1,16 @@
 /**
  * pricing.ts — data source for the /pricing page.
  *
- * Three doors (Assessment / Platform / Agents), each with:
+ * Three doors (Assessment / Agent / Platform — deck commitment ladder), each with:
  *   - tier name, icon, headline, pitch
- *   - contrast pill (typical vs. us — qualitative, no numbers)
+ *   - contrast pill (typical vs. us — qualitative)
+ *   - explicit deck-canon price (priceDisplay + priceFootnote + timing)
  *   - 5 accordion panels (HOW / WHAT / WHY / ROI / TIMELINE)
+ *   - per-tier OUTCOME callout (deck wording)
  *   - CTA label + href
  *
- * No dollar figures anywhere. Page components are pure consumers.
+ * Prices are now explicit per Attentions AI Capability Deck v2 (2026).
+ * Page components are pure consumers.
  */
 
 export type DoorId = 'assessment' | 'platform' | 'agents';
@@ -37,16 +40,21 @@ export type Door = {
   panels: DoorPanel[];
   ctaLabel: string;
   ctaHref: string;
+  // Deck-canon pricing fields (Capability Deck v2)
+  priceDisplay: string;      // e.g., "$5,000 USD"
+  priceFootnote: string;     // e.g., "Fixed · one time"
+  timing: string;            // e.g., "2 weeks · fixed fee"
+  outcome: string;           // one-line deck OUTCOME wording
 };
 
 const ASSESSMENT: Door = {
   id: 'assessment',
   iconName: 'SearchCheck',
-  tierName: 'Assessment',
-  headline: 'Scope the fit.',
-  headlineAccent: 'Plan the pilot.',
+  tierName: 'Enterprise AI Assessment',
+  headline: 'A board-ready business case',
+  headlineAccent: 'in two weeks.',
   pitch:
-    'A 2-week senior-architect-led engagement that delivers a board-ready business case and a ready-to-execute pilot plan — not a 200-page PDF.',
+    'One senior architect, working with your team for two weeks. Two to three candidate processes audited and scored. Named success measure agreed in writing. Board-ready business case and agent specification at the end.',
   contrast: {
     typicalLabel: 'Typical',
     typicalText: '6-month research + PDF deck that gets shelved.',
@@ -80,18 +88,22 @@ const ASSESSMENT: Door = {
       body: 'Fixed 2-week window. Week 0: kickoff, NDA, document access, stakeholder interviews scheduled. Week 1: deep-dive. Week 2: ROI model + pilot scoping + decision point. We\u2019re in, we assess, we\u2019re out. No scope creep.',
     },
   ],
-  ctaLabel: 'Scope this door',
-  ctaHref: 'mailto:hello@attentions.ai?subject=Assessment%20Scoping',
+  ctaLabel: 'Start the 2-week assessment',
+  ctaHref: 'mailto:hello@attentions.ai?subject=Enterprise%20AI%20Assessment',
+  priceDisplay: '$5,000 USD',
+  priceFootnote: 'Fixed · one time',
+  timing: '2 weeks · fixed fee',
+  outcome: 'A signed business case and a target go-live date for your first agent.',
 };
 
 const PLATFORM: Door = {
   id: 'platform',
   iconName: 'Layers',
-  tierName: 'Platform',
-  headline: 'Own the base.',
-  headlineAccent: 'Every agent compounds.',
+  tierName: 'Sovereign AI Platform',
+  headline: 'Full platform deployed,',
+  headlineAccent: 'three custom agents live.',
   pitch:
-    'Sovereign artiGen runtime deployed on your hardware in 4\u20136 weeks. Every agent after the first costs ~80% less \u2014 the shared layers are already paid for.',
+    'Platform deployed inside your network. Three custom agents built and live in phase one. Every additional agent at the same flat fee. One foundation. Many agents. Compounding return.',
   contrast: {
     typicalLabel: 'Typical',
     typicalText: 'SaaS seat + shared models + their cloud + lock-in.',
@@ -102,7 +114,7 @@ const PLATFORM: Door = {
     {
       id: 'how',
       label: 'How it works',
-      body: '4\u20136 weeks end-to-end. Weeks 1\u20132: hardware and connector audit. Weeks 3\u20134: core platform deployment \u2014 sovereign runtime, model router, 4-layer hallucination control. Weeks 5\u20136: governance rails and first agent integration. Handover with runbooks, deployment topology, and audit-trail examples your team can run with.',
+      body: '6 weeks end-to-end. Weeks 1\u20132: hardware and connector audit. Weeks 3\u20134: core platform deployment \u2014 sovereign runtime, model router, 4-layer hallucination control. Weeks 5\u20136: governance rails and three custom agents live in phase one. Handover with runbooks, deployment topology, and audit-trail examples your team can run with.',
     },
     {
       id: 'what',
@@ -122,21 +134,25 @@ const PLATFORM: Door = {
     {
       id: 'timeline',
       label: 'Timeline',
-      body: '4\u20136 weeks to live. Owned forever. No annual renewal. Upgrades on your schedule, not a vendor\u2019s.',
+      body: '6 weeks to live, three custom agents inside. The $20K/yr keeps the platform supported, certified and current; every next agent ships at the same flat $10K. Upgrades on your schedule, not a vendor\u2019s.',
     },
   ],
-  ctaLabel: 'Scope this door',
-  ctaHref: 'mailto:hello@attentions.ai?subject=Platform%20Scoping',
+  ctaLabel: 'Scope the platform',
+  ctaHref: 'mailto:hello@attentions.ai?subject=Sovereign%20AI%20Platform',
+  priceDisplay: '$20,000 USD / year',
+  priceFootnote: '+ $10,000 USD per custom agent',
+  timing: '6 weeks · platform + 3 agents',
+  outcome: 'Three agents live, platform deployed — every next agent at the same flat fee.',
 };
 
 const AGENTS: Door = {
   id: 'agents',
   iconName: 'Workflow',
-  tierName: 'Agents',
-  headline: 'Targeted automation.',
-  headlineAccent: 'Live in weeks.',
+  tierName: 'Sovereign AI Agent',
+  headline: 'One agent, live on your servers,',
+  headlineAccent: 'in four weeks.',
   pitch:
-    'A production agent built to your workflow, trained on your data, integrated into your system of record. Executes \u2014 doesn\u2019t recommend. KPI-measured from day one.',
+    'One named business problem, solved end-to-end. Scope and fee fixed at the end of the assessment. No platform commitment required. Runs on your servers from day one.',
   contrast: {
     typicalLabel: 'Typical',
     typicalText: 'Generic LLM wrapper recommending, humans verify.',
@@ -147,7 +163,7 @@ const AGENTS: Door = {
     {
       id: 'how',
       label: 'How it works',
-      body: '8\u201312 weeks. Weeks 1\u20132: workflow and document deep-dive. Weeks 3\u20136: agent build \u2014 deep OCR calibrated to your document mix, a custom small language model fine-tuned on your vendor master or clinical codes or equivalent schema, integration to your system of record. Weeks 7\u201310: parallel run with humans, exception-routing tuning, audit-trail validation. Weeks 11\u201312: cutover to autonomous execution. KPI dashboard live.',
+      body: '4 weeks, on your servers. Week 1: workflow + document deep-dive on the named problem. Week 2: agent build \u2014 deep OCR calibrated to your document mix, a custom small language model fine-tuned on your vendor master or clinical codes or equivalent schema. Week 3: integration to your system of record + parallel run with humans. Week 4: cutover to autonomous execution. Named success measure tracked from day one.',
     },
     {
       id: 'what',
@@ -157,24 +173,29 @@ const AGENTS: Door = {
     {
       id: 'why',
       label: 'Why us',
-      body: 'A typical "AI agent" in the market is a generic foundation-model wrapper with a prompt template. Works on general cases, fails on your handwritten, multi-language, or edge-case data. Outputs are recommendations for humans to verify \u2014 not executions. We build targeted agents \u2014 bespoke to your workflow, trained on your schema, integrated into your system of record. They don\u2019t recommend. They EXECUTE. The difference between "AI that shows insight" and "AI that closes the loop." Three live today: Thomson, Qira, Daimler.',
+      body: 'A typical "AI agent" in the market is a generic foundation-model wrapper with a prompt template. Works on general cases, fails on your handwritten, multi-language, or edge-case data. Outputs are recommendations for humans to verify \u2014 not executions. We build targeted agents \u2014 bespoke to your workflow, trained on your schema, integrated into your system of record. They don\u2019t recommend. They EXECUTE. The difference between "AI that shows insight" and "AI that closes the loop." Seven live today across logistics, automotive, and healthcare.',
     },
     {
       id: 'roi',
       label: 'ROI pattern',
-      body: 'Typical ROI within 60\u201390 days post-go-live. KPI defined at kickoff \u2014 cost takeout, cycle time, recovery rate, depending on the workflow. Measured against it. If the business case isn\u2019t hitting, we know before you do \u2014 we revisit scope, not invoice. Shapes we\u2019ve shipped: 88% no-touch invoicing, $400K+ recovered per clinic per year, weeks-to-hours on root cause.',
+      body: 'Typical ROI within 60\u201390 days post-go-live. Named success measure defined at kickoff \u2014 cost takeout, cycle time, recovery rate, depending on the workflow. Measured against it. If the business case isn\u2019t hitting, we know before you do \u2014 we revisit scope, not invoice. Shapes we\u2019ve shipped: 88% no-touch invoicing, $100K+ recovered per clinic per year, weeks-to-hours on root cause.',
     },
     {
       id: 'timeline',
       label: 'Timeline',
-      body: '8\u201312 weeks to live autonomous execution. Fixed-scope. KPI-measured. Live production, not a demo, not a POC. After go-live: a tuning cadence and the KPI dashboard stay in place.',
+      body: '4 weeks to live autonomous execution. Fixed scope, fixed fee, fixed timeline \u2014 all agreed at the end of the 2-week assessment. Live production, not a demo, not a POC. After go-live: a tuning cadence and the success-measure dashboard stay in place.',
     },
   ],
-  ctaLabel: 'Scope this door',
-  ctaHref: 'mailto:hello@attentions.ai?subject=Agent%20Scoping',
+  ctaLabel: 'Scope an agent',
+  ctaHref: 'mailto:hello@attentions.ai?subject=Sovereign%20AI%20Agent',
+  priceDisplay: 'From $10,000 USD',
+  priceFootnote: 'Up to $50K · complex workflow',
+  timing: '4 weeks · per agent',
+  outcome: 'One live agent on your servers, measured against the named success measure.',
 };
 
-export const DOORS: Door[] = [ASSESSMENT, PLATFORM, AGENTS];
+// Deck commitment ladder: Assessment → Agent → Platform (lowest to highest commitment)
+export const DOORS: Door[] = [ASSESSMENT, AGENTS, PLATFORM];
 
 export const DOOR_BY_ID: Record<DoorId, Door> = Object.fromEntries(
   DOORS.map((d) => [d.id, d])

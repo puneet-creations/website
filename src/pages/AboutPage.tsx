@@ -24,18 +24,18 @@ export default function AboutPage() {
     <MotionConfig reducedMotion="user">
       <main>
         <PageHero
-          label="About"
-          title="Built to ship."
-          titleAccent="Certified to scale."
-          description="18 experts. Five production agents. Three enterprise clients. Zero hallucination incidents since day one. SOC 2 Type 1, HIPAA, GDPR, ISO 27001 — all certified."
+          label="About · experts in sovereign AI for enterprise"
+          title="Experts in Sovereign AI Agents"
+          titleAccent="for Enterprise."
+          description="Cost-optimized, secure on-prem, and scalable to enterprise volumes — millions of documents, your hardware, your regulator’s rules. 18 experts. 15 agents live in production across 3 regulated industries. Zero security incidents on record. SOC 2 Type II, HIPAA, GDPR, ISO 27001 — all certified. Offices in Dubai and Pune."
           accent="#475569"
           orbColor="#c8d0dc"
           pills={[
-            '18 experts',
-            '5 agents live',
-            '3 enterprise clients',
-            '0 incidents',
-            '4 certifications',
+            'Cost-optimized',
+            'Secure · on-prem',
+            'Scalable · millions of docs',
+            'Dubai · Pune',
+            'SOC 2 Type II · HIPAA · GDPR · ISO 27001',
           ]}
         />
 
@@ -51,7 +51,7 @@ export default function AboutPage() {
           imageSrc="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop"
           headline="Shipped. Audited."
           headlineAccent="Live."
-          subline="Three enterprise clients in regulated industries. Zero hallucination incidents since day one. Four certifications on file."
+          subline="15 agents live in production across 3 regulated industries. Zero security incidents on record. Four certifications on file."
           label="The track record"
           height="60vh"
           clipRadius={24}

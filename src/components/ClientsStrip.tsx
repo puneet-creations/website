@@ -15,9 +15,9 @@ const clients = [
 ];
 
 const trustMetrics = [
-  { n: '5', label: 'agents live in production' },
+  { n: '15', label: 'agents live in production' },
   { n: '3', label: 'regulated industries' },
-  { n: '0', label: 'hallucination incidents' },
+  { n: '0', label: 'security incidents on record' },
   { n: '88%', label: 'no-touch processing rate' },
 ];
 
@@ -38,7 +38,7 @@ export default function ClientsStrip({ variant = 'trust' }: Props) {
   const isTrust = variant === 'trust';
   const metrics = isTrust ? trustMetrics : platformMetrics;
   const headerLeft = isTrust ? 'Live in production at' : 'Powering regulated workflows';
-  const headerRight = isTrust ? '· Zero hallucination incidents' : '· On-prem · Sovereign · Cited';
+  const headerRight = isTrust ? '· Zero security incidents on record' : '· On-prem · Sovereign · Cited';
 
   return (
     <section

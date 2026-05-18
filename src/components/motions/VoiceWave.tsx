@@ -1,7 +1,7 @@
 import JourneyFlow from './JourneyFlow';
 
 /**
- * VoiceWave — Voice AI / SOAP (Qira Labs, 38 clinics).
+ * VoiceWave — Doctor's Notes (multi-state dental group, 38 clinics).
  * 4 wide-format scenes. viewBox 1200×500.
  */
 
@@ -171,7 +171,7 @@ function S4() {
 
       {/* Live badge */}
       <rect x="350" y="390" width="500" height="50" rx="25" fill="rgba(245,168,212,0.08)" stroke="rgba(245,168,212,0.15)" />
-      <text x="600" y="420" fontSize="16" fontWeight="700" fill="#f5a8d4" textAnchor="middle">Live at Qira Labs · 38 clinics · 2,400 consults/week</text>
+      <text x="600" y="420" fontSize="16" fontWeight="700" fill="#f5a8d4" textAnchor="middle">Live in 38 clinics · 2,400 consults/week</text>
     </svg>
   );
 }

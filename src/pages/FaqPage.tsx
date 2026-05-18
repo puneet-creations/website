@@ -89,7 +89,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: 'How long does full production take?',
-        a: 'The 14-day assessment produces a working prototype scoped for 4 weeks of production delivery. Thomson Group went from first call to live invoice processing in 6 weeks. Qira Labs went live with Voice AI in 4 weeks. We guarantee a live production agent — not a prototype — within the agreed timeline or you do not pay.',
+        a: 'The 14-day assessment produces a working prototype scoped for 4 weeks of production delivery. A global logistics group went from first call to live invoice processing in 6 weeks. A multi-state dental group went live with Doctor’s Notes in 4 weeks. We guarantee a live production agent — not a prototype — within the agreed timeline or you do not pay.',
       },
       {
         q: 'Do you support [SAP / Epic / Salesforce / DMS]?',
@@ -125,7 +125,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: 'Can I talk to a reference client?',
-        a: 'Yes. Named references at Thomson Group UAE, Daimler Asia, and Qira Labs US are available on request for qualified enterprise prospects. We arrange it after the 14-day assessment is booked.',
+        a: 'Yes. Named references across logistics, automotive, and healthcare clients are available on request for qualified enterprise prospects. We arrange it after the 14-day assessment is booked.',
       },
     ],
   },

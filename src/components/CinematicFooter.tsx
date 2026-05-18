@@ -394,7 +394,7 @@ export default function CinematicFooter() {
         {/* Legal row */}
         <div className="relative z-10 border-t px-6 py-6" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
           <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-[13px]" style={{ color: 'rgba(255,255,255,0.50)', fontFamily: "'JetBrains Mono', monospace" }}>
-            <span>© {new Date().getFullYear()} attentions.ai · Built for regulated enterprise.</span>
+            <span>© {new Date().getFullYear()} attentions.ai · Experts in Sovereign AI for Enterprise · Dubai · Pune</span>
             <span>artiGen · Sovereign AI Platform</span>
           </div>
         </div>

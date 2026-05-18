@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, useMotionValueEvent } from 'framer-motion';
 import type { MotionValue } from 'framer-motion';
-import { FileText, GitBranch, Mic, Phone, Receipt, Plus, Sparkles, ArrowRight } from 'lucide-react';
+import { FileText, GitBranch, Mic, Phone, Receipt, Award, ShieldAlert, Plus, Sparkles, ArrowRight } from 'lucide-react';
 import {
   BEATS,
   INDUSTRIES,
@@ -16,7 +16,7 @@ import {
 import { useSplitText } from '../../hooks/useSplitText';
 import AgentPlatformStackMobile from './AgentPlatformStackMobile';
 
-const ICON_MAP = { FileText, GitBranch, Mic, Phone, Receipt, Plus } as const;
+const ICON_MAP = { FileText, GitBranch, Mic, Phone, Receipt, Award, ShieldAlert, Plus } as const;
 
 export default function AgentPlatformStack() {
   const containerRef = useRef<HTMLElement>(null);
@@ -112,7 +112,7 @@ function CopyPanel({ activeBeat, reduced }: { activeBeat: Beat; reduced: boolean
   const headlineRef = useSplitText<HTMLHeadingElement>([activeBeat.id, reduced]);
 
   return (
-    <div className="h-full flex flex-col justify-center px-14 py-12 relative z-10">
+    <div className="h-full flex flex-col justify-center px-10 lg:px-12 py-10 relative z-10">
       <motion.div
         key={activeBeat.id}
         initial={reduced ? false : { opacity: 0, y: 12 }}
@@ -120,7 +120,7 @@ function CopyPanel({ activeBeat, reduced }: { activeBeat: Beat; reduced: boolean
         transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
       >
         <div
-          className="mb-6"
+          className="mb-5"
           style={{
             fontFamily: 'var(--mono)',
             fontSize: 12,
@@ -139,7 +139,7 @@ function CopyPanel({ activeBeat, reduced }: { activeBeat: Beat; reduced: boolean
           style={{
             fontFamily: 'var(--serif)',
             fontWeight: 500,
-            fontSize: 'clamp(36px, 4vw, 64px)',
+            fontSize: 'clamp(36px, 4.4vw, 68px)',
             letterSpacing: '-0.02em',
             lineHeight: 1.05,
           }}
@@ -149,19 +149,80 @@ function CopyPanel({ activeBeat, reduced }: { activeBeat: Beat; reduced: boolean
         />
 
         <p
-          className="max-w-[500px]"
+          className="mb-7 max-w-[540px]"
           style={{
             fontSize: 'clamp(14px, 1.4vw, 18px)',
-            lineHeight: 1.5,
-            color: 'rgba(255,255,255,0.65)',
+            lineHeight: 1.55,
+            color: 'rgba(255,255,255,0.70)',
           }}
         >
           {copy.subline}
         </p>
+
+        {/* Big metric block — fills empty vertical space, matches deck case-study cadence */}
+        {copy.metric && (
+          <div
+            className="flex items-baseline gap-4 pt-6 mb-6"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}
+          >
+            <span
+              className="leading-none"
+              style={{
+                fontFamily: 'var(--serif)',
+                fontSize: 'clamp(48px, 5.5vw, 84px)',
+                fontWeight: 600,
+                fontStyle: 'italic',
+                color: '#ffffff',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              {copy.metric}
+            </span>
+            <span
+              className="max-w-[260px]"
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.55)',
+                lineHeight: 1.35,
+              }}
+            >
+              {copy.metricLabel}
+            </span>
+          </div>
+        )}
+
+        {/* Four-promises chip-row reminder — anchors the deck pillars without consuming much space */}
+        {copy.metric && (
+          <div className="flex flex-wrap gap-2 max-w-[520px]">
+            {['Sovereign', 'Deterministic', 'Cost-effective', 'Scalable'].map((p) => (
+              <span
+                key={p}
+                className="inline-flex items-center rounded-full"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(138,245,192,0.20)',
+                  color: 'rgba(255,255,255,0.70)',
+                  fontFamily: 'var(--mono)',
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  padding: '5px 11px',
+                }}
+              >
+                {p}
+              </span>
+            ))}
+          </div>
+        )}
       </motion.div>
 
       <div
-        className="absolute bottom-8 left-14"
+        className="absolute bottom-8 left-10 lg:left-12"
         style={{
           fontFamily: 'var(--mono)',
           fontSize: 12,
@@ -227,20 +288,22 @@ function IllustrationPanel({
   }
 
   return (
-    <div className="h-full relative px-8 py-12 flex flex-col gap-3 z-10">
-      <motion.div style={{ y: industryY, height: '30%' }} className="flex gap-2">
+    <div className="h-full relative px-6 py-10 flex flex-col gap-3 z-10">
+      {/* 7 industries — single row */}
+      <motion.div style={{ y: industryY, height: '22%' }} className="grid grid-cols-7 gap-1.5">
         {INDUSTRIES.map((ind) => (
           <IndustryTile key={ind.id} industry={ind} isActive={activeBeat.id === ind.id} />
         ))}
       </motion.div>
 
-      <motion.div style={{ y: agentY, height: '36%' }} className="flex gap-3">
+      {/* 7 agents + Build — 4-column wrap (2 rows × 4) so each card has breathing room */}
+      <motion.div style={{ y: agentY, height: '46%' }} className="grid grid-cols-4 gap-2">
         {AGENTS.map((a) => (
           <AgentCard key={a.id} agent={a} isActive={activeBeat.id === a.id} />
         ))}
       </motion.div>
 
-      <motion.div style={{ y: layerY, height: '34%' }} className="flex flex-col gap-1.5 justify-end">
+      <motion.div style={{ y: layerY, height: '32%' }} className="flex flex-col gap-1.5 justify-end">
         {PLATFORM_LAYERS.map((layer) => (
           <PlatformLayerBand key={layer.n} layer={layer} scrollYProgress={scrollYProgress} />
         ))}
@@ -421,6 +484,34 @@ function MotionPreview({ agentId }: { agentId: string }) {
           ))}
         </svg>
       );
+    case 'tender':
+      return (
+        <svg width={40} height={20} aria-hidden>
+          {/* Three quote bars converging to one landed-cost line */}
+          {[0, 1, 2].map((i) => (
+            <rect key={i} x={3} y={3 + i * 5} width={10 + i * 4} height="3" rx="1" fill={color} opacity={0.45 + i * 0.18}>
+              {!reduced && <animate attributeName="width" values={`${8 + i * 3};${10 + i * 4};${8 + i * 3}`} dur="1.6s" begin={`${i * 0.18}s`} repeatCount="indefinite" />}
+            </rect>
+          ))}
+          <line x1="22" y1="10" x2="30" y2="10" stroke={color} strokeWidth="0.8" opacity="0.5" />
+          <rect x="30" y="6" width="8" height="8" rx="1.5" fill={color} opacity="0.85">
+            {!reduced && <animate attributeName="opacity" values="0.6;1;0.6" dur="1.6s" repeatCount="indefinite" />}
+          </rect>
+        </svg>
+      );
+    case 'fraud':
+      return (
+        <svg width={40} height={20} aria-hidden>
+          {/* Shield + radar sweep pattern */}
+          <path d="M20 2 L34 6 L34 12 Q34 16 20 18 Q6 16 6 12 L6 6 Z" fill="rgba(138,245,192,0.10)" stroke={color} strokeWidth="0.9" />
+          {[0, 1, 2].map((i) => (
+            <circle key={i} cx="20" cy="10" r={3 + i * 3} fill="none" stroke={color} strokeWidth="0.5" opacity={0.6 - i * 0.18}>
+              {!reduced && <animate attributeName="opacity" values={`0;${0.6 - i * 0.18};0`} dur="2s" begin={`${i * 0.5}s`} repeatCount="indefinite" />}
+            </circle>
+          ))}
+          <circle cx="20" cy="10" r="1.4" fill={color} />
+        </svg>
+      );
     default:
       return null;
   }
@@ -513,41 +604,63 @@ function EngagementCard({ option, delayIndex }: { option: typeof ENGAGEMENT_OPTI
 // ============================================================
 // Beat copy — centralized so content edits stay in one place.
 // ============================================================
-function getBeatCopy(id: BeatId): { eyebrow: string; headline: string; subline: string } {
+type BeatCopy = {
+  eyebrow: string;
+  headline: string;
+  subline: string;
+  metric?: string;
+  metricLabel?: string;
+};
+
+function getBeatCopy(id: BeatId): BeatCopy {
   switch (id) {
     case 'intro':
       return {
-        eyebrow: 'SOVEREIGN AI',
+        eyebrow: 'SOVEREIGN AI · 2026 CAPABILITY DECK',
         headline: 'The sovereign AI stack. <em>Industry → agents → platform.</em> End to end.',
         subline: 'A complete picture of what runs in regulated enterprises today. Scroll through to see the industries we serve, the agents shipped in production, and the platform that holds them up.',
+        metric: '15 / 7 / 6',
+        metricLabel: 'agents live · deep-dives shown · platform layers',
       };
     case 'synthesis':
       return {
-        eyebrow: 'SOVEREIGN AI',
-        headline: 'Platform. Agents. <em>Sovereign AI,</em> end-to-end.',
-        subline: 'Three ways to start. Pick the commitment level that fits where you are.',
+        eyebrow: 'SOVEREIGN AI · THREE WAYS TO START',
+        headline: 'Three ways to start, <em>listed in order of commitment.</em>',
+        subline: 'Two-week assessment. Single agent live in four weeks. Or the full platform deployed in six. The numbers on the right are the numbers on the contract.',
+        metric: '$5K / $10K / $20K',
+        metricLabel: 'assessment · agent (from) · platform / year',
       };
     case 'build':
       return {
         eyebrow: 'AGENT · + BUILD YOUR OWN',
-        headline: 'Your workflow. <em>4–8 weeks.</em> Production-live.',
-        subline: 'Same platform. Same grounding. Same audit trail. We scope with you, build the agent, and ship it into your environment in 4–8 weeks — fixed.',
+        headline: 'Your workflow. <em>4 weeks.</em> Production-live.',
+        subline: 'Same platform. Same grounding. Same audit trail. We scope with you, build the agent, and ship it into your environment in four weeks — fixed scope, fixed fee.',
+        metric: '4 wks',
+        metricLabel: 'scope · build · cutover · measured',
       };
     default: {
       const industry = INDUSTRIES.find((i) => i.id === id);
       if (industry) {
+        const pairedAgent = AGENTS.find((a) => a.id === industry.pairedAgentId);
         return {
           eyebrow: industry.name.toUpperCase(),
           headline: industry.tagline,
           subline: getIndustrySubline(industry.id),
+          metric: pairedAgent ? getAgentMetric(pairedAgent.id).metric : undefined,
+          metricLabel: pairedAgent
+            ? `${pairedAgent.name.toLowerCase()} · ${getAgentMetric(pairedAgent.id).label}`
+            : undefined,
         };
       }
       const agent = AGENTS.find((a) => a.id === id);
       if (agent) {
+        const m = getAgentMetric(agent.id);
         return {
           eyebrow: `AGENT · ${agent.name.toUpperCase()}`,
           headline: getAgentHeadline(agent.id),
           subline: getAgentSubline(agent.id),
+          metric: m.metric,
+          metricLabel: m.label,
         };
       }
       return { eyebrow: '', headline: '', subline: '' };
@@ -555,36 +668,55 @@ function getBeatCopy(id: BeatId): { eyebrow: string; headline: string; subline: 
   }
 }
 
+function getAgentMetric(id: string): { metric: string; label: string } {
+  const map: Record<string, { metric: string; label: string }> = {
+    invoice: { metric: '88%',  label: 'no-touch post rate' },
+    pcr:     { metric: '1.2M', label: 'reports cross-linked' },
+    voice:   { metric: '~2h',  label: 'given back per doctor per day' },
+    patient: { metric: '$100K+', label: 'recovered per clinic per year' },
+    voucher: { metric: '5 min', label: 'per six-document payment packet' },
+    tender:  { metric: '4–8%', label: 'saved on every PO awarded' },
+    fraud:   { metric: '< 1s', label: 'to flag fraud at intake · 14 patterns' },
+    build:   { metric: '4 wks', label: 'to live · fixed scope' },
+  };
+  return map[id] ?? { metric: '', label: '' };
+}
+
 function getIndustrySubline(id: string): string {
   const map: Record<string, string> = {
-    logistics:  'Handwritten invoices, 3-way matched, posted to SAP before your first coffee. Thomson Group UAE runs this on 14,200 vouchers every Monday.',
-    pharma:     'Millions of lab reports distilled into a knowledge graph your researchers can query. Findings are cited and reversible — every claim traces back to source.',
-    dental:     'Every multilingual patient call transcribed, coded, and synced to your EHR. No missed follow-ups, no coding backlog.',
-    auto:       'Handwritten warranty claims read, validated against policy, posted to SAP — with a full citation trail your compliance team can replay.',
-    healthcare: 'Patient history compressed into SOAP notes in seconds. Every inference cited back to the source document, reversible on review.',
-    banking:    'KYC documents extracted, cross-verified, and stamped with a full audit trail. Regulators get the paper they need; analysts stop ctrl-F-ing PDFs.',
+    logistics:    'Handwritten invoices three-way matched and posted to the finance system before the morning coffee. A global logistics group runs this on 14,200 vouchers every Monday.',
+    pharma:       'Millions of adverse-event reports distilled into a cross-linked knowledge graph. Findings cited back to the exact source line, reviewable by your regulator.',
+    dental:       'Every patient call answered 24/7. Every consult written into a structured note in seconds. Audio never leaves the clinic.',
+    auto:         'Warranty fraud scored at the moment of upload — fourteen patterns checked simultaneously in under a second. Clean claims pay automatically.',
+    healthcare:   'Patient context across six to twelve tools. Books, bills, reminds. Only the unusual calls reach a human.',
+    banking:      'KYC and trade-finance documents extracted, cross-verified, and stamped with a full audit trail. Regulators get the paper they need; analysts stop ctrl-F-ing PDFs.',
+    'real-estate':'Every quote in every format converted to one true landed cost — tax, freight, retention and payment terms included. Benchmarked against past paid and government rate cards.',
   };
   return map[id] ?? '';
 }
 
 function getAgentHeadline(id: string): string {
   const map: Record<string, string> = {
-    invoice: 'Reads it. <em>Cites it.</em> Posts it.',
-    pcr:     'Graphs millions of reports. <em>Cites every edge.</em>',
-    voice:   'Hears the call. <em>Structures it.</em> Syncs it.',
-    patient: '30-second SOAP. <em>Every claim sourced.</em>',
-    voucher: 'Handwritten in. <em>SAP out.</em> Reversible.',
+    invoice: 'Any format in. <em>Clean finance-system entry out.</em>',
+    pcr:     'Cross-link millions of reports. <em>Cite the root cause.</em>',
+    voice:   'Listen on the premises. Write the note. <em>Sync to records.</em>',
+    patient: 'Answer every call. <em>Book. Bill. Remind.</em>',
+    voucher: 'Six documents in. <em>Clean payment out.</em>',
+    tender:  'Every quote, every spec, <em>every tax.</em>',
+    fraud:   'Every claim, every pattern, <em>every reason.</em>',
   };
   return map[id] ?? '';
 }
 
 function getAgentSubline(id: string): string {
   const map: Record<string, string> = {
-    invoice: '88% no-touch. 6× ROI week 1. <30s per invoice. Running at Thomson Group UAE on 14,200 vouchers every Monday.',
-    pcr:     'Lab reports → structured knowledge graph with cited edges. Reversible. Used across pharma research teams to shrink lit-review from weeks to hours.',
-    voice:   'Multilingual call audio → structured transcripts with extracted action items. Dental clinic networks use this across 30+ languages.',
-    patient: 'Patient call → SOAP note in 30 seconds. Every claim cited to source. Reversible until approval. Hospital systems use this for follow-up triage.',
-    voucher: 'Warranty claims handwritten by dealerships → SAP vouchers with full audit trail. Auto aftermarket uses this at scale across 200+ dealer networks.',
+    invoice: '88% posted with zero human touch. Reads any format · matches against the PO and goods-received note · posts in under 30 seconds with full audit trail.',
+    pcr:     '1.2M reports cross-linked across models, regions and suppliers. Same symptom, same supplier, same root cause — clustered in one view. Cited brief drafted in minutes.',
+    voice:   '~2 hours given back to each doctor per day. Listens on the premises during the consult, writes the structured note with diagnosis codes filled in, syncs to records. Audio deleted after.',
+    patient: '$100K+ recovered per clinic per year. Picks up every call 24/7 in the patient’s local language. Books, reschedules, checks insurance, sends reminders — only unusual calls go to staff.',
+    voucher: '5 minutes per six-document payment packet. Reads sales order + delivery note + invoice + customs + payment instruction + internal approval. Match rate above 97%.',
+    tender:  '4–8% saved on every PO awarded. Reads every quote in any format, standardises to one true landed cost, benchmarks against past paid + government rate cards. Live in real estate · Mumbai.',
+    fraud:   '< 1 second to flag fraud at intake. 14 specialised models run simultaneously per claim, each flag cited to the exact photo, invoice or vehicle history that triggered it. Live across 700 dealers.',
   };
   return map[id] ?? '';
 }

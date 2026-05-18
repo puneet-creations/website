@@ -68,8 +68,8 @@ export default function AgentsCloser() {
                 color: '#000000',
               }}
             >
-              Five agents today.{' '}
-              <span style={{ fontStyle: 'italic' }}>Five more next quarter.</span>
+              Fifteen agents today.{' '}
+              <span style={{ fontStyle: 'italic' }}>More every quarter.</span>
             </h2>
             <p
               className="max-w-[560px] mx-auto md:mx-0"

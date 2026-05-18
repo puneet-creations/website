@@ -6,6 +6,8 @@ import ParallaxHero from '../components/ParallaxHero';
 import ClientsStrip from '../components/ClientsStrip';
 import PlatformFlow from '../components/PlatformFlow';
 import AgentDeepDiveScroll from '../components/AgentDeepDiveScroll';
+import MoreAgentsStrip from '../components/agents/MoreAgentsStrip';
+import WhyUsTriad from '../components/agents/WhyUsTriad';
 import ProductionProof from '../components/landing/ProductionProof';
 import AgentsCloser from '../components/landing/AgentsCloser';
 
@@ -38,12 +40,12 @@ export default function AgentsPage() {
       <main>
         <PageHero
           label="Live production agents"
-          title="Five agents."
+          title="Fifteen agents."
           titleAccent="One sovereign base."
           description="Each runs on the same platform. Scroll through to see inputs, live motion stories, workflows, and outcomes."
           accent="#8af5c0"
           orbColor="#c0f5e0"
-          pills={['5 agents live', '3 regulated industries', '0 hallucination incidents', '88% no-touch', '12,400 docs/hr']}
+          pills={['15 agents live', '3 regulated industries', '0 security incidents', '88% no-touch', '12,400 docs/hr']}
         />
 
         <ClientsStrip />
@@ -52,7 +54,7 @@ export default function AgentsPage() {
 
         <ParallaxHero
           imageSrc="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop"
-          headline="Five agents."
+          headline="Fifteen agents."
           headlineAccent="Live today."
           subline="Handwritten invoices. Voice consultations. Knowledge graphs across millions of reports. Each running on your hardware right now."
           label="In production"
@@ -63,6 +65,8 @@ export default function AgentsPage() {
         <div id="agent-deep-dive">
           <AgentDeepDiveScroll />
         </div>
+
+        <MoreAgentsStrip />
 
         <ParallaxHero
           imageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop"
@@ -75,6 +79,8 @@ export default function AgentsPage() {
         />
 
         <ProductionProof />
+
+        <WhyUsTriad />
 
         <AgentsCloser />
       </main>

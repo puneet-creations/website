@@ -1,20 +1,25 @@
 /**
  * solutions.ts — data source for the /solutions page.
  *
- * Defines the 5 agents, 10 industries, 5×10 fit matrix with reasoning
- * strings, the 3 in-production anchor industries, and the 7 adjacent
- * industry card specs. Components in src/components/solutions/ are
- * pure consumers of this data.
+ * Defines the 7 deep-dive agents (5 original + Tender + Fraud per Capability
+ * Deck v2), 11 industries (+ Real Estate), 7×11 fit matrix, the 3 in-production
+ * anchor industries, and the adjacent industry card specs. Components in
+ * src/components/solutions/ are pure consumers of this data.
+ *
+ * Note: total marketing claim is 15 agents live in production — 7 are detailed
+ * here, the other 8 ship across pharma, banking, hospitality, legal, aviation,
+ * retail, insurance, and additional manufacturing flavors.
  */
 
 export type Fit = 'proven' | 'fits' | 'none';
 
-export type AgentId = 'invoice' | 'voucher' | 'pcr' | 'voice' | 'patient';
+export type AgentId = 'invoice' | 'voucher' | 'pcr' | 'voice' | 'patient' | 'tender' | 'fraud';
 
 export type IndustryId =
   | 'finance-logistics'
   | 'healthcare'
   | 'manufacturing'
+  | 'real-estate'
   | 'insurance'
   | 'banking'
   | 'hospitality'
@@ -32,11 +37,13 @@ export type Agent = {
 };
 
 export const AGENTS: Agent[] = [
-  { id: 'invoice',  name: 'Invoice Intelligence',   short: 'Invoice Intel' },
-  { id: 'voucher',  name: 'Voucher Matching',       short: 'Voucher Match' },
-  { id: 'pcr',      name: 'PCR Intelligence',       short: 'PCR Intel' },
-  { id: 'voice',    name: 'Voice AI · SOAP',        short: 'Voice AI' },
-  { id: 'patient',  name: 'Patient Experience OS',  short: 'Patient OS' },
+  { id: 'invoice',  name: 'Invoice Intelligence',         short: 'Invoice Intel' },
+  { id: 'voucher',  name: 'Voucher Matching',             short: 'Voucher Match' },
+  { id: 'pcr',      name: 'Defect-report Intelligence',   short: 'Defect Intel' },
+  { id: 'voice',    name: 'Doctor’s Notes',               short: 'Doctor Notes' },
+  { id: 'patient',  name: 'Patient Call Agent',           short: 'Patient Call' },
+  { id: 'tender',   name: 'Tender Intelligence',          short: 'Tender Intel' },
+  { id: 'fraud',    name: 'Fraud Intelligence',           short: 'Fraud Intel' },
 ];
 
 // ── Industries ────────────────────────────────────────────────────────
@@ -53,6 +60,7 @@ export const INDUSTRIES: Industry[] = [
   { id: 'finance-logistics', name: 'Finance & Logistics', short: 'F&L', iconName: 'Building2',    proven: true  },
   { id: 'healthcare',        name: 'Healthcare',          short: 'HC',  iconName: 'Stethoscope',  proven: true  },
   { id: 'manufacturing',     name: 'Manufacturing',       short: 'Mfg', iconName: 'Factory',      proven: true  },
+  { id: 'real-estate',       name: 'Real Estate',         short: 'RE',  iconName: 'Building',     proven: true  },
   { id: 'insurance',         name: 'Insurance',           short: 'Ins', iconName: 'ShieldCheck',  proven: false },
   { id: 'banking',           name: 'Banking',             short: 'Bnk', iconName: 'Landmark',     proven: false },
   { id: 'hospitality',       name: 'Hospitality',         short: 'Hsp', iconName: 'Hotel',        proven: false },
@@ -62,15 +70,16 @@ export const INDUSTRIES: Industry[] = [
   { id: 'retail',            name: 'Retail',              short: 'Ret', iconName: 'ShoppingBag',  proven: false },
 ];
 
-// ── Fit matrix: 5 agents × 10 industries ──────────────────────────────
+// ── Fit matrix: 7 agents × 11 industries ──────────────────────────────
 
 type Cell = { fit: Fit; reason: string };
 
 export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
   invoice: {
-    'finance-logistics': { fit: 'proven', reason: 'Live at Thomson — 200+ handwritten invoices/day posted no-touch to SAP.' },
+    'finance-logistics': { fit: 'proven', reason: 'Live in logistics — 200+ handwritten invoices/day posted no-touch to the finance system.' },
     'healthcare':        { fit: 'fits',   reason: 'Hospital AP — vendor invoices across pharmacy, equipment, services.' },
     'manufacturing':     { fit: 'fits',   reason: 'Supplier AP across plants and business units.' },
+    'real-estate':       { fit: 'fits',   reason: 'Developer AP — vendor invoices across multiple projects and sites.' },
     'insurance':         { fit: 'fits',   reason: 'Vendor AP — claims adjuster invoices, IT services, regional offices.' },
     'banking':           { fit: 'fits',   reason: 'Branch AP and expense management at scale.' },
     'hospitality':       { fit: 'fits',   reason: 'F&B, maintenance, linens, utilities — AP across properties.' },
@@ -80,9 +89,10 @@ export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
     'retail':            { fit: 'fits',   reason: 'Thousands of suppliers × tens of thousands of SKUs.' },
   },
   voucher: {
-    'finance-logistics': { fit: 'proven', reason: 'Live at Thomson — 200-page vouchers matched in 5 min (was 2 hrs).' },
+    'finance-logistics': { fit: 'proven', reason: 'Live in logistics — six-doc payment packets matched in 5 min (was 2 hrs).' },
     'healthcare':        { fit: 'none',   reason: '' },
     'manufacturing':     { fit: 'fits',   reason: 'Supplier reconciliation — PO + GRN + invoice + contract packets.' },
+    'real-estate':       { fit: 'fits',   reason: 'Construction billing packets — contract, milestone, retention, payment.' },
     'insurance':         { fit: 'fits',   reason: 'Claims bundles are voucher packets — same multi-doc correlation.' },
     'banking':           { fit: 'fits',   reason: 'Trade finance — LC, bill of lading, shipping docs in one packet.' },
     'hospitality':       { fit: 'none',   reason: '' },
@@ -93,8 +103,9 @@ export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
   },
   pcr: {
     'finance-logistics': { fit: 'none',   reason: '' },
-    'healthcare':        { fit: 'fits',   reason: 'Adverse event reports — same knowledge-graph pattern as PCRs.' },
-    'manufacturing':     { fit: 'proven', reason: 'Live at Daimler — 1.2M+ reports indexed, root cause in hours.' },
+    'healthcare':        { fit: 'fits',   reason: 'Adverse event reports — same knowledge-graph pattern as defect reports.' },
+    'manufacturing':     { fit: 'proven', reason: 'Live in automotive — 1.2M+ reports indexed, root cause in hours.' },
+    'real-estate':       { fit: 'none',   reason: '' },
     'insurance':         { fit: 'fits',   reason: 'Claims correlation — find the same incident described 3 ways.' },
     'banking':           { fit: 'none',   reason: '' },
     'hospitality':       { fit: 'none',   reason: '' },
@@ -105,8 +116,9 @@ export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
   },
   voice: {
     'finance-logistics': { fit: 'none',   reason: '' },
-    'healthcare':        { fit: 'proven', reason: 'Live at Qira — SOAP + ICD-10 in ~30s. Audio discarded.' },
+    'healthcare':        { fit: 'proven', reason: 'Live in 38 clinics — structured clinical note in ~30s. Audio discarded.' },
     'manufacturing':     { fit: 'fits',   reason: 'Field inspection voice notes → structured defect reports.' },
+    'real-estate':       { fit: 'none',   reason: '' },
     'insurance':         { fit: 'fits',   reason: 'Adjuster calls → structured claim notes with cited findings.' },
     'banking':           { fit: 'fits',   reason: 'Wealth advisory calls → compliant client summaries.' },
     'hospitality':       { fit: 'fits',   reason: 'Concierge + service calls → structured guest records.' },
@@ -117,8 +129,9 @@ export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
   },
   patient: {
     'finance-logistics': { fit: 'none',   reason: '' },
-    'healthcare':        { fit: 'proven', reason: 'Live at Qira — $400K+ recovered/location, no system replacements.' },
+    'healthcare':        { fit: 'proven', reason: 'Live in 38 clinics — $100K+ recovered/clinic/yr, no system replacements.' },
     'manufacturing':     { fit: 'none',   reason: '' },
+    'real-estate':       { fit: 'fits',   reason: 'Sales inquiries 24/7 — qualifies leads, books site visits across CRM.' },
     'insurance':         { fit: 'fits',   reason: 'Claims intake + follow-up across 6–12 policy/claims tools.' },
     'banking':           { fit: 'fits',   reason: 'Wealth client service — every call answered, every tool synced.' },
     'hospitality':       { fit: 'fits',   reason: 'Front desk 24/7 across PMS, booking, CRM — zero replacement.' },
@@ -126,6 +139,32 @@ export const FIT_MATRIX: Record<AgentId, Record<IndustryId, Cell>> = {
     'pharma':            { fit: 'none',   reason: '' },
     'aviation':          { fit: 'none',   reason: '' },
     'retail':            { fit: 'fits',   reason: 'Customer service — returns, warranty, order status 24/7.' },
+  },
+  tender: {
+    'finance-logistics': { fit: 'fits',   reason: 'Carrier + 3PL RFPs benchmarked against past paid rates.' },
+    'healthcare':        { fit: 'fits',   reason: 'Equipment + service tenders across facilities, one comparable view.' },
+    'manufacturing':     { fit: 'fits',   reason: 'Supplier RFQs across plants — apples-to-apples landed cost.' },
+    'real-estate':       { fit: 'proven', reason: 'Live in real estate — every quote standardised to landed cost, 4–8% saved on every PO awarded.' },
+    'insurance':         { fit: 'none',   reason: '' },
+    'banking':           { fit: 'none',   reason: '' },
+    'hospitality':       { fit: 'fits',   reason: 'Vendor RFPs across properties — F&B, linen, services.' },
+    'legal':             { fit: 'none',   reason: '' },
+    'pharma':            { fit: 'fits',   reason: 'CRO and trial-supplier RFPs benchmarked against past awards.' },
+    'aviation':          { fit: 'fits',   reason: 'MRO + parts supplier tenders compared at true landed cost.' },
+    'retail':            { fit: 'fits',   reason: 'Supplier RFPs across thousands of SKUs.' },
+  },
+  fraud: {
+    'finance-logistics': { fit: 'fits',   reason: 'Cargo claim fraud — pattern signals scored at intake in <1s.' },
+    'healthcare':        { fit: 'fits',   reason: 'Billing fraud — claim correlation across providers.' },
+    'manufacturing':     { fit: 'proven', reason: 'Live in automotive — 15K dealer warranty claims/mo scored in <1s, 14 patterns checked simultaneously.' },
+    'real-estate':       { fit: 'none',   reason: '' },
+    'insurance':         { fit: 'fits',   reason: 'Claim-fraud detection at first notice of loss — 14 patterns at intake.' },
+    'banking':           { fit: 'fits',   reason: 'Transaction-fraud scoring at the moment of authorisation.' },
+    'hospitality':       { fit: 'none',   reason: '' },
+    'legal':             { fit: 'none',   reason: '' },
+    'pharma':            { fit: 'fits',   reason: 'Clinical-trial data fraud — outlier and duplication detection.' },
+    'aviation':          { fit: 'none',   reason: '' },
+    'retail':            { fit: 'fits',   reason: 'Return + gift-card fraud — pattern-scored at intake.' },
   },
 };
 
@@ -160,13 +199,13 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
       'SOWs & contracts',
     ],
     agents: ['invoice', 'voucher'],
-    client: 'Thomson Group UAE',
+    client: 'Global logistics group',
     region: 'Dubai · 20+ business units',
     metric: '88%',
     metricLabel: 'invoices posted to SAP with zero human touch',
     quote:
       'The team only sees the 12% that actually needs a human decision. Everything else is done. Posted. Audited. Before we\u2019ve had our morning coffee.',
-    attrib: 'Thomson Group UAE · Accounts Payable',
+    attrib: 'Logistics group · Dubai · Accounts Payable',
     chips: ['LIVE · 200+ INVOICES/DAY', 'WEEK 1 ROI', '0 HALLUCINATION INCIDENTS'],
   },
   {
@@ -181,13 +220,13 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
       'Insurance intake',
     ],
     agents: ['voice', 'patient'],
-    client: 'Qira Labs US',
+    client: 'Multi-state dental group',
     region: '38 locations · multi-state',
-    metric: '$400K+',
-    metricLabel: 'recovered per location per year',
+    metric: '$100K+',
+    metricLabel: 'recovered per clinic per year',
     quote:
       'The doctors look at the patients again, not the screens. The patients notice. The notes are better than what we were hand-typing.',
-    attrib: 'Qira Labs US · Clinical Operations',
+    attrib: 'Dental group · 38 clinics · Clinical Operations',
     chips: ['LIVE · 38 LOCATIONS', 'HIPAA', 'AUDIO DISCARDED'],
   },
   {
@@ -202,13 +241,13 @@ export const ANCHOR_INDUSTRIES: AnchorIndustry[] = [
       'Supplier traceability',
     ],
     agents: ['pcr'],
-    client: 'Daimler Asia',
-    region: 'Regional quality operations',
+    client: 'Global automotive maker',
+    region: 'SE Asia · regional quality operations',
     metric: '1.2M',
     metricLabel: 'reports indexed, root cause in hours',
     quote:
       'For the first time, root cause traces back to a supplier batch in hours. Our engineers spend their time fixing, not hunting.',
-    attrib: 'Daimler Asia · Quality Engineering',
+    attrib: 'Automotive OEM · SE Asia · Quality Engineering',
     chips: ['LIVE · 1.2M+ REPORTS', 'HOURS TO ROOT CAUSE', 'AUTO-CITED 8D'],
   },
 ];

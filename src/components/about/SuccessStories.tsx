@@ -6,9 +6,9 @@ import { whiteCardStyle, AccentStrip } from '../common/whiteCard';
 import { SUCCESS_STORIES, PAGE_ACCENT as ACCENT } from '../../data/about';
 
 /**
- * SuccessStories — 3 customer outcome cards. Same Thomson/Qira/Daimler
- * data as /solutions and /agents, but framed as proof of delivery
- * (track record), not vertical fit.
+ * SuccessStories — 3 customer outcome cards. Same domain-anonymized
+ * (logistics / dental / automotive) data as /solutions and /agents,
+ * but framed as proof of delivery (track record), not vertical fit.
  */
 export default function SuccessStories() {
   const [ref, inView] = useInView<HTMLElement>(0.15);

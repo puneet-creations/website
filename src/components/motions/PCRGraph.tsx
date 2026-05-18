@@ -1,7 +1,7 @@
 import JourneyFlow from './JourneyFlow';
 
 /**
- * PCRGraph — PCR Intelligence (Daimler Asia).
+ * PCRGraph — Defect-report Intelligence (global automotive maker · SE Asia).
  * 4 wide-format scenes. viewBox 1200×500. 14px+ text.
  */
 export default function PCRGraph() {
@@ -91,7 +91,7 @@ function S2() {
         </g>
       ))}
 
-      <text x="600" y="440" fontSize="14" fill="rgba(91,118,254,0.6)" textAnchor="middle">Taxonomy: Daimler Q-Codes v4.2 · 12,400 failure modes</text>
+      <text x="600" y="440" fontSize="14" fill="rgba(91,118,254,0.6)" textAnchor="middle">Taxonomy: OEM Q-Codes v4.2 · 12,400 failure modes</text>
     </svg>
   );
 }

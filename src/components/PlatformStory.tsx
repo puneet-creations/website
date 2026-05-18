@@ -140,7 +140,7 @@ export function AgentFamilies() {
               <li>▸ Writes to SAP · Oracle · Dynamics · NetSuite</li>
             </ul>
             <div className="capsule-light rounded-full inline-block text-[14px]">
-              Thomson Group · 18,000 vouchers/mo
+              Logistics group · 18,000 vouchers/mo
             </div>
           </div>
 
@@ -210,7 +210,7 @@ export function AgentFamilies() {
               <li>▸ Writes to Dentrix · Epic · Salesforce</li>
             </ul>
             <div className="capsule-light rounded-full inline-block text-[14px]">
-              Qira Labs · 2,400 consults/week
+              Dental group · 2,400 consults/week
             </div>
           </div>
 
@@ -290,7 +290,7 @@ export function AgentFamilies() {
               <li>▸ Image forensics (stamps · signatures)</li>
             </ul>
             <div className="capsule-light rounded-full inline-block text-[14px]">
-              Daimler Asia · warranty claims
+              Automotive OEM · warranty claims
             </div>
           </div>
         </div>
@@ -914,7 +914,7 @@ export function ScaleAtVolume() {
           {/* Header row */}
           <div className="flex items-baseline justify-between mb-8">
             <div>
-              <div className="micro-upper mb-1" style={{ color: 'rgba(0,0,0,0.50)' }}>Monday backlog · Thomson Group</div>
+              <div className="micro-upper mb-1" style={{ color: 'rgba(0,0,0,0.50)' }}>Monday backlog · Logistics group</div>
               <div className="font-display text-[28px] text-black">14,200 vouchers</div>
             </div>
             <div className="text-right">

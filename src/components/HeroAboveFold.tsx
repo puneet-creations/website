@@ -30,8 +30,8 @@ function MatchIcon({ accent: _a }: { accent: string }) {
 const gtmCards = [
   {
     id: 1, order: 0, x: '-460px', y: '10px', zIndex: 30, direction: 'left' as const,
-    label: 'Agents in Production', sublabel: '5 agents · 3 industries', metric: '88%',
-    details: 'Zero hallucination incidents. Live at Thomson Group, Daimler Asia, Qira Labs.',
+    label: 'Agents in Production', sublabel: '15 agents · 3 industries', metric: '88%',
+    details: 'Zero security incidents on record. Live in logistics, automotive, and healthcare.',
     accent: '#8af5c0',
     image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600&h=800&fit=crop',
   },
@@ -54,32 +54,32 @@ const gtmCards = [
 const agentCards = [
   {
     id: 11, order: 0, x: '-744px', y: '8px', zIndex: 50, direction: 'left' as const,
-    label: 'Invoice Intelligence', sublabel: 'Thomson Group · Dubai', metric: '88%',
-    details: 'Reads any format. Matches the PO, posts to SAP in under 30 seconds.',
+    label: 'Invoice Intelligence', sublabel: 'Logistics · Dubai', metric: '88%',
+    details: 'Reads any format. Matches the PO, posts to the finance system in under 30 seconds.',
     accent: '#8af5c0', icon: InvoiceIcon,
   },
   {
     id: 12, order: 1, x: '-372px', y: '20px', zIndex: 40, direction: 'left' as const,
-    label: 'PCR Intelligence', sublabel: 'Daimler Asia', metric: '1.2M',
-    details: 'Knowledge graph across 1.2M+ reports. Root cause in hours.',
+    label: 'Defect-report Intelligence', sublabel: 'Automotive · SE Asia', metric: '1.2M',
+    details: 'Cross-linked across models, regions, suppliers. Root cause in hours.',
     accent: '#8ea6ff', icon: GraphIcon,
   },
   {
     id: 13, order: 2, x: '0px', y: '5px', zIndex: 30, direction: 'right' as const,
-    label: 'Voice AI · SOAP', sublabel: 'Qira Labs · 38 clinics', metric: '~30s',
-    details: 'Listens on-prem. Audio discarded. SOAP + ICD-10 synced to EHR.',
+    label: 'Doctor’s Notes', sublabel: 'Healthcare · 38 clinics', metric: '~2h',
+    details: 'Listens on-prem. Audio discarded. Structured note synced to records.',
     accent: '#f5a8d4', icon: MicIcon,
   },
   {
     id: 14, order: 3, x: '372px', y: '25px', zIndex: 20, direction: 'right' as const,
-    label: 'Patient Experience OS', sublabel: 'Qira Labs · 24/7', metric: '$400K+',
-    details: 'Every call answered 24/7. Orchestrates 6-12 tools without replacing any.',
+    label: 'Patient Call Agent', sublabel: 'Healthcare · 24/7', metric: '$100K+',
+    details: 'Every call answered 24/7. Books, bills, reminds — only unusual calls go to staff.',
     accent: '#ffd080', icon: PhoneIcon,
   },
   {
     id: 15, order: 4, x: '744px', y: '12px', zIndex: 10, direction: 'left' as const,
-    label: 'Voucher Matching', sublabel: 'Thomson Group · Dubai', metric: '5 min',
-    details: '6 doc types per packet. Cross-matched, flagged before payment.',
+    label: 'Voucher Matching', sublabel: 'Logistics · Dubai', metric: '5 min',
+    details: 'Six payment documents per packet. Cross-matched, flagged before payment.',
     accent: '#a0dc8c', icon: MatchIcon,
   },
 ];
@@ -203,9 +203,9 @@ export default function HeroAboveFold() {
             className="flex flex-wrap items-center justify-center gap-8 mt-4"
           >
             {[
-              { name: 'Thomson Group', industry: 'Logistics · Dubai', color: '#000000' },
-              { name: 'Daimler Asia', industry: 'Auto OEM · SE Asia', color: '#8ea6ff' },
-              { name: 'Qira Labs', industry: '38 Clinics · SF', color: '#f5a8d4' },
+              { name: 'Logistics group', industry: 'Dubai · 20+ business units', color: '#000000' },
+              { name: 'Automotive OEM', industry: 'SE Asia · regional quality ops', color: '#8ea6ff' },
+              { name: 'Dental group', industry: '38 clinics · multi-state', color: '#f5a8d4' },
             ].map((c) => (
               <div key={c.name} className="flex items-center gap-2.5">
                 <span className="w-2 h-2 rounded-full" style={{ background: c.color }} />

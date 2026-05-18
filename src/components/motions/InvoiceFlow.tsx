@@ -1,7 +1,7 @@
 import JourneyFlow from './JourneyFlow';
 
 /**
- * InvoiceFlow — Invoice Intelligence (Thomson Group UAE).
+ * InvoiceFlow — Invoice Intelligence (global logistics group · Dubai).
  * 4 wide-format scenes for horizontal slider. viewBox 1200×500.
  * All text 14px+ in SVG space. Responsive via w-full h-auto.
  */
@@ -30,7 +30,7 @@ function S1() {
       <line x1="70" y1="110" x2="530" y2="110" stroke="#c0b080" />
 
       <text x="70" y="140" fontSize="14" fontWeight="600" fill="#888">BILL TO</text>
-      <text x="70" y="160" fontSize="15" fill="#333">Thomson Group UAE · AP Dept</text>
+      <text x="70" y="160" fontSize="15" fill="#333">Logistics group · Dubai · AP Dept</text>
       <text x="340" y="140" fontSize="14" fontWeight="600" fill="#888">REF</text>
       <text x="340" y="160" fontSize="15" fill="#333">PO-4473 · GRN-8821</text>
 
@@ -203,7 +203,7 @@ function S4() {
 
       {/* Metric cards */}
       {[
-        { metric: '88%', label: 'NO-TOUCH', sub: 'Thomson Group', color: '#8af5c0', x: 80 },
+        { metric: '88%', label: 'NO-TOUCH', sub: 'Logistics group', color: '#8af5c0', x: 80 },
         { metric: '6×', label: 'ROI WEEK 1', sub: '200+ invoices/day', color: '#ffd080', x: 440 },
         { metric: '<30s', label: 'INVOICE→ERP', sub: 'End-to-end', color: '#5b76fe', x: 800 },
       ].map((m) => (

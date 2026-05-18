@@ -87,7 +87,7 @@ const NAV_ITEMS = [
         title: 'Company',
         items: [
           { label: 'About', description: 'From idea to production', icon: Info, link: '/about' },
-          { label: 'Solutions by industry', description: '10 industries \u00b7 5 agents', icon: Users, link: '/solutions' },
+          { label: 'Solutions by industry', description: '10 industries \u00b7 15 agents', icon: Users, link: '/solutions' },
           { label: 'FAQ', description: 'Questions we hear most', icon: HelpCircle, link: '/faq' },
           { label: 'Contact', description: 'Two doors \u00b7 one phone call', icon: Phone, link: '/contact' },
         ],

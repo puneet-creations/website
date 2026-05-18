@@ -1,6 +1,6 @@
 // src/components/landing/AgentPlatformStackMobile.tsx
 import { useInView } from '../../hooks/useInView';
-import { FileText, GitBranch, Mic, Phone, Receipt, Plus, ArrowRight, Sparkles } from 'lucide-react';
+import { FileText, GitBranch, Mic, Phone, Receipt, Award, ShieldAlert, Plus, ArrowRight, Sparkles } from 'lucide-react';
 import {
   INDUSTRIES,
   AGENTS,
@@ -8,7 +8,7 @@ import {
   ENGAGEMENT_OPTIONS,
 } from '../../data/agentPlatformStack';
 
-const ICON_MAP = { FileText, GitBranch, Mic, Phone, Receipt, Plus } as const;
+const ICON_MAP = { FileText, GitBranch, Mic, Phone, Receipt, Award, ShieldAlert, Plus } as const;
 
 export default function AgentPlatformStackMobile() {
   return (
@@ -93,7 +93,7 @@ function AgentsStack() {
   return (
     <div className="px-6 py-10 max-w-[560px] mx-auto">
       <div className="mb-4" style={{ fontFamily: 'var(--mono)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', color: '#8af5c0' }}>
-        AGENTS · 5 LIVE + BUILD YOURS
+        AGENTS · 7 DEEP-DIVE LIVE + BUILD YOURS
       </div>
       <div className="flex flex-col gap-3">
         {AGENTS.map((agent) => {

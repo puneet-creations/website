@@ -21,13 +21,19 @@ export default function PlatformPage() {
   return (
     <main>
       <PageHero
-        label="The platform"
+        label="The platform · experts in sovereign AI for enterprise"
         title="The sovereign AI platform"
         titleAccent="that ships agents to production."
-        description="artiGen is the base. Document agents, voice agents, and the messy multimodal combinations of both — built on your hardware, grounded in your data, auditable by your regulators."
+        description="Experts in Sovereign AI Agents for Enterprise. Cost-optimized, secure on-prem, scalable to enterprise volumes — millions of documents, your hardware, your regulator’s rules."
         accent="#5b76fe"
         orbColor="#c0d0f5"
-        pills={['On-prem · sovereign', 'Hallucination-controlled', 'Deterministic', 'Cited · auditable', '12,400 docs/hr']}
+        pills={[
+          'Cost-optimized',
+          'Secure · run on-prem',
+          'Scalable · millions of docs',
+          'Hallucination-controlled',
+          '12,400 docs/hr',
+        ]}
       />
 
       <ClientsStrip />

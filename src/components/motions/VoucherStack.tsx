@@ -1,7 +1,7 @@
 import JourneyFlow from './JourneyFlow';
 
 /**
- * VoucherStack — Voucher Matching (Thomson Group UAE).
+ * VoucherStack — Voucher Matching (global logistics group · Dubai).
  * 4 wide-format scenes. viewBox 1200×500.
  */
 export default function VoucherStack() {
@@ -161,12 +161,12 @@ function S4() {
 
       {/* Monday backlog */}
       <rect x="200" y="250" width="800" height="100" rx="12" fill="rgba(255,208,128,0.04)" stroke="rgba(255,208,128,0.10)" />
-      <text x="600" y="285" fontSize="16" fontWeight="700" fill="#ffd080" textAnchor="middle">Monday backlog · Thomson Group</text>
+      <text x="600" y="285" fontSize="16" fontWeight="700" fill="#ffd080" textAnchor="middle">Monday backlog · Logistics group</text>
       <text x="400" y="320" fontSize="18" fontWeight="700" fill="#fff">14,200 vouchers</text>
       <text x="800" y="320" fontSize="18" fontWeight="700" fill="#8af5c0">Cleared by 10:42 AM</text>
 
       <rect x="300" y="390" width="600" height="50" rx="25" fill="rgba(138,245,192,0.08)" stroke="rgba(138,245,192,0.15)" />
-      <text x="600" y="420" fontSize="16" fontWeight="700" fill="#8af5c0" textAnchor="middle">Live at Thomson Group · Dubai · Fortune 500 logistics</text>
+      <text x="600" y="420" fontSize="16" fontWeight="700" fill="#8af5c0" textAnchor="middle">Live in logistics · Dubai · 20+ business units</text>
     </svg>
   );
 }

@@ -2,8 +2,8 @@
 
 export type BeatId =
   | 'intro'
-  | 'logistics' | 'pharma' | 'dental' | 'auto' | 'healthcare' | 'banking'
-  | 'invoice' | 'pcr' | 'voice' | 'patient' | 'voucher' | 'build'
+  | 'logistics' | 'pharma' | 'dental' | 'auto' | 'healthcare' | 'banking' | 'real-estate'
+  | 'invoice' | 'pcr' | 'voice' | 'patient' | 'voucher' | 'tender' | 'fraud' | 'build'
   | 'synthesis';
 
 export type Beat = {
@@ -12,21 +12,26 @@ export type Beat = {
   end: number;    // 0..1, exclusive (except synthesis which extends through 1.0)
 };
 
+// 17 beats: intro · 7 industries · 7 agents · build · synthesis
+// 7 industries × 0.05 + 7 agents × 0.05 + intro 0.05 + build 0.05 + synthesis 0.20 = 1.00
 export const BEATS: readonly Beat[] = [
   { id: 'intro',       start: 0.00, end: 0.05 },
-  { id: 'logistics',   start: 0.05, end: 0.12 },
-  { id: 'pharma',      start: 0.12, end: 0.19 },
-  { id: 'dental',      start: 0.19, end: 0.26 },
-  { id: 'auto',        start: 0.26, end: 0.33 },
-  { id: 'healthcare',  start: 0.33, end: 0.40 },
-  { id: 'banking',     start: 0.40, end: 0.47 },
-  { id: 'invoice',     start: 0.47, end: 0.53 },
-  { id: 'pcr',         start: 0.53, end: 0.59 },
-  { id: 'voice',       start: 0.59, end: 0.65 },
-  { id: 'patient',     start: 0.65, end: 0.71 },
-  { id: 'voucher',     start: 0.71, end: 0.77 },
-  { id: 'build',       start: 0.77, end: 0.83 },
-  { id: 'synthesis',   start: 0.83, end: 1.001 },
+  { id: 'logistics',   start: 0.05, end: 0.10 },
+  { id: 'pharma',      start: 0.10, end: 0.15 },
+  { id: 'dental',      start: 0.15, end: 0.20 },
+  { id: 'auto',        start: 0.20, end: 0.25 },
+  { id: 'healthcare',  start: 0.25, end: 0.30 },
+  { id: 'banking',     start: 0.30, end: 0.35 },
+  { id: 'real-estate', start: 0.35, end: 0.40 },
+  { id: 'invoice',     start: 0.40, end: 0.45 },
+  { id: 'pcr',         start: 0.45, end: 0.50 },
+  { id: 'voice',       start: 0.50, end: 0.55 },
+  { id: 'patient',     start: 0.55, end: 0.60 },
+  { id: 'voucher',     start: 0.60, end: 0.65 },
+  { id: 'tender',      start: 0.65, end: 0.70 },
+  { id: 'fraud',       start: 0.70, end: 0.75 },
+  { id: 'build',       start: 0.75, end: 0.80 },
+  { id: 'synthesis',   start: 0.80, end: 1.001 },
 ] as const;
 
 /**
@@ -41,11 +46,11 @@ export function activeBeatForProgress(p: number): Beat {
   return BEATS[BEATS.length - 1];
 }
 
-export type AgentLiveId = 'invoice' | 'pcr' | 'voice' | 'patient' | 'voucher';
+export type AgentLiveId = 'invoice' | 'pcr' | 'voice' | 'patient' | 'voucher' | 'tender' | 'fraud';
 export type AgentId = AgentLiveId | 'build';
 
 export type Industry = {
-  id: 'logistics' | 'pharma' | 'dental' | 'auto' | 'healthcare' | 'banking';
+  id: 'logistics' | 'pharma' | 'dental' | 'auto' | 'healthcare' | 'banking' | 'real-estate';
   name: string;
   tagline: string;
   photoUrl: string;
@@ -57,26 +62,29 @@ export type Agent = {
   name: string;
   domainLabel: string;
   flow: string;
-  iconKey: 'FileText' | 'GitBranch' | 'Mic' | 'Phone' | 'Receipt' | 'Plus';
+  iconKey: 'FileText' | 'GitBranch' | 'Mic' | 'Phone' | 'Receipt' | 'Award' | 'ShieldAlert' | 'Plus';
   usesPlatformLayers: ReadonlyArray<1 | 2 | 3 | 4 | 5 | 6>;
 };
 
 export const INDUSTRIES: readonly Industry[] = [
-  { id: 'logistics',  name: 'Logistics & trade finance', tagline: 'Clear the Monday backlog by 10:42.',      photoUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=70', pairedAgentId: 'invoice' },
-  { id: 'pharma',     name: 'Pharma & life sciences',    tagline: 'PCR graphs across millions of reports.', photoUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=70', pairedAgentId: 'pcr' },
-  { id: 'dental',     name: 'Dental networks',           tagline: 'Every patient call logged and coded.',   photoUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=70', pairedAgentId: 'voice' },
-  { id: 'auto',       name: 'Automotive aftermarket',    tagline: 'Handwritten warranty claims → SAP.',     photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=600&q=70', pairedAgentId: 'voucher' },
-  { id: 'healthcare', name: 'Hospital systems',          tagline: 'Patient history, cited and reversible.', photoUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=70', pairedAgentId: 'patient' },
-  { id: 'banking',    name: 'Banking & compliance',      tagline: 'KYC docs with a full audit trail.',      photoUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=70', pairedAgentId: 'invoice' },
+  { id: 'logistics',   name: 'Logistics & trade finance', tagline: 'Clear the Monday backlog by 10:42.',                photoUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=70', pairedAgentId: 'invoice' },
+  { id: 'pharma',      name: 'Pharma & life sciences',    tagline: 'Defect-report graphs across millions of reports.', photoUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=70', pairedAgentId: 'pcr' },
+  { id: 'dental',      name: 'Dental networks',           tagline: 'Every clinical note written. Every call answered.', photoUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=70', pairedAgentId: 'voice' },
+  { id: 'auto',        name: 'Automotive',                tagline: 'Warranty fraud flagged before payment.',           photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=600&q=70', pairedAgentId: 'voucher' },
+  { id: 'healthcare',  name: 'Hospital systems',          tagline: 'Patient history, cited and reversible.',           photoUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=70', pairedAgentId: 'patient' },
+  { id: 'banking',     name: 'Banking & compliance',      tagline: 'KYC docs with a full audit trail.',                photoUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=70', pairedAgentId: 'invoice' },
+  { id: 'real-estate', name: 'Real estate',               tagline: 'Every quote standardised to true landed cost.',    photoUrl: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=70', pairedAgentId: 'tender' },
 ] as const;
 
 export const AGENTS: readonly Agent[] = [
-  { id: 'invoice', name: 'Invoice Intelligence', domainLabel: 'Logistics',     flow: 'handwritten invoice → SAP posted',      iconKey: 'FileText',  usesPlatformLayers: [1, 2, 3, 4, 5] },
-  { id: 'pcr',     name: 'PCR Graph',            domainLabel: 'Pharma',        flow: 'lab reports → knowledge graph',         iconKey: 'GitBranch', usesPlatformLayers: [1, 2, 3, 5] },
-  { id: 'voice',   name: 'Voice Wave',           domainLabel: 'Dental',        flow: 'call audio → structured transcript',    iconKey: 'Mic',       usesPlatformLayers: [1, 2, 3, 4] },
-  { id: 'patient', name: 'Patient Call',         domainLabel: 'Healthcare',    flow: 'call → SOAP notes',                     iconKey: 'Phone',     usesPlatformLayers: [1, 2, 3, 5, 6] },
-  { id: 'voucher', name: 'Voucher Stack',        domainLabel: 'Auto warranty', flow: 'handwritten → SAP vouchers',            iconKey: 'Receipt',   usesPlatformLayers: [1, 2, 3, 4, 5] },
-  { id: 'build',   name: '+ Build your own',     domainLabel: 'Any workflow',  flow: '4-8 weeks to live',                     iconKey: 'Plus',      usesPlatformLayers: [1, 2, 3, 4, 5, 6] },
+  { id: 'invoice', name: 'Invoice Intelligence',       domainLabel: 'Logistics',    flow: 'any format → finance system posted',  iconKey: 'FileText',    usesPlatformLayers: [1, 2, 3, 4, 5] },
+  { id: 'pcr',     name: 'Defect-report Intelligence', domainLabel: 'Automotive',   flow: 'million reports → root cause cited',  iconKey: 'GitBranch',   usesPlatformLayers: [1, 2, 3, 5] },
+  { id: 'voice',   name: 'Doctor’s Notes',             domainLabel: 'Healthcare',   flow: 'consult → structured note synced',    iconKey: 'Mic',         usesPlatformLayers: [1, 2, 3, 4] },
+  { id: 'patient', name: 'Patient Call Agent',         domainLabel: 'Healthcare',   flow: 'call → book, bill, remind',           iconKey: 'Phone',       usesPlatformLayers: [1, 2, 3, 5, 6] },
+  { id: 'voucher', name: 'Voucher Matching',           domainLabel: 'Logistics',    flow: 'six docs → clean payment out',        iconKey: 'Receipt',     usesPlatformLayers: [1, 2, 3, 4, 5] },
+  { id: 'tender',  name: 'Tender Intelligence',        domainLabel: 'Real estate',  flow: 'every quote → one landed cost',       iconKey: 'Award',       usesPlatformLayers: [1, 2, 3, 4, 5] },
+  { id: 'fraud',   name: 'Fraud Intelligence',         domainLabel: 'Automotive',   flow: 'every claim → scored at intake',      iconKey: 'ShieldAlert', usesPlatformLayers: [1, 2, 3, 5, 6] },
+  { id: 'build',   name: '+ Build your own',           domainLabel: 'Any workflow', flow: '4 weeks to live',                     iconKey: 'Plus',        usesPlatformLayers: [1, 2, 3, 4, 5, 6] },
 ] as const;
 
 export const PLATFORM_LAYERS: readonly { n: number; title: string; sub: string; tint: string }[] = [
@@ -121,10 +129,13 @@ if (import.meta.env.DEV) {
   const cases: Array<[number, BeatId]> = [
     [0.00, 'intro'],
     [0.05, 'logistics'],
-    [0.12, 'pharma'],
-    [0.47, 'invoice'],
-    [0.82, 'build'],
-    [0.83, 'synthesis'],
+    [0.10, 'pharma'],
+    [0.35, 'real-estate'],
+    [0.40, 'invoice'],
+    [0.65, 'tender'],
+    [0.70, 'fraud'],
+    [0.77, 'build'],
+    [0.80, 'synthesis'],
     [1.00, 'synthesis'],
   ];
   for (const [p, expected] of cases) {

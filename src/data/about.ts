@@ -61,7 +61,7 @@ export type TimelineNode = {
 // ── Certifications ─────────────────────────────────────────────────────
 
 export const CERTIFICATIONS: Certification[] = [
-  { id: 'soc2',     name: 'SOC 2',      statusLabel: 'Type 1 Certified', iconName: 'ShieldCheck' },
+  { id: 'soc2',     name: 'SOC 2',      statusLabel: 'Type II Certified', iconName: 'ShieldCheck' },
   { id: 'hipaa',    name: 'HIPAA',      statusLabel: 'Compliant',        iconName: 'Lock' },
   { id: 'gdpr',     name: 'GDPR',       statusLabel: 'Compliant',        iconName: 'Globe' },
   { id: 'iso27001', name: 'ISO 27001',  statusLabel: 'Certified',        iconName: 'FileCheck2' },
@@ -71,9 +71,9 @@ export const CERTIFICATIONS: Certification[] = [
 
 export const STATS: Stat[] = [
   { metric: '18', label: 'Top experts in AI + product' },
-  { metric: '5',  label: 'Agents live in production' },
-  { metric: '3',  label: 'Enterprise clients · 3 industries' },
-  { metric: '0',  label: 'Hallucination incidents · day one' },
+  { metric: '15', label: 'Agents live in production' },
+  { metric: '3',  label: 'Regulated industries · live today' },
+  { metric: '0',  label: 'Security incidents on record' },
 ];
 
 // ── Founders (2 bios, expanded narrative) ──────────────────────────────
@@ -133,30 +133,30 @@ export const ADVISORS: Advisor[] = [
 
 export const TEAM_TOTAL_COUNT = 18;
 
-// ── Success stories (Thomson / Qira / Daimler, About framing) ──────────
+// ── Success stories (anonymized by domain — Logistics / Dental / Auto) ─
 
 export const SUCCESS_STORIES: SuccessStory[] = [
   {
-    client: 'Thomson Group UAE',
-    region: 'AP \u00b7 Dubai',
+    client: 'Global logistics group',
+    region: 'Accounts Payable \u00b7 Dubai',
     metric: '88%',
     outcome:
-      'Invoices posted no-touch to SAP. 200+/day. Week 1 ROI across 20+ business units.',
+      'Invoices posted no-touch to the finance system. 200+/day. Week 1 ROI across 20+ business units.',
     iconName: 'Building2',
     proofChip: 'LIVE \u00b7 20+ BUSINESS UNITS',
   },
   {
-    client: 'Qira Labs US',
-    region: 'Clinical Ops \u00b7 Multi-state',
-    metric: '$400K+',
+    client: 'Multi-state dental group',
+    region: 'Clinical Ops \u00b7 38 clinics',
+    metric: '$100K+',
     outcome:
-      'Revenue recovered per clinic per year. 38 locations. Zero system replacements.',
+      'Recovered per clinic per year. 38 locations. Zero system replacements.',
     iconName: 'Stethoscope',
     proofChip: 'LIVE \u00b7 HIPAA \u00b7 AUDIO DISCARDED',
   },
   {
-    client: 'Daimler Asia',
-    region: 'Quality Engineering',
+    client: 'Global automotive maker',
+    region: 'Quality Engineering \u00b7 SE Asia',
     metric: '1.2M',
     outcome:
       'Reports cross-correlated. Root cause in hours, not weeks. 8D drafts auto-cited from source.',
@@ -174,7 +174,7 @@ export const WORK_PRINCIPLES: WorkPrinciple[] = [
     title: 'Built for your workflow.',
     titleAccent: 'Not prompt-wrapped around a demo.',
     body:
-      'Generic models are trained on the world. Your workflows run on your data \u2014 your vendor master, your clinical codes, your schema. We fine-tune small LMs on what your business actually looks like. No templates. No foundation-model wrappers.',
+      'Generic models are trained on the world. Your workflows run on your data \u2014 your vendor master, your clinical codes, your schema. Each agent is tuned on your documents, your suppliers, your specifications. Not a generic model that knows none of your specifics.',
   },
   {
     num: '02',
@@ -198,7 +198,7 @@ export const WORK_PRINCIPLES: WorkPrinciple[] = [
     title: 'Every output cites its source.',
     titleAccent: 'Hallucination is a design failure.',
     body:
-      'In a system that recommends, a hallucination is embarrassing. In a system that executes, it\u2019s a liability. Every field, every decision, every flag traces to an exact document, page, and line. Three live clients in regulated industries. Zero hallucination incidents. Achievable as architecture.',
+      'In a system that recommends, a hallucination is embarrassing. In a system that executes, it\u2019s a liability. Every output points back to a real source page or row. No hand-waving, no black-box answers. Fifteen agents live across three regulated industries. Zero security incidents on record.',
   },
   {
     num: '05',
@@ -235,13 +235,13 @@ export const TIMELINE: TimelineNode[] = [
     year: '2024',
     label: 'First production agents',
     body:
-      'Thomson Group, Daimler Asia, Qira Labs went live. Three industries. Three document types. Zero hallucination incidents.',
+      'Logistics, automotive, and healthcare clients went live. Three industries. Three document types. Zero hallucination incidents.',
   },
   {
     year: 'Today',
     label: 'Live in production',
     body:
-      '5 agents live. 3 enterprise clients. 0 hallucination incidents. The shared platform is the moat.',
+      '15 agents live across 3 regulated industries. 0 security incidents on record. The shared platform is the moat.',
   },
 ];
 

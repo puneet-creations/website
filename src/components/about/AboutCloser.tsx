@@ -87,7 +87,7 @@ export default function AboutCloser() {
                 color: 'rgba(0,0,0,0.65)',
               }}
             >
-              Thomson&rsquo;s AP team. Qira&rsquo;s doctors. Daimler&rsquo;s
+              The logistics AP team. The clinic doctors. The automotive
               engineers. They don&rsquo;t see our platform &mdash; they see
               work finished. That&rsquo;s what we built for. That&rsquo;s
               the measure.

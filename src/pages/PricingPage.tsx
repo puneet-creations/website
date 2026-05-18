@@ -20,17 +20,17 @@ export default function PricingPage() {
       <main>
         <PageHero
           label="Pricing"
-          title="Three doors."
-          titleAccent="Every door a great strategy."
-          description="Pick where you are. Each door delivers standalone. Scope-dependent — we price to your business, not to a rate card."
+          title="Three ways to start,"
+          titleAccent="listed in order of commitment."
+          description="Two-week assessment, single agent live in four weeks, or the full platform deployed in six. The numbers on this page are the numbers on the contract."
           accent="#3a7d44"
           orbColor="#a0d0a8"
           pills={[
-            '3 engagement shapes',
-            'Scope-dependent · no rate card',
-            'ROI in months, not years',
-            '2-week assessment start',
+            '$5K · 2-week assessment',
+            'From $10K · agent in 4 weeks',
+            '$20K/yr platform + $10K/agent',
             'Own what you build',
+            'Live on your servers',
           ]}
         />
 

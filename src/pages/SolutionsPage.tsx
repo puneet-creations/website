@@ -27,7 +27,7 @@ export default function SolutionsPage() {
           label="Solutions by industry"
           title="Your industry."
           titleAccent="Your agents."
-          description="Five agents. Three industries in production. Seven more where the same pattern ships. Pick yours."
+          description="Fifteen agents. Three industries in production. Seven more where the same pattern ships. Pick yours."
           accent="#d97706"
           orbColor="#e0c080"
           pills={[
@@ -51,7 +51,7 @@ export default function SolutionsPage() {
           imageSrc="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1920&h=1080&fit=crop"
           headline="The same agent."
           headlineAccent="A different industry."
-          subline="Five agents are live in three industries today. The same pattern ships in seven more."
+          subline="Fifteen agents are live in three industries today. The same pattern ships in seven more."
           label="Extend the pattern"
           height="60vh"
           clipRadius={24}
