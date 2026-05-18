@@ -26,6 +26,12 @@ function PhoneIcon({ accent: _a }: { accent: string }) {
 function MatchIcon({ accent: _a }: { accent: string }) {
   return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="12" y="28" width="40" height="26" rx="5" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><rect x="12" y="66" width="40" height="26" rx="5" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.50)" strokeWidth="1.8"/><rect x="68" y="47" width="40" height="26" rx="5" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><line x1="52" y1="41" x2="68" y2="56" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><line x1="52" y1="79" x2="68" y2="64" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><path d="M78 56L85 63L99 49" stroke="#000000" strokeWidth="2.8" strokeLinecap="round" fill="none"/></svg>);
 }
+function TenderIcon({ accent: _a }: { accent: string }) {
+  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><rect x="14" y="18" width="92" height="20" rx="4" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><rect x="14" y="44" width="92" height="20" rx="4" fill="rgba(0,0,0,0.05)" stroke="rgba(0,0,0,0.55)" strokeWidth="2"/><rect x="14" y="70" width="92" height="20" rx="4" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.45)" strokeWidth="1.8"/><line x1="22" y1="28" x2="50" y2="28" stroke="rgba(0,0,0,0.40)" strokeWidth="2"/><line x1="22" y1="54" x2="60" y2="54" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><line x1="22" y1="80" x2="44" y2="80" stroke="rgba(0,0,0,0.40)" strokeWidth="2"/><circle cx="92" cy="54" r="6" fill="#000000"/><path d="M89 54L91 56L95 52" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" fill="none"/></svg>);
+}
+function FraudIcon({ accent: _a }: { accent: string }) {
+  return (<svg className="w-full h-full" viewBox="0 0 120 120" fill="none"><path d="M60 12L98 24V58C98 76 82 92 60 100C38 92 22 76 22 58V24L60 12Z" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.60)" strokeWidth="2.2"/><circle cx="60" cy="56" r="14" fill="none" stroke="rgba(0,0,0,0.50)" strokeWidth="2"/><circle cx="60" cy="56" r="22" fill="none" stroke="rgba(0,0,0,0.30)" strokeWidth="1.6"/><circle cx="60" cy="56" r="30" fill="none" stroke="rgba(0,0,0,0.15)" strokeWidth="1.2"/><circle cx="60" cy="56" r="4" fill="#000000"/></svg>);
+}
 
 const gtmCards = [
   {
@@ -51,36 +57,52 @@ const gtmCards = [
   },
 ];
 
+// 7 deep-dive agent cards — fan-out positions tightened so all seven fit in the
+// hero gallery (250px center-to-center spacing, total 1500px spread).
+// Cards overlap by ~50–150px depending on viewport; HeroGallery's spring physics
+// + draggable interaction lets visitors fan them apart on hover/touch.
 const agentCards = [
   {
-    id: 11, order: 0, x: '-744px', y: '8px', zIndex: 50, direction: 'left' as const,
+    id: 11, order: 0, x: '-750px', y: '8px', zIndex: 70, direction: 'left' as const,
     label: 'Invoice Intelligence', sublabel: 'Logistics · Dubai', metric: '88%',
-    details: 'Reads any format. Matches the PO, posts to the finance system in under 30 seconds.',
+    details: 'Any format in. Clean finance-system entry out.',
     accent: '#8af5c0', icon: InvoiceIcon,
   },
   {
-    id: 12, order: 1, x: '-372px', y: '20px', zIndex: 40, direction: 'left' as const,
+    id: 12, order: 1, x: '-500px', y: '20px', zIndex: 60, direction: 'left' as const,
     label: 'Defect-report Intelligence', sublabel: 'Automotive · SE Asia', metric: '1.2M',
-    details: 'Cross-linked across models, regions, suppliers. Root cause in hours.',
+    details: 'Cross-link millions of reports. Cite the root cause.',
     accent: '#8ea6ff', icon: GraphIcon,
   },
   {
-    id: 13, order: 2, x: '0px', y: '5px', zIndex: 30, direction: 'right' as const,
+    id: 13, order: 2, x: '-250px', y: '12px', zIndex: 50, direction: 'left' as const,
     label: 'Doctor’s Notes', sublabel: 'Healthcare · 38 clinics', metric: '~2h',
-    details: 'Listens on-prem. Audio discarded. Structured note synced to records.',
+    details: 'Listen on-prem. Write the note. Sync to records.',
     accent: '#f5a8d4', icon: MicIcon,
   },
   {
-    id: 14, order: 3, x: '372px', y: '25px', zIndex: 20, direction: 'right' as const,
+    id: 14, order: 3, x: '0px', y: '5px', zIndex: 80, direction: 'right' as const,
     label: 'Patient Call Agent', sublabel: 'Healthcare · 24/7', metric: '$100K+',
-    details: 'Every call answered 24/7. Books, bills, reminds — only unusual calls go to staff.',
+    details: 'Answer every call. Book. Bill. Remind.',
     accent: '#ffd080', icon: PhoneIcon,
   },
   {
-    id: 15, order: 4, x: '744px', y: '12px', zIndex: 10, direction: 'left' as const,
+    id: 15, order: 4, x: '250px', y: '22px', zIndex: 40, direction: 'right' as const,
     label: 'Voucher Matching', sublabel: 'Logistics · Dubai', metric: '5 min',
-    details: 'Six payment documents per packet. Cross-matched, flagged before payment.',
+    details: 'Six documents in. Clean payment out.',
     accent: '#a0dc8c', icon: MatchIcon,
+  },
+  {
+    id: 16, order: 5, x: '500px', y: '14px', zIndex: 30, direction: 'right' as const,
+    label: 'Tender Intelligence', sublabel: 'Real estate · Mumbai', metric: '4–8%',
+    details: 'Every quote, every spec, every tax.',
+    accent: '#c0d8e8', icon: TenderIcon,
+  },
+  {
+    id: 17, order: 6, x: '750px', y: '24px', zIndex: 20, direction: 'right' as const,
+    label: 'Fraud Intelligence', sublabel: 'Automotive · 700 dealers', metric: '< 1s',
+    details: 'Every claim, every pattern, every reason.',
+    accent: '#ffd0c8', icon: FraudIcon,
   },
 ];
 
@@ -192,7 +214,7 @@ export default function HeroAboveFold() {
             <span className="italic">Production.</span>
           </motion.h2>
 
-          {/* Agent Gallery — 5 cards */}
+          {/* Agent Gallery — 7 cards (deck v2: 7 deep-dives) */}
           <HeroGallery cards={agentCards} animationDelay={1.2} dropIn />
 
           {/* Trust row */}
