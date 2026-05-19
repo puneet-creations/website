@@ -5,8 +5,7 @@ import WhyNowTriad from '../components/landing/WhyNowTriad';
 import SevenAgentsGrid from '../components/landing/SevenAgentsGrid';
 import ThreeOfferings from '../components/landing/ThreeOfferings';
 import AgentPlatformStack from '../components/landing/AgentPlatformStack';
-import ContextKing from '../components/landing/ContextKing';
-import GTMPath from '../components/GTMPath';
+import WhyUsBuyersAsk from '../components/landing/WhyUsBuyersAsk';
 import LandingCloser from '../components/landing/LandingCloser';
 
 /**
@@ -18,11 +17,14 @@ import LandingCloser from '../components/landing/LandingCloser';
  *   ThreeOfferings (deck S03 · Assessment/Agent/Platform with prices) →
  *   SevenAgentsGrid (deck S04 · seven agents in production) →
  *   AgentPlatformStack (centerpiece scroll-driven) →
- *   ContextKing → GTMPath → LandingCloser.
+ *   WhyUsBuyersAsk (deck S16 · Outcome-owned / Cited / Tuned) →
+ *   LandingCloser.
  *
- * The old IsThisYou ("Where are you stuck?") section was replaced by
- * ThreeOfferings — slide 2 of the deck is a stronger lead than persona
- * pain since visitors get the price ladder upfront.
+ * Replaced: ContextKing ("An agent without your context is not production
+ * software") → WhyUsBuyersAsk (deck-canon three-reason card grid).
+ * Removed: GTMPath ("The engagement path / Three steps from curious to live
+ * in production") — already covered upstream by ThreeOfferings' commitment
+ * ladder, and the deck has no equivalent slide.
  */
 export default function LandingPage() {
   return (
@@ -34,8 +36,7 @@ export default function LandingPage() {
         <ThreeOfferings />
         <SevenAgentsGrid />
         <AgentPlatformStack />
-        <ContextKing />
-        <GTMPath />
+        <WhyUsBuyersAsk />
         <LandingCloser />
       </main>
     </MotionConfig>
