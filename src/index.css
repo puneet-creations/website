@@ -4,8 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body { overflow-x: clip; }
+/* Belt-and-braces: cinematic decorative elements (HeroOrb floats 8% off the
+   right edge, AmbientVideo + GradientMesh stretch full-bleed) can geometric-
+   ally extend past the viewport even when their container has overflow:hidden,
+   which leaks into html.scrollWidth and creates a horizontal scrollbar on
+   tablet (~768px). Clipping at the html level too kills that scrollbar in
+   every browser without affecting visual layout. */
 
 :root {
   color-scheme: light;
