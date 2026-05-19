@@ -169,13 +169,14 @@ export default function CinematicFooter() {
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
     { to: '/faq', label: 'FAQ' },
+    { to: '/press', label: 'Press & milestones' },
     { to: '/security', label: 'Security & compliance' },
   ];
   const connect: LinkItem[] = [
     { href: 'mailto:sales@attentions.ai', label: 'sales@attentions.ai', external: true },
     { href: 'https://www.linkedin.com/company/attentions', label: 'LinkedIn', external: true },
-    { to: '#', label: 'Privacy' },
-    { to: '#', label: 'Terms' },
+    { to: '/privacy', label: 'Privacy' },
+    { to: '/terms', label: 'Terms' },
   ];
 
   return (

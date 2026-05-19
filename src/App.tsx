@@ -16,6 +16,9 @@ import CompetitorsPage from './pages/CompetitorsPage';
 import FaqPage from './pages/FaqPage';
 import SecurityPage from './pages/SecurityPage';
 import AboutPage from './pages/AboutPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
+import AgentCasePage from './pages/AgentCasePage';
 
 const ROUTE_TO_MESH: Record<string, string> = {
   '/': 'landing',
@@ -29,6 +32,9 @@ const ROUTE_TO_MESH: Record<string, string> = {
   '/about': 'about',
   '/contact': 'contact',
   '/faq': 'faq',
+  '/privacy': 'landing',
+  '/terms': 'landing',
+  '/press': 'landing',
 };
 
 /**
@@ -67,6 +73,8 @@ function Shell() {
 
   return (
     <div className="relative" style={{ color: 'var(--text-primary)', minHeight: '100vh' }}>
+      {/* Skip-to-content — WCAG 2.4.1 requirement. Hidden until tab-focused. */}
+      <a href="#main-content" className="skip-to-content">Skip to content</a>
       <ScrollToTop />
       {/* Global SVG defs — rendered once, referenced by all motion stories via url(#id) */}
       <svg aria-hidden className="absolute w-0 h-0 overflow-hidden"><SvgDefs /></svg>
@@ -75,7 +83,9 @@ function Shell() {
         <div className="comet-grain" aria-hidden />
         <CursorGlow />
         <SiteNav />
-        <Outlet />
+        <div id="main-content" tabIndex={-1}>
+          <Outlet />
+        </div>
         <CinematicFooter />
       </div>
     </div>
@@ -106,6 +116,7 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/platform" element={<PlatformPage />} />
           <Route path="/agents" element={<AgentsPage />} />
+          <Route path="/agents/:slug" element={<AgentCasePage />} />
           <Route path="/why-generic-fail" element={<WhyGenericFailPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/solutions" element={<SolutionsPage />} />
@@ -115,6 +126,9 @@ export default function App() {
           <Route path="/security" element={<SecurityPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/press" element={<PressPage />} />
           <Route path="*" element={<LandingPage />} />
         </Route>
       </Routes>

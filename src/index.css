@@ -79,6 +79,31 @@ body { overflow-x: clip; }
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* Skip-to-content — visible only while focused (WCAG 2.4.1) */
+.skip-to-content {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 18px;
+  background: #0A0A0A;
+  color: #ffffff;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 9999px;
+  transition: top 0.18s ease;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  top: 16px;
+  outline: 2px solid #0066cc;
+  outline-offset: 3px;
+}
 html, body, #root {
   margin: 0;
   padding: 0;
