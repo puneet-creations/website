@@ -4,7 +4,7 @@ import ClientsStrip from '../components/ClientsStrip';
 import WhyNowTriad from '../components/landing/WhyNowTriad';
 import SevenAgentsGrid from '../components/landing/SevenAgentsGrid';
 import ThreeOfferings from '../components/landing/ThreeOfferings';
-import AgentPlatformStack from '../components/landing/AgentPlatformStack';
+import PlatformLayers from '../components/landing/PlatformLayers';
 import WhyUsBuyersAsk from '../components/landing/WhyUsBuyersAsk';
 import LandingCloser from '../components/landing/LandingCloser';
 
@@ -16,15 +16,15 @@ import LandingCloser from '../components/landing/LandingCloser';
  *   WhyNowTriad (deck S02 · Privacy/Cost/Outcomes) →
  *   ThreeOfferings (deck S03 · Assessment/Agent/Platform with prices) →
  *   SevenAgentsGrid (deck S04 · seven agents in production) →
- *   AgentPlatformStack (centerpiece scroll-driven) →
- *   WhyUsBuyersAsk (deck S16 · Outcome-owned / Cited / Tuned) →
+ *   PlatformLayers (the platform under every agent) →
+ *   WhyUsBuyersAsk (deck S16 · Proof / ROI / Fixed scope) →
  *   LandingCloser.
  *
- * Replaced: ContextKing ("An agent without your context is not production
- * software") → WhyUsBuyersAsk (deck-canon three-reason card grid).
- * Removed: GTMPath ("The engagement path / Three steps from curious to live
- * in production") — already covered upstream by ThreeOfferings' commitment
- * ladder, and the deck has no equivalent slide.
+ * Retired: AgentPlatformStack — the dark scroll-driven section had low
+ * contrast (white-on-#0a0e18) and broke the calm-brochure rhythm of the
+ * surrounding light deck-faithful sections. Its core value (the 6 platform
+ * layers + compound base story) is now told in PlatformLayers, a light
+ * arched-card panel that matches SevenAgentsGrid / ThreeOfferings.
  */
 export default function LandingPage() {
   return (
@@ -35,7 +35,7 @@ export default function LandingPage() {
         <WhyNowTriad />
         <ThreeOfferings />
         <SevenAgentsGrid />
-        <AgentPlatformStack />
+        <PlatformLayers />
         <WhyUsBuyersAsk />
         <LandingCloser />
       </main>
