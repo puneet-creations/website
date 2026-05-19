@@ -5,6 +5,7 @@ import ClientsStrip from '../components/ClientsStrip';
 import WhyNowTriad from '../components/landing/WhyNowTriad';
 import SevenAgentsGrid from '../components/landing/SevenAgentsGrid';
 import ThreeOfferings from '../components/landing/ThreeOfferings';
+import CustomerQuote from '../components/landing/CustomerQuote';
 import PlatformLayers from '../components/landing/PlatformLayers';
 import WhyUsBuyersAsk from '../components/landing/WhyUsBuyersAsk';
 import LandingCloser from '../components/landing/LandingCloser';
@@ -42,6 +43,7 @@ export default function LandingPage() {
         <WhyNowTriad />
         <ThreeOfferings />
         <SevenAgentsGrid />
+        <CustomerQuote />
         <PlatformLayers />
         <WhyUsBuyersAsk />
         <LandingCloser />

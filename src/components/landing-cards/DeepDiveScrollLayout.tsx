@@ -50,7 +50,38 @@ export default function DeepDiveScrollLayout({ sectionLabel, sectionAccent, tabs
   const activeIdx = Math.min(Math.floor(progress * N + 0.001), N - 1);
 
   return (
-    <section ref={wrapRef} className="relative" style={{ height: `${N * 100}vh` }}>
+    <>
+      {/*
+        Mobile path (< lg) — bypass the horizontal scroll-jack entirely.
+        7 agents at 100vh each = 700vh of forced scroll on a phone, which
+        is mobile-hostile (the user reported in the design review). Stack
+        the frames vertically instead so each agent reads in one screen
+        without scroll hijacking.
+      */}
+      <section className="block lg:hidden" style={{ background: dark ? 'var(--bg-hero)' : 'var(--bg-s1)' }}>
+        <div className="px-3 py-10 flex items-center gap-2">
+          <span className="capsule-dark inline-flex items-center gap-2 rounded-full">
+            <span className="w-2 h-2 rounded-full" style={{ background: sectionAccent }} />
+            <span>{sectionLabel} · {String(N).padStart(2, '0')} agents</span>
+          </span>
+        </div>
+        <div className="flex flex-col gap-6 px-3 pb-14">
+          {tabs.map((t, i) => (
+            <div key={t.id} className="snap-start">
+              <Frame
+                tab={t}
+                active
+                width={vw}
+                dark={dark}
+                orbVariant={orbVariants?.[i]}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Desktop path (≥ lg) — the original scroll-driven storytelling */}
+      <section ref={wrapRef} className="relative hidden lg:block" style={{ height: `${N * 100}vh` }}>
       <div
         className="sticky top-[72px] w-full overflow-hidden"
         style={{ height: 'calc(100vh - 72px)', background: dark ? 'var(--bg-hero)' : 'var(--bg-s1)' }}
@@ -101,7 +132,8 @@ export default function DeepDiveScrollLayout({ sectionLabel, sectionAccent, tabs
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
 

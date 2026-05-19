@@ -83,40 +83,67 @@ export default function IndustrySwitcher() {
         borderBottom: '1px solid rgba(0,0,0,0.06)',
       }}
     >
-      <div
-        ref={stripRef}
-        className="max-w-[1400px] mx-auto flex items-center gap-3 px-6 py-3 overflow-x-auto no-scrollbar"
-        style={{ scrollbarWidth: 'none' }}
-      >
-        <span className="micro-upper flex-shrink-0" style={{ color: 'rgba(0,0,0,0.45)' }}>
-          Jump to
-        </span>
+      <div className="relative max-w-[1400px] mx-auto">
+        {/* Edge fades — make the horizontal-scroll affordance visible at viewport
+            widths where the pills overflow (notably 11-pill row at < 1280px). */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%)',
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10"
+          style={{
+            background:
+              'linear-gradient(to left, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%)',
+          }}
+          aria-hidden="true"
+        />
 
-        {/* Proven group */}
-        <span
-          className="micro-upper flex-shrink-0 px-2"
-          style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}
+        <div
+          ref={stripRef}
+          className="flex items-center gap-3 px-6 py-3 overflow-x-auto no-scrollbar snap-x snap-proximity"
+          style={{
+            scrollbarWidth: 'none',
+            scrollPaddingLeft: 40,
+            scrollPaddingRight: 40,
+          }}
+          role="tablist"
+          aria-label="Industry sections"
         >
-          · IN PRODUCTION ·
-        </span>
-        {proven.map((i) => (
-          <Pill key={i.id} id={i.id} active={activeId === i.id} onClick={onClick}>
-            {i.name}
-          </Pill>
-        ))}
+          <span className="micro-upper flex-shrink-0" style={{ color: 'rgba(0,0,0,0.45)' }}>
+            Jump to
+          </span>
 
-        {/* Adjacent group */}
-        <span
-          className="micro-upper flex-shrink-0 px-2"
-          style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}
-        >
-          · ADJACENT ·
-        </span>
-        {adjacent.map((i) => (
-          <Pill key={i.id} id={i.id} active={activeId === i.id} onClick={onClick}>
-            {i.name}
-          </Pill>
-        ))}
+          {/* Proven group */}
+          <span
+            className="micro-upper flex-shrink-0 px-2 snap-start"
+            style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}
+          >
+            · IN PRODUCTION ·
+          </span>
+          {proven.map((i) => (
+            <Pill key={i.id} id={i.id} active={activeId === i.id} onClick={onClick}>
+              {i.name}
+            </Pill>
+          ))}
+
+          {/* Adjacent group */}
+          <span
+            className="micro-upper flex-shrink-0 px-2 snap-start"
+            style={{ color: 'rgba(0,0,0,0.35)', fontSize: 10 }}
+          >
+            · ADJACENT ·
+          </span>
+          {adjacent.map((i) => (
+            <Pill key={i.id} id={i.id} active={activeId === i.id} onClick={onClick}>
+              {i.name}
+            </Pill>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -139,7 +166,7 @@ function Pill({
       data-industry-pill={id}
       aria-current={active ? 'location' : undefined}
       onClick={(e) => onClick(e, id)}
-      className="flex-shrink-0 inline-flex items-center rounded-full transition-all duration-150 focus-visible:outline-2 focus-visible:outline-black focus-visible:outline-offset-2"
+      className="flex-shrink-0 snap-start inline-flex items-center rounded-full transition-all duration-150 focus-visible:outline-2 focus-visible:outline-black focus-visible:outline-offset-2"
       style={{
         padding: '6px 14px',
         fontFamily: 'var(--mono)',
