@@ -105,8 +105,15 @@ p { margin: 0; }
 
 .micro-upper { font-family: var(--mono); font-size: 14px; line-height: 1.2; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
 
-/* Base readable body text — minimum 16px for descriptions/captions */
-p, .text-body { font-size: 16px; line-height: 1.6; }
+/* Base readable body text — Apple cadence (getdesign add apple).
+   17px instead of 16px, 1.47 leading, -0.022em (≈ Apple's -0.374px on 17px)
+   produces the "reading not scanning" pace the deck ref calls out.
+   Components can still opt into smaller sizes via inline styles. */
+p, .text-body {
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+}
 
 /* ── GLOBAL THEME CLASSES ── */
 
