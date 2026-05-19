@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   Receipt, Wrench, Stethoscope, PhoneCall, FileCheck2, Building2, ShieldAlert,
   Shield, Target, TrendingDown, Layers,
@@ -28,6 +29,7 @@ type Agent = {
   metric: string;
   metricLabel: string;
   icon: LucideIcon;
+  slug: string;                        // routes to /agents/<slug> case-study page
 };
 
 const AGENTS: Agent[] = [
@@ -44,6 +46,7 @@ const AGENTS: Agent[] = [
     metric: '88%',
     metricLabel: 'no-touch post rate',
     icon: Receipt,
+    slug: 'invoice-intelligence',
   },
   {
     n: '02',
@@ -58,6 +61,7 @@ const AGENTS: Agent[] = [
     metric: '1.2M',
     metricLabel: 'reports cross-linked',
     icon: Wrench,
+    slug: 'defect-report-intelligence',
   },
   {
     n: '03',
@@ -72,6 +76,7 @@ const AGENTS: Agent[] = [
     metric: '2h',
     metricLabel: 'given back per doctor / day',
     icon: Stethoscope,
+    slug: 'doctors-notes',
   },
   {
     n: '04',
@@ -86,6 +91,7 @@ const AGENTS: Agent[] = [
     metric: '$100K',
     metricLabel: 'recovered per clinic / yr',
     icon: PhoneCall,
+    slug: 'patient-call-agent',
   },
   {
     n: '05',
@@ -100,6 +106,7 @@ const AGENTS: Agent[] = [
     metric: '5 min',
     metricLabel: 'per six-doc packet',
     icon: FileCheck2,
+    slug: 'voucher-matching',
   },
   {
     n: '06',
@@ -114,6 +121,7 @@ const AGENTS: Agent[] = [
     metric: '4–8%',
     metricLabel: 'savings on purchase orders',
     icon: Building2,
+    slug: 'tender-intelligence',
   },
   {
     n: '07',
@@ -128,6 +136,7 @@ const AGENTS: Agent[] = [
     metric: '< 1s',
     metricLabel: 'to flag fraud at intake',
     icon: ShieldAlert,
+    slug: 'fraud-intelligence',
   },
 ];
 
@@ -213,13 +222,17 @@ export default function SevenAgentsGrid() {
               ≥ 1280px : 7 col single row (xl — matches deck slide S04) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
           {AGENTS.map((a, i) => (
-            <motion.article
+            <motion.div
               key={a.n}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
-              className="flex flex-col"
+            >
+            <Link
+              to={`/agents/${a.slug}`}
+              aria-label={`${a.name} case study — ${a.metric} ${a.metricLabel}`}
+              className="block h-full flex-col no-underline transition-all hover:-translate-y-0.5"
               style={{
                 background: '#FFFFFF',
                 border: `1px solid ${RULE}`,
@@ -227,7 +240,18 @@ export default function SevenAgentsGrid() {
                 borderRadius: '70px 70px 4px 4px',
                 padding: '26px 16px 22px',
                 minHeight: 360,
+                display: 'flex',
                 gap: 13,
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = INK;
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.06)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = RULE;
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               {/* Top: circle icon */}
@@ -351,7 +375,8 @@ export default function SevenAgentsGrid() {
                   {a.metricLabel}
                 </div>
               </div>
-            </motion.article>
+            </Link>
+            </motion.div>
           ))}
         </div>
 
