@@ -21,45 +21,49 @@ type Reason = {
   us: string;
 };
 
+// Three pillars are engagement-focused — each closes a different risk gate
+// for enterprise procurement: technical (POC), financial (ROI), and
+// contractual (fixed scope/fee). Together they make the 4-week build sit
+// inside a 6-week engagement with the de-risking story baked in.
 const REASONS: Reason[] = [
   {
     n: '01',
-    name: 'Outcome-owned',
+    name: 'Proof before production',
     body: (
       <>
-        Measured by{' '}
-        <strong>
-          what got posted into your finance system, written into the chart, or drafted to specification
-        </strong>{' '}
-        — not what got summarised in a slide.
+        A 2-week assessment ships a{' '}
+        <strong>working proof-of-concept on your own documents</strong> — not a slide deck.
+        Decide to roll into the 4-week production build, or walk away with the business case.
       </>
     ),
-    them: 'Project plan',
-    us: 'Contract tied to a named success measure',
+    them: 'Big-bang production project',
+    us: 'POC on your data, then production',
   },
   {
     n: '02',
-    name: 'Cited by default',
+    name: 'ROI named on day one',
     body: (
       <>
-        Every output the agent produces{' '}
-        <strong>points back to a real source page or row</strong>. No hand-waving, no black-box answers.
+        A <strong>named success measure agreed in writing at kickoff</strong> — 88% no-touch,
+        ~2 hours back per doctor, &lt; 1 second to flag, whatever the workflow demands.
+        If the business case isn’t hitting, we know before you do, and we revisit scope — not invoice.
       </>
     ),
-    them: 'Trust the answer',
-    us: 'Verify the answer',
+    them: 'Wait for ROI at year-end',
+    us: 'Named success measure from week 1',
   },
   {
     n: '03',
-    name: 'Tuned, not generic',
+    name: 'Fixed scope, fixed fee',
     body: (
       <>
-        Each agent is{' '}
-        <strong>tuned on your documents, your suppliers, your specifications</strong> — not a generic model that knows none of your specifics.
+        The <strong>numbers in the assessment are the numbers on the contract</strong>.
+        No T&amp;M, no change orders, no mid-flight rewrites. One senior architect agrees
+        the scope; that scope ships in four weeks, on your servers.
       </>
     ),
-    them: 'One-size model',
-    us: 'Your-business model',
+    them: 'T&M hours · scope creep',
+    us: 'Fixed scope · fixed fee',
   },
 ];
 
@@ -80,7 +84,7 @@ export default function WhyUsBuyersAsk() {
       }}
     >
       <div className="max-w-[1440px] mx-auto">
-        {/* Eyebrow + headline */}
+        {/* Eyebrow + headline + sub */}
         <div className="mb-10 md:mb-14">
           <div
             className="mb-4"
@@ -93,10 +97,11 @@ export default function WhyUsBuyersAsk() {
               fontWeight: 500,
             }}
           >
-            Why us · three things that make this engagement different
+            Why us · 4 weeks to develop sovereign AI agents
           </div>
 
           <h2
+            className="mb-5"
             style={{
               fontFamily: 'var(--serif)',
               fontSize: 'clamp(34px, 4.4vw, 64px)',
@@ -111,6 +116,24 @@ export default function WhyUsBuyersAsk() {
               Three things that make this engagement different.
             </span>
           </h2>
+
+          <p
+            className="max-w-[1100px]"
+            style={{
+              fontSize: 'clamp(15px, 1.3vw, 19px)',
+              lineHeight: 1.55,
+              color: CHARCOAL,
+              borderLeft: `2px solid ${INK}`,
+              paddingLeft: 16,
+              fontWeight: 400,
+            }}
+          >
+            One named business problem.{' '}
+            <strong style={{ color: INK, fontWeight: 600 }}>
+              A 2-week assessment with a working proof-of-concept on your data, then a 4-week production build on your servers.
+            </strong>{' '}
+            Six weeks from "should we?" to a live agent. Here’s what makes that contract — and that timeline — different from anything else you’ve signed.
+          </p>
         </div>
 
         {/* 3 arched reason cards */}

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scraped reference material (21st.dev pages, deck snapshots) — not part of the build
+.firecrawl/
