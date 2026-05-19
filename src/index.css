@@ -23,6 +23,24 @@ body { overflow-x: clip; }
   --serif: 'Fraunces', 'Newsreader', Georgia, serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
 
+  /* ── Apple-design-skill polish layer (getdesign add apple) ─────────────
+     Deliberately additive — does NOT replace the deck-brand tokens above.
+     Used by .apple-pill, .apple-pill-ghost utilities + body type system.
+     Reference: ./.design-references/apple-DESIGN.md */
+  --apple-ink:        #1d1d1f;   /* near-black, not pure black */
+  --apple-canvas:     #ffffff;
+  --apple-parchment:  #f5f5f7;   /* signature off-white tile */
+  --apple-pearl:      #fafafc;
+  --apple-hairline:   #e0e0e0;
+  --apple-blue:       #0066cc;   /* Action Blue · the only interactive accent */
+  --apple-blue-focus: #0071e3;
+  --apple-blue-dark:  #2997ff;   /* used on dark surfaces */
+  --apple-ink-80:     #333333;
+  --apple-ink-48:     #7a7a7a;
+  --apple-sf: 'SF Pro Display', 'SF Pro Text',
+              -apple-system, BlinkMacSystemFont,
+              'Plus Jakarta Sans', 'Noto Sans', system-ui, sans-serif;
+
   /* Section bg shades — light with subtle tint */
   --bg-hero: rgba(255,255,255,0.95);
   --bg-s1: rgba(248,249,252,0.98);
@@ -854,3 +872,117 @@ html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+/* ============================================================
+   APPLE DESIGN-SKILL POLISH (getdesign add apple)
+
+   A thin polish layer on top of the deck brand. Adds Apple's body
+   type cadence (17px, -0.374px tracking, 1.47 leading) and two pill
+   CTAs (.apple-pill primary, .apple-pill-ghost secondary). Sticks to
+   one accent — Action Blue #0066cc — only for opt-in primary actions.
+
+   Don't apply blanket; use these classes on specific surfaces where
+   they fit (hero CTAs, conversion sections). The deck-faithful
+   arched cards and ink-on-paper aesthetic stays as-is.
+   ============================================================ */
+
+/* Apple body type system — opt-in via .body-apple */
+.body-apple {
+  font-family: var(--apple-sf);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  color: var(--apple-ink);
+}
+.body-apple-strong {
+  font-family: var(--apple-sf);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: -0.374px;
+  color: var(--apple-ink);
+}
+.body-apple-lead {
+  font-family: var(--apple-sf);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--apple-ink);
+}
+.body-apple-tagline {
+  font-family: var(--apple-sf);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.19;
+  letter-spacing: 0.231px;
+  color: var(--apple-ink);
+}
+
+/* Pill CTAs — Apple's signature interactive geometry.
+   Primary (blue) for the dominant action; ghost (white-on-rule) for
+   the secondary. Use sparingly: one .apple-pill per CTA cluster. */
+.apple-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--apple-blue);
+  color: #ffffff;
+  font-family: var(--apple-sf);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.374px;
+  padding: 11px 22px;
+  border: none;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+.apple-pill:hover { background: var(--apple-blue-focus); transform: scale(1.015); }
+.apple-pill:active { transform: scale(0.985); }
+.apple-pill:focus-visible {
+  outline: 2px solid var(--apple-blue-focus);
+  outline-offset: 3px;
+}
+.apple-pill-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--apple-blue);
+  font-family: var(--apple-sf);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.374px;
+  padding: 11px 22px;
+  border: 1px solid var(--apple-hairline);
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease, border-color 0.15s ease;
+}
+.apple-pill-ghost:hover { background: var(--apple-pearl); border-color: var(--apple-ink-48); transform: scale(1.015); }
+.apple-pill-ghost:active { transform: scale(0.985); }
+.apple-pill-ghost:focus-visible { outline: 2px solid var(--apple-blue-focus); outline-offset: 3px; }
+
+/* Apple section rhythm — alternating parchment ↔ pure white tiles act
+   as section dividers without borders. Apply to <section> wrappers. */
+.apple-tile-light    { background: var(--apple-canvas); }
+.apple-tile-parch    { background: var(--apple-parchment); }
+.apple-tile-pearl    { background: var(--apple-pearl); }
+
+/* Apple text link — body inline link, single blue accent */
+.apple-link {
+  color: var(--apple-blue);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.15s ease;
+}
+.apple-link:hover { opacity: 0.78; }
+.apple-link:focus-visible { outline: 2px solid var(--apple-blue-focus); outline-offset: 2px; border-radius: 2px; }

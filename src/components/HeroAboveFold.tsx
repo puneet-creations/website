@@ -107,29 +107,26 @@ export default function HeroAboveFold() {
             <span className="italic" style={{ color: '#000000' }}>Zero Concessions.</span>
           </motion.h1>
 
-          {/* CTAs
-              Primary → /pricing#assessment (deck S03 assessment door, with explicit $5K price)
-              Secondary → smooth-scroll to the SevenAgentsGrid section on this page */}
+          {/* CTAs — Apple-design-skill polish layer.
+              Primary (.apple-pill, Action Blue #0066cc) → /pricing#assessment
+              Secondary (.apple-pill-ghost) → smooth-scroll to SevenAgentsGrid
+              Pill geometry, SF Pro stack, single-accent interaction model
+              all per .design-references/apple-DESIGN.md. */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-3 justify-center mb-10"
           >
-            <Link
-              to="/pricing#assessment"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-[14px] hover:scale-[1.02] active:scale-[0.98] transition-all"
-              style={{ background: '#000000', color: '#ffffff', fontFamily: 'var(--mono)', letterSpacing: '0.04em', textDecoration: 'none' }}
-            >
-              Get an assessment →
+            <Link to="/pricing#assessment" className="apple-pill">
+              Get an assessment <span aria-hidden="true">→</span>
             </Link>
             <button
               type="button"
               onClick={() => scrollToTarget('#seven-agents')}
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold text-[14px] hover:bg-white/[0.08] transition-colors"
-              style={{ background: 'rgba(0,0,0,0.04)', backdropFilter: 'blur(8px)', color: 'rgba(0,0,0,0.85)', fontFamily: 'var(--mono)', letterSpacing: '0.04em', border: '1px solid rgba(0,0,0,0.12)' }}
+              className="apple-pill-ghost"
             >
-              See how it works ↓
+              See how it works <span aria-hidden="true">↓</span>
             </button>
           </motion.div>
 

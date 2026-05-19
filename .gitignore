@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Scraped reference material (21st.dev pages, deck snapshots) — not part of the build
+# Scraped reference material (21st.dev pages, deck snapshots, getdesign brands)
+# — read by humans and the design polish layer, not part of the build
 .firecrawl/
+.design-references/

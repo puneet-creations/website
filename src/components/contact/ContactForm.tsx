@@ -389,25 +389,10 @@ export default function ContactForm() {
                 By submitting you agree we may contact you about your enquiry.
                 We do not sell your data or use it for marketing — period.
               </p>
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-full transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  background: INK,
-                  color: '#FFFFFF',
-                  fontFamily: 'var(--mono)',
-                  fontSize: 13,
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  padding: '14px 26px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                }}
-              >
-                Send to sales →
+              {/* Submit — Apple-design-skill polish: action-blue pill, SF Pro stack.
+                  Primary conversion action; the only Action-Blue on the page. */}
+              <button type="submit" className="apple-pill" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
+                Send to sales <span aria-hidden="true">→</span>
               </button>
             </div>
           </motion.form>
