@@ -45,7 +45,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       pills: ['Cost-optimized', 'Secure · on-prem', 'Scalable · millions'],
       tagline: 'Experts in Sovereign AI for Enterprise.',
       ctaLabel: 'Book a founder call',
-      ctaHref: 'mailto:hello@attentions.ai?subject=Founder%20Call',
+      ctaHref: 'mailto:sales@attentions.ai?subject=Founder%20Call',
     },
   },
   {
@@ -84,7 +84,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       pills: ['On-prem default', 'Air-gapped option', 'Zero incidents'],
       tagline: 'Compliance is structural \u2014 not retrofitted.',
       ctaLabel: 'Request a security review',
-      ctaHref: 'mailto:hello@attentions.ai?subject=Security%20Review',
+      ctaHref: 'mailto:sales@attentions.ai?subject=Security%20Review',
     },
   },
   {
@@ -97,7 +97,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       pills: ['No seat licenses', 'No data leaves', 'ROI in weeks'],
       tagline: 'Pilot \u2192 Production \u2192 Yours.',
       ctaLabel: 'Kick off the assessment',
-      ctaHref: 'mailto:hello@attentions.ai?subject=Assessment%20Kickoff',
+      ctaHref: 'mailto:sales@attentions.ai?subject=Assessment%20Kickoff',
     },
   },
   {
@@ -110,7 +110,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       pills: ['Direct to founders', 'No sales funnel', 'Reply in 4 hrs'],
       tagline: "Don't hand your IP to public AI.",
       ctaLabel: 'Book a founder call',
-      ctaHref: 'mailto:hello@attentions.ai?subject=Founder%20Call',
+      ctaHref: 'mailto:sales@attentions.ai?subject=Founder%20Call',
     },
   },
 ];

@@ -172,7 +172,7 @@ export default function CinematicFooter() {
     { to: '/security', label: 'Security & compliance' },
   ];
   const connect: LinkItem[] = [
-    { href: 'mailto:hello@attentions.ai', label: 'hello@attentions.ai', external: true },
+    { href: 'mailto:sales@attentions.ai', label: 'sales@attentions.ai', external: true },
     { href: 'https://linkedin.com', label: 'LinkedIn', external: true },
     { to: '#', label: 'Privacy' },
     { to: '#', label: 'Terms' },
@@ -329,7 +329,7 @@ export default function CinematicFooter() {
                 </motion.a>
               )}
               <div className="mt-5 text-[13px]" style={{ color: 'rgba(255,255,255,0.50)', fontFamily: "'JetBrains Mono', monospace" }}>
-                hello@attentions.ai · Response within 4 business hours
+                sales@attentions.ai · Response within 4 business hours
               </div>
             </div>
           </div>

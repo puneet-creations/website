@@ -96,7 +96,7 @@ export default function PricingCloser() {
               investment compounds on your balance sheet, not ours.
             </p>
             <a
-              href="mailto:hello@attentions.ai?subject=Scoping"
+              href="mailto:sales@attentions.ai?subject=Scoping"
               className="capsule-dark inline-flex items-center gap-2 rounded-full transition-transform hover:scale-[1.03]"
               style={{
                 padding: '12px 24px',

@@ -45,7 +45,7 @@ const OFFERINGS: Offering[] = [
     priceNum: '$5,000 USD',
     priceSub: 'Fixed · One time',
     ctaLabel: 'Start the assessment',
-    ctaHref: 'mailto:hello@attentions.ai?subject=Enterprise%20AI%20Assessment',
+    ctaHref: 'mailto:sales@attentions.ai?subject=Enterprise%20AI%20Assessment',
   },
   {
     num: '02',
@@ -66,7 +66,7 @@ const OFFERINGS: Offering[] = [
     priceNum: 'From $10,000 USD',
     priceSub: 'Up to $50K · Complex workflow',
     ctaLabel: 'Scope an agent',
-    ctaHref: 'mailto:hello@attentions.ai?subject=Sovereign%20AI%20Agent',
+    ctaHref: 'mailto:sales@attentions.ai?subject=Sovereign%20AI%20Agent',
   },
   {
     num: '03',
@@ -87,7 +87,7 @@ const OFFERINGS: Offering[] = [
     priceNum: '$20,000 USD / year',
     priceSub: '+ $10,000 USD per custom agent',
     ctaLabel: 'Scope the platform',
-    ctaHref: 'mailto:hello@attentions.ai?subject=Sovereign%20AI%20Platform',
+    ctaHref: 'mailto:sales@attentions.ai?subject=Sovereign%20AI%20Platform',
   },
 ];
 

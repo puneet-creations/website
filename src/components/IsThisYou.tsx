@@ -18,7 +18,7 @@ const personas = [
     proofQuote: 'A 2-week expert-led assessment maps where AI delivers the highest ROI across your workflows — with a board-ready business case and a pilot plan.',
     proofAttr: 'Outcome · Strategy + ROI model',
     cta: 'Start the 2-week assessment',
-    href: 'mailto:hello@attentions.ai?subject=2-Week%20Assessment',
+    href: 'mailto:sales@attentions.ai?subject=2-Week%20Assessment',
   },
   {
     icon: TrendingUp,
@@ -29,7 +29,7 @@ const personas = [
     proofQuote: 'We port your running workloads from public AI (OpenAI, Claude, Gemini) to a sovereign deployment on your hardware — same outputs, predictable fixed infra cost.',
     proofAttr: 'Outcome · Fixed cost · Same accuracy',
     cta: 'Migrate to sovereign',
-    href: 'mailto:hello@attentions.ai?subject=Migrate%20to%20Sovereign',
+    href: 'mailto:sales@attentions.ai?subject=Migrate%20to%20Sovereign',
   },
   {
     icon: Shield,
@@ -40,7 +40,7 @@ const personas = [
     proofQuote: 'Sovereign AI platform on your hardware — air-gapped if needed — plus production-ready agents that automate regulated workflows end to end.',
     proofAttr: 'Outcome · Platform + automation agents',
     cta: 'Go sovereign',
-    href: 'mailto:hello@attentions.ai?subject=Sovereign%20AI%20Platform',
+    href: 'mailto:sales@attentions.ai?subject=Sovereign%20AI%20Platform',
   },
 ];
 

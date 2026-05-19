@@ -18,7 +18,7 @@ import {
  * accent second line, body, agent chips, outcome chip.
  *
  * The 8th card is inverted (black bg) and is the "Your industry here?"
- * CTA pointing at hello@attentions.ai.
+ * CTA pointing at sales@attentions.ai.
  */
 export default function AdjacentIndustries() {
   const [ref, inView] = useInView<HTMLElement>(0.15);
@@ -227,7 +227,7 @@ function CTACard({ delay }: { delay: number }) {
         <div className="flex-1" />
 
         <a
-          href="mailto:hello@attentions.ai?subject=New%20Industry%20Fit"
+          href="mailto:sales@attentions.ai?subject=New%20Industry%20Fit"
           className="self-start inline-flex items-center gap-2 rounded-full transition-all hover:scale-[1.03]"
           style={{
             padding: '10px 20px',

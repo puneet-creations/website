@@ -2,6 +2,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useInView } from '../hooks/useInView';
 import PageHero from '../components/PageHero';
 import PageCinematicWrap from '../components/PageCinematicWrap';
+import ContactForm from '../components/contact/ContactForm';
 
 const FAQS = [
   {
@@ -47,7 +48,7 @@ export default function ContactPage() {
           '$5K · 2-week assessment',
           'From $10K · agent in 4 weeks',
           '$20K/yr · platform + 3 agents',
-          'hello@attentions.ai',
+          'sales@attentions.ai',
           'Dubai · Pune',
         ]}
         orbColor="#c0f5d8"
@@ -63,12 +64,13 @@ export default function ContactPage() {
         </p>
       </section>
 
-      {/* Visual intent picker — horizontal labeled doors, not a text form */}
+      {/* Visual intent picker — horizontal labeled doors, fastest-path mailto links.
+          For longer enquiries, the ContactForm below is the primary capture. */}
       <section className="max-w-[1280px] mx-auto px-6 grid md:grid-cols-4 gap-4 mb-16">
         {INTENTS.map((intent, i) => (
           <a
             key={intent.label}
-            href="mailto:hello@attentions.ai"
+            href={`mailto:sales@attentions.ai?subject=${encodeURIComponent(intent.label)}`}
             className={`p-6 transition-all hover:-translate-y-1 hover:shadow-lift sr d-${i + 1}`}
             style={{
               background: ['rgba(138,245,192,0.06)', 'rgba(245,168,212,0.06)', 'rgba(160,220,140,0.06)', 'rgba(255,180,80,0.06)'][i],
@@ -83,6 +85,9 @@ export default function ContactPage() {
           </a>
         ))}
       </section>
+
+      {/* Primary capture — structured contact form (mailto: builder, no backend) */}
+      <ContactForm />
 
       {/* FAQ — Radix Accordion */}
       <section className="max-w-[820px] mx-auto px-6 pb-24">

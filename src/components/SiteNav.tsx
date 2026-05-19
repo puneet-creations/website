@@ -134,7 +134,7 @@ export default function SiteNav() {
 
         <div className="flex items-center gap-2 flex-shrink-0">
           <Link to="/contact" className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-semibold text-[#1c1c1e] border border-[rgba(0,0,0,0.12)] hover:bg-[rgba(0,0,0,0.04)] transition-colors" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Contact us</Link>
-          <a href="mailto:hello@attentions.ai" className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-semibold text-white bg-[#1c1c1e] hover:bg-[#333] transition-colors" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Book a call</a>
+          <a href="mailto:sales@attentions.ai" className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-semibold text-white bg-[#1c1c1e] hover:bg-[#333] transition-colors" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Book a call</a>
 
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
@@ -169,7 +169,7 @@ export default function SiteNav() {
                     </Link>
                   ))}
                 </nav>
-                <a href="mailto:hello@attentions.ai" className="btn-primary mt-10 w-full justify-center">Book a call</a>
+                <a href="mailto:sales@attentions.ai" className="btn-primary mt-10 w-full justify-center">Book a call</a>
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>

@@ -67,7 +67,7 @@ export default function PlatformStack() {
               <div className="font-display text-[20px] text-blue-450 italic">Your next agent</div>
               <div className="text-[13.5px] text-[rgba(0,0,0,0.65)] font-body mt-0.5">Plugs into the same base. Live in 4 weeks.</div>
             </div>
-            <a href="mailto:hello@attentions.ai" className="text-blue-450 font-display font-semibold text-[14px] hidden md:inline-flex">Scope it →</a>
+            <a href="mailto:sales@attentions.ai" className="text-blue-450 font-display font-semibold text-[14px] hidden md:inline-flex">Scope it →</a>
           </div>
         </div>
       </div>
