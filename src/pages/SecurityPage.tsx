@@ -1,5 +1,6 @@
 import { useReducedMotion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
+import { usePageMeta } from '../hooks/usePageMeta';
 import ParallaxHero from '../components/ParallaxHero';
 import PageCinematicWrap from '../components/PageCinematicWrap';
 import { COMPLIANCE } from '../data/compliance';
@@ -18,6 +19,12 @@ const RINGS = [
 ];
 
 export default function SecurityPage() {
+  usePageMeta({
+    title: 'Security · Architectural, not contractual — Attentions AI',
+    description:
+      'Sovereign by architecture. Data never leaves your perimeter. Five concentric security rings — physical, network, runtime, model, data. SOC 2 Type II · HIPAA · GDPR · ISO 27001 · zero security incidents on record.',
+    ogUrl: 'https://attentions.ai/security',
+  });
   const [ref, inView] = useInView<HTMLElement>();
   const reduced = useReducedMotion() ?? false;
 

@@ -45,6 +45,11 @@ export default function ContactForm() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Snapshot of the structured payload so the success state can offer
+  // copy-to-clipboard as a fallback for browsers without a default mail handler
+  // (common in locked-down corporate environments).
+  const [payloadSnapshot, setPayloadSnapshot] = useState<{ subject: string; body: string } | null>(null);
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
 
   const intentLabel = INTENTS.find((i) => i.value === intent)?.label ?? '';
 
@@ -82,7 +87,35 @@ export default function ContactForm() {
     // Open the mail client in the same tab. Most browsers handle this gracefully
     // even when the OS has no default mail handler (they show a prompt).
     window.location.href = href;
+    setPayloadSnapshot({ subject, body });
+    setCopyState('idle');
     setSubmitted(true);
+  };
+
+  const copyPayloadToClipboard = async () => {
+    if (!payloadSnapshot) return;
+    const blob = `To: sales@attentions.ai\nSubject: ${payloadSnapshot.subject}\n\n${payloadSnapshot.body}`;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(blob);
+        setCopyState('copied');
+      } else {
+        // Legacy fallback — populate a hidden textarea + execCommand
+        const ta = document.createElement('textarea');
+        ta.value = blob;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        setCopyState('copied');
+      }
+      window.setTimeout(() => setCopyState('idle'), 2500);
+    } catch {
+      setCopyState('failed');
+      window.setTimeout(() => setCopyState('idle'), 2500);
+    }
   };
 
   // Shared input styling — calm brochure, deck palette
@@ -169,78 +202,177 @@ export default function ContactForm() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mx-auto max-w-[640px]"
+            className="mx-auto max-w-[720px]"
             style={{
               background: ICE,
               border: `1px solid ${RULE}`,
               borderRadius: 16,
-              padding: '32px 28px',
-              textAlign: 'center',
+              padding: 'clamp(24px, 4vw, 36px)',
             }}
           >
-            <div
-              style={{
-                fontFamily: 'var(--mono)',
-                fontSize: 11,
-                color: INK,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                fontWeight: 700,
-                marginBottom: 8,
-              }}
-            >
-              Mail client opened
-            </div>
-            <h3
-              style={{
-                fontFamily: 'var(--serif)',
-                fontSize: 'clamp(22px, 2.2vw, 30px)',
-                fontWeight: 600,
-                color: INK,
-                lineHeight: 1.2,
-                letterSpacing: '-0.01em',
-                marginBottom: 10,
-              }}
-            >
-              Your draft is ready to send.
-            </h3>
-            <p style={{ fontSize: 15, color: CHARCOAL, lineHeight: 1.55, marginBottom: 16 }}>
-              We’ve pre-filled the message to{' '}
-              <a
-                href="mailto:sales@attentions.ai"
+            <div className="text-center">
+              <div
                 style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 11,
                   color: INK,
-                  fontWeight: 600,
-                  borderBottom: `1px solid ${INK}`,
-                  textDecoration: 'none',
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  marginBottom: 8,
                 }}
               >
-                sales@attentions.ai
-              </a>
-              . Hit send in your mail client and a senior architect will reply within 4 business hours.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setSubmitted(false);
-                setMessage('');
-              }}
-              className="inline-flex items-center justify-center gap-2"
-              style={{
-                fontFamily: 'var(--mono)',
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: STEEL,
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '8px 12px',
-              }}
-            >
-              Send another →
-            </button>
+                Mail client opened
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'var(--serif)',
+                  fontSize: 'clamp(22px, 2.2vw, 30px)',
+                  fontWeight: 600,
+                  color: INK,
+                  lineHeight: 1.2,
+                  letterSpacing: '-0.01em',
+                  marginBottom: 10,
+                }}
+              >
+                Your draft is ready to send.
+              </h3>
+              <p style={{ fontSize: 15, color: CHARCOAL, lineHeight: 1.55, marginBottom: 18 }}>
+                We’ve pre-filled the message to{' '}
+                <a
+                  href="mailto:sales@attentions.ai"
+                  style={{
+                    color: INK,
+                    fontWeight: 600,
+                    borderBottom: `1px solid ${INK}`,
+                    textDecoration: 'none',
+                  }}
+                >
+                  sales@attentions.ai
+                </a>
+                . Hit send and a senior architect replies within 4 business hours.
+              </p>
+            </div>
+
+            {/* Fallback panel — for browsers without a default mail handler
+                (locked-down corporate Chrome, Cmd-Shift-N profiles, etc.).
+                Shows the exact payload + a copy-to-clipboard button + the
+                sales address as a tappable mailto link. */}
+            {payloadSnapshot && (
+              <div
+                style={{
+                  background: '#FFFFFF',
+                  border: `1px solid ${RULE}`,
+                  borderRadius: 10,
+                  padding: '18px 18px 14px',
+                  marginBottom: 14,
+                }}
+              >
+                <div
+                  className="flex items-center justify-between gap-3 mb-3"
+                  style={{ flexWrap: 'wrap' }}
+                >
+                  <div
+                    style={{
+                      fontFamily: 'var(--mono)',
+                      fontSize: 11,
+                      color: STEEL,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      fontWeight: 700,
+                    }}
+                  >
+                    No mail client? Copy &amp; send manually
+                  </div>
+                  <button
+                    type="button"
+                    onClick={copyPayloadToClipboard}
+                    className="inline-flex items-center gap-2 rounded-full transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    style={{
+                      fontFamily: 'var(--mono)',
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      color: copyState === 'copied' ? '#0A0A0A' : '#FFFFFF',
+                      background: copyState === 'copied' ? '#F4F2EE' : '#0A0A0A',
+                      border: copyState === 'copied' ? `1px solid ${INK}` : 'none',
+                      padding: '7px 14px',
+                      cursor: 'pointer',
+                    }}
+                    aria-live="polite"
+                  >
+                    {copyState === 'copied'
+                      ? '✓ Copied to clipboard'
+                      : copyState === 'failed'
+                        ? 'Copy failed — select below'
+                        : 'Copy email content'}
+                  </button>
+                </div>
+                <pre
+                  style={{
+                    fontFamily: 'var(--mono)',
+                    fontSize: 12,
+                    color: CHARCOAL,
+                    lineHeight: 1.55,
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-word',
+                    background: '#F4F2EE',
+                    border: `1px solid ${RULE}`,
+                    borderRadius: 6,
+                    padding: '12px 14px',
+                    margin: 0,
+                    maxHeight: 280,
+                    overflow: 'auto',
+                  }}
+                >
+{`To: sales@attentions.ai
+Subject: ${payloadSnapshot.subject}
+
+${payloadSnapshot.body}`}
+                </pre>
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+              <p style={{ fontSize: 12, color: STEEL, lineHeight: 1.5, fontFamily: 'var(--sans)' }}>
+                Or write directly:{' '}
+                <a
+                  href="mailto:sales@attentions.ai"
+                  style={{
+                    color: '#0066CC',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    borderBottom: '1px solid currentColor',
+                  }}
+                >
+                  sales@attentions.ai
+                </a>
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSubmitted(false);
+                  setMessage('');
+                  setPayloadSnapshot(null);
+                }}
+                className="inline-flex items-center justify-center gap-2"
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: STEEL,
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '8px 12px',
+                }}
+              >
+                Send another →
+              </button>
+            </div>
           </motion.div>
         ) : (
           <motion.form

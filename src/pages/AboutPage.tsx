@@ -1,4 +1,5 @@
 import { MotionConfig } from 'framer-motion';
+import { usePageMeta } from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
 import ParallaxHero from '../components/ParallaxHero';
@@ -20,6 +21,12 @@ import AboutCloser from '../components/about/AboutCloser';
  * Design: docs/plans/2026-04-18-about-page-design.md
  */
 export default function AboutPage() {
+  usePageMeta({
+    title: 'About · Experts in Sovereign AI for Enterprise — Attentions AI',
+    description:
+      'Experts in sovereign AI agents for enterprise. 18 experts in Dubai and Pune. 15 agents live in production across 3 regulated industries. Zero security incidents on record. SOC 2 Type II · HIPAA · GDPR · ISO 27001.',
+    ogUrl: 'https://attentions.ai/about',
+  });
   return (
     <MotionConfig reducedMotion="user">
       <main>

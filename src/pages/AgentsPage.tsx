@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { scrollToTarget } from '../lib/lenis';
+import { usePageMeta } from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
 import ClientsStrip from '../components/ClientsStrip';
@@ -23,6 +24,12 @@ import AgentsCloser from '../components/landing/AgentsCloser';
  * Design: docs/plans/2026-04-15-agents-page-v2-design.md
  */
 export default function AgentsPage() {
+  usePageMeta({
+    title: 'Agents · 15 in production today — Attentions AI',
+    description:
+      'Seven deep-dive sovereign AI agents in production today — Invoice Intelligence, Defect-report Intelligence, Doctor’s Notes, Patient Call Agent, Voucher Matching, Tender Intelligence, Fraud Intelligence. Plus 8 more shipping across pharma, banking, hospitality, legal, aviation, retail, insurance and manufacturing.',
+    ogUrl: 'https://attentions.ai/agents',
+  });
   const { hash } = useLocation();
 
   // Preserve hash-scroll behavior for footer jump-links like /agents#agent-deep-dive.

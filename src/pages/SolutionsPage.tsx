@@ -1,4 +1,5 @@
 import { MotionConfig } from 'framer-motion';
+import { usePageMeta } from '../hooks/usePageMeta';
 import ClientsStrip from '../components/ClientsStrip';
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
@@ -20,6 +21,12 @@ import { ANCHOR_INDUSTRIES } from '../data/solutions';
  * Design: docs/plans/2026-04-18-solutions-page-design.md
  */
 export default function SolutionsPage() {
+  usePageMeta({
+    title: 'Solutions by industry · 11 verticals — Attentions AI',
+    description:
+      'Fifteen agents live across four industries today — finance & logistics, healthcare, manufacturing, real estate. The same sovereign-AI pattern ships in seven more: insurance, banking, hospitality, legal, pharma, aviation, retail.',
+    ogUrl: 'https://attentions.ai/solutions',
+  });
   return (
     <MotionConfig reducedMotion="user">
       <main>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useInView } from '../hooks/useInView';
+import { usePageMeta } from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import PageCinematicWrap from '../components/PageCinematicWrap';
 
@@ -45,7 +46,7 @@ const CATEGORIES: Category[] = [
     qas: [
       {
         q: 'How do you know artiGen is not hallucinating?',
-        a: 'Every field traces back to an exact page and line in the source document. The 4-layer hallucination control pipeline gates outputs below a confidence threshold to human review before any action. Three live clients in regulated industries — zero hallucination incidents since go-live.',
+        a: 'Every field traces back to an exact page and line in the source document. The 4-layer hallucination-control pipeline gates outputs below a confidence threshold to human review before any action. 15 agents live across 3 regulated industries — zero security incidents on record since go-live.',
       },
       {
         q: 'What happens when confidence is low?',
@@ -136,6 +137,12 @@ const CATEGORIES: Category[] = [
 ];
 
 export default function FaqPage() {
+  usePageMeta({
+    title: 'FAQ · Pricing, security, timeline — Attentions AI',
+    description:
+      'Answers to the questions enterprise buyers ask first: how fast we ship, where data lives, what pricing looks like, how we prove non-hallucination, where we have offices.',
+    ogUrl: 'https://attentions.ai/faq',
+  });
   const [ref, inView] = useInView<HTMLElement>();
   const [activeTab, setActiveTab] = useState<string>('platform');
   const current = CATEGORIES.find((c) => c.id === activeTab)!;

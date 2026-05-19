@@ -1,4 +1,5 @@
 import { MotionConfig } from 'framer-motion';
+import { usePageMeta } from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import ClientsStrip from '../components/ClientsStrip';
 import PricingDoor from '../components/pricing/PricingDoor';
@@ -15,6 +16,12 @@ import PricingCloser from '../components/pricing/PricingCloser';
  * Design: docs/plans/2026-04-18-pricing-page-design.md
  */
 export default function PricingPage() {
+  usePageMeta({
+    title: 'Pricing · $5K assessment · From $10K agent · $20K/yr platform — Attentions AI',
+    description:
+      'Three ways to start, listed in order of commitment. $5,000 USD fixed for a 2-week assessment. From $10,000 USD per agent in 4 weeks. $20,000 USD/year platform + three custom agents in 6 weeks. The numbers on this page are the numbers on the contract.',
+    ogUrl: 'https://attentions.ai/pricing',
+  });
   return (
     <MotionConfig reducedMotion="user">
       <main>

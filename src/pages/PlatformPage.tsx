@@ -1,3 +1,4 @@
+import { usePageMeta } from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
 import ClientsStrip from '../components/ClientsStrip';
@@ -18,6 +19,12 @@ import PlatformCloser from '../components/landing/PlatformCloser';
  * Design: docs/plans/2026-04-15-platform-page-v2-design.md
  */
 export default function PlatformPage() {
+  usePageMeta({
+    title: 'Platform · Sovereign AI for Enterprise — Attentions AI',
+    description:
+      'The sovereign AI platform that ships agents to production. Cost-optimized, secure on-prem, scalable to millions of documents — your hardware, your regulator’s rules. 6 shared layers: runtime · router · hallucination control · connectors · governance · security.',
+    ogUrl: 'https://attentions.ai/platform',
+  });
   return (
     <main>
       <PageHero

@@ -1,4 +1,5 @@
 import { MotionConfig } from 'framer-motion';
+import { usePageMeta } from '../hooks/usePageMeta';
 import HeroAboveFold from '../components/HeroAboveFold';
 import ClientsStrip from '../components/ClientsStrip';
 import WhyNowTriad from '../components/landing/WhyNowTriad';
@@ -27,6 +28,12 @@ import LandingCloser from '../components/landing/LandingCloser';
  * arched-card panel that matches SevenAgentsGrid / ThreeOfferings.
  */
 export default function LandingPage() {
+  usePageMeta({
+    title: 'Attentions AI · Sovereign AI Agents for Enterprise',
+    description:
+      'Cost-optimized, secure on-prem sovereign AI agents — live in 4 weeks on your servers. 15 agents in production across logistics, automotive, and healthcare. SOC 2 Type II · HIPAA · GDPR · ISO 27001.',
+    ogUrl: 'https://attentions.ai/',
+  });
   return (
     <MotionConfig reducedMotion="user">
       <main>

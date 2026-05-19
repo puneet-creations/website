@@ -1,5 +1,6 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import { useInView } from '../hooks/useInView';
+import { usePageMeta } from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import PageCinematicWrap from '../components/PageCinematicWrap';
 import ContactForm from '../components/contact/ContactForm';
@@ -23,7 +24,7 @@ const FAQS = [
   },
   {
     q: 'How do I know it is not hallucinating?',
-    a: 'Every field traces back to an exact page and line in the source document. The 4-layer hallucination control pipeline gates outputs below a confidence threshold to human review. Three live clients in regulated industries — zero hallucination incidents.',
+    a: 'Every field traces back to an exact page and line in the source document. The 4-layer hallucination-control pipeline gates outputs below a confidence threshold to human review. 15 agents live across 3 regulated industries — zero security incidents on record.',
   },
 ];
 
@@ -35,6 +36,12 @@ const INTENTS = [
 ];
 
 export default function ContactPage() {
+  usePageMeta({
+    title: 'Contact · sales@attentions.ai · Dubai · Pune — Attentions AI',
+    description:
+      'Tell us what you need. A senior architect reads every submission and replies within 4 business hours. No SDRs, no auto-replies. sales@attentions.ai · Dubai · Pune.',
+    ogUrl: 'https://attentions.ai/contact',
+  });
   const [heroRef, heroIn] = useInView();
   return (
     <main>
