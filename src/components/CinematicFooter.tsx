@@ -173,7 +173,7 @@ export default function CinematicFooter() {
   ];
   const connect: LinkItem[] = [
     { href: 'mailto:sales@attentions.ai', label: 'sales@attentions.ai', external: true },
-    { href: 'https://linkedin.com', label: 'LinkedIn', external: true },
+    { href: 'https://www.linkedin.com/company/attentions', label: 'LinkedIn', external: true },
     { to: '#', label: 'Privacy' },
     { to: '#', label: 'Terms' },
   ];
