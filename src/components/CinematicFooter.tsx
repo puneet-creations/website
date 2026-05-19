@@ -48,13 +48,13 @@ function FooterColumn({ title, items }: { title: string; items: LinkItem[] }) {
   return (
     <div>
       <div
-        className="mb-4 text-[11px]"
+        className="mb-4 text-[12px]"
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontWeight: 700,
           letterSpacing: '0.10em',
           textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.40)',
+          color: 'rgba(255,255,255,0.48)',
         }}
       >
         {title}
@@ -67,7 +67,7 @@ function FooterColumn({ title, items }: { title: string; items: LinkItem[] }) {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[14px] transition-colors hover:text-white"
+                className="text-[15px] transition-colors hover:text-white"
                 style={{ color: 'rgba(255,255,255,0.65)' }}
               >
                 {item.label}
@@ -75,7 +75,7 @@ function FooterColumn({ title, items }: { title: string; items: LinkItem[] }) {
             ) : (
               <Link
                 to={item.to ?? '#'}
-                className="text-[14px] transition-colors hover:text-white"
+                className="text-[15px] transition-colors hover:text-white"
                 style={{ color: 'rgba(255,255,255,0.65)' }}
               >
                 {item.label}
@@ -349,9 +349,9 @@ export default function CinematicFooter() {
               className="mb-5"
               style={{
                 fontFamily: 'var(--mono)',
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: '0.12em',
+                letterSpacing: '0.10em',
                 textTransform: 'uppercase',
                 color: accent,
               }}

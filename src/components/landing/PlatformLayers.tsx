@@ -306,11 +306,11 @@ export default function PlatformLayers() {
                       background: ICE,
                       color: CHARCOAL,
                       fontFamily: 'var(--mono)',
-                      fontSize: 10.5,
+                      fontSize: 12,
                       fontWeight: 700,
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.06em',
                       textTransform: 'uppercase',
-                      padding: '5px 9px',
+                      padding: '6px 11px',
                       borderRadius: 999,
                       border: `1px solid ${RULE}`,
                     }}
@@ -349,7 +349,7 @@ export default function PlatformLayers() {
             }}
           >
             The compound base
-            <span style={{ display: 'block', color: STEEL, fontWeight: 500, fontSize: 11, marginTop: 4 }}>
+            <span style={{ display: 'block', color: STEEL, fontWeight: 500, fontSize: 12, marginTop: 4 }}>
               one foundation, many agents
             </span>
           </div>

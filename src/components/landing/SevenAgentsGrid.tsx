@@ -341,7 +341,7 @@ export default function SevenAgentsGrid() {
                 style={{
                   gap: 1,
                   fontFamily: 'var(--mono)',
-                  fontSize: 10,
+                  fontSize: 11.5,
                   color: STEEL,
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
@@ -433,8 +433,8 @@ export default function SevenAgentsGrid() {
                 display: 'block',
                 color: STEEL,
                 fontWeight: 500,
-                marginTop: 3,
-                fontSize: 11,
+                marginTop: 4,
+                fontSize: 12,
               }}
             >
               run on the same sovereign platform

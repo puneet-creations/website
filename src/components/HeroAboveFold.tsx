@@ -237,9 +237,9 @@ function HeroProofStrip() {
             <div
               style={{
                 fontFamily: 'var(--mono)',
-                fontSize: 11.5,
-                color: 'rgba(0,0,0,0.55)',
-                letterSpacing: '0.14em',
+                fontSize: 13,
+                color: 'rgba(0,0,0,0.6)',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 fontWeight: 600,
                 lineHeight: 1.4,
@@ -378,13 +378,13 @@ function HeroProofStrip() {
             style={{
               background: '#F4F2EE',
               border: '1px solid rgba(0,0,0,0.08)',
-              color: '#2B2B2B',
+              color: '#1A1A1A',
               fontFamily: 'var(--mono)',
-              fontSize: 10.5,
+              fontSize: 12,
               fontWeight: 700,
-              letterSpacing: '0.12em',
+              letterSpacing: '0.10em',
               textTransform: 'uppercase',
-              padding: '6px 11px',
+              padding: '7px 13px',
               borderRadius: 9999,
             }}
           >
@@ -455,11 +455,11 @@ function TelemetryTicker() {
         <span
           style={{
             fontFamily: 'var(--mono)',
-            fontSize: 10.5,
-            letterSpacing: '0.14em',
+            fontSize: 12,
+            letterSpacing: '0.12em',
             textTransform: 'uppercase',
             fontWeight: 700,
-            color: 'rgba(0,0,0,0.55)',
+            color: 'rgba(0,0,0,0.6)',
           }}
         >
           Live · just now
@@ -486,7 +486,7 @@ function TelemetryTicker() {
       <span
         style={{
           fontFamily: 'var(--mono)',
-          fontSize: 10.5,
+          fontSize: 12.5,
           fontWeight: 700,
           color: '#0A0A0A',
           letterSpacing: '0.04em',
