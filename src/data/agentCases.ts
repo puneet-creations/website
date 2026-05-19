@@ -41,6 +41,11 @@ export type AgentCase = {
   outcomeNote: string;     // italic supporting sentence
   benefits: AgentCaseBenefit[];
   wins: AgentCaseWin[];
+  // Optional editorial video backdrop for the hero section
+  // (e.g. /video/doctor-writing.mp4). Heavily tinted in render so
+  // it reads as atmosphere, not foreground. Skipped under
+  // prefers-reduced-motion.
+  videoBg?: string;
 };
 
 export const AGENT_CASES: AgentCase[] = [
@@ -114,6 +119,7 @@ export const AGENT_CASES: AgentCase[] = [
           'The invoice data, the trained agent and the audit log all stay inside your own network.',
       },
     ],
+    videoBg: '/video/invoice-intelligence.mp4',
   },
   {
     slug: 'defect-report-intelligence',
@@ -182,6 +188,7 @@ export const AGENT_CASES: AgentCase[] = [
           'Defect reports, dealer data and the trained agent never leave your network.',
       },
     ],
+    videoBg: '/video/defect-report-intelligence.mp4',
   },
   {
     slug: 'doctors-notes',
@@ -250,6 +257,7 @@ export const AGENT_CASES: AgentCase[] = [
           'Patient audio never leaves the clinic · compliant with health-data law by architecture.',
       },
     ],
+    videoBg: '/video/doctor-writing.mp4',
   },
   {
     slug: 'patient-call-agent',
@@ -318,6 +326,7 @@ export const AGENT_CASES: AgentCase[] = [
           'Patient identity and call content stay in the clinic · compliant with health-data law.',
       },
     ],
+    videoBg: '/video/patient-call-agent.mp4',
   },
   {
     slug: 'voucher-matching',
@@ -386,6 +395,7 @@ export const AGENT_CASES: AgentCase[] = [
           'Payment data and the trained agent stay inside the finance perimeter.',
       },
     ],
+    videoBg: '/video/voucher-matching.mp4',
   },
   {
     slug: 'tender-intelligence',
@@ -454,6 +464,7 @@ export const AGENT_CASES: AgentCase[] = [
           'Tender and vendor data stay on your procurement system.',
       },
     ],
+    videoBg: '/video/tender-intelligence.mp4',
   },
   {
     slug: 'fraud-intelligence',
@@ -526,6 +537,7 @@ export const AGENT_CASES: AgentCase[] = [
           'Claim data, dealer information and the trained models stay on your warranty system.',
       },
     ],
+    videoBg: '/video/fraud-intelligence.mp4',
   },
 ];
 

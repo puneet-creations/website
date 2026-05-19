@@ -5,6 +5,7 @@ import {
   Shield, Target, TrendingDown, Layers,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { InvoiceFieldExtract, PatientWavePulse, FraudAnomalyFlash } from '../motions/CardMotions';
 
 /**
  * SevenAgentsGrid — deck v2 S04 "Seven agents in production" port.
@@ -30,6 +31,7 @@ type Agent = {
   metricLabel: string;
   icon: LucideIcon;
   slug: string;                        // routes to /agents/<slug> case-study page
+  motion?: React.ComponentType;        // optional in-view micro-animation
 };
 
 const AGENTS: Agent[] = [
@@ -47,6 +49,7 @@ const AGENTS: Agent[] = [
     metricLabel: 'no-touch post rate',
     icon: Receipt,
     slug: 'invoice-intelligence',
+    motion: InvoiceFieldExtract,
   },
   {
     n: '02',
@@ -92,6 +95,7 @@ const AGENTS: Agent[] = [
     metricLabel: 'recovered per clinic / yr',
     icon: PhoneCall,
     slug: 'patient-call-agent',
+    motion: PatientWavePulse,
   },
   {
     n: '05',
@@ -137,6 +141,7 @@ const AGENTS: Agent[] = [
     metricLabel: 'to flag fraud at intake',
     icon: ShieldAlert,
     slug: 'fraud-intelligence',
+    motion: FraudAnomalyFlash,
   },
 ];
 
@@ -314,6 +319,21 @@ export default function SevenAgentsGrid() {
               >
                 {a.does}
               </div>
+
+              {/*
+                Domain-specific micro-animation — fires once on first
+                scroll into view, then loops a quiet gesture. Only
+                attached to the highest-narrative agents (Invoice,
+                Patient, Fraud); the other four show the static card
+                as before. Keeps the page coherent — every card has
+                the same geometry, but the ones with motion act as
+                "visual anchors" that draw the eye across the grid.
+              */}
+              {a.motion && (
+                <div style={{ margin: '2px 0 6px' }}>
+                  <a.motion />
+                </div>
+              )}
 
               {/* Flow pipe — dashed borders */}
               <div

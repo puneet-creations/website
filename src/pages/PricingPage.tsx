@@ -25,6 +25,13 @@ export default function PricingPage() {
   return (
     <MotionConfig reducedMotion="user">
       <main>
+        {/*
+          Cinematic hero — close-up of a hand signing a business
+          contract. Direct narrative match: the page is the
+          "commitment ladder" and the entire framing is "the numbers
+          on this page are the numbers on the contract". Visual
+          evidence of the literal moment of commitment.
+        */}
         <PageHero
           label="Pricing"
           title="Three ways to start,"
@@ -39,6 +46,9 @@ export default function PricingPage() {
             'Own what you build',
             'Live on your servers',
           ]}
+          videoSrc="/video/pricing-hero.mp4"
+          videoOpacity={0.3}
+          videoTintOpacity={0.74}
         />
 
         <ClientsStrip />
@@ -48,7 +58,7 @@ export default function PricingPage() {
         ))}
 
         <ParallaxHero
-          imageSrc="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1920&h=1080&fit=crop"
+          imageSrc="/img/photo-1559526324-4b87b5e36e44.webp"
           headline="Start anywhere."
           headlineAccent="Compound over time."
           subline="A door you start with today becomes the foundation for the next. Every engagement is scoped to pay back in months, not years."

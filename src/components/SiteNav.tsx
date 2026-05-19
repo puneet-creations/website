@@ -40,19 +40,24 @@ const NAV_ITEMS = [
       {
         title: 'Live Agents',
         items: [
-          { label: 'Invoice Intelligence', description: 'Any format \u00b7 88% no-touch post', icon: FileText, link: '/agents' },
-          { label: 'Defect-report Intelligence', description: '1.2M reports \u00b7 root cause in hours', icon: Cpu, link: '/agents' },
-          { label: 'Doctor\u2019s Notes', description: '~2 hours back per doctor per day', icon: Stethoscope, link: '/agents' },
-          { label: 'Tender Intelligence', description: '4\u20138% saved on every PO awarded', icon: ClipboardCheck, link: '/agents' },
+          // Each agent name now deep-links to its /agents/<slug> case page,
+          // which carries the full deck-style detail (problem, 3 solution
+          // steps, big metric, 4 wins) plus an editorial video backdrop.
+          { label: 'Invoice Intelligence',        description: 'Any format \u00b7 88% no-touch post',      icon: FileText,        link: '/agents/invoice-intelligence' },
+          { label: 'Defect-report Intelligence',  description: '1.2M reports \u00b7 root cause in hours',  icon: Cpu,             link: '/agents/defect-report-intelligence' },
+          { label: 'Doctor\u2019s Notes',              description: '~2 hours back per doctor per day',    icon: Stethoscope,     link: '/agents/doctors-notes' },
+          { label: 'Tender Intelligence',         description: '4\u20138% saved on every PO awarded',      icon: ClipboardCheck,  link: '/agents/tender-intelligence' },
         ],
       },
       {
         title: 'Agent Pattern',
         items: [
-          { label: 'READ \u00b7 THINK \u00b7 DO \u00b7 PROVE', description: 'The 4-verb agent anatomy', icon: Zap, link: '/agents' },
-          { label: 'Patient Call Agent', description: '$100K+ recovered per clinic / yr', icon: Phone, link: '/agents' },
-          { label: 'Voucher Matching', description: 'Six docs in \u00b7 5 min per packet', icon: FileText, link: '/agents' },
-          { label: 'Fraud Intelligence', description: '< 1s to flag fraud at intake', icon: ShieldAlert, link: '/agents' },
+          // "READ \u00b7 THINK \u00b7 DO \u00b7 PROVE" stays on the /agents index \u2014 it
+          // describes the shared agent anatomy, not a single agent.
+          { label: 'READ \u00b7 THINK \u00b7 DO \u00b7 PROVE',   description: 'The 4-verb agent anatomy',           icon: Zap,             link: '/agents' },
+          { label: 'Patient Call Agent',          description: '$100K+ recovered per clinic / yr',   icon: Phone,           link: '/agents/patient-call-agent' },
+          { label: 'Voucher Matching',            description: 'Six docs in \u00b7 5 min per packet',     icon: FileText,        link: '/agents/voucher-matching' },
+          { label: 'Fraud Intelligence',          description: '< 1s to flag fraud at intake',       icon: ShieldAlert,     link: '/agents/fraud-intelligence' },
         ],
       },
     ],

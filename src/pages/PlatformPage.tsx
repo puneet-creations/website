@@ -27,6 +27,12 @@ export default function PlatformPage() {
   });
   return (
     <main>
+      {/*
+        Cinematic hero — editorial backdrop of a real data-center
+        hallway. Reinforces the "platform that ships agents to
+        production" narrative with visual evidence of the
+        infrastructure scale instead of leaning on text alone.
+      */}
       <PageHero
         label="The platform · experts in sovereign AI for enterprise"
         title="The sovereign AI platform"
@@ -41,6 +47,9 @@ export default function PlatformPage() {
           'Hallucination-controlled',
           '12,400 docs/hr',
         ]}
+        videoSrc="/video/platform-hero.mp4"
+        videoOpacity={0.28}
+        videoTintOpacity={0.78}
       />
 
       <ClientsStrip />
@@ -48,7 +57,7 @@ export default function PlatformPage() {
       <PlatformWhySection />
 
       <ParallaxHero
-        imageSrc="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&h=1080&fit=crop"
+        imageSrc="/img/photo-1558494949-ef010cbdcc31.webp"
         headline="Six layers."
         headlineAccent="Solved once."
         subline="The hard parts — runtime, routing, hallucination control, connectors, governance, security — solved once for every agent that ships on artiGen."
@@ -60,7 +69,7 @@ export default function PlatformPage() {
       <PlatformStack />
 
       <ParallaxHero
-        imageSrc="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1920&h=1080&fit=crop"
+        imageSrc="/img/photo-1639322537228-f710d846310a.webp"
         headline="How the hardest layers"
         headlineAccent="actually work."
         subline="Hallucination control, determinism, and scale — the three properties your regulator asks about. Each shipped in production."
@@ -74,7 +83,7 @@ export default function PlatformPage() {
       <ScaleAtVolume />
 
       <ParallaxHero
-        imageSrc="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop"
+        imageSrc="/img/photo-1677442136019-21780ecad995.webp"
         headline="Documents. Voice."
         headlineAccent="Multimodal."
         subline="Three agent families on one platform. Custom-built for your workflow, not prompt-wrapped around ChatGPT."

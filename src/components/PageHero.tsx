@@ -1,6 +1,7 @@
 import { lazy, Suspense, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
+import AmbientVideo from './motions/AmbientVideo';
 
 const HeroOrb = lazy(() => import('./HeroOrb'));
 
@@ -20,11 +21,19 @@ type Props = {
   orbColor?: string;
   dustCount?: number;
   withOrb?: boolean;
+  // Optional editorial video backdrop — when set, the section
+  // background goes transparent and the video sits behind the
+  // existing grid + aurora layers. Heavily tinted via the
+  // AmbientVideo component so the headline stays readable.
+  videoSrc?: string;
+  videoTintOpacity?: number;
+  videoOpacity?: number;
 };
 
 export default function PageHero({
   label, title, titleAccent, description, accent = '#8af5c0', pills,
   orbColor = '#f5e8c0', dustCount = 14, withOrb = true,
+  videoSrc, videoTintOpacity = 0.72, videoOpacity = 0.3,
 }: Props) {
   const heroRef = useRef<HTMLElement>(null);
   const [viewRef, inView] = useInView<HTMLDivElement>(0.1);
@@ -40,8 +49,28 @@ export default function PageHero({
     <section
       ref={heroRef}
       className="relative overflow-hidden"
-      style={{ background: '#ffffff', minHeight: '80vh' }}
+      style={{
+        // When a video backdrop is requested, drop the opaque white
+        // so the video can show through. Otherwise keep the original
+        // parchment-white background.
+        background: videoSrc ? '#F4F2EE' : '#ffffff',
+        minHeight: '80vh',
+      }}
     >
+      {/* Editorial video backdrop (optional) — sits at the lowest
+          layer so the existing grid + aurora + orb continue to read
+          on top. AmbientVideo handles autoplay, IO pause, and
+          reduced-motion fallback. */}
+      {videoSrc && (
+        <AmbientVideo
+          src={videoSrc}
+          opacity={videoOpacity}
+          tint="#F4F2EE"
+          tintOpacity={videoTintOpacity}
+          objectPosition="center 40%"
+        />
+      )}
+
       {/* Grid overlay */}
       <div className="cf-grid absolute inset-0 pointer-events-none" />
 

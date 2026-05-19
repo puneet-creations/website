@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { AGENT_CASE_BY_SLUG, type AgentCase } from '../data/agentCases';
+import AmbientVideo from '../components/motions/AmbientVideo';
 
 /**
  * AgentCasePage — single per-agent case study page (deck S06+ pattern).
@@ -46,10 +47,24 @@ function AgentCaseView({ caseData }: { caseData: AgentCase }) {
     <main style={{ background: '#F4F2EE' }}>
       {/* Hero block */}
       <section
-        className="relative scroll-mt-20"
+        className="relative scroll-mt-20 overflow-hidden"
         style={{ padding: 'clamp(56px, 9vw, 120px) clamp(16px, 4vw, 32px) 0' }}
       >
-        <div className="max-w-[1280px] mx-auto">
+        {/* Optional editorial video backdrop — present on cases where
+            a fitting clip exists (e.g. Doctor's Notes uses a slow macro
+            of a doctor writing notes). Heavily parchment-tinted so the
+            hero copy remains the focus. */}
+        {c.videoBg && (
+          <AmbientVideo
+            src={c.videoBg}
+            opacity={0.32}
+            tint="#F4F2EE"
+            tintOpacity={0.7}
+            objectPosition="center 35%"
+          />
+        )}
+
+        <div className="relative max-w-[1280px] mx-auto" style={{ zIndex: 1 }}>
           {/* Breadcrumb */}
           <nav
             className="mb-6"

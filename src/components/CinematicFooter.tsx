@@ -95,6 +95,9 @@ export default function CinematicFooter() {
 
   const { pathname } = useLocation();
   const msg = resolveFooterMessage(pathname);
+  // Per-route accent — drives eyebrow ink, CTA glow, compliance band
+  // tint, and orb attenuation. Defaults to mint when message omits it.
+  const accent = msg.accent ?? '#8af5c0';
 
   // prefers-reduced-motion is read once at mount; if the user toggles their
   // system preference mid-session, they must reload for it to take effect —
@@ -250,7 +253,7 @@ export default function CinematicFooter() {
                   fontWeight: 700,
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
-                  color: '#8af5c0',
+                  color: accent,
                 }}
               >
                 {msg.eyebrow}
@@ -350,7 +353,7 @@ export default function CinematicFooter() {
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: '#8af5c0',
+                color: accent,
               }}
             >
               Certified &amp; audited
@@ -361,9 +364,9 @@ export default function CinematicFooter() {
                   key={c}
                   className="px-5 py-2.5 rounded-full text-[13px] font-semibold"
                   style={{
-                    background: 'rgba(138,245,192,0.08)',
-                    border: '1px solid rgba(138,245,192,0.20)',
-                    color: '#8af5c0',
+                    background: `${accent}14`, // ~8% alpha (8-digit hex)
+                    border: `1px solid ${accent}33`, // ~20% alpha
+                    color: accent,
                     fontFamily: "'Noto Sans', sans-serif",
                   }}
                 >

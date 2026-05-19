@@ -67,13 +67,13 @@ export type Agent = {
 };
 
 export const INDUSTRIES: readonly Industry[] = [
-  { id: 'logistics',   name: 'Logistics & trade finance', tagline: 'Clear the Monday backlog by 10:42.',                photoUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=70', pairedAgentId: 'invoice' },
-  { id: 'pharma',      name: 'Pharma & life sciences',    tagline: 'Defect-report graphs across millions of reports.', photoUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=70', pairedAgentId: 'pcr' },
-  { id: 'dental',      name: 'Dental networks',           tagline: 'Every clinical note written. Every call answered.', photoUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=70', pairedAgentId: 'voice' },
-  { id: 'auto',        name: 'Automotive',                tagline: 'Warranty fraud flagged before payment.',           photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=600&q=70', pairedAgentId: 'voucher' },
-  { id: 'healthcare',  name: 'Hospital systems',          tagline: 'Patient history, cited and reversible.',           photoUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=70', pairedAgentId: 'patient' },
-  { id: 'banking',     name: 'Banking & compliance',      tagline: 'KYC docs with a full audit trail.',                photoUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=70', pairedAgentId: 'invoice' },
-  { id: 'real-estate', name: 'Real estate',               tagline: 'Every quote standardised to true landed cost.',    photoUrl: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=70', pairedAgentId: 'tender' },
+  { id: 'logistics',   name: 'Logistics & trade finance', tagline: 'Clear the Monday backlog by 10:42.',                photoUrl: '/img/photo-1556761175-5973dc0f32e7.webp', pairedAgentId: 'invoice' },
+  { id: 'pharma',      name: 'Pharma & life sciences',    tagline: 'Defect-report graphs across millions of reports.', photoUrl: '/img/photo-1576086213369-97a306d36557.webp', pairedAgentId: 'pcr' },
+  { id: 'dental',      name: 'Dental networks',           tagline: 'Every clinical note written. Every call answered.', photoUrl: '/img/photo-1629909613654-28e377c37b09.webp', pairedAgentId: 'voice' },
+  { id: 'auto',        name: 'Automotive',                tagline: 'Warranty fraud flagged before payment.',           photoUrl: '/img/photo-1486006920555-c77dcf18193c.webp', pairedAgentId: 'voucher' },
+  { id: 'healthcare',  name: 'Hospital systems',          tagline: 'Patient history, cited and reversible.',           photoUrl: '/img/photo-1519494026892-80bbd2d6fd0d.webp', pairedAgentId: 'patient' },
+  { id: 'banking',     name: 'Banking & compliance',      tagline: 'KYC docs with a full audit trail.',                photoUrl: '/img/photo-1556761175-b413da4baf72.webp', pairedAgentId: 'invoice' },
+  { id: 'real-estate', name: 'Real estate',               tagline: 'Every quote standardised to true landed cost.',    photoUrl: '/img/photo-1486325212027-8081e485255e.webp', pairedAgentId: 'tender' },
 ] as const;
 
 export const AGENTS: readonly Agent[] = [

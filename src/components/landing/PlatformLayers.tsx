@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Server, Router, ShieldCheck, Plug, Eye, Lock,
 } from 'lucide-react';
@@ -107,15 +108,44 @@ const RULE = '#D9D9D9';
 const ICE = '#E8E8E8';
 
 export default function PlatformLayers() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Vertical connector hairline grows as the section scrolls through view —
+  // "the stack assembling itself" visual. Capped at 100% so it never overshoots.
+  const connectorScale = useTransform(scrollYProgress, [0.15, 0.75], [0, 1]);
+
   return (
     <section
+      ref={sectionRef}
       id="platform-layers"
       className="relative scroll-mt-20"
       style={{
         background: '#F4F2EE',          // --stone, alternates with adjacent white sections
         padding: 'clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px)',
+        perspective: '1400px',
       }}
     >
+      {/* Scroll-tied connector hairline — left margin, grows downward as
+          the user scrolls. Hidden on small screens (would be off-edge). */}
+      <motion.div
+        aria-hidden="true"
+        className="hidden lg:block absolute"
+        style={{
+          left: 'clamp(24px, 3vw, 52px)',
+          top: '12%',
+          bottom: '12%',
+          width: 1,
+          background: INK,
+          opacity: 0.18,
+          scaleY: connectorScale,
+          transformOrigin: 'top center',
+        }}
+      />
+
       <div className="max-w-[1440px] mx-auto">
         {/* Header — deck-faithful framing */}
         <div className="mb-10 md:mb-14">
@@ -174,10 +204,10 @@ export default function PlatformLayers() {
           {LAYERS.map((l, i) => (
             <motion.article
               key={l.n}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 60, rotateX: 14, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: i * 0.06 }}
+              transition={{ duration: 0.7, delay: i * 0.09, ease: [0.16, 0.84, 0.24, 1] }}
               className="flex flex-col"
               style={{
                 background: '#FFFFFF',
@@ -186,6 +216,8 @@ export default function PlatformLayers() {
                 padding: '32px 26px 24px',
                 gap: 12,
                 minHeight: 320,
+                transformOrigin: 'top center',
+                willChange: 'transform, opacity',
               }}
             >
               {/* Icon + number badge */}

@@ -8,6 +8,7 @@ import IndustryAnchorSection from '../components/solutions/IndustryAnchorSection
 import AgentIndustryMatrix from '../components/solutions/AgentIndustryMatrix';
 import AdjacentIndustries from '../components/solutions/AdjacentIndustries';
 import SolutionsCloser from '../components/solutions/SolutionsCloser';
+import SevenAgentsGrid from '../components/landing/SevenAgentsGrid';
 import { ANCHOR_INDUSTRIES } from '../data/solutions';
 
 /**
@@ -30,6 +31,13 @@ export default function SolutionsPage() {
   return (
     <MotionConfig reducedMotion="user">
       <main>
+        {/*
+          Cinematic hero — aerial editorial of a city full of corporate
+          buildings at night. Reinforces the "your industry" framing
+          with visual evidence of the diversity of enterprises the
+          platform serves — every glass tower in the shot is a
+          different industry, and we ship into all of them.
+        */}
         <PageHero
           label="Solutions by industry"
           title="Your industry."
@@ -38,24 +46,38 @@ export default function SolutionsPage() {
           accent="#d97706"
           orbColor="#e0c080"
           pills={[
-            '10 industries',
-            '5 sovereign agents',
-            '3 in production',
+            '11 industries',
+            '7 sovereign agents',
+            '4 in production',
             '0 hallucination incidents',
             'On-prem by default',
           ]}
+          videoSrc="/video/solutions-hero.mp4"
+          videoOpacity={0.3}
+          videoTintOpacity={0.76}
         />
 
         <ClientsStrip />
 
         <IndustrySwitcher />
 
+        {/*
+          All 7 use cases — deck-faithful S04/S06-S12 detail.
+          Each arched card surfaces the case number, agent name,
+          tagline, big outcome metric, and links to the full
+          /agents/<slug> deck-style case study. This guarantees that
+          buyers landing on /solutions see every use case in
+          production (not just the four anchor industries below)
+          and can click into the full deck content for any one.
+        */}
+        <SevenAgentsGrid />
+
         {ANCHOR_INDUSTRIES.map((a) => (
           <IndustryAnchorSection key={a.id} data={a} />
         ))}
 
         <ParallaxHero
-          imageSrc="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1920&h=1080&fit=crop"
+          imageSrc="/img/photo-1487958449943-2429e8be8625.webp"
           headline="The same agent."
           headlineAccent="A different industry."
           subline="Fifteen agents are live across four industries today. The same pattern ships in seven more."
@@ -69,7 +91,7 @@ export default function SolutionsPage() {
         <AdjacentIndustries />
 
         <ParallaxHero
-          imageSrc="https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=1920&h=1080&fit=crop"
+          imageSrc="/img/photo-1473091534298-04dcbce3278c.webp"
           headline="Is your industry"
           headlineAccent="here?"
           subline="If your workflow has mixed-format docs, regulated reporting, real-time voice, or multi-tool orchestration — we've seen the pattern before."

@@ -30,6 +30,13 @@ export default function AboutPage() {
   return (
     <MotionConfig reducedMotion="user">
       <main>
+        {/*
+          Cinematic hero — aerial Downtown Dubai cityscape. Grounds the
+          "Dubai · Pune" brand geography in real footage of one of the
+          two HQ cities, not generic office stock. The mid-page
+          ParallaxHero further reinforces with a golden-hour cityscape
+          for "the track record" beat.
+        */}
         <PageHero
           label="About · experts in sovereign AI for enterprise"
           title="Experts in Sovereign AI Agents"
@@ -44,6 +51,9 @@ export default function AboutPage() {
             'Dubai · Pune',
             'SOC 2 Type II · HIPAA · GDPR · ISO 27001',
           ]}
+          videoSrc="/video/about-hero.mp4"
+          videoOpacity={0.3}
+          videoTintOpacity={0.74}
         />
 
         <ClientsStrip />
@@ -54,8 +64,14 @@ export default function AboutPage() {
 
         <SuccessStories />
 
+        {/*
+          Editorial backdrop — golden-hour cityscape. Local /img/ so
+          page renders without external CDN. Grounds the "Dubai · Pune"
+          brand geography in real urban-skyline imagery rather than
+          generic office stock.
+        */}
         <ParallaxHero
-          imageSrc="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop"
+          imageSrc="/img/about-city-dusk.webp"
           headline="Shipped. Audited."
           headlineAccent="Live."
           subline="15 agents live in production across 3 regulated industries. Zero security incidents on record. Four certifications on file."

@@ -1,7 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { scrollToTarget } from '../lib/lenis';
+import AmbientVideo from './motions/AmbientVideo';
+import AmbientGlyphField from './motions/AmbientGlyphField';
 
 /**
  * HeroAboveFold — v6: value headline + 3-card GTM gallery.
@@ -40,6 +42,33 @@ export default function HeroAboveFold() {
     >
       {/* Background */}
       <div className="cf-grid absolute inset-0 pointer-events-none" />
+
+      {/*
+        Layer 1 — Ambient editorial video: a slow macro of a hand
+        writing in a notebook. Heavily desaturated + parchment-tinted
+        so it reads as atmosphere, never foreground. Picked over
+        cliché "AI brain" footage because the brand is sovereign-AI
+        for *documents and decisions* — a hand on paper signals
+        deliberate, audited work.
+
+        Layer 2 — Canvas glyph drift continues to ride above the
+        video as a "language in motion" overlay. Together: real
+        editorial footage + generative typography = cinematic without
+        the stock-photo feel.
+
+        Both layers respect prefers-reduced-motion and auto-pause
+        when the hero scrolls off-screen.
+      */}
+      <AmbientVideo
+        src="/video/hero-writing.mp4"
+        opacity={0.28}
+        tint="#F4F2EE"
+        tintOpacity={0.72}
+        objectPosition="center 40%"
+      />
+      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.55 }}>
+        <AmbientGlyphField density={0.6} />
+      </div>
 
       {/* Aurora */}
       <div className="absolute inset-0 pointer-events-none">
@@ -363,7 +392,110 @@ function HeroProofStrip() {
           </span>
         ))}
       </motion.div>
+
+      {/*
+        Telemetry ticker — gives "live in production" actual weight.
+        Mock-but-plausible decisions from the deployed agent fleet,
+        cycling through with a typewriter cursor. Reduced-motion fallback
+        renders a static row.
+      */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.3 }}
+        className="mx-auto mt-7 max-w-[760px]"
+      >
+        <TelemetryTicker />
+      </motion.div>
     </motion.div>
+  );
+}
+
+const TELEMETRY_EVENTS = [
+  { agent: 'Invoice', verb: 'matched', detail: 'PO-44012 · 3-way clean', ms: 18 },
+  { agent: 'Patient', verb: 'booked', detail: 'Slot · Dr. Mehta · 6:32 PM', ms: 540 },
+  { agent: 'Fraud', verb: 'flagged', detail: 'Claim #29117 · photo + history', ms: 92 },
+  { agent: 'Defect', verb: 'classified', detail: 'Trim · paint · A-pillar', ms: 47 },
+  { agent: 'Voucher', verb: 'posted', detail: 'SAP · cited · audited', ms: 31 },
+  { agent: 'Doctor', verb: 'structured', detail: 'Handwritten · 12 fields', ms: 64 },
+  { agent: 'Tender', verb: 'parsed', detail: '187 pages · 4 clauses out', ms: 1480 },
+] as const;
+
+function TelemetryTicker() {
+  const reduced = useReducedMotion() ?? false;
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    if (reduced) return;
+    const id = window.setInterval(() => setI((n) => (n + 1) % TELEMETRY_EVENTS.length), 2400);
+    return () => window.clearInterval(id);
+  }, [reduced]);
+
+  const e = TELEMETRY_EVENTS[i];
+
+  return (
+    <div
+      className="flex items-center justify-between gap-4"
+      style={{
+        background: 'rgba(255,255,255,0.55)',
+        border: '1px solid rgba(0,0,0,0.06)',
+        borderRadius: 9999,
+        padding: '8px 16px',
+        backdropFilter: 'blur(8px)',
+      }}
+    >
+      <span className="flex items-center gap-2.5">
+        <span className="relative flex h-2 w-2">
+          <span
+            className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-70"
+            style={{ background: '#0066CC' }}
+          />
+          <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: '#0066CC' }} />
+        </span>
+        <span
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 10.5,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: 'rgba(0,0,0,0.55)',
+          }}
+        >
+          Live · just now
+        </span>
+      </span>
+      <motion.span
+        key={`${e.agent}-${i}`}
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+        className="flex-1 text-left ml-2"
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 12,
+          color: '#0A0A0A',
+          letterSpacing: '0.01em',
+        }}
+      >
+        <strong style={{ fontWeight: 700 }}>{e.agent}</strong>
+        <span style={{ opacity: 0.6 }}> · </span>
+        <span style={{ fontStyle: 'italic', color: '#0066CC' }}>{e.verb}</span>
+        <span style={{ opacity: 0.55 }}> · {e.detail}</span>
+      </motion.span>
+      <span
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 10.5,
+          fontWeight: 700,
+          color: '#0A0A0A',
+          letterSpacing: '0.04em',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {e.ms}<span style={{ opacity: 0.55 }}>ms</span>
+      </span>
+    </div>
   );
 }
 

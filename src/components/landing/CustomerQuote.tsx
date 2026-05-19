@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import AmbientVideo from '../motions/AmbientVideo';
 
 /**
  * CustomerQuote — single big editorial quote section that breaks up the
@@ -7,6 +8,10 @@ import { motion } from 'framer-motion';
  * Deck-faithful palette (parchment + ink), Fraunces italic display quote,
  * minimal chrome — the words do the work. Lifts the customer voice we
  * already have buried in /solutions to the landing where it earns the proof.
+ *
+ * The quote itself reveals word-by-word on first scroll-in — a quiet,
+ * cinematic moment that doesn't fight the typography. Reduced-motion
+ * skips the stagger and renders statically.
  */
 
 const INK = '#0A0A0A';
@@ -14,16 +19,104 @@ const CHARCOAL = '#2B2B2B';
 const STEEL = '#6B6B6B';
 const RULE = '#D9D9D9';
 
+/* Word-by-word reveal helper. Each word is a motion.span; the container
+   drives the stagger via Framer's `variants`. Words wrap naturally and
+   keep their parent's typography. */
+type QuotePart = { text: string; emphasis?: boolean };
+function QuoteReveal({ parts }: { parts: QuotePart[] }) {
+  const reduced = useReducedMotion() ?? false;
+
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: reduced ? 0 : 0.035,
+        delayChildren: reduced ? 0 : 0.1,
+      },
+    },
+  } as const;
+
+  const word = {
+    hidden: { opacity: 0, y: 14, filter: 'blur(6px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 0.55, ease: [0.22, 0.61, 0.36, 1] },
+    },
+  } as const;
+
+  let key = 0;
+  return (
+    <motion.span
+      variants={container}
+      initial={reduced ? 'show' : 'hidden'}
+      whileInView="show"
+      viewport={{ once: true, amount: 0.4 }}
+      style={{ display: 'inline' }}
+    >
+      {parts.map((part, pi) => {
+        const tokens = part.text.split(/(\s+)/); // keep whitespace tokens
+        return tokens.map((tok) => {
+          if (/^\s+$/.test(tok)) {
+            // preserve spacing as a non-animated text node so wrapping behaves
+            return <span key={key++}>{tok}</span>;
+          }
+          if (tok === '') return null;
+          return (
+            <motion.span
+              key={key++}
+              variants={word}
+              style={{
+                display: 'inline-block',
+                fontStyle: part.emphasis ? 'italic' : undefined,
+                fontWeight: part.emphasis ? 600 : undefined,
+                willChange: 'transform, opacity, filter',
+              }}
+              data-emphasis={part.emphasis ? 'true' : undefined}
+              data-part={pi}
+            >
+              {tok}
+            </motion.span>
+          );
+        });
+      })}
+    </motion.span>
+  );
+}
+
+const QUOTE_PARTS: QuotePart[] = [
+  { text: 'The team only sees the ' },
+  { text: '12% that actually needs a human decision', emphasis: true },
+  { text: '. Everything else is done. Posted. Audited. ' },
+  { text: 'Before we’ve had our morning coffee.', emphasis: true },
+];
+
 export default function CustomerQuote() {
   return (
     <section
-      className="relative scroll-mt-20"
+      className="relative scroll-mt-20 overflow-hidden"
       style={{
         background: '#FFFFFF',
         padding: 'clamp(80px, 11vw, 140px) clamp(16px, 3vw, 32px)',
       }}
     >
-      <div className="max-w-[1100px] mx-auto">
+      {/*
+        Editorial backdrop — slow macro of a paper stack on a desk.
+        Heavily tinted (0.85 white wash) so the video reads as a soft
+        textural cue rather than a foreground photograph. The Fraunces
+        quote sits on a white panel above it; the paper-stack hint
+        bleeds in at the section edges.
+      */}
+      <AmbientVideo
+        src="/video/quote-papers.mp4"
+        opacity={0.42}
+        tint="#FFFFFF"
+        tintOpacity={0.78}
+        objectPosition="center 50%"
+      />
+
+      <div className="relative max-w-[1100px] mx-auto" style={{ zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,10 +170,7 @@ export default function CustomerQuote() {
             >
               &ldquo;
             </span>
-            The team only sees the{' '}
-            <span style={{ fontStyle: 'italic', fontWeight: 600 }}>12% that actually needs a human decision</span>.
-            Everything else is done. Posted. Audited.{' '}
-            <span style={{ fontStyle: 'italic', fontWeight: 600 }}>Before we’ve had our morning coffee.</span>
+            <QuoteReveal parts={QUOTE_PARTS} />
           </blockquote>
 
           {/* Attribution */}

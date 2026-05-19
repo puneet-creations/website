@@ -25,6 +25,11 @@ export type FooterMessage = {
   tagline: string;
   ctaLabel: string;
   ctaHref: string;
+  // Per-route accent color — drives the eyebrow ink, the compliance
+  // pill tint, and the "Certified & audited" eyebrow. Should match the
+  // corresponding PageHero accent for visual continuity from hero to
+  // footer. Defaults to mint (#8af5c0) when omitted.
+  accent?: string;
 };
 
 type FooterMessageEntry = {
@@ -46,6 +51,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       tagline: 'Experts in Sovereign AI for Enterprise.',
       ctaLabel: 'Book a founder call',
       ctaHref: 'mailto:sales@attentions.ai?subject=Founder%20Call',
+      accent: '#8af5c0',
     },
   },
   {
@@ -59,6 +65,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       tagline: 'Architectural, not contractual.',
       ctaLabel: 'See agents in production',
       ctaHref: '/agents#agent-deep-dive',
+      accent: '#5b76fe',
     },
   },
   {
@@ -72,6 +79,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       tagline: 'Your fine-tuned weights. Never uploaded.',
       ctaLabel: 'Start your assessment',
       ctaHref: '/pricing#assessment',
+      accent: '#8af5c0',
     },
   },
   {
@@ -85,6 +93,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       tagline: 'Compliance is structural \u2014 not retrofitted.',
       ctaLabel: 'Request a security review',
       ctaHref: 'mailto:sales@attentions.ai?subject=Security%20Review',
+      accent: '#22c55e',
     },
   },
   {
@@ -98,6 +107,105 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       tagline: 'Pilot \u2192 Production \u2192 Yours.',
       ctaLabel: 'Kick off the assessment',
       ctaHref: 'mailto:sales@attentions.ai?subject=Assessment%20Kickoff',
+      accent: '#5fdc86',
+    },
+  },
+  {
+    matches: '/solutions',
+    message: {
+      id: 'solutions',
+      eyebrow: 'YOUR INDUSTRY',
+      headline: 'Eleven industries.',
+      headlineAccent: 'One sovereign base.',
+      pills: ['11 industries', '7 use cases', '4 in production'],
+      tagline: 'The same pattern ships in seven more.',
+      ctaLabel: 'Find your use case',
+      ctaHref: '/agents',
+      accent: '#fbbf24',
+    },
+  },
+  {
+    matches: '/about',
+    message: {
+      id: 'about',
+      eyebrow: 'DUBAI \u00b7 PUNE',
+      headline: 'Eighteen experts.',
+      headlineAccent: 'Founders on the call.',
+      pills: ['18 experts', 'Dubai \u00b7 Pune', 'Founders reply'],
+      tagline: 'No sales funnel. Reply in 4 business hours.',
+      ctaLabel: 'Talk to a founder',
+      ctaHref: '/contact',
+      accent: '#94a3b8',
+    },
+  },
+  {
+    matches: '/competitors',
+    message: {
+      id: 'competitors',
+      eyebrow: 'PAST THE ALTERNATIVES',
+      headline: 'They licence a wrapper.',
+      headlineAccent: 'You ship sovereign.',
+      pills: ['Own your weights', 'Own your data', 'Own the audit trail'],
+      tagline: 'Pick the architecture, not the SaaS.',
+      ctaLabel: 'Compare your options',
+      ctaHref: '/pricing',
+      accent: '#f97316',
+    },
+  },
+  {
+    matches: '/why-generic-fail',
+    message: {
+      id: 'why-generic-fail',
+      eyebrow: 'WHY GENERIC FAILS',
+      headline: 'Generic guesses.',
+      headlineAccent: 'Sovereign cites.',
+      pills: ['Hallucination-controlled', 'Page + line cited', 'On your servers'],
+      tagline: 'The wrong tool shipped fast is still the wrong tool.',
+      ctaLabel: 'See the sovereign way',
+      ctaHref: '/platform',
+      accent: '#ef4444',
+    },
+  },
+  {
+    matches: '/faq',
+    message: {
+      id: 'faq',
+      eyebrow: 'STILL A QUESTION',
+      headline: 'Honest answers.',
+      headlineAccent: 'From the founders.',
+      pills: ['Reply in 4 hrs', 'No sales funnel', 'Direct to founders'],
+      tagline: 'If it\u2019s not in the FAQ, ask us directly.',
+      ctaLabel: 'Ask a founder',
+      ctaHref: '/contact',
+      accent: '#06b6d4',
+    },
+  },
+  {
+    matches: '/press',
+    message: {
+      id: 'press',
+      eyebrow: 'PRESS \u00b7 MILESTONES',
+      headline: 'On the record.',
+      headlineAccent: 'Off the marketing.',
+      pills: ['Reference customers', 'Audit-grade', 'No PR fog'],
+      tagline: 'Reference under a confidentiality agreement.',
+      ctaLabel: 'Press enquiries',
+      ctaHref: 'mailto:sales@attentions.ai?subject=Press%20Enquiry',
+      accent: '#a78bfa',
+    },
+  },
+  {
+    matches: '/agents/*',
+    message: {
+      id: 'agent-case',
+      eyebrow: 'YOU SAW THE CASE',
+      headline: 'Your agent next.',
+      headlineAccent: 'Four weeks. Fixed fee.',
+      pills: ['Scope in 2 wks', 'Live in 4 wks', 'On your servers'],
+      tagline: 'The same pattern, scoped to your business.',
+      ctaLabel: 'Scope your agent',
+      ctaHref: '/pricing#assessment',
+      accent: '#0066cc',
     },
   },
   {
@@ -111,6 +219,7 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
       tagline: "Don't hand your IP to public AI.",
       ctaLabel: 'Book a founder call',
       ctaHref: 'mailto:sales@attentions.ai?subject=Founder%20Call',
+      accent: '#8af5c0',
     },
   },
 ];
@@ -119,15 +228,28 @@ export const FOOTER_MESSAGES: readonly FooterMessageEntry[] = [
  * Resolve the FooterMessage for a given pathname. First-match-wins over
  * FOOTER_MESSAGES; '*' always matches. The final entry MUST have
  * matches:'*' so this function can never return undefined.
+ *
+ * Match types supported:
+ *   - '*'             — catch-all sentinel (always last)
+ *   - '/exact/path'   — string equality
+ *   - '/prefix/*'     — wildcard suffix; matches anything under /prefix/
+ *                       (e.g. '/agents/*' matches '/agents/invoice-intelligence')
+ *   - ['/a', '/b']    — any of these exact paths
  */
+function matchesPath(matcher: string, pathname: string): boolean {
+  if (matcher === '*') return true;
+  if (matcher.endsWith('/*')) {
+    return pathname.startsWith(matcher.slice(0, -1)); // keep the trailing slash
+  }
+  return matcher === pathname;
+}
+
 export function resolveFooterMessage(pathname: string): FooterMessage {
   for (const entry of FOOTER_MESSAGES) {
-    // '*' is our sentinel for "always matches", not a real pathname —
-    // React Router pathnames are always '/'-prefixed, never literally '*'.
     if (entry.matches === '*') return entry.message;
     if (Array.isArray(entry.matches)) {
-      if (entry.matches.includes(pathname)) return entry.message;
-    } else if (entry.matches === pathname) {
+      if (entry.matches.some((m) => matchesPath(m, pathname))) return entry.message;
+    } else if (matchesPath(entry.matches, pathname)) {
       return entry.message;
     }
   }

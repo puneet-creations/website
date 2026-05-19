@@ -18,6 +18,7 @@ import SecurityPage from './pages/SecurityPage';
 import AboutPage from './pages/AboutPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
+import PressPage from './pages/PressPage';
 import AgentCasePage from './pages/AgentCasePage';
 
 const ROUTE_TO_MESH: Record<string, string> = {

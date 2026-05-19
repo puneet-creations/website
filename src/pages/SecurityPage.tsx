@@ -30,8 +30,14 @@ export default function SecurityPage() {
 
   return (
     <main className="pb-20" ref={ref}>
+      {/*
+        Editorial backdrop — a real server rack. Local /img/ so the
+        page renders air-gapped (sovereign brand walks the talk).
+        Reinforces "your hardware, your rack, your facility" with
+        visual evidence instead of just words.
+      */}
       <ParallaxHero
-        imageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop"
+        imageSrc="/img/security-server-rack.webp"
         headline="Your data. Your building."
         headlineAccent="Period."
         subline="On-prem by default. Air-gapped on request. SOC 2 Type II, HIPAA, GDPR, ISO 27001 — pre-documented, not retrofitted. Zero security incidents on record."
