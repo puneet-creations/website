@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { INDUSTRIES } from '../../data/solutions';
+import { scrollToTarget } from '../../lib/lenis';
 
 // Account for sticky SiteNav (64px) + switcher (32px).
 const SCROLL_OFFSET = 96;
@@ -65,10 +66,9 @@ export default function IndustrySwitcher() {
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const target = document.getElementById(id);
-    if (!target) return;
-    const y = target.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
-    window.scrollTo({ top: y, behavior: 'smooth' });
+    // Lenis hijacks document scroll, so window.scrollTo / scrollIntoView
+    // are no-ops. Route everything through the lenis singleton.
+    scrollToTarget(id, { offset: -SCROLL_OFFSET });
   };
 
   const proven = INDUSTRIES.filter((i) => i.proven);

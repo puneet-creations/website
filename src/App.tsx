@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Outlet, useLocation, Navigate } from 'react-router-dom';
+import { lenis, scrollToTarget } from './lib/lenis';
 import GradientMesh, { MESHES } from './components/GradientMesh';
 import SvgDefs from './components/motions/SvgDefs';
 import SiteNav from './components/SiteNav';
@@ -42,18 +43,20 @@ function ScrollToTop() {
   useEffect(() => {
     if (hash) {
       // Defer one paint — give the newly-rendered page a chance to mount
-      // the target element before we measure its position.
+      // the target element before we measure its position. Use Lenis
+      // (scrollToTarget) instead of native scrollIntoView — Lenis hijacks
+      // document scroll so the native API is a no-op.
       const t = window.setTimeout(() => {
         const el = document.getElementById(hash.slice(1));
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToTarget(el);
         } else {
-          window.scrollTo(0, 0);
+          lenis.scrollTo(0, { immediate: true });
         }
       }, 50);
       return () => window.clearTimeout(t);
     }
-    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
   }, [pathname, hash]);
   return null;
 }

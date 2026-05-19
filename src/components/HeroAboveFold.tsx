@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { HeroGallery } from './ui/hero-gallery';
+import { scrollToTarget } from '../lib/lenis';
 
 /**
  * HeroAboveFold — v6: value headline + 3-card GTM gallery.
@@ -105,23 +107,25 @@ export default function HeroAboveFold() {
             <span className="italic" style={{ color: '#000000' }}>Zero Concessions.</span>
           </motion.h1>
 
-          {/* CTAs */}
+          {/* CTAs
+              Primary → /pricing#assessment (deck S03 assessment door, with explicit $5K price)
+              Secondary → smooth-scroll to the SevenAgentsGrid section on this page */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-3 justify-center mb-10"
           >
-            <a
-              href="mailto:hello@attentions.ai?subject=Assessment"
+            <Link
+              to="/pricing#assessment"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-[14px] hover:scale-[1.02] active:scale-[0.98] transition-all"
-              style={{ background: '#000000', color: '#ffffff', fontFamily: 'var(--mono)', letterSpacing: '0.04em' }}
+              style={{ background: '#000000', color: '#ffffff', fontFamily: 'var(--mono)', letterSpacing: '0.04em', textDecoration: 'none' }}
             >
               Get an assessment →
-            </a>
+            </Link>
             <button
               type="button"
-              onClick={() => document.getElementById('production-proof')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToTarget('#seven-agents')}
               className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold text-[14px] hover:bg-white/[0.08] transition-colors"
               style={{ background: 'rgba(0,0,0,0.04)', backdropFilter: 'blur(8px)', color: 'rgba(0,0,0,0.85)', fontFamily: 'var(--mono)', letterSpacing: '0.04em', border: '1px solid rgba(0,0,0,0.12)' }}
             >

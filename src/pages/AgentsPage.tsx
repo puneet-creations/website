@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
+import { scrollToTarget } from '../lib/lenis';
 import PageHero from '../components/PageHero';
 import ParallaxHero from '../components/ParallaxHero';
 import ClientsStrip from '../components/ClientsStrip';
@@ -24,12 +25,12 @@ import AgentsCloser from '../components/landing/AgentsCloser';
 export default function AgentsPage() {
   const { hash } = useLocation();
 
-  // Preserve hash-scroll behavior for footer jump-links like /agents#production
+  // Preserve hash-scroll behavior for footer jump-links like /agents#agent-deep-dive.
+  // Uses Lenis (scrollToTarget) — native scrollIntoView is hijacked by Lenis.
   useEffect(() => {
     if (hash) {
       const timer = setTimeout(() => {
-        const el = document.querySelector(hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToTarget(hash);
       }, 300);
       return () => clearTimeout(timer);
     }

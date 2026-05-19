@@ -70,7 +70,8 @@ const RULE = '#D9D9D9';
 export default function WhyNowTriad() {
   return (
     <section
-      className="relative"
+      id="why-now"
+      className="relative scroll-mt-20"
       style={{
         background: '#FFFFFF',
         padding: 'clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px)',

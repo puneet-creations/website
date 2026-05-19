@@ -99,7 +99,8 @@ const RULE = '#D9D9D9';
 export default function ThreeOfferings() {
   return (
     <section
-      className="relative"
+      id="offerings"
+      className="relative scroll-mt-20"
       style={{
         background: '#F4F2EE',                                  // --stone
         padding: 'clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px)',

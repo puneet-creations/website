@@ -28,3 +28,32 @@ gsap.ticker.add((time) => {
   lenis.raf(time * 1000);
 });
 gsap.ticker.lagSmoothing(0);
+
+/**
+ * Smooth-scroll to an element by selector / id-string / Element ref.
+ *
+ * Native `element.scrollIntoView({ behavior: 'smooth' })` is a no-op while
+ * Lenis is driving the page (Lenis hijacks the document scroll). Use this
+ * helper from any click handler or React effect that needs to bring a
+ * section into view.
+ *
+ * Defaults match the Lenis singleton's easing so on-page jumps feel
+ * consistent with mouse-wheel scrolling.
+ */
+export function scrollToTarget(
+  target: string | HTMLElement | null | undefined,
+  options?: { offset?: number; duration?: number },
+) {
+  if (!target) return;
+  const el =
+    typeof target === 'string'
+      ? document.querySelector<HTMLElement>(
+          target.startsWith('#') || target.startsWith('.') ? target : `#${target}`,
+        )
+      : target;
+  if (!el) return;
+  lenis.scrollTo(el, {
+    offset: options?.offset ?? -16,
+    duration: options?.duration ?? 1.2,
+  });
+}

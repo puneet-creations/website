@@ -146,7 +146,8 @@ const ICE = '#E8E8E8';
 export default function SevenAgentsGrid() {
   return (
     <section
-      className="relative"
+      id="seven-agents"
+      className="relative scroll-mt-20"
       style={{ padding: 'clamp(64px, 9vw, 120px) clamp(16px, 3vw, 32px)' }}
     >
       <div className="max-w-[1440px] mx-auto">
